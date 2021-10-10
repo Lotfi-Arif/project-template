@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    api:
+        image: dovaluffy/fyp-nestjs:latest
+        depends_on: 
+            - postgres
+        environment: 
+            DATABASE_URL: postgres://user:password@postgres:5432/db
+            NODE_ENV: development
+            PORT: 3000
+        ports:
+            - "8080:3000"
+
+    postgres:
+        image: postgres:latest
+        ports:
+            - "35000:5432"
+        environment: 
+            POSTGRES_USER: ${DATABASE_USER}
+            POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+            POSTGRES_DB: ${DATABASE_DB}
