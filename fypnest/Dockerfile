@@ -1,21 +1,26 @@
-FROM node:12
+FROM node:12 AS builder
 
-# Create app directory, this is in our container/in our image
-WORKDIR /FYP/FYPdemo/fypnest
+# Create app directory
+WORKDIR /app
+
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+COPY prisma ./prisma/
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+# Generate prisma client, leave out if generating in `postinstall` script
+RUN npx prisma generate
 
-# Bundle app source
 COPY . .
 
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "node", "dist/main" ]
+FROM node:12
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 3000
+CMD ["npm", "run", "start:prod"]
