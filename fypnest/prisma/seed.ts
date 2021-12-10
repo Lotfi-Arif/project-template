@@ -7,13 +7,13 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Alice',
     email: 'alice@prisma.io',
     password: "123",
-    mobile:  18234453453, 
+    mobile:  "18234453453", 
   },
   {
     name: 'Mahmoud',
     email: 'mahmoud@prisma.io',
     password: "123",
-    mobile:  1450349563409, 
+    mobile:  "1450349563409", 
   },
 ]
 
@@ -25,7 +25,7 @@ async function main() {
     })
     console.log(`Created user with id: ${user.id}`)
   }
-  console.log(`Seeding finished.`)
+  console.log(`Seeding done.`)
 }
 
 main()

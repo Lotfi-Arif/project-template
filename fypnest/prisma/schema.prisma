@@ -15,5 +15,5 @@ model User {
   name  String?
   email String  @unique
   password String?
-  mobile BigInt? @unique
+  mobile String? @unique
 }
