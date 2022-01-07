@@ -10,6 +10,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+    provider = "node node_modules/prisma-nestjs-graphql"
+    output = "../libs/common/src/generated/index"
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   name  String?

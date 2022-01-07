@@ -1,4 +1,48 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "apps/fypnest/src",
+  "monorepo": true,
+  "root": "apps/fypnest",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/fypnest/tsconfig.app.json"
+  },
+  "projects": {
+    "fypnest": {
+      "type": "application",
+      "root": "apps/fypnest",
+      "entryFile": "main",
+      "sourceRoot": "apps/fypnest/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fypnest/tsconfig.app.json"
+      }
+    },
+    "mailing": {
+      "type": "application",
+      "root": "apps/mailing",
+      "entryFile": "main",
+      "sourceRoot": "apps/mailing/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mailing/tsconfig.app.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "providers": {
+      "type": "library",
+      "root": "libs/providers",
+      "entryFile": "index",
+      "sourceRoot": "libs/providers/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/providers/tsconfig.lib.json"
+      }
+    }
+  }
 }
