@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -11,14 +11,44 @@ generator client {
 }
 
 generator nestgraphql {
-    provider = "node node_modules/prisma-nestjs-graphql"
-    output = "../libs/common/src/generated/index"
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../libs/common/src/generated/index"
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String?
-  email String  @unique
-  password String?
-  mobile String? @unique
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password      String?
+  mobile        String?  @unique
+  accountStatus String
+  role          Role     @default(USER)
+  posts         Post[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  body      String
+  userId    String
+  author    User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chat {
+  id         String   @id @default(uuid())
+  chatStatus String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
+  STUDENT
+  COUNSELOR
+  DEPARTMENT_MANAGER
 }

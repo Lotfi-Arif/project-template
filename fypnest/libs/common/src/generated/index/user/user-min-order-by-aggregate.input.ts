@@ -19,4 +19,16 @@ export class UserMinOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     mobile?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    accountStatus?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    role?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
 }

@@ -18,4 +18,16 @@ export class UserMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     mobile?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    accountStatus?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    role?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
 }

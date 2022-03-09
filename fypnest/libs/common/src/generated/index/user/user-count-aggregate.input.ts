@@ -20,5 +20,17 @@ export class UserCountAggregateInput {
     mobile?: true;
 
     @Field(() => Boolean, {nullable:true})
+    accountStatus?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    role?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }
