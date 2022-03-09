@@ -16,16 +16,27 @@ generator nestgraphql {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  name          String
-  email         String   @unique
-  password      String?
-  mobile        String?  @unique
-  accountStatus String
-  role          Role     @default(USER)
-  posts         Post[]
+  id                  String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  password            String?
+  mobile              String?  @unique
+  accountStatus       String
+  role                Role     @default(USER)
+  posts               Post[]
+  counselingSession   CounselorSession[]   @relation(references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Schedule {
+  id                String   @id  @default(uuid())
+  scheduleDate      DateTime
+}
+
+model CounselorSession {
+  id            String    @id @default(uuid())
+  participants  User[]
 }
 
 model Counselor {
@@ -50,6 +61,52 @@ model Chat {
   chatStatus String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model Message {
+  id        String @id  @default(uuid())
+  sender    String
+  reciever  String
+  Message   String
+}
+
+model Event {
+  id           String  @id @default(uuid())
+  title        String
+  eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
+  imageId      String? @unique
+  eventDetails String
+}
+
+model FAQ {
+  id        String  @id @default(uuid())
+  question  String
+  answer    String
+}
+
+model Asset {
+  id              String          @id @default(uuid())
+  originalName    String
+  fileName        String
+  fileType        FileType        @default(IMAGE)
+  url             String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  uploadingState  UploadingState? @default(uploaded)
+  eventImageAsset Event?          @relation("ImageEventAsset")
+}
+
+enum FileType {
+  VIDEO
+  PDF
+  IMAGE
+  ZIP
+  OTHER
+}
+
+enum UploadingState {
+  uploading
+  uploaded
 }
 
 enum Role {
