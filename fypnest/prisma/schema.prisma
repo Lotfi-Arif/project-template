@@ -28,6 +28,13 @@ model User {
   updatedAt     DateTime @updatedAt
 }
 
+model Counselor {
+  id         String   @id @default(uuid())
+  department String
+  expertise  String
+  Schedule   String[]
+}
+
 model Post {
   id        String   @id @default(uuid())
   title     String

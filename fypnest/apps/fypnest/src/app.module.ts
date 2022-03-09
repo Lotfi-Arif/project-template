@@ -6,6 +6,8 @@ import { ProvidersModule } from '@app/providers';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma'
 import { join } from 'path'
+import { PostsModule } from './posts/posts.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [UsersModule, ProvidersModule,
@@ -16,7 +18,8 @@ import { join } from 'path'
     }),
     PrismaModule.forRoot({
       isGlobal: true,
-    })
+    }),
+    PostsModule
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService]
