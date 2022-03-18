@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFaqDto } from './dto/create-faq.dto';
-import { UpdateFaqDto } from './dto/update-faq.dto';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
+
 
 @Injectable()
-export class FaqService {
-  create(createFaqDto: CreateFaqDto) {
-    return 'This action adds a new faq';
-  }
+export class FAQsService {
+  constructor(private prisma: PrismaService) { }
 
-  findAll() {
-    return `This action returns all faq`;
+  async findAll(fAQFindManyArgs: Prisma.FAQFindManyArgs) {
+    return this.prisma.fAQ.findMany(fAQFindManyArgs);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} faq`;
+  async findOne(fAQFindOneArgs: Prisma.FAQFindUniqueArgs) {
+    return this.prisma.fAQ.findUnique(fAQFindOneArgs);
   }
-
-  update(id: number, updateFaqDto: UpdateFaqDto) {
-    return `This action updates a #${id} faq`;
+  async createFAQ(fAQCreateOneArgs: Prisma.FAQCreateArgs) {
+    return this.prisma.fAQ.create(fAQCreateOneArgs);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} faq`;
+  async updateFAQ(fAQUpdateArgs: Prisma.FAQUpdateArgs) {
+    return this.prisma.fAQ.update(fAQUpdateArgs);
+  }
+  async deleteFAQ(fAQDeleteArgs: Prisma.FAQDeleteArgs) {
+    return this.prisma.fAQ.delete(fAQDeleteArgs);
   }
 }

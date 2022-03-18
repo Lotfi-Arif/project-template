@@ -3,7 +3,6 @@ import { AssetsService } from './assets.service';
 import { AssetsResolver } from './assets.resolver';
 
 @Module({
-  controllers: [AssetsResolver],
-  providers: [AssetsService]
+  providers: [AssetsService,AssetsResolver]
 })
 export class AssetsModule {}

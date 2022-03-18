@@ -3,7 +3,6 @@ import { CounselorSessionsService } from './counselor-sessions.service';
 import { CounselorSessionsResolver } from './counselor-sessions.resolver';
 
 @Module({
-  controllers: [CounselorSessionsResolver],
-  providers: [CounselorSessionsService]
+  providers: [CounselorSessionsService, CounselorSessionsResolver]
 })
 export class CounselorSessionsModule {}

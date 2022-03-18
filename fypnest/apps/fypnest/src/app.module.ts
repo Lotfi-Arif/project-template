@@ -13,7 +13,7 @@ import { EventsModule } from './events/events.module';
 import { FaqModule } from './faq/faq.module';
 import { AssetsModule } from './assets/assets.module';
 import { SchedulesModule } from './schedules/schedules.module';
-import { CounsellorsModule } from './counsellors/counsellors.module';
+import { CounsellorsModule } from './counselors/counselors.module';
 import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions.module';
 
 @Module({

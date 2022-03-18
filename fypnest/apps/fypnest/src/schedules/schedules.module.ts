@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { SchedulesService } from './schedules.service';
-import { SchedulesController } from './schedules.controller';
+import { SchedulesResolver } from './schedules.resolver';
 
 @Module({
-  controllers: [SchedulesController],
-  providers: [SchedulesService]
+  providers: [SchedulesService, SchedulesResolver]
 })
 export class SchedulesModule {}

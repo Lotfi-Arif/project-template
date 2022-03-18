@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateScheduleDto } from './dto/create-schedule.dto';
-import { UpdateScheduleDto } from './dto/update-schedule.dto';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
+
 
 @Injectable()
 export class SchedulesService {
-  create(createScheduleDto: CreateScheduleDto) {
-    return 'This action adds a new schedule';
-  }
+  constructor(private prisma: PrismaService) { }
 
-  findAll() {
-    return `This action returns all schedules`;
+  async findAll(scheduleFindManyArgs: Prisma.ScheduleFindManyArgs) {
+    return this.prisma.schedule.findMany(scheduleFindManyArgs);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} schedule`;
+  async findOne(scheduleFindOneArgs: Prisma.ScheduleFindUniqueArgs) {
+    return this.prisma.schedule.findUnique(scheduleFindOneArgs);
   }
-
-  update(id: number, updateScheduleDto: UpdateScheduleDto) {
-    return `This action updates a #${id} schedule`;
+  async createSchedule(scheduleCreateOneArgs: Prisma.ScheduleCreateArgs) {
+    return this.prisma.schedule.create(scheduleCreateOneArgs);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} schedule`;
+  async updateSchedule(scheduleUpdateArgs: Prisma.ScheduleUpdateArgs) {
+    return this.prisma.schedule.update(scheduleUpdateArgs);
+  }
+  async deleteSchedule(scheduleDeleteArgs: Prisma.ScheduleDeleteArgs) {
+    return this.prisma.schedule.delete(scheduleDeleteArgs);
   }
 }
