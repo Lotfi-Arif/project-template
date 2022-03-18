@@ -5,6 +5,7 @@ import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-str
 import { EnumRoleFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { PostUpdateManyWithoutAuthorInput } from '../post/post-update-many-without-author.input';
+import { CounselorSessionUpdateManyWithoutParticipantsInput } from '../counselor-session/counselor-session-update-many-without-participants.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -38,4 +39,7 @@ export class UserUpdateInput {
 
     @Field(() => PostUpdateManyWithoutAuthorInput, {nullable:true})
     posts?: PostUpdateManyWithoutAuthorInput;
+
+    @Field(() => CounselorSessionUpdateManyWithoutParticipantsInput, {nullable:true})
+    counselingSession?: CounselorSessionUpdateManyWithoutParticipantsInput;
 }

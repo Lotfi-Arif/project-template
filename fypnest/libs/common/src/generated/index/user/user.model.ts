@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { Post } from '../post/post.model';
+import { CounselorSession } from '../counselor-session/counselor-session.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -31,6 +32,9 @@ export class User {
 
     @Field(() => [Post], {nullable:true})
     posts?: Array<Post>;
+
+    @Field(() => [CounselorSession], {nullable:true})
+    counselingSession?: Array<CounselorSession>;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

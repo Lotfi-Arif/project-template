@@ -9,37 +9,7 @@ import { FindUniqueUserArgs } from '@app/common/generated/index/user/find-unique
 import { UpdateOneUserArgs } from '@app/common/generated/index/user/update-one-user.args';
 import { DeleteOneUserArgs } from '@app/common/generated/index/user/delete-one-user.args';
 
-//normal setup - resolver and service
-// prisma select
-// how to modify nestjs-prisma-graphql
-// postgresql
 
-
-/*
-  query {
-     name
-     mobile
-     password
-    }
-  }
-*/
-
-
-/*
-  query {
-    users{
-     name
-     mobile
-     password
-     //! cannot be queried unless we do a left join or an additional prisma.findMany
-     transactions{
-     id
-    
-     updatedAt
-     }
-    }
-  }
-*/
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {

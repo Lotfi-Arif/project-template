@@ -13,28 +13,55 @@ export class PostsResolver {
   constructor(private readonly postService: PostsService) {
   }
 
-  @Query(() => [Post])
+  @Query(() => Post)
   async findAll(@Args() postFindManyArgs: FindManyPostArgs, @Info() info) {
+    try {
+      const posts = new PrismaSelect(info).value
+      return this.postService.findAll({ ...postFindManyArgs, ...posts })
+    } catch (error) {
+      console.error(error);
+    }
 
   }
 
   @Mutation(() => Post)
   async findOne(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
-   
+    try {
+      const post = new PrismaSelect(info).value;
+      return this.postService.findOne({ ...postFindUnique, ...post })
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   @Mutation(() => Post)
   async create(@Args() postCreateArgs: CreateOnePostArgs, @Info() info) {
-    
+    try {
+      const newPost = new PrismaSelect(info).value;
+      return this.postService.createPost({ ...postCreateArgs, ...newPost })
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   @Mutation(() => Post)
   async update(@Args() postUpdateArgs: UpdateOnePostArgs, @Info() info) {
-    
+    try {
+      const update = new PrismaSelect(info).value;
+      return this.postService.updatePost({ ...postUpdateArgs, ...update })
+    } catch (error) {
+      console.error(error);
+    }
+
   }
 
   @Mutation(() => Post)
   async delete(@Args() postDeletArgs: DeleteOnePostArgs, @Info() info) {
-    
+    try {
+      const post = new PrismaSelect(info).value;
+      return this.postService.deletePost({ ...postDeletArgs, ...post })
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
