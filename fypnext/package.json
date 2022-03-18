@@ -6,22 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:tailwind": "postcss ./styles/globals.css -o ./styles/tailwind.css --env production",
+    "watch:tailwind": "postcss ./styles/globals.css -o ./styles/tailwind.css -w",
+    "npm:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.6",
-    "graphql": "^16.1.0",
+    "@apollo/client": "^3.5.10",
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
+    "@tailwindcss/typography": "^0.5.2",
+    "graphql": "^16.3.0",
     "next": "11.1.0",
+    "postcss-cli": "^9.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "4.0.3",
+    "recharts": "^2.1.8"
   },
   "devDependencies": {
     "@types/react": "17.0.18",
-    "autoprefixer": "^10.3.1",
+    "autoprefixer": "^9.8.8",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.10",
+    "tailwindcss": "^3.0.23",
     "typescript": "4.3.5"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
