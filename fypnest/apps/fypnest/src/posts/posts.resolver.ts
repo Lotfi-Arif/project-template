@@ -14,7 +14,7 @@ export class PostsResolver {
   }
 
   @Query(() => Post)
-  async findAll(@Args() postFindManyArgs: FindManyPostArgs, @Info() info) {
+  async findAllPosts(@Args() postFindManyArgs: FindManyPostArgs, @Info() info) {
     try {
       const posts = new PrismaSelect(info).value
       return this.postService.findAll({ ...postFindManyArgs, ...posts })
@@ -25,7 +25,7 @@ export class PostsResolver {
   }
 
   @Mutation(() => Post)
-  async findOne(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
+  async findOnePost(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;
       return this.postService.findOne({ ...postFindUnique, ...post })
@@ -35,7 +35,7 @@ export class PostsResolver {
   }
 
   @Mutation(() => Post)
-  async create(@Args() postCreateArgs: CreateOnePostArgs, @Info() info) {
+  async createPost(@Args() postCreateArgs: CreateOnePostArgs, @Info() info) {
     try {
       const newPost = new PrismaSelect(info).value;
       return this.postService.createPost({ ...postCreateArgs, ...newPost })
@@ -45,7 +45,7 @@ export class PostsResolver {
   }
 
   @Mutation(() => Post)
-  async update(@Args() postUpdateArgs: UpdateOnePostArgs, @Info() info) {
+  async updatePost(@Args() postUpdateArgs: UpdateOnePostArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
       return this.postService.updatePost({ ...postUpdateArgs, ...update })
@@ -56,7 +56,7 @@ export class PostsResolver {
   }
 
   @Mutation(() => Post)
-  async delete(@Args() postDeletArgs: DeleteOnePostArgs, @Info() info) {
+  async deletePost(@Args() postDeletArgs: DeleteOnePostArgs, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;
       return this.postService.deletePost({ ...postDeletArgs, ...post })

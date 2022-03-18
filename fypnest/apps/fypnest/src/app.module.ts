@@ -7,14 +7,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma'
 import { join } from 'path'
 import { PostsModule } from './posts/posts.module';
-import { PostsModule } from './posts/posts.module';
 
 @Module({
-  imports: [UsersModule, ProvidersModule,
+  imports: [UsersModule, ProvidersModule, PostsModule,
     GraphQLModule.forRoot({
       cors: false,
       autoSchemaFile: join(process.cwd(), '../graphql/fypnest.gql'),
-      include: [UsersModule],
+      include: [UsersModule, PostsModule],
     }),
     PrismaModule.forRoot({
       isGlobal: true,

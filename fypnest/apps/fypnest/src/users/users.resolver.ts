@@ -16,7 +16,7 @@ export class UsersResolver {
   }
 
   @Query(() => [User])
-  async findAll(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {
+  async findAllUsers(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {
     try {
       const users = new PrismaSelect(info).value
       return this.usersService.findAll({ ...userFindManyArgs, ...users })
@@ -27,7 +27,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  async findOne(@Args() userFindUnique: FindUniqueUserArgs, @Info() info) {
+  async findOneUser(@Args() userFindUnique: FindUniqueUserArgs, @Info() info) {
     try {
       const user = new PrismaSelect(info).value;
       return this.usersService.findOne({ ...userFindUnique, ...user })
@@ -37,7 +37,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  async create(@Args() userCreateArgs: CreateOneUserArgs, @Info() info) {
+  async createUser(@Args() userCreateArgs: CreateOneUserArgs, @Info() info) {
     try {
       const newUser = new PrismaSelect(info).value;
       return this.usersService.createUser({ ...userCreateArgs, ...newUser })
@@ -47,7 +47,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  async update(@Args() userUpdateArgs: UpdateOneUserArgs, @Info() info) {
+  async updateUser(@Args() userUpdateArgs: UpdateOneUserArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
       return this.usersService.updateUser({ ...userUpdateArgs, ...update })
@@ -57,7 +57,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  async delete(@Args() userDeletArgs: DeleteOneUserArgs, @Info() info) {
+  async deleteUser(@Args() userDeletArgs: DeleteOneUserArgs, @Info() info) {
     try {
       const deleteUser = new PrismaSelect(info).value;
       return this.usersService.updateUser({ ...userDeletArgs, ...deleteUser })
