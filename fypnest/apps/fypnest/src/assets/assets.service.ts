@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssetDto } from './dto/create-asset.dto';
-import { UpdateAssetDto } from './dto/update-asset.dto';
+import { PrismaService } from 'nestjs-prisma'
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AssetsService {
-  create(createAssetDto: CreateAssetDto) {
-    return 'This action adds a new asset';
-  }
+  constructor(private prisma: PrismaService) { }
 
-  findAll() {
-    return `This action returns all assets`;
+  async findAll(assetFindManyArgs: Prisma.AssetFindManyArgs) {
+    return this.prisma.asset.findMany(assetFindManyArgs);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} asset`;
+  async findOne(assetFindOneArgs: Prisma.AssetFindUniqueArgs) {
+    return this.prisma.asset.findUnique(assetFindOneArgs);
   }
-
-  update(id: number, updateAssetDto: UpdateAssetDto) {
-    return `This action updates a #${id} asset`;
+  async createAsset(assetCreateOneArgs: Prisma.AssetCreateArgs) {
+    return this.prisma.asset.create(assetCreateOneArgs);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} asset`;
+  async updateAsset(assetUpdateArgs: Prisma.AssetUpdateArgs) {
+    return this.prisma.asset.update(assetUpdateArgs);
+  }
+  async deleteAsset(assetDeleteArgs: Prisma.AssetDeleteArgs) {
+    return this.prisma.asset.delete(assetDeleteArgs);
   }
 }

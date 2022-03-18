@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AssetsService } from './assets.service';
-import { AssetsController } from './assets.controller';
+import { AssetsResolver } from './assets.resolver';
 
 @Module({
-  controllers: [AssetsController],
+  controllers: [AssetsResolver],
   providers: [AssetsService]
 })
 export class AssetsModule {}

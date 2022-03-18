@@ -13,8 +13,8 @@ import { EventsModule } from './events/events.module';
 import { FaqModule } from './faq/faq.module';
 import { AssetsModule } from './assets/assets.module';
 import { SchedulesModule } from './schedules/schedules.module';
-import { CounsellingsessionsModule } from './counsellingsessions/counsellingsessions.module';
 import { CounsellorsModule } from './counsellors/counsellors.module';
+import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions.module';
 
 @Module({
   imports: [UsersModule, ProvidersModule, PostsModule,
@@ -33,8 +33,8 @@ import { CounsellorsModule } from './counsellors/counsellors.module';
     FaqModule,
     AssetsModule,
     SchedulesModule,
-    CounsellingsessionsModule,
-    CounsellorsModule
+    CounsellorsModule,
+    CounselorSessionsModule
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService]

@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
+
 
 @Injectable()
 export class ChatsService {
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
-  }
+  constructor(private prisma: PrismaService) { }
 
-  findAll() {
-    return `This action returns all chats`;
+  async findAll(chatFindManyArgs: Prisma.ChatFindManyArgs) {
+    return this.prisma.chat.findMany(chatFindManyArgs);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
+  async findOne(chatFindOneArgs: Prisma.ChatFindUniqueArgs) {
+    return this.prisma.chat.findUnique(chatFindOneArgs);
   }
-
-  update(id: number, updateChatDto: UpdateChatDto) {
-    return `This action updates a #${id} chat`;
+  async createChat(chatCreateOneArgs: Prisma.ChatCreateArgs) {
+    return this.prisma.chat.create(chatCreateOneArgs);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  async updateChat(chatUpdateArgs: Prisma.ChatUpdateArgs) {
+    return this.prisma.chat.update(chatUpdateArgs);
+  }
+  async deleteChat(chatDeleteArgs: Prisma.ChatDeleteArgs) {
+    return this.prisma.chat.delete(chatDeleteArgs);
   }
 }
