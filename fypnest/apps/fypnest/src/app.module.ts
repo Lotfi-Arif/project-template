@@ -7,6 +7,14 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma'
 import { join } from 'path'
 import { PostsModule } from './posts/posts.module';
+import { MessagesModule } from './messages/messages.module';
+import { ChatsModule } from './chats/chats.module';
+import { EventsModule } from './events/events.module';
+import { FaqModule } from './faq/faq.module';
+import { AssetsModule } from './assets/assets.module';
+import { SchedulesModule } from './schedules/schedules.module';
+import { CounsellingsessionsModule } from './counsellingsessions/counsellingsessions.module';
+import { CounsellorsModule } from './counsellors/counsellors.module';
 
 @Module({
   imports: [UsersModule, ProvidersModule, PostsModule,
@@ -18,7 +26,15 @@ import { PostsModule } from './posts/posts.module';
     PrismaModule.forRoot({
       isGlobal: true,
     }),
-    PostsModule
+    PostsModule,
+    MessagesModule,
+    ChatsModule,
+    EventsModule,
+    FaqModule,
+    AssetsModule,
+    SchedulesModule,
+    CounsellingsessionsModule,
+    CounsellorsModule
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService]
