@@ -20,12 +20,12 @@ const Landing = () => {
                     </div>
                     <div className="py-8">
                         <button className='text-white hover:bg-white hover:text-black bg-blue-400 w-36 h-12 border rounded-sm'>
-                            <Link href={'/register'}>
+                            <Link href={'/Register'}>
                                 Register
                             </Link>
                         </button>
                         <button className='text-black hover:bg-blue-400 hover:text-white p-1 px-2 bg-white ml-2 w-32 h-12 border rounded-sm'>
-                            <Link href={'/register'}>
+                            <Link href={'#'}>
                                 Learn More
                             </Link>
                         </button>

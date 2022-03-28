@@ -154,12 +154,12 @@ const Navbar = () => {
                 }
                 <div>
                   <button className='text-black-300 hover:bg-sky-500 hover:text-whitefont-bold p-1 px-2 ml-2 border rounded-sm'>
-                    <Link href={'/register'}>
+                    <Link href={'/Login'}>
                       Sign in
                     </Link>
                   </button>
                   <button className='text-gray-100 hover:bg-gray-100 hover:text-black-300 bg-sky-500 hover:text-whitefont-bold p-1 px-2 ml-2 border rounded-sm'>
-                    <Link href={'/register'}>
+                    <Link href={'/Register'}>
                       Register
                     </Link>
                   </button> </ div>
