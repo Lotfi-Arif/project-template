@@ -29,7 +29,7 @@ const TypographyHeaderText = styled(Typography)<TypographyProps>(({ theme }) => 
   lineHeight: 'normal',
   letterSpacing: '0.21px',
   textTransform: 'uppercase',
-  color: theme.palette.text.disabled,
+  color: '#FFF',
   fontWeight: theme.typography.fontWeightMedium
 }))
 
@@ -46,7 +46,7 @@ const VerticalNavSectionTitle = (props: Props) => {
       sx={{
         px: 0,
         py: 1.75,
-        color: theme.palette.text.disabled,
+        color: `rgba(58, 53, 65, 0.87)`,
         '& .MuiDivider-root:before, & .MuiDivider-root:after, & hr': {
           borderColor: `rgba(${theme.palette.customColors.main}, 0.12)`
         }
@@ -56,6 +56,7 @@ const VerticalNavSectionTitle = (props: Props) => {
         textAlign='left'
         sx={{
           m: 0,
+          color: `rgba(255, 255, 255, 0.87)`,
           width: '100%',
           lineHeight: 'normal',
           textTransform: 'uppercase',

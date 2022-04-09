@@ -88,8 +88,9 @@ const DefaultPalette = (mode: PaletteMode, themeColor: ThemeColor) => {
       A700: '#303030'
     },
     text: {
-      primary: `rgba(${mainColor}, 0.87)`,
+      primary: `rgba(255, 255, 255, 0.87)`,
       secondary: `rgba(${mainColor}, 0.68)`,
+      dashtext: `rgba('231, 227, 252', 0.87)`,
       disabled: `rgba(${mainColor}, 0.38)`
     },
     divider: `rgba(${mainColor}, 0.12)`,

@@ -1,6 +1,6 @@
 module.exports = {
     content: ['src/pages/**/*.{js,ts,jsx,tsx}', 'src/@core/**/*.{js,ts,jsx,tsx}'],
-    media: true, // or 'media' or 'class'
+    media: false, // or 'media' or 'class'
     theme: {
         extend: {},
     },

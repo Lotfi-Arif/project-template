@@ -56,7 +56,7 @@ const UserDropdown = () => {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    color: 'text.primary',
+    color: `rgba(58, 53, 65, 0.87)`,
     textDecoration: 'none',
     '& svg': {
       fontSize: '1.375rem',

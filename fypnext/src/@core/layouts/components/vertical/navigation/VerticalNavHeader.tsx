@@ -37,7 +37,7 @@ const HeaderTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
   fontWeight: 600,
   lineHeight: 'normal',
   textTransform: 'uppercase',
-  color: theme.palette.text.primary,
+  color: '#FFF',
   transition: 'opacity .25s ease-in-out, margin .25s ease-in-out'
 }))
 

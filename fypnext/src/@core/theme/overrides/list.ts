@@ -8,7 +8,7 @@ const List = (theme: Theme) => {
         root: {
           minWidth: 0,
           marginRight: theme.spacing(2.25),
-          color: theme.palette.text.secondary
+          color: `rgba(255, 253, 255, 0.87)`
         }
       }
     },
@@ -24,7 +24,7 @@ const List = (theme: Theme) => {
       styleOverrides: {
         dense: {
           '& .MuiListItemText-primary': {
-            color: theme.palette.text.primary
+            color: theme.palette.text.secondary
           }
         }
       }

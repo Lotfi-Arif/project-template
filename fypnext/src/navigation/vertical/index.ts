@@ -47,27 +47,27 @@ const navigation = (): VerticalNavItemsType => {
     {
       title: 'Typography',
       icon: FormatLetterCase,
-      path: '/typography'
+      path: '/admin/typography'
     },
     {
       title: 'Icons',
-      path: '/icons',
+      path: '/admin/icons',
       icon: GoogleCirclesExtended
     },
     {
       title: 'Cards',
       icon: CreditCardOutline,
-      path: '/cards'
+      path: '/admin/cards'
     },
     {
       title: 'Tables',
       icon: Table,
-      path: '/tables'
+      path: '/admin/tables'
     },
     {
       icon: CubeOutline,
       title: 'Form Layouts',
-      path: '/form-layouts'
+      path: '/admin/form-layouts'
     },
     {
       sectionTitle: 'Settings'
@@ -75,7 +75,7 @@ const navigation = (): VerticalNavItemsType => {
     {
       title: 'Account Settings',
       icon: AccountCogOutline,
-      path: '/account-settings'
+      path: '/admin/account-settings'
     },
   ]
 }

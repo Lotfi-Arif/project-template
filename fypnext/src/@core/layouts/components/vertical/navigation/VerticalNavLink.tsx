@@ -41,7 +41,7 @@ const MenuNavLink = styled(ListItemButton)<
   width: '100%',
   borderTopRightRadius: 100,
   borderBottomRightRadius: 100,
-  color: theme.palette.text.primary,
+  color: '#FFF',
   padding: theme.spacing(2.25, 3.5),
   transition: 'opacity .25s ease-in-out',
   '&.active, &.active:hover': {
@@ -105,7 +105,7 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }: Props) => {
           <ListItemIcon
             sx={{
               mr: 2.5,
-              color: 'text.primary',
+              color: 'text.dashtext',
               transition: 'margin .25s ease-in-out'
             }}
           >

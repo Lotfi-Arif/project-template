@@ -17,7 +17,7 @@ const DatePickerWrapper = styled(Box)<BoxProps>(({ theme }) => {
       border: 'none',
       boxShadow: theme.shadows[7],
       padding: theme.spacing(2, 0),
-      color: theme.palette.text.primary,
+      color: `rgba(58, 53, 65, 0.87)`,
       borderRadius: theme.shape.borderRadius,
       fontFamily: theme.typography.fontFamily,
       backgroundColor: theme.palette.background.paper,
@@ -33,7 +33,7 @@ const DatePickerWrapper = styled(Box)<BoxProps>(({ theme }) => {
       '& .react-datepicker-year-header': {
         lineHeight: 2.1,
         marginBottom: '0.5rem',
-        color: theme.palette.text.primary
+        color: `rgba(58, 53, 65, 0.87)`,
       },
       '& .react-datepicker__triangle': {
         display: 'none'
@@ -75,7 +75,7 @@ const DatePickerWrapper = styled(Box)<BoxProps>(({ theme }) => {
         fontWeight: 'normal',
         letterSpacing: '0.15px',
         marginBottom: theme.spacing(2),
-        color: theme.palette.text.primary
+        color: `rgba(58, 53, 65, 0.87)`,
       },
       '& .react-datepicker__day-name': {
         lineHeight: 1.5,
