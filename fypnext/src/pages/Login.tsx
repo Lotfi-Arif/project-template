@@ -1,10 +1,8 @@
-import Navbar from "./Navbar"
 import Image from 'next/image'
 
 const Login = () => {
     return (
         <>
-            <Navbar />
             <div className="mx-auto bg-white shadow-lg mt-14 md:w-2/3 lg:w-2/3 sm:w-2/3 rounded-2xl">
                 <div className="grid grid-cols-2 text-left">
                     <div className="row-start-auto my-auto mx-auto p-4">

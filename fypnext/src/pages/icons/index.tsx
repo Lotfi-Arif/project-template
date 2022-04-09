@@ -2,7 +2,6 @@
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import Link from '@mui/material/Link'
-import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
@@ -145,17 +144,6 @@ const Icons = () => {
         <Grid container spacing={6}>
           {renderIconGrids()}
         </Grid>
-      </Grid>
-      <Grid item xs={12} sx={{ textAlign: 'center' }}>
-        <Button
-          target='_blank'
-          rel='noreferrer'
-          component={Link}
-          variant='contained'
-          href='https://materialdesignicons.com/'
-        >
-          View All Material Design Icons
-        </Button>
       </Grid>
     </Grid>
   )

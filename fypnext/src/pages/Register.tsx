@@ -1,11 +1,9 @@
-import Navbar from "src/navigation/horizontal";
 import Image from 'next/image'
 
 const Register = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container mx-auto">
                 <div className="flex justify-center px-6 my-12">
                     <div className="w-full shadow-lg xl:w-3/4 lg:w-11/12 flex">
@@ -83,7 +81,7 @@ const Register = () => {
                                 </div>
                                 <div className="mb-6 text-center">
                                     <button
-                                        className="w-full px-4 py-2 font-bold text-slate-500 hover:text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                        className="w-full px-4 py-2 font-bold text-gray-100 hover:text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                         type="button"
                                     >
                                         Register
@@ -109,7 +107,7 @@ const Register = () => {
                             </form>
                         </div>
                         <div
-                            className="w-full h-auto hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
+                            className=" h-auto w-auto lg:block sm:bg-cover bg-cover rounded-l-lg"
                         >
                             <Image src="/register1.svg" width={841} height={1024} />
                         </div>
