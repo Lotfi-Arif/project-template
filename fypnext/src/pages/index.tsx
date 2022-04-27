@@ -7,7 +7,7 @@ const Landing = () => {
     return (
         <>
             <Navbar />
-            <div className='grid grid-cols-2 pt-4 mb-20'>
+            <div className='grid grid-cols-2 pt-4 mb-20 text-slate-800'>
                 <div className="row-start-auto mx-auto my-auto p-6">
                     <h1 className='text-5xl text-gray-900'>
                         The Safe Space <br />You need
@@ -35,7 +35,7 @@ const Landing = () => {
                     <Image src="/mobile1.svg" width={509} height={364} />
                 </div>
             </div>
-            <div className='grid grid-cols-1 gap-5 pt-4 mb-40 break-normal'>
+            <div className='grid grid-cols-1 gap-5 pt-4 mb-40 break-normal text-slate-800'>
                 <div className="row-start-auto mx-auto my-auto p-6 text-center">
                     <h1 className='text-5xl text-gray-900'>
                         How it Works
@@ -74,7 +74,7 @@ const Landing = () => {
                         <Image className="" src="/landing1.svg" width={495} height={298} />
                     </div>
                 </div>
-                <div className="p-6 my-auto mx-auto">
+                <div className="p-6 my-auto mx-auto text-slate-800">
                     <h1 className='text-4xl text-gray-900'>
                         Real-time Chat with <br /> your Counselor
                     </h1>
