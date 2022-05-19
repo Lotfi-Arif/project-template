@@ -29,7 +29,7 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src "],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src ", "src/components/Cards/CardLineChart/CardLineChart.js"],
   "exclude": [
     "node_modules"
   ]

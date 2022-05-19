@@ -14,7 +14,6 @@ const navigation = [
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-const user = false;
 
 const Navbar = () => {
 

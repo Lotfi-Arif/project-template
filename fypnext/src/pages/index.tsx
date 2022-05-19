@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from 'next/image'
-import Navbar from "src/navigation/horizontal";
+import Navbar from "src/components/Navbar/MainNavbar";
 
 const Landing = () => {
 
