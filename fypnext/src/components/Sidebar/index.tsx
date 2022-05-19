@@ -11,7 +11,7 @@ export default function Sidebar() {
   
 return (
     <>
-      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-slate-600 flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#18344D] flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
@@ -19,7 +19,7 @@ return (
             type="button"
             onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
           >
-            <i className="fas fa-bars"></i>
+            <i className="cib-next-js"></i>
           </button>
           {/* Brand */}
           <Link href="/">
@@ -85,7 +85,7 @@ return (
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-gray-200 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Layout Pages
+              Admin Pages
             </h6>
             {/* Navigation */}
 
@@ -106,10 +106,10 @@ return (
                         "fas fa-tv mr-2 text-sm " +
                         (router.pathname.indexOf("/admin/dashboard") !== -1
                           ? "opacity-75"
-                          : "text-white")
+                          : "text-black")
                       }
                     ></i>{" "}
-                    Dashboard
+                    Overview
                   </a>
                 </Link>
               </li>
@@ -133,7 +133,7 @@ return (
                           : "text-white")
                       }
                     ></i>{" "}
-                    Settings
+                    Approve Users
                   </a>
                 </Link>
               </li>
@@ -157,7 +157,7 @@ return (
                           : "text-white")
                       }
                     ></i>{" "}
-                    Tables
+                    Bookings
                   </a>
                 </Link>
               </li>
@@ -181,7 +181,30 @@ return (
                           : "text-white")
                       }
                     ></i>{" "}
-                    Maps
+                    Manage Events
+                  </a>
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link href="/admin/maps">
+                  <a
+                    href="#pablo"
+                    className={
+                      "text-xs uppercase py-3 font-bold block " +
+                      (router.pathname.indexOf("/admin/maps") !== -1
+                        ? "text-white hover:text-lightBlue-600"
+                        : "text-white hover:text-blueGray-500")
+                    }
+                  >
+                    <i
+                      className={
+                        "fas fa-map-marked mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/maps") !== -1
+                          ? "opacity-75"
+                          : "text-white")
+                      }
+                    ></i>{" "}
+                    Manage Posts
                   </a>
                 </Link>
               </li>
@@ -191,13 +214,13 @@ return (
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-white text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
+              Auth Pages
             </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
-                <Link href="/auth/login">
+                <Link href="/login">
                   <a
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
