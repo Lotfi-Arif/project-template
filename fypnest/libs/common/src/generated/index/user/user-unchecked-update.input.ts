@@ -2,9 +2,16 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
+import { NullableEnumGenderFieldUpdateOperationsInput } from '../prisma/nullable-enum-gender-field-update-operations.input';
+import { EnumAccountStatusFieldUpdateOperationsInput } from '../prisma/enum-account-status-field-update-operations.input';
 import { EnumRoleFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
-import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { StudentUncheckedUpdateOneWithoutUserInput } from '../student/student-unchecked-update-one-without-user.input';
+import { StaffUncheckedUpdateOneWithoutUserInput } from '../staff/staff-unchecked-update-one-without-user.input';
+import { CounselorUncheckedUpdateOneWithoutUserInput } from '../counselor/counselor-unchecked-update-one-without-user.input';
+import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecked-update-one-without-user.input';
 import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
+import { CounselorSessionUncheckedUpdateManyWithoutParticipantsInput } from '../counselor-session/counselor-session-unchecked-update-many-without-participants.input';
+import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -24,18 +31,36 @@ export class UserUncheckedUpdateInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     mobile?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    accountStatus?: StringFieldUpdateOperationsInput;
+    @Field(() => NullableEnumGenderFieldUpdateOperationsInput, {nullable:true})
+    gender?: NullableEnumGenderFieldUpdateOperationsInput;
+
+    @Field(() => EnumAccountStatusFieldUpdateOperationsInput, {nullable:true})
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput;
 
     @Field(() => EnumRoleFieldUpdateOperationsInput, {nullable:true})
     role?: EnumRoleFieldUpdateOperationsInput;
+
+    @Field(() => StudentUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    student?: StudentUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => StaffUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    staff?: StaffUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => CounselorUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    counselor?: CounselorUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => AdminUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    admin?: AdminUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
+    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
+
+    @Field(() => CounselorSessionUncheckedUpdateManyWithoutParticipantsInput, {nullable:true})
+    counselingSession?: CounselorSessionUncheckedUpdateManyWithoutParticipantsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
-
-    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
 }

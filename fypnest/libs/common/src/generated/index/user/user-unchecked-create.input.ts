@@ -1,7 +1,14 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { Gender } from '../prisma/gender.enum';
+import { AccountStatus } from '../prisma/account-status.enum';
 import { Role } from '../prisma/role.enum';
+import { StudentUncheckedCreateNestedOneWithoutUserInput } from '../student/student-unchecked-create-nested-one-without-user.input';
+import { StaffUncheckedCreateNestedOneWithoutUserInput } from '../staff/staff-unchecked-create-nested-one-without-user.input';
+import { CounselorUncheckedCreateNestedOneWithoutUserInput } from '../counselor/counselor-unchecked-create-nested-one-without-user.input';
+import { AdminUncheckedCreateNestedOneWithoutUserInput } from '../admin/admin-unchecked-create-nested-one-without-user.input';
 import { PostUncheckedCreateNestedManyWithoutAuthorInput } from '../post/post-unchecked-create-nested-many-without-author.input';
+import { CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput } from '../counselor-session/counselor-session-unchecked-create-nested-many-without-participants.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -21,18 +28,36 @@ export class UserUncheckedCreateInput {
     @Field(() => String, {nullable:true})
     mobile?: string;
 
-    @Field(() => String, {nullable:false})
-    accountStatus!: string;
+    @Field(() => Gender, {nullable:true})
+    gender?: keyof typeof Gender;
 
-    @Field(() => Role, {nullable:true})
-    role?: keyof typeof Role;
+    @Field(() => AccountStatus, {nullable:true})
+    accountStatus?: keyof typeof AccountStatus;
+
+    @Field(() => Role, {nullable:false})
+    role!: keyof typeof Role;
+
+    @Field(() => StudentUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    student?: StudentUncheckedCreateNestedOneWithoutUserInput;
+
+    @Field(() => StaffUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    staff?: StaffUncheckedCreateNestedOneWithoutUserInput;
+
+    @Field(() => CounselorUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    counselor?: CounselorUncheckedCreateNestedOneWithoutUserInput;
+
+    @Field(() => AdminUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput;
+
+    @Field(() => PostUncheckedCreateNestedManyWithoutAuthorInput, {nullable:true})
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+
+    @Field(() => CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput, {nullable:true})
+    counselingSession?: CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
-
-    @Field(() => PostUncheckedCreateNestedManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput;
 }

@@ -12,6 +12,9 @@ export class UsersService {
   async findOne(userFindOneArgs: Prisma.UserFindUniqueArgs) {
     return this.prisma.user.findUnique(userFindOneArgs);
   }
+  getMe(userId: string, select?: any) {
+    return this.prisma.user.findUnique({ where: { id: userId }, ...select });
+  }
   async createUser(userCreateOneArgs: Prisma.UserCreateArgs) {
     return this.prisma.user.create(userCreateOneArgs);
   }

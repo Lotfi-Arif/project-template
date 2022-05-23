@@ -1,0 +1,599 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  userId: String!
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CounselorSessionCount {
+  participants: Int!
+}
+
+type CounselorSession {
+  id: ID!
+  participants: [User!]
+  _count: CounselorSessionCount!
+}
+
+type UserCount {
+  posts: Int!
+  counselingSession: Int!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String
+  mobile: String
+  accountStatus: String!
+  role: Role!
+  posts: [Post!]
+  counselingSession: [CounselorSession!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: UserCount!
+}
+
+enum Role {
+  ADMIN
+  USER
+  STUDENT
+  COUNSELOR
+  DEPARTMENT_MANAGER
+}
+
+type Asset {
+  id: ID!
+  originalName: String!
+  fileName: String!
+  fileType: FileType!
+  url: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  uploadingState: UploadingState
+  eventImageAsset: Event
+}
+
+enum FileType {
+  VIDEO
+  PDF
+  IMAGE
+  ZIP
+  OTHER
+}
+
+enum UploadingState {
+  uploading
+  uploaded
+}
+
+type Event {
+  id: ID!
+  title: String!
+  eventImage: Asset
+  imageId: String
+  eventDetails: String!
+}
+
+type Query {
+  findAllUsers(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): Post!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  email: StringFilter
+  password: StringNullableFilter
+  mobile: StringNullableFilter
+  accountStatus: StringFilter
+  role: EnumRoleFilter
+  posts: PostListRelationFilter
+  counselingSession: CounselorSessionListRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input EnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  notIn: [Role!]
+  not: NestedEnumRoleFilter
+}
+
+input NestedEnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  notIn: [Role!]
+  not: NestedEnumRoleFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: StringFilter
+  title: StringFilter
+  body: StringFilter
+  userId: StringFilter
+  author: UserRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input CounselorSessionListRelationFilter {
+  every: CounselorSessionWhereInput
+  some: CounselorSessionWhereInput
+  none: CounselorSessionWhereInput
+}
+
+input CounselorSessionWhereInput {
+  AND: [CounselorSessionWhereInput!]
+  OR: [CounselorSessionWhereInput!]
+  NOT: [CounselorSessionWhereInput!]
+  id: StringFilter
+  participants: UserListRelationFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  mobile: SortOrder
+  accountStatus: SortOrder
+  role: SortOrder
+  posts: PostOrderByRelationAggregateInput
+  counselingSession: CounselorSessionOrderByRelationAggregateInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input PostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CounselorSessionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input UserWhereUniqueInput {
+  id: String
+  email: String
+  mobile: String
+}
+
+enum UserScalarFieldEnum {
+  id
+  name
+  email
+  password
+  mobile
+  accountStatus
+  role
+  createdAt
+  updatedAt
+}
+
+input PostOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  body: SortOrder
+  userId: SortOrder
+  author: UserOrderByWithRelationInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PostWhereUniqueInput {
+  id: String
+}
+
+enum PostScalarFieldEnum {
+  id
+  title
+  body
+  userId
+  createdAt
+  updatedAt
+}
+
+type Mutation {
+  findOneUser(where: UserWhereUniqueInput!): User!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  findOnePost(where: PostWhereUniqueInput!): Post!
+  createPost(data: PostCreateInput!): Post!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
+  deletePost(where: PostWhereUniqueInput!): Post!
+}
+
+input UserCreateInput {
+  id: String
+  name: String!
+  email: String!
+  password: String
+  mobile: String
+  accountStatus: String!
+  role: Role
+  posts: PostCreateNestedManyWithoutAuthorInput
+  counselingSession: CounselorSessionCreateNestedManyWithoutParticipantsInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateWithoutAuthorInput {
+  id: String
+  title: String!
+  body: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyAuthorInput {
+  id: String
+  title: String!
+  body: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CounselorSessionCreateNestedManyWithoutParticipantsInput {
+  create: [CounselorSessionCreateWithoutParticipantsInput!]
+  connectOrCreate: [CounselorSessionCreateOrConnectWithoutParticipantsInput!]
+  connect: [CounselorSessionWhereUniqueInput!]
+}
+
+input CounselorSessionCreateWithoutParticipantsInput {
+  id: String
+}
+
+input CounselorSessionCreateOrConnectWithoutParticipantsInput {
+  where: CounselorSessionWhereUniqueInput!
+  create: CounselorSessionCreateWithoutParticipantsInput!
+}
+
+input CounselorSessionWhereUniqueInput {
+  id: String
+}
+
+input UserUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  accountStatus: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  posts: PostUpdateManyWithoutAuthorInput
+  counselingSession: CounselorSessionUpdateManyWithoutParticipantsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input EnumRoleFieldUpdateOperationsInput {
+  set: Role
+}
+
+input PostUpdateManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  set: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  connect: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
+  deleteMany: [PostScalarWhereInput!]
+}
+
+input PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutAuthorInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input PostUpdateWithoutAuthorInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  body: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutAuthorInput!
+}
+
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  where: PostScalarWhereInput!
+  data: PostUpdateManyMutationInput!
+}
+
+input PostScalarWhereInput {
+  AND: [PostScalarWhereInput!]
+  OR: [PostScalarWhereInput!]
+  NOT: [PostScalarWhereInput!]
+  id: StringFilter
+  title: StringFilter
+  body: StringFilter
+  userId: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input PostUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  body: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CounselorSessionUpdateManyWithoutParticipantsInput {
+  create: [CounselorSessionCreateWithoutParticipantsInput!]
+  connectOrCreate: [CounselorSessionCreateOrConnectWithoutParticipantsInput!]
+  upsert: [CounselorSessionUpsertWithWhereUniqueWithoutParticipantsInput!]
+  set: [CounselorSessionWhereUniqueInput!]
+  disconnect: [CounselorSessionWhereUniqueInput!]
+  delete: [CounselorSessionWhereUniqueInput!]
+  connect: [CounselorSessionWhereUniqueInput!]
+  update: [CounselorSessionUpdateWithWhereUniqueWithoutParticipantsInput!]
+  updateMany: [CounselorSessionUpdateManyWithWhereWithoutParticipantsInput!]
+  deleteMany: [CounselorSessionScalarWhereInput!]
+}
+
+input CounselorSessionUpsertWithWhereUniqueWithoutParticipantsInput {
+  where: CounselorSessionWhereUniqueInput!
+  update: CounselorSessionUpdateWithoutParticipantsInput!
+  create: CounselorSessionCreateWithoutParticipantsInput!
+}
+
+input CounselorSessionUpdateWithoutParticipantsInput {
+  id: StringFieldUpdateOperationsInput
+}
+
+input CounselorSessionUpdateWithWhereUniqueWithoutParticipantsInput {
+  where: CounselorSessionWhereUniqueInput!
+  data: CounselorSessionUpdateWithoutParticipantsInput!
+}
+
+input CounselorSessionUpdateManyWithWhereWithoutParticipantsInput {
+  where: CounselorSessionScalarWhereInput!
+  data: CounselorSessionUpdateManyMutationInput!
+}
+
+input CounselorSessionScalarWhereInput {
+  AND: [CounselorSessionScalarWhereInput!]
+  OR: [CounselorSessionScalarWhereInput!]
+  NOT: [CounselorSessionScalarWhereInput!]
+  id: StringFilter
+}
+
+input CounselorSessionUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+}
+
+input PostCreateInput {
+  id: String
+  title: String!
+  body: String!
+  author: UserCreateNestedOneWithoutPostsInput!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserCreateNestedOneWithoutPostsInput {
+  create: UserCreateWithoutPostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutPostsInput {
+  id: String
+  name: String!
+  email: String!
+  password: String
+  mobile: String
+  accountStatus: String!
+  role: Role
+  counselingSession: CounselorSessionCreateNestedManyWithoutParticipantsInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserCreateOrConnectWithoutPostsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutPostsInput!
+}
+
+input PostUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  body: StringFieldUpdateOperationsInput
+  author: UserUpdateOneRequiredWithoutPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutPostsInput {
+  create: UserCreateWithoutPostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
+  upsert: UserUpsertWithoutPostsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutPostsInput
+}
+
+input UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsInput!
+  create: UserCreateWithoutPostsInput!
+}
+
+input UserUpdateWithoutPostsInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  accountStatus: StringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  counselingSession: CounselorSessionUpdateManyWithoutParticipantsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}

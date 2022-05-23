@@ -21,6 +21,9 @@ export class UserCountAggregate {
     mobile!: number;
 
     @Field(() => Int, {nullable:false})
+    gender!: number;
+
+    @Field(() => Int, {nullable:false})
     accountStatus!: number;
 
     @Field(() => Int, {nullable:false})

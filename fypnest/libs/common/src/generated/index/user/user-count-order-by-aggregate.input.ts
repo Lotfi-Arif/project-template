@@ -21,6 +21,9 @@ export class UserCountOrderByAggregateInput {
     mobile?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    gender?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     accountStatus?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

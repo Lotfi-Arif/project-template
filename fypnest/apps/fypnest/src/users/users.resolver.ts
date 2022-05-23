@@ -26,6 +26,12 @@ export class UsersResolver {
 
   }
 
+  // @Query(() => User)
+  // async me(@Args() user: User, @Info() info) {
+  //   const select = new PrismaSelect(info).value;
+  //   return await this.usersService.getMe(user.id, select);
+  // }
+
   @Mutation(() => User)
   async findOneUser(@Args() userFindUnique: FindUniqueUserArgs, @Info() info) {
     try {

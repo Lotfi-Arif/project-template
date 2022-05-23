@@ -15,6 +15,7 @@ import { AssetsModule } from './assets/assets.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { CounsellorsModule } from './counselors/counselors.module';
 import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [UsersModule, ProvidersModule, PostsModule,
@@ -34,7 +35,8 @@ import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions
     AssetsModule,
     SchedulesModule,
     CounsellorsModule,
-    CounselorSessionsModule
+    CounselorSessionsModule,
+    AuthModule
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService]

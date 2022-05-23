@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
 import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
+import { EnumGenderNullableWithAggregatesFilter } from '../prisma/enum-gender-nullable-with-aggregates-filter.input';
+import { EnumAccountStatusWithAggregatesFilter } from '../prisma/enum-account-status-with-aggregates-filter.input';
 import { EnumRoleWithAggregatesFilter } from '../prisma/enum-role-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
@@ -32,8 +34,11 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     mobile?: StringNullableWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    accountStatus?: StringWithAggregatesFilter;
+    @Field(() => EnumGenderNullableWithAggregatesFilter, {nullable:true})
+    gender?: EnumGenderNullableWithAggregatesFilter;
+
+    @Field(() => EnumAccountStatusWithAggregatesFilter, {nullable:true})
+    accountStatus?: EnumAccountStatusWithAggregatesFilter;
 
     @Field(() => EnumRoleWithAggregatesFilter, {nullable:true})
     role?: EnumRoleWithAggregatesFilter;

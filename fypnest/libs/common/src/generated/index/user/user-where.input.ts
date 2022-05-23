@@ -2,7 +2,13 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { EnumGenderNullableFilter } from '../prisma/enum-gender-nullable-filter.input';
+import { EnumAccountStatusFilter } from '../prisma/enum-account-status-filter.input';
 import { EnumRoleFilter } from '../prisma/enum-role-filter.input';
+import { StudentRelationFilter } from '../student/student-relation-filter.input';
+import { StaffRelationFilter } from '../staff/staff-relation-filter.input';
+import { CounselorRelationFilter } from '../counselor/counselor-relation-filter.input';
+import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
 import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
 import { CounselorSessionListRelationFilter } from '../counselor-session/counselor-session-list-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
@@ -34,11 +40,26 @@ export class UserWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     mobile?: StringNullableFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    accountStatus?: StringFilter;
+    @Field(() => EnumGenderNullableFilter, {nullable:true})
+    gender?: EnumGenderNullableFilter;
+
+    @Field(() => EnumAccountStatusFilter, {nullable:true})
+    accountStatus?: EnumAccountStatusFilter;
 
     @Field(() => EnumRoleFilter, {nullable:true})
     role?: EnumRoleFilter;
+
+    @Field(() => StudentRelationFilter, {nullable:true})
+    student?: StudentRelationFilter;
+
+    @Field(() => StaffRelationFilter, {nullable:true})
+    staff?: StaffRelationFilter;
+
+    @Field(() => CounselorRelationFilter, {nullable:true})
+    counselor?: CounselorRelationFilter;
+
+    @Field(() => AdminRelationFilter, {nullable:true})
+    admin?: AdminRelationFilter;
 
     @Field(() => PostListRelationFilter, {nullable:true})
     posts?: PostListRelationFilter;

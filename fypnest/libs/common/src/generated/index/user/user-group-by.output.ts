@@ -1,5 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
+import { Gender } from '../prisma/gender.enum';
+import { AccountStatus } from '../prisma/account-status.enum';
 import { Role } from '../prisma/role.enum';
 import { UserCountAggregate } from './user-count-aggregate.output';
 import { UserMinAggregate } from './user-min-aggregate.output';
@@ -23,8 +25,11 @@ export class UserGroupBy {
     @Field(() => String, {nullable:true})
     mobile?: string;
 
-    @Field(() => String, {nullable:false})
-    accountStatus!: string;
+    @Field(() => Gender, {nullable:true})
+    gender?: keyof typeof Gender;
+
+    @Field(() => AccountStatus, {nullable:false})
+    accountStatus!: keyof typeof AccountStatus;
 
     @Field(() => Role, {nullable:false})
     role!: keyof typeof Role;

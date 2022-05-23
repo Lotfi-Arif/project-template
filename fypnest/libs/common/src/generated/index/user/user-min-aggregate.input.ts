@@ -20,6 +20,9 @@ export class UserMinAggregateInput {
     mobile?: true;
 
     @Field(() => Boolean, {nullable:true})
+    gender?: true;
+
+    @Field(() => Boolean, {nullable:true})
     accountStatus?: true;
 
     @Field(() => Boolean, {nullable:true})

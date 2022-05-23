@@ -1,0 +1,11 @@
+query users {
+  findAllUsers {
+    id
+    name
+    email
+    password
+    mobile
+    accountStatus
+    role
+  }
+}

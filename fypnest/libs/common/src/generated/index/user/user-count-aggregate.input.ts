@@ -20,6 +20,9 @@ export class UserCountAggregateInput {
     mobile?: true;
 
     @Field(() => Boolean, {nullable:true})
+    gender?: true;
+
+    @Field(() => Boolean, {nullable:true})
     accountStatus?: true;
 
     @Field(() => Boolean, {nullable:true})

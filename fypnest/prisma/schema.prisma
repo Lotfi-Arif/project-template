@@ -21,8 +21,13 @@ model User {
   email               String   @unique
   password            String?
   mobile              String?  @unique
-  accountStatus       String
-  role                Role     @default(USER)
+  gender              Gender?
+  accountStatus       AccountStatus   @default(UNVERIFIED)
+  role                Role
+  student             Student?
+  staff               Staff?
+  counselor           Counselor?
+  admin               Admin?
   posts               Post[]
   counselingSession   CounselorSession[]   @relation(references: [id])
   createdAt     DateTime @default(now())
@@ -37,13 +42,45 @@ model Schedule {
 model CounselorSession {
   id            String    @id @default(uuid())
   participants  User[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Student {
+  id       String   @id @default(uuid())
+  matrix   String
+  user     User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty  String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Admin {
+  id        String   @id @unique
+  email     String   @unique
+  password  String
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Staff {
+  id       String   @id @default(uuid())
+  staffId  String
+  user     User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty  String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
 
 model Counselor {
   id         String   @id @default(uuid())
   department String
+  user       User   @relation(fields: [id], references: [id], onDelete: Cascade)
   expertise  String
   Schedule   String[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
 
 model Post {
@@ -109,10 +146,21 @@ enum UploadingState {
   uploaded
 }
 
+enum AccountStatus {
+  VERIFIED
+  UNVERIFIED
+}
+
 enum Role {
   ADMIN
   USER
   STUDENT
   COUNSELOR
   DEPARTMENT_MANAGER
+}
+
+enum Gender {
+  M
+  F
+  OTHERS
 }
