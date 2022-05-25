@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^2.0.1",
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^9.1.2",
     "@nestjs/mapped-types": "^1.0.1",
@@ -30,6 +31,8 @@
     "@paljs/plugins": "^4.0.13",
     "@prisma/client": "^3.6.0",
     "apollo-server-express": "^3.5.0",
+    "bcrypt": "^5.0.1",
+    "class-validator": "^0.13.2",
     "graphql": "^15.8.0",
     "nestjs-prisma": "^0.14.3",
     "passport": "^0.6.0",

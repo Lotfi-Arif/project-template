@@ -8,7 +8,7 @@ const Landing = () => {
         <>
             <Navbar />
             <div className='grid grid-cols-2 pt-4 mb-20 text-slate-800'>
-                <div className="row-start-auto mx-auto my-auto p-6">
+                <div className="row-start-auto mx-auto px-32 my-auto p-6">
                     <h1 className='text-5xl text-gray-900'>
                         The Safe Space <br />You need
                     </h1>
@@ -20,7 +20,7 @@ const Landing = () => {
                     </div>
                     <div className="py-8">
                         <button className='text-white hover:bg-white hover:text-black bg-blue-400 w-36 h-12 border rounded-sm'>
-                            <Link href={'/Register'}>
+                            <Link href={'/register'}>
                                 Register
                             </Link>
                         </button>
@@ -32,7 +32,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className="row-start-auto -z-10 p-6 my-auto mx-auto">
-                    <Image src="/mobile1.svg" width={509} height={364} />
+                    <Image src="/mobile1.svg" alt="MobileView" width={509} height={364} />
                 </div>
             </div>
             <div className='grid grid-cols-1 gap-5 pt-4 mb-40 break-normal text-slate-800'>
@@ -46,21 +46,21 @@ const Landing = () => {
                 </div>
                 <div className="grid grid-cols-3 p-6 my-auto mx-auto">
                     <div className='text-center mx-auto'>
-                        <Image src="/Ellipse1.svg" width={250} height={250} />
+                        <Image src="/Ellipse1.svg" alt="MobileView" width={250} height={250} />
                         <h3 className="text-2xl mt-6">You sign up</h3>
                         <div className='mt-10 mx-auto'>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor.
                         </div>
                     </div>
                     <div className='text-center mx-auto'>
-                        <Image src="/Ellipse1.svg" width={250} height={250} />
+                        <Image src="/Ellipse1.svg" alt="MobileView" width={250} height={250} />
                         <h3 className="text-2xl mt-6">You find a Counselor</h3>
                         <div className='mt-10 mx-auto'>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor.
                         </div>
                     </div>
                     <div className='text-center  mx-auto'>
-                        <Image className="" src="/Ellipse1.svg" width={250} height={250} />
+                        <Image className="" src="/Ellipse1.svg" alt="MobileView" width={250} height={250} />
                         <h3 className="text-2xl mt-6">You attend the session</h3>
                         <div className='mt-10 mx-auto'>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor.
@@ -71,7 +71,7 @@ const Landing = () => {
             <div className='grid grid-cols-2 gap-5 pt-4 mb-40 break-normal'>
                 <div className="row-start-auto mx-auto my-auto p-6 text-center">
                     <div className='mt-10 mx-auto'>
-                        <Image className="" src="/landing1.svg" width={495} height={298} />
+                        <Image className="" src="/landing1.svg" alt="MobileView" width={495} height={298} />
                     </div>
                 </div>
                 <div className="p-6 my-auto mx-auto text-slate-800">

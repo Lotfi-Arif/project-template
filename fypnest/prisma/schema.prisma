@@ -16,43 +16,45 @@ generator nestgraphql {
 }
 
 model User {
-  id                  String   @id @default(uuid())
-  name                String
-  email               String   @unique
-  password            String?
-  mobile              String?  @unique
-  gender              Gender?
-  accountStatus       AccountStatus   @default(UNVERIFIED)
-  role                Role
-  student             Student?
-  staff               Staff?
-  counselor           Counselor?
-  admin               Admin?
-  posts               Post[]
-  counselingSession   CounselorSession[]   @relation(references: [id])
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                String             @id @default(uuid())
+  name              String
+  email             String             @unique
+  password          String?
+  mobile            String?            @unique
+  gender            Gender?
+  accountStatus     AccountStatus      @default(UNVERIFIED)
+  role              Role
+  student           Student?
+  staff             Staff?
+  counselor         Counselor?
+  admin             Admin?
+  posts             Post[]
+  counselingSession CounselorSession[] @relation(references: [id])
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model Schedule {
-  id                String   @id  @default(uuid())
-  scheduleDate      DateTime
+  id           String   @id @default(uuid())
+  scheduleDate DateTime
 }
 
 model CounselorSession {
-  id            String    @id @default(uuid())
-  participants  User[]
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id           String   @id @default(uuid())
+  participants User[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Student {
-  id       String   @id @default(uuid())
-  matrix   String
-  user     User     @relation(fields: [id], references: [id], onDelete: Cascade)
-  faculty  String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  matrix    String   @unique
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Admin {
@@ -65,22 +67,24 @@ model Admin {
 }
 
 model Staff {
-  id       String   @id @default(uuid())
-  staffId  String
-  user     User     @relation(fields: [id], references: [id], onDelete: Cascade)
-  faculty  String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  staffId   String   @unique
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Counselor {
   id         String   @id @default(uuid())
   department String
-  user       User   @relation(fields: [id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [id], references: [id], onDelete: Cascade)
   expertise  String
   Schedule   String[]
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Post {
@@ -101,10 +105,10 @@ model Chat {
 }
 
 model Message {
-  id        String @id  @default(uuid())
-  sender    String
-  reciever  String
-  Message   String
+  id       String @id @default(uuid())
+  sender   String
+  reciever String
+  Message  String
 }
 
 model Event {
@@ -116,9 +120,9 @@ model Event {
 }
 
 model FAQ {
-  id        String  @id @default(uuid())
-  question  String
-  answer    String
+  id       String @id @default(uuid())
+  question String
+  answer   String
 }
 
 model Asset {

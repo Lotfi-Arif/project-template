@@ -35,6 +35,11 @@ const Register = () => {
         }
     }
 
+    const handleLogin = (e) => {
+        e.preventDefault()
+        router.push('/login')
+    }
+
 
     return (
         <>
@@ -118,7 +123,7 @@ const Register = () => {
                                 <div className="text-center">
                                     <a
                                         className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                        href="./index.html"
+                                        onClick={handleLogin}
                                     >
                                         Already have an account? Login!
                                     </a>
@@ -128,7 +133,7 @@ const Register = () => {
                         <div
                             className=" h-auto w-auto lg:block sm:bg-cover bg-cover rounded-l-lg"
                         >
-                            <Image src="/register1.svg" width={841} height={1024} />
+                            <Image alt='RegisterPhoto' src="/register1.svg" width={841} height={1024} />
                         </div>
                     </div>
                 </div>

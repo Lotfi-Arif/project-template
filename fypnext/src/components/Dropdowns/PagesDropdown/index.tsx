@@ -92,7 +92,7 @@ return (
         >
           Auth Layout
         </span>
-        <Link href="/auth/login">
+        <Link href="/login">
           <a
             href="#pablo"
             className={
@@ -102,7 +102,7 @@ return (
             Login
           </a>
         </Link>
-        <Link href="/auth/register">
+        <Link href="/register">
           <a
             href="#pablo"
             className={

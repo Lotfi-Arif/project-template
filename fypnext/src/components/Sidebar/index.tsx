@@ -93,7 +93,7 @@ return (
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
-                <Link href="/admin/dashboard">
+                <Link href="/pages/admin/">
                   <a
                     href="#pablo"
                     className={
@@ -117,12 +117,12 @@ return (
               </li>
 
               <li className="items-center">
-                <Link href="/admin/settings">
+                <Link href="/pages/admin/approveusers">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/settings") !== -1
+                      (router.pathname.indexOf("/pages/admin/approveusers") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
@@ -130,7 +130,7 @@ return (
                     <i
                       className={
                         "fas fa-tools mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/settings") !== -1
+                        (router.pathname.indexOf("/pages/admin/approveusers") !== -1
                           ? "opacity-75"
                           : "text-white")
                       }

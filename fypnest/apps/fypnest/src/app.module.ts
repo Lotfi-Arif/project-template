@@ -4,8 +4,8 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { ProvidersModule } from '@app/providers';
 import { GraphQLModule } from '@nestjs/graphql';
-import { PrismaModule } from 'nestjs-prisma'
-import { join } from 'path'
+import { PrismaModule } from 'nestjs-prisma';
+import { join } from 'path';
 import { PostsModule } from './posts/posts.module';
 import { MessagesModule } from './messages/messages.module';
 import { ChatsModule } from './chats/chats.module';
@@ -16,12 +16,18 @@ import { SchedulesModule } from './schedules/schedules.module';
 import { CounsellorsModule } from './counselors/counselors.module';
 import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import config from '@app/common/configs/config';
 
 @Module({
-  imports: [UsersModule, ProvidersModule, PostsModule,
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    UsersModule,
+    ProvidersModule,
+    PostsModule,
     GraphQLModule.forRoot({
       cors: false,
-      autoSchemaFile: join(process.cwd(), '../graphql/fypnest.gql'),
+      autoSchemaFile: join(process.cwd(), './graphql/fypnest.gql'),
       include: [UsersModule, PostsModule],
     }),
     PrismaModule.forRoot({
@@ -36,9 +42,9 @@ import { AuthModule } from './auth/auth.module';
     SchedulesModule,
     CounsellorsModule,
     CounselorSessionsModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [PrismaService, UsersService],
-  exports: [PrismaService]
+  exports: [PrismaService],
 })
-export class AppModule { }
+export class AppModule {}

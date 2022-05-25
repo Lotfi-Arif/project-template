@@ -1,0 +1,13 @@
+
+mutation login($email: String!, $password: String!) {
+  loginUser(credentials: { email: $email, password: $password }) {
+    findAllUsers {
+      id
+      name
+      email
+      mobile
+      accountStatus
+      role
+    }
+  }
+}

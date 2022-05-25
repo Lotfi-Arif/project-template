@@ -4,12 +4,10 @@ import { UsersService } from './users.service';
 
 @Resolver(() => User)
 export class AdminUsersResolver {
+  constructor(private readonly usersService: UsersService) {}
 
-    constructor(private readonly usersService: UsersService) {
-    }
-
-    // @Mutation(() => User)
-    // async createUser() {}
-    // @Mutation(() => User)
-    // async updateUser() {}
+  // @Mutation(() => User)
+  // async createUser() {}
+  // @Mutation(() => User)
+  // async updateUser() {}
 }

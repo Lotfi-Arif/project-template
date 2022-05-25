@@ -9,21 +9,18 @@ import { FindUniqueUserArgs } from '@app/common/generated/index/user/find-unique
 import { UpdateOneUserArgs } from '@app/common/generated/index/user/update-one-user.args';
 import { DeleteOneUserArgs } from '@app/common/generated/index/user/delete-one-user.args';
 
-
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [User])
   async findAllUsers(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {
     try {
-      const users = new PrismaSelect(info).value
-      return this.usersService.findAll({ ...userFindManyArgs, ...users })
+      const users = new PrismaSelect(info).value;
+      return this.usersService.findAll({ ...userFindManyArgs, ...users });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   // @Query(() => User)
@@ -36,7 +33,7 @@ export class UsersResolver {
   async findOneUser(@Args() userFindUnique: FindUniqueUserArgs, @Info() info) {
     try {
       const user = new PrismaSelect(info).value;
-      return this.usersService.findOne({ ...userFindUnique, ...user })
+      return this.usersService.findOne({ ...userFindUnique, ...user });
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +43,7 @@ export class UsersResolver {
   async createUser(@Args() userCreateArgs: CreateOneUserArgs, @Info() info) {
     try {
       const newUser = new PrismaSelect(info).value;
-      return this.usersService.createUser({ ...userCreateArgs, ...newUser })
+      return this.usersService.createUser({ ...userCreateArgs, ...newUser });
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +53,7 @@ export class UsersResolver {
   async updateUser(@Args() userUpdateArgs: UpdateOneUserArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
-      return this.usersService.updateUser({ ...userUpdateArgs, ...update })
+      return this.usersService.updateUser({ ...userUpdateArgs, ...update });
     } catch (error) {
       console.error(error);
     }
@@ -66,7 +63,7 @@ export class UsersResolver {
   async deleteUser(@Args() userDeletArgs: DeleteOneUserArgs, @Info() info) {
     try {
       const deleteUser = new PrismaSelect(info).value;
-      return this.usersService.updateUser({ ...userDeletArgs, ...deleteUser })
+      return this.usersService.updateUser({ ...userDeletArgs, ...deleteUser });
     } catch (error) {
       console.error(error);
     }

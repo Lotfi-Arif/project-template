@@ -3,7 +3,6 @@ query users {
     id
     name
     email
-    password
     mobile
     accountStatus
     role
