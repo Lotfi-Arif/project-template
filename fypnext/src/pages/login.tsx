@@ -1,8 +1,37 @@
 import Image from 'next/image'
 import { TabGroup } from '@statikly/funk'
 import Link from 'next/link';
+import Cookies from 'universal-cookie';
+import { useState } from 'react';
+import { LoginMutation, Role, useLoginMutation } from 'schema/generated/graphql';
+import { withApollo } from 'utils/hooks/withApollo';
 
 const Login = () => {
+
+    const cookie = new Cookies();
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [message, setError] = useState('')
+    const [signIn] = useLoginMutation()
+
+    const onSubmit = async ({ email, password }, error) => {
+        error.preventDefault()
+        try {
+            await signIn({
+                variables: {
+                    data:{
+                        email,
+                        password,
+                        role: Role.Student
+                    }
+                }
+            })
+        } catch (error) {
+
+            setError(error.message)
+
+        }
+    }
 
     return (
         <>
@@ -81,6 +110,8 @@ const Login = () => {
                                                 className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                                 id="email"
                                                 type="email"
+                                                name={email}
+                                                onChange={(e) => { setEmail(e.target.value) }}
                                                 placeholder="Email"
                                             />
                                         </div>
@@ -90,8 +121,10 @@ const Login = () => {
                                             </label>
                                             <input
                                                 className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                                id="c_password"
+                                                id="password"
                                                 type="password"
+                                                name={password}
+                                                onChange={(e) => { setPassword(e.target.value) }}
                                                 placeholder="******************"
                                             />
                                         </div>
@@ -104,7 +137,7 @@ const Login = () => {
                                                 Forgot password?
                                             </div>
                                         </div>
-                                        <button type="submit" className="text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500">Login</button>
+                                        <button type="submit" onClick={(e) => onSubmit({email, password}, e)} className="text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500">Login</button>
                                         <button type="button" className='text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500'>
                                             <Link href={'/register'}>
                                                 Sign Up
@@ -141,4 +174,4 @@ const Login = () => {
     );
 }
 
-export default Login
+export default withApollo(Login);

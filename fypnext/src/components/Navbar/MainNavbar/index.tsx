@@ -5,10 +5,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const navigation = [
-  { name: 'About Us', href: '#', current: true },
-  { name: 'Events', href: '#', current: false },
+  { name: 'Overview', href: '/', current: true },
+  { name: 'Events', href: '/events', current: false },
   { name: 'Our Social media', href: '#', current: false },
-  { name: 'How it works', href: '#', current: false },
+  { name: 'FAQ', href: '/pages/FAQ', current: false },
 ]
 
 function classNames(...classes: string[]) {

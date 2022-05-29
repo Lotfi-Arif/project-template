@@ -147,6 +147,10 @@ type Event {
   eventDetails: String!
 }
 
+type Auth {
+  user: User!
+}
+
 type Query {
   findAllUsers(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
   findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): Post!
@@ -552,6 +556,7 @@ type Mutation {
   createPost(data: PostCreateInput!): Post!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
   deletePost(where: PostWhereUniqueInput!): Post!
+  loginUser(data: LoginInput!): Auth!
 }
 
 input UserCreateInput {
@@ -1054,4 +1059,10 @@ input UserUpdateWithoutPostsInput {
   counselingSession: CounselorSessionUpdateManyWithoutParticipantsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+  role: Role!
 }

@@ -116,6 +116,11 @@ export type Asset = {
   url: Scalars['String'];
 };
 
+export type Auth = {
+  __typename?: 'Auth';
+  user: User;
+};
+
 export type Counselor = {
   __typename?: 'Counselor';
   Schedule?: Maybe<Array<Scalars['String']>>;
@@ -382,6 +387,12 @@ export enum Gender {
   Others = 'OTHERS'
 }
 
+export type LoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  role: Role;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createPost: Post;
@@ -390,6 +401,7 @@ export type Mutation = {
   deleteUser: User;
   findOnePost: Post;
   findOneUser: User;
+  loginUser: Auth;
   updatePost: Post;
   updateUser: User;
 };
@@ -422,6 +434,11 @@ export type MutationFindOnePostArgs = {
 
 export type MutationFindOneUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationLoginUserArgs = {
+  data: LoginInput;
 };
 
 
@@ -717,8 +734,10 @@ export enum SortOrder {
 export type Staff = {
   __typename?: 'Staff';
   createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   faculty: Scalars['String'];
   id: Scalars['ID'];
+  password: Scalars['String'];
   staffId: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user: User;
@@ -737,15 +756,19 @@ export type StaffCreateOrConnectWithoutUserInput = {
 
 export type StaffCreateWithoutUserInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
   faculty: Scalars['String'];
+  password: Scalars['String'];
   staffId: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type StaffOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
   faculty?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   staffId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
@@ -768,7 +791,9 @@ export type StaffUpdateOneWithoutUserInput = {
 
 export type StaffUpdateWithoutUserInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
   faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
   staffId?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -783,15 +808,19 @@ export type StaffWhereInput = {
   NOT?: InputMaybe<Array<StaffWhereInput>>;
   OR?: InputMaybe<Array<StaffWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<StringFilter>;
   faculty?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringFilter>;
   staffId?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
 };
 
 export type StaffWhereUniqueInput = {
+  email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
+  staffId?: InputMaybe<Scalars['String']>;
 };
 
 export type StringFieldUpdateOperationsInput = {
@@ -839,9 +868,11 @@ export type StringNullableListFilter = {
 export type Student = {
   __typename?: 'Student';
   createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   faculty: Scalars['String'];
   id: Scalars['ID'];
   matrix: Scalars['String'];
+  password: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   user: User;
 };
@@ -859,16 +890,20 @@ export type StudentCreateOrConnectWithoutUserInput = {
 
 export type StudentCreateWithoutUserInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
   faculty: Scalars['String'];
   matrix: Scalars['String'];
+  password: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type StudentOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
   faculty?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   matrix?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
 };
@@ -890,8 +925,10 @@ export type StudentUpdateOneWithoutUserInput = {
 
 export type StudentUpdateWithoutUserInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
   faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
   matrix?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -905,15 +942,19 @@ export type StudentWhereInput = {
   NOT?: InputMaybe<Array<StudentWhereInput>>;
   OR?: InputMaybe<Array<StudentWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<StringFilter>;
   faculty?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   matrix?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
 };
 
 export type StudentWhereUniqueInput = {
+  email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
+  matrix?: InputMaybe<Scalars['String']>;
 };
 
 export enum UploadingState {
@@ -1117,6 +1158,13 @@ export type UserWhereUniqueInput = {
   mobile?: InputMaybe<Scalars['String']>;
 };
 
+export type LoginMutationVariables = Exact<{
+  data: LoginInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', loginUser: { __typename?: 'Auth', user: { __typename?: 'User', id: string, name: string, email: string, password?: string | null | undefined, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role } } };
+
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -1127,9 +1175,50 @@ export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __type
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsersQuery = { __typename?: 'Query', findAllUsers: Array<{ __typename?: 'User', id: string, name: string, email: string, password?: string | null | undefined, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role }> };
+export type UsersQuery = { __typename?: 'Query', findAllUsers: Array<{ __typename?: 'User', id: string, name: string, email: string, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role }> };
 
 
+export const LoginDocument = gql`
+    mutation login($data: LoginInput!) {
+  loginUser(data: $data) {
+    user {
+      id
+      name
+      email
+      password
+      mobile
+      accountStatus
+      role
+    }
+  }
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+      }
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
@@ -1175,7 +1264,6 @@ export const UsersDocument = gql`
     id
     name
     email
-    password
     mobile
     accountStatus
     role
@@ -1225,6 +1313,7 @@ export const namedOperations = {
     users: 'users'
   },
   Mutation: {
+    login: 'login',
     createUser: 'createUser'
   }
 }
