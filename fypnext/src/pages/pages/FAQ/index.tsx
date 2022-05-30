@@ -3,93 +3,335 @@ import Navbar from "src/components/Navbar/MainNavbar";
 const FAQ = () => {
     return (
         <>
-        <Navbar />
-            <div>
-                <section className="text-gray-700">
-                    <div className="container px-5 py-24 mx-auto">
-                        <div className="text-center mb-20">
-                            <h1 className="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                                Frequently Asked Question
-                            </h1>
-                            <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-                                The most common questions about how our business works and what
-                                can do for you.
-                            </p>
-                        </div>
-                        <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                            <div className="w-full lg:w-1/2 px-4 py-2">
-                                <details className="mb-4">
-                                    <summary className="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                        How Long is this site live?
-                                    </summary>
-
-                                    <span>
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
-                                <details className="mb-4">
-                                    <summary className="font-semibold bg-gray-200 rounded-md py-2 px-4">
-                                        Can I install/upload anything I want on there?
-                                    </summary>
-
-                                    <span>
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
-                                <details className="mb-4">
-                                    <summary className="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                        How can I migrate to another site?
-                                    </summary>
-
-                                    <span>
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
+            <Navbar />
+            <div className="bg-gray-100">
+                <div className="container mx-auto">
+                    <div role="article" className="bg-gray-100 py-12 md:px-8">
+                        <div className="px-4 xl:px-0 py-10">
+                            <div className="flex flex-col lg:flex-row flex-wrap">
+                                <div className="mt-4 lg:mt-0 lg:w-3/5">
+                                    <div>
+                                        <h1 className="text-3xl ml-2 lg:ml-0 lg:text-4xl font-bold text-gray-900 tracking-normal lg:w-11/12">Frequently asked questions</h1>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="w-full lg:w-1/2 px-4 py-2">
-                                <details className="mb-4">
-                                    <summary className="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                        Can I change the domain you give me?
-                                    </summary>
-
-                                    <span className="px-4 py-2">
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
-                                <details className="mb-4">
-                                    <summary className="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                        How many sites I can create at once?
-                                    </summary>
-
-                                    <span className="px-4 py-2">
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
-                                <details className="mb-4">
-                                    <summary className="font-semibold  bg-gray-200 rounded-md py-2 px-4">
-                                        How can I communicate with you?
-                                    </summary>
-
-                                    <span className="px-4 py-2">
-                                        Laboris qui labore cillum culpa in sunt quis sint veniam.
-                                        Dolore ex aute deserunt esse ipsum elit aliqua. Aute quis
-                                        minim velit nostrud pariatur culpa magna in aute.
-                                    </span>
-                                </details>
+                        </div>
+                        <div className="px-6 xl:px-0">
+                            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-6 gap-8">
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="bg-white p-5 rounded-md relative h-full w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/27R6nk5/home-1.png" alt="home-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Account Overview</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full space-x-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full space-x-3">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="bg-white p-5 rounded-md relative h-full w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/bdGyLYk/pricetags-1.png" alt="pricetags-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Subscription Plans</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy?</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="bg-white p-5 rounded-md relative h-full w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/GT4KHvJ/card-1.png" alt="home-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Payment Options</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="bg-white p-5 rounded-md h-full relative w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/rG4r6NJ/notifications-1.png" alt="home-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Notification Settings</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="relative bg-white p-5 rounded-md relative h-full w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/HFC1hqn/people-1.png" alt="home-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Profile Preferences</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div role="cell" className="bg-gray-100">
+                                    <div className="relative bg-white p-5 rounded-md relative h-full w-full">
+                                        {/* <!-- className="absolute inset-0 object-center object-cover h-full w-full"  --> */}
+                                        <span><img className="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/QX80fYm/lock-closed-1.png" alt="home-1" /></span>
+                                        <h1 className="pb-4 text-2xl font-semibold">Privacy and Cookies</h1>
+                                        <div className="my-5">
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">First time, what do I do next?</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">Changing you profile picture and other information</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            </div>
+                                            <div className="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="text-md text-gray-900 dark:text-gray-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            </div>
+                                        </div>
+                                        <a className="hover:text-indigo-500 hover:underline absolute bottom-5 text-sm text-indigo-700 font-bold cursor-pointer flex items-center" href="javascript:void(0)">
+                                            <p>Show All</p>
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-narrow-right" width="16" height="16" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#4338CA" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    <line x1="15" y1="16" x2="19" y2="12" />
+                                                    <line x1="15" y1="8" x2="19" y2="12" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
         </>
     );

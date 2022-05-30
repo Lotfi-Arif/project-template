@@ -4,14 +4,15 @@ import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
+import { InformationCircleIcon, LoginIcon, PhotographIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon, ViewGridAddIcon } from "@heroicons/react/outline";
 
-export default function Sidebar() {
+export default function UserSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
-  
-return (
+
+  return (
     <>
-  
+
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#18344D] flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
@@ -28,8 +29,8 @@ return (
               href="#pablo"
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
-              ECS Dashboard
-              
+              Admin Dashboard
+
             </a>
           </Link>
           {/* User */}
@@ -57,7 +58,7 @@ return (
                       href="#pablo"
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
-                      ECS Dashboard
+                      Admin Dashboard
                     </a>
                   </Link>
                 </div>
@@ -78,7 +79,7 @@ return (
                 <input
                   type="text"
                   placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+                  className="px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
                 />
               </div>
             </form>
@@ -93,120 +94,112 @@ return (
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
-                <Link href="/pages/admin/">
+                <Link href="/pages/student/">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/dashboard") !== -1
+                      (router.pathname.indexOf("/pages/student") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <i
-                      className={
-                        "fas fa-tv mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/dashboard") !== -1
-                          ? "opacity-75"
-                          : "text-black")
-                      }
-                    ></i>{" "}
+                    <TemplateIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Overview
                   </a>
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/pages/admin/approveusers">
+                <Link href="/pages/student/approveusers">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/admin/approveusers") !== -1
+                      (router.pathname.indexOf("/pages/student/approveusers") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <i
-                      className={
-                        "fas fa-tools mr-2 text-sm " +
-                        (router.pathname.indexOf("/pages/admin/approveusers") !== -1
-                          ? "opacity-75"
-                          : "text-white")
-                      }
-                    ></i>{" "}
+                    <UsersIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Approve Users
                   </a>
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/admin/tables">
+                <Link href="/pages/student/bookings">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/tables") !== -1
+                      (router.pathname.indexOf("/pages/student/bookings") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <i
-                      className={
-                        "fas fa-table mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/tables") !== -1
-                          ? "opacity-75"
-                          : "text-white")
-                      }
-                    ></i>{" "}
+                    <TicketIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Bookings
                   </a>
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/admin/maps">
+                <Link href="/pages/student/manageevents">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/maps") !== -1
+                      (router.pathname.indexOf("/pages/student/manageevents") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <i
-                      className={
-                        "fas fa-map-marked mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/maps") !== -1
-                          ? "opacity-75"
-                          : "text-white")
-                      }
-                    ></i>{" "}
+                    <ViewGridAddIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Manage Events
                   </a>
                 </Link>
               </li>
               <li className="items-center">
-                <Link href="/admin/maps">
+                <Link href="/pages/student/manageposts">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/maps") !== -1
+                      (router.pathname.indexOf("/pages/student/manageposts") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <i
-                      className={
-                        "fas fa-map-marked mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/maps") !== -1
-                          ? "opacity-75"
-                          : "text-white")
-                      }
-                    ></i>{" "}
+                    <PhotographIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Manage Posts
+                  </a>
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link href="/pages/student/manageposts">
+                  <a
+                    href="#pablo"
+                    className={
+                      "text-xs uppercase py-3 font-bold block " +
+                      (router.pathname.indexOf("/pages/student/manageposts") !== -1
+                        ? "text-white hover:text-lightBlue-600"
+                        : "text-white hover:text-blueGray-500")
+                    }
+                  >
+                    <InformationCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    Manage FAQ
+                  </a>
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link href="/profile">
+                  <a
+                    href="#pablo"
+                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  >
+                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2"/>
+                    Profile Page
                   </a>
                 </Link>
               </li>
@@ -227,34 +220,23 @@ return (
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-fingerprint text-white mr-2 text-sm"></i>{" "}
+                    <LoginIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Login
                   </a>
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/auth/register">
+                <Link href="/register">
                   <a
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}
+                    <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Register
                   </a>
                 </Link>
               </li>
-            </ul>
-
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-white text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              No Layout Pages
-            </h6>
-            {/* Navigation */}
-
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link href="/landing">
                   <a
@@ -262,22 +244,12 @@ return (
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
                     <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
-                    Landing Page
+                    Return to Landing Page
                   </a>
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link href="/profile">
-                  <a
-                    href="#pablo"
-                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
-                    Profile Page
-                  </a>
-                </Link>
-              </li>
+            </ul>
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             </ul>
           </div>
         </div>

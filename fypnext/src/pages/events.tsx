@@ -5,12 +5,12 @@ const Events = () => {
     return (
         <>
             <Navbar />
-            <div className="flex flex-row mx-auto my-auto space-x-12 px-10">
+            <div className="flex justify-center mx-auto my-auto space-x-12 px-10 py-10">
                 <EventsCard />
                 <EventsCard />
                 <EventsCard />
             </div>
-            <div className="flex flex-row mx-auto my-auto space-x-12 px-10">
+            <div className="flex justify-center mx-auto my-auto space-x-12 px-10 py-10">
                 <EventsCard />
                 <EventsCard />
                 <EventsCard />

@@ -3,10 +3,10 @@ import React from "react";
 // components
 
 import AdminNavbar from "src/components/Navbar/AdminNavbar";
-import Sidebar from "src/components/Sidebar/AdminSidebar";
+import Sidebar from "src/components/Sidebar/UserSidebar";
 import HeaderStats from "src/components/Headers";
 
-const AdminLayout = ({ children }) => {
+const StudentLayout = ({ children }) => {
   return (
     <>
       <Sidebar />
@@ -22,4 +22,4 @@ const AdminLayout = ({ children }) => {
   );
 }
 
-export default AdminLayout;
+export default StudentLayout;
