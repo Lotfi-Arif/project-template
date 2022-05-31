@@ -8,6 +8,7 @@ import console from 'console';
 import { FindUniqueUserArgs } from '@app/common/generated/index/user/find-unique-user.args';
 import { UpdateOneUserArgs } from '@app/common/generated/index/user/update-one-user.args';
 import { DeleteOneUserArgs } from '@app/common/generated/index/user/delete-one-user.args';
+import { AccountStatus } from '@prisma/client';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -46,6 +47,36 @@ export class UsersResolver {
       return this.usersService.createUser({ ...userCreateArgs, ...newUser });
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  @Mutation(() => User)
+  async approveUser(@Args('id') id: string, @Info() info) {
+    try {
+      const select = new PrismaSelect(info).value;
+      const result = await this.usersService.updateUser({
+        where: { id: id },
+        data: { accountStatus: AccountStatus.APPROVED },
+        ...select,
+      });
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  @Mutation(() => User)
+  async rejectUser(@Args('id') id: string, @Info() info) {
+    try {
+      const select = new PrismaSelect(info).value;
+      const result = await this.usersService.updateUser({
+        where: { id: id },
+        data: { accountStatus: AccountStatus.REJECTED },
+        ...select,
+      });
+      return result;
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 

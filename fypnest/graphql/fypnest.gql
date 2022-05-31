@@ -104,6 +104,8 @@ enum Gender {
 enum AccountStatus {
   VERIFIED
   UNVERIFIED
+  APPROVED
+  REJECTED
 }
 
 enum Role {
@@ -550,6 +552,8 @@ enum PostScalarFieldEnum {
 type Mutation {
   findOneUser(where: UserWhereUniqueInput!): User!
   createUser(data: UserCreateInput!): User!
+  approveUser(id: String!): User!
+  rejectUser(id: String!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User!
   findOnePost(where: PostWhereUniqueInput!): Post!

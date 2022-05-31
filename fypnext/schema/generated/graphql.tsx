@@ -18,6 +18,8 @@ export type Scalars = {
 };
 
 export enum AccountStatus {
+  Approved = 'APPROVED',
+  Rejected = 'REJECTED',
   Unverified = 'UNVERIFIED',
   Verified = 'VERIFIED'
 }
@@ -395,6 +397,7 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  approveUser: User;
   createPost: Post;
   createUser: User;
   deletePost: Post;
@@ -402,8 +405,14 @@ export type Mutation = {
   findOnePost: Post;
   findOneUser: User;
   loginUser: Auth;
+  rejectUser: User;
   updatePost: Post;
   updateUser: User;
+};
+
+
+export type MutationApproveUserArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -439,6 +448,11 @@ export type MutationFindOneUserArgs = {
 
 export type MutationLoginUserArgs = {
   data: LoginInput;
+};
+
+
+export type MutationRejectUserArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -1172,6 +1186,20 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: string, name: string, email: string, password?: string | null | undefined, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role } };
 
+export type RejectUserMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RejectUserMutation = { __typename?: 'Mutation', rejectUser: { __typename?: 'User', id: string } };
+
+export type ApproveUserMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ApproveUserMutation = { __typename?: 'Mutation', approveUser: { __typename?: 'User', id: string } };
+
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1258,6 +1286,72 @@ export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export const RejectUserDocument = gql`
+    mutation rejectUser($id: String!) {
+  rejectUser(id: $id) {
+    id
+  }
+}
+    `;
+export type RejectUserMutationFn = Apollo.MutationFunction<RejectUserMutation, RejectUserMutationVariables>;
+
+/**
+ * __useRejectUserMutation__
+ *
+ * To run a mutation, you first call `useRejectUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRejectUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [rejectUserMutation, { data, loading, error }] = useRejectUserMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRejectUserMutation(baseOptions?: Apollo.MutationHookOptions<RejectUserMutation, RejectUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RejectUserMutation, RejectUserMutationVariables>(RejectUserDocument, options);
+      }
+export type RejectUserMutationHookResult = ReturnType<typeof useRejectUserMutation>;
+export type RejectUserMutationResult = Apollo.MutationResult<RejectUserMutation>;
+export type RejectUserMutationOptions = Apollo.BaseMutationOptions<RejectUserMutation, RejectUserMutationVariables>;
+export const ApproveUserDocument = gql`
+    mutation approveUser($id: String!) {
+  approveUser(id: $id) {
+    id
+  }
+}
+    `;
+export type ApproveUserMutationFn = Apollo.MutationFunction<ApproveUserMutation, ApproveUserMutationVariables>;
+
+/**
+ * __useApproveUserMutation__
+ *
+ * To run a mutation, you first call `useApproveUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useApproveUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [approveUserMutation, { data, loading, error }] = useApproveUserMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useApproveUserMutation(baseOptions?: Apollo.MutationHookOptions<ApproveUserMutation, ApproveUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ApproveUserMutation, ApproveUserMutationVariables>(ApproveUserDocument, options);
+      }
+export type ApproveUserMutationHookResult = ReturnType<typeof useApproveUserMutation>;
+export type ApproveUserMutationResult = Apollo.MutationResult<ApproveUserMutation>;
+export type ApproveUserMutationOptions = Apollo.BaseMutationOptions<ApproveUserMutation, ApproveUserMutationVariables>;
 export const UsersDocument = gql`
     query users {
   findAllUsers {
@@ -1314,6 +1408,8 @@ export const namedOperations = {
   },
   Mutation: {
     login: 'login',
-    createUser: 'createUser'
+    createUser: 'createUser',
+    rejectUser: 'rejectUser',
+    approveUser: 'approveUser'
   }
 }

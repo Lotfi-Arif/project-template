@@ -6,7 +6,7 @@ import { withApollo } from "utils/hooks/withApollo";
 
 const Register = () => {
 
-    const { data, loading, error } = useUsersQuery()
+    const { error } = useUsersQuery()
     const [createUserMutation] = useCreateUserMutation()
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');

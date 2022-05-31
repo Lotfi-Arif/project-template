@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
-import { InformationCircleIcon, LoginIcon, PhotographIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon, ViewGridAddIcon } from "@heroicons/react/outline";
+import { LoginIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon } from "@heroicons/react/outline";
 
 export default function UserSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -29,7 +29,7 @@ export default function UserSidebar() {
               href="#pablo"
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
-              Admin Dashboard
+              Dashboard
 
             </a>
           </Link>
@@ -58,7 +58,7 @@ export default function UserSidebar() {
                       href="#pablo"
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
-                      Admin Dashboard
+                      Dashboard
                     </a>
                   </Link>
                 </div>
@@ -84,12 +84,6 @@ export default function UserSidebar() {
               </div>
             </form>
 
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-gray-200 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Pages
-            </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -106,23 +100,6 @@ export default function UserSidebar() {
                   >
                     <TemplateIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Overview
-                  </a>
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/pages/student/approveusers">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/approveusers") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <UsersIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Approve Users
                   </a>
                 </Link>
               </li>
@@ -145,60 +122,12 @@ export default function UserSidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/pages/student/manageevents">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/manageevents") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <ViewGridAddIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage Events
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/pages/student/manageposts">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/manageposts") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <PhotographIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage Posts
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/pages/student/manageposts">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/manageposts") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <InformationCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage FAQ
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
                 <Link href="/profile">
                   <a
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2"/>
+                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Profile Page
                   </a>
                 </Link>

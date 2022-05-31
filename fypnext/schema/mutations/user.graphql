@@ -9,3 +9,15 @@ mutation createUser($data: UserCreateInput!) {
     role
   }
 }
+
+mutation rejectUser($id: String!) {
+  rejectUser(id: $id) {
+    id
+  }
+}
+
+mutation approveUser($id: String!) {
+  approveUser(id: $id) {
+    id
+  }
+}

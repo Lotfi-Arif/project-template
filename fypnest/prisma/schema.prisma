@@ -153,6 +153,8 @@ enum UploadingState {
 enum AccountStatus {
   VERIFIED
   UNVERIFIED
+  APPROVED
+  REJECTED
 }
 
 enum Role {

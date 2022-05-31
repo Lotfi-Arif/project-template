@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
-import { InformationCircleIcon, LoginIcon, PhotographIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon, ViewGridAddIcon } from "@heroicons/react/outline";
+import { LoginIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon } from "@heroicons/react/outline";
 
 export default function CounselorSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -87,7 +87,7 @@ export default function CounselorSidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-gray-200 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Pages
+              Counselor Pages
             </h6>
             {/* Navigation */}
 
@@ -142,62 +142,13 @@ export default function CounselorSidebar() {
                   </a>
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link href="/pages/counselor/manageevents">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/counselor/manageevents") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <ViewGridAddIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage Events
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/pages/counselor/manageposts">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/counselor/manageposts") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <PhotographIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage Posts
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/pages/counselor/manageposts">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/counselor/manageposts") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <InformationCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Manage FAQ
-                  </a>
-                </Link>
-              </li>
               <li className="items-center">
                 <Link href="/profile">
                   <a
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2"/>
+                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Profile Page
                   </a>
                 </Link>
