@@ -112,10 +112,11 @@ model Message {
 }
 
 model Event {
-  id           String  @id @default(uuid())
-  title        String
-  eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
-  imageId      String? @unique
+  id            String  @id @default(uuid())
+  title         String
+  eventImageURL String?
+  // eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
+  // imageId      String? @unique
   eventDetails String
 }
 
@@ -127,14 +128,14 @@ model FAQ {
 
 model Asset {
   id              String          @id @default(uuid())
-  originalName    String
-  fileName        String
+  originalName    String?
+  fileName        String?
   fileType        FileType        @default(IMAGE)
-  url             String
+  url             String?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   uploadingState  UploadingState? @default(uploaded)
-  eventImageAsset Event?          @relation("ImageEventAsset")
+  // eventImageAsset Event?          @relation("ImageEventAsset")
 }
 
 enum FileType {

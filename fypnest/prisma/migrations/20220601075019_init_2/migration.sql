@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Asset" ALTER COLUMN "originalName" DROP NOT NULL,
+ALTER COLUMN "fileName" DROP NOT NULL,
+ALTER COLUMN "url" DROP NOT NULL;

@@ -47,7 +47,7 @@ const UserRow = (users) => {
                 </td>
 
                 <td className="py-3 px-6 text-center">
-                    <span className={"bg-yellow-200 text-purple-600 py-1 px-3 rounded-full text-xs"}>{users.user.accountStatus}</span>
+                    <span className={users.user.accountStatus === "APPROVED"? "bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs": "bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs"}>{users.user.accountStatus}</span>
                 </td>
                 <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">

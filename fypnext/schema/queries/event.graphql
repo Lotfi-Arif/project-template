@@ -1,0 +1,8 @@
+query events {
+  findAllEvents {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}

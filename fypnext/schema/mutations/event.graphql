@@ -1,0 +1,24 @@
+mutation createEvent($data: EventCreateInput!) {
+  createEvent(data: $data) {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}
+
+mutation updateEvent($data: EventUpdateInput!, $where: EventWhereUniqueInput!) {
+  updateEvent(data: $data, where: $where) {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}
+
+mutation deleteEvent($where: EventWhereUniqueInput!) {
+  deleteEvent(where: $where) {
+    id
+    eventImageURL
+  }
+}

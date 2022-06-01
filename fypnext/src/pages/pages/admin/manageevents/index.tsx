@@ -1,12 +1,24 @@
-import CRUDTable from "src/components/Tables/CRUDTable";
+import { useEventsQuery } from "schema/generated/graphql";
+import EventsTable from "src/components/Tables/EventsTable";
 import AdminLayout from "src/layouts/Admin";
+import { withApollo } from "utils/hooks/withApollo";
 
-const manageEvents = () => {
+const ManageEvents = () => {
+
+    const { data, loading } = useEventsQuery();
+
+    if (loading) {
+        return (<></>);
+    }
+
+
     return (
-        <AdminLayout>
-            <CRUDTable />
-        </AdminLayout>
+        <>
+            <AdminLayout>
+                <EventsTable events={ data?.findAllEvents} />
+            </AdminLayout>
+        </>
     );
 }
 
-export default manageEvents;
+export default withApollo(ManageEvents);

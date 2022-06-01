@@ -28,7 +28,18 @@ import config from '@app/common/configs/config';
     GraphQLModule.forRoot({
       cors: false,
       autoSchemaFile: join(process.cwd(), './graphql/fypnest.gql'),
-      include: [UsersModule, PostsModule, AuthModule],
+      include: [
+        UsersModule,
+        PostsModule,
+        AuthModule,
+        EventsModule,
+        ChatsModule,
+        CounsellorsModule,
+        CounselorSessionsModule,
+        MessagesModule,
+        FaqModule,
+        SchedulesModule,
+      ],
     }),
     PrismaModule.forRoot({
       isGlobal: true,

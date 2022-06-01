@@ -5,7 +5,13 @@ CREATE TYPE "FileType" AS ENUM ('VIDEO', 'PDF', 'IMAGE', 'ZIP', 'OTHER');
 CREATE TYPE "UploadingState" AS ENUM ('uploading', 'uploaded');
 
 -- CreateEnum
+CREATE TYPE "AccountStatus" AS ENUM ('VERIFIED', 'UNVERIFIED', 'APPROVED', 'REJECTED');
+
+-- CreateEnum
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'STUDENT', 'COUNSELOR', 'DEPARTMENT_MANAGER');
+
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('M', 'F', 'OTHERS');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -14,8 +20,9 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT,
     "mobile" TEXT,
-    "accountStatus" TEXT NOT NULL,
-    "role" "Role" NOT NULL DEFAULT E'USER',
+    "gender" "Gender",
+    "accountStatus" "AccountStatus" NOT NULL DEFAULT E'UNVERIFIED',
+    "role" "Role" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -33,8 +40,47 @@ CREATE TABLE "Schedule" (
 -- CreateTable
 CREATE TABLE "CounselorSession" (
     "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "CounselorSession_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Student" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "matrix" TEXT NOT NULL,
+    "faculty" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Student_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Admin" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Admin_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Staff" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "staffId" TEXT NOT NULL,
+    "faculty" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Staff_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -43,6 +89,8 @@ CREATE TABLE "Counselor" (
     "department" TEXT NOT NULL,
     "expertise" TEXT NOT NULL,
     "Schedule" TEXT[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Counselor_pkey" PRIMARY KEY ("id")
 );
@@ -125,6 +173,24 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_mobile_key" ON "User"("mobile");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Student_matrix_key" ON "Student"("matrix");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Admin_id_key" ON "Admin"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Staff_email_key" ON "Staff"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Staff_staffId_key" ON "Staff"("staffId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Event_imageId_key" ON "Event"("imageId");
 
 -- CreateIndex
@@ -134,13 +200,25 @@ CREATE UNIQUE INDEX "_CounselorSessionToUser_AB_unique" ON "_CounselorSessionToU
 CREATE INDEX "_CounselorSessionToUser_B_index" ON "_CounselorSessionToUser"("B");
 
 -- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_id_fkey" FOREIGN KEY ("id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Admin" ADD CONSTRAINT "Admin_id_fkey" FOREIGN KEY ("id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Staff" ADD CONSTRAINT "Staff_id_fkey" FOREIGN KEY ("id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Counselor" ADD CONSTRAINT "Counselor_id_fkey" FOREIGN KEY ("id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_imageId_fkey" FOREIGN KEY ("imageId") REFERENCES "Asset"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CounselorSessionToUser" ADD FOREIGN KEY ("A") REFERENCES "CounselorSession"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CounselorSessionToUser" ADD CONSTRAINT "_CounselorSessionToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "CounselorSession"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CounselorSessionToUser" ADD FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CounselorSessionToUser" ADD CONSTRAINT "_CounselorSessionToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

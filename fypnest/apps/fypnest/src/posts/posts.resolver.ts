@@ -10,25 +10,23 @@ import { UpdateOnePostArgs } from '@app/common/generated/index/post/update-one-p
 
 @Resolver(() => Post)
 export class PostsResolver {
-  constructor(private readonly postService: PostsService) {
-  }
+  constructor(private readonly postService: PostsService) {}
 
   @Query(() => Post)
   async findAllPosts(@Args() postFindManyArgs: FindManyPostArgs, @Info() info) {
     try {
-      const posts = new PrismaSelect(info).value
-      return this.postService.findAll({ ...postFindManyArgs, ...posts })
+      const posts = new PrismaSelect(info).value;
+      return this.postService.findAll({ ...postFindManyArgs, ...posts });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Post)
   async findOnePost(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;
-      return this.postService.findOne({ ...postFindUnique, ...post })
+      return this.postService.findOne({ ...postFindUnique, ...post });
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +36,7 @@ export class PostsResolver {
   async createPost(@Args() postCreateArgs: CreateOnePostArgs, @Info() info) {
     try {
       const newPost = new PrismaSelect(info).value;
-      return this.postService.createPost({ ...postCreateArgs, ...newPost })
+      return this.postService.createPost({ ...postCreateArgs, ...newPost });
     } catch (error) {
       console.error(error);
     }
@@ -48,18 +46,17 @@ export class PostsResolver {
   async updatePost(@Args() postUpdateArgs: UpdateOnePostArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
-      return this.postService.updatePost({ ...postUpdateArgs, ...update })
+      return this.postService.updatePost({ ...postUpdateArgs, ...update });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Post)
   async deletePost(@Args() postDeletArgs: DeleteOnePostArgs, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;
-      return this.postService.deletePost({ ...postDeletArgs, ...post })
+      return this.postService.deletePost({ ...postDeletArgs, ...post });
     } catch (error) {
       console.error(error);
     }

@@ -10,25 +10,29 @@ import { FindUniqueEventArgs } from '@app/common/generated/index/event/find-uniq
 
 @Resolver(() => Event)
 export class EventsResolver {
-  constructor(private readonly eventsService: EventsService) {
-  }
+  constructor(private readonly eventsService: EventsService) {}
 
-  @Query(() => Event)
-  async findAllEvents(@Args() eventFindManyArgs: FindManyEventArgs, @Info() info) {
+  @Query(() => [Event])
+  async findAllEvents(
+    @Args() eventFindManyArgs: FindManyEventArgs,
+    @Info() info,
+  ) {
     try {
-      const events = new PrismaSelect(info).value
-      return this.eventsService.findAll({ ...eventFindManyArgs, ...events })
+      const events = new PrismaSelect(info).value;
+      return this.eventsService.findAll({ ...eventFindManyArgs, ...events });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Event)
-  async findOneEvent(@Args() eventFindUnique: FindUniqueEventArgs, @Info() info) {
+  async findOneEvent(
+    @Args() eventFindUnique: FindUniqueEventArgs,
+    @Info() info,
+  ) {
     try {
       const event = new PrismaSelect(info).value;
-      return this.eventsService.findOne({ ...eventFindUnique, ...event })
+      return this.eventsService.findOne({ ...eventFindUnique, ...event });
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +42,10 @@ export class EventsResolver {
   async createEvent(@Args() eventCreateArgs: CreateOneEventArgs, @Info() info) {
     try {
       const newEvent = new PrismaSelect(info).value;
-      return this.eventsService.createEvent({ ...eventCreateArgs, ...newEvent })
+      return this.eventsService.createEvent({
+        ...eventCreateArgs,
+        ...newEvent,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -48,18 +55,17 @@ export class EventsResolver {
   async updateEvent(@Args() eventUpdateArgs: UpdateOneEventArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
-      return this.eventsService.updateEvent({ ...eventUpdateArgs, ...update })
+      return this.eventsService.updateEvent({ ...eventUpdateArgs, ...update });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Event)
   async deleteEvent(@Args() eventDeletArgs: DeleteOneEventArgs, @Info() info) {
     try {
       const event = new PrismaSelect(info).value;
-      return this.eventsService.deleteEvent({ ...eventDeletArgs, ...event })
+      return this.eventsService.deleteEvent({ ...eventDeletArgs, ...event });
     } catch (error) {
       console.error(error);
     }

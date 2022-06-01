@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
 
-
 @Injectable()
 export class EventsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(eventFindManyArgs: Prisma.EventFindManyArgs) {
     return this.prisma.event.findMany(eventFindManyArgs);

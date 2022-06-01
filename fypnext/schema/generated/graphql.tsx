@@ -105,22 +105,59 @@ export type AdminWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type Asset = {
-  __typename?: 'Asset';
-  createdAt: Scalars['DateTime'];
-  eventImageAsset?: Maybe<Event>;
-  fileName: Scalars['String'];
-  fileType: FileType;
-  id: Scalars['ID'];
-  originalName: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
-  uploadingState?: Maybe<UploadingState>;
-  url: Scalars['String'];
-};
-
 export type Auth = {
   __typename?: 'Auth';
   user: User;
+};
+
+export type Chat = {
+  __typename?: 'Chat';
+  chatStatus: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  updatedAt: Scalars['DateTime'];
+};
+
+export type ChatCreateInput = {
+  chatStatus: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type ChatOrderByWithRelationInput = {
+  chatStatus?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum ChatScalarFieldEnum {
+  ChatStatus = 'chatStatus',
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ChatUpdateInput = {
+  chatStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ChatWhereInput = {
+  AND?: InputMaybe<Array<ChatWhereInput>>;
+  NOT?: InputMaybe<Array<ChatWhereInput>>;
+  OR?: InputMaybe<Array<ChatWhereInput>>;
+  chatStatus?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type ChatWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type Counselor = {
@@ -132,6 +169,15 @@ export type Counselor = {
   id: Scalars['ID'];
   updatedAt: Scalars['DateTime'];
   user: User;
+};
+
+export type CounselorCreateInput = {
+  Schedule?: InputMaybe<CounselorCreateScheduleInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  department: Scalars['String'];
+  expertise: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<UserCreateNestedOneWithoutCounselorInput>;
 };
 
 export type CounselorCreateNestedOneWithoutUserInput = {
@@ -172,6 +218,15 @@ export type CounselorRelationFilter = {
   isNot?: InputMaybe<CounselorWhereInput>;
 };
 
+export enum CounselorScalarFieldEnum {
+  Schedule = 'Schedule',
+  CreatedAt = 'createdAt',
+  Department = 'department',
+  Expertise = 'expertise',
+  Id = 'id',
+  UpdatedAt = 'updatedAt'
+}
+
 export type CounselorSession = {
   __typename?: 'CounselorSession';
   _count: CounselorSessionCount;
@@ -184,6 +239,13 @@ export type CounselorSession = {
 export type CounselorSessionCount = {
   __typename?: 'CounselorSessionCount';
   participants: Scalars['Int'];
+};
+
+export type CounselorSessionCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  participants?: InputMaybe<UserCreateNestedManyWithoutCounselingSessionInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CounselorSessionCreateNestedManyWithoutParticipantsInput = {
@@ -213,6 +275,19 @@ export type CounselorSessionOrderByRelationAggregateInput = {
   _count?: InputMaybe<SortOrder>;
 };
 
+export type CounselorSessionOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  participants?: InputMaybe<UserOrderByRelationAggregateInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum CounselorSessionScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  UpdatedAt = 'updatedAt'
+}
+
 export type CounselorSessionScalarWhereInput = {
   AND?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
   NOT?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
@@ -220,6 +295,13 @@ export type CounselorSessionScalarWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CounselorSessionUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  participants?: InputMaybe<UserUpdateManyWithoutCounselingSessionInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type CounselorSessionUpdateManyMutationInput = {
@@ -275,6 +357,15 @@ export type CounselorSessionWhereInput = {
 
 export type CounselorSessionWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
+};
+
+export type CounselorUpdateInput = {
+  Schedule?: InputMaybe<CounselorUpdateScheduleInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  department?: InputMaybe<StringFieldUpdateOperationsInput>;
+  expertise?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCounselorInput>;
 };
 
 export type CounselorUpdateOneWithoutUserInput = {
@@ -369,19 +460,96 @@ export type EnumRoleFilter = {
 export type Event = {
   __typename?: 'Event';
   eventDetails: Scalars['String'];
-  eventImage?: Maybe<Asset>;
+  eventImageURL?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  imageId?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
-export enum FileType {
-  Image = 'IMAGE',
-  Other = 'OTHER',
-  Pdf = 'PDF',
-  Video = 'VIDEO',
-  Zip = 'ZIP'
+export type EventCreateInput = {
+  eventDetails: Scalars['String'];
+  eventImageURL?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  title: Scalars['String'];
+};
+
+export type EventOrderByWithRelationInput = {
+  eventDetails?: InputMaybe<SortOrder>;
+  eventImageURL?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
+export enum EventScalarFieldEnum {
+  EventDetails = 'eventDetails',
+  EventImageUrl = 'eventImageURL',
+  Id = 'id',
+  Title = 'title'
 }
+
+export type EventUpdateInput = {
+  eventDetails?: InputMaybe<StringFieldUpdateOperationsInput>;
+  eventImageURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type EventWhereInput = {
+  AND?: InputMaybe<Array<EventWhereInput>>;
+  NOT?: InputMaybe<Array<EventWhereInput>>;
+  OR?: InputMaybe<Array<EventWhereInput>>;
+  eventDetails?: InputMaybe<StringFilter>;
+  eventImageURL?: InputMaybe<StringNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type EventWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type Faq = {
+  __typename?: 'FAQ';
+  answer: Scalars['String'];
+  id: Scalars['ID'];
+  question: Scalars['String'];
+};
+
+export type FaqCreateInput = {
+  answer: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  question: Scalars['String'];
+};
+
+export type FaqOrderByWithRelationInput = {
+  answer?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  question?: InputMaybe<SortOrder>;
+};
+
+export enum FaqScalarFieldEnum {
+  Answer = 'answer',
+  Id = 'id',
+  Question = 'question'
+}
+
+export type FaqUpdateInput = {
+  answer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  question?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type FaqWhereInput = {
+  AND?: InputMaybe<Array<FaqWhereInput>>;
+  NOT?: InputMaybe<Array<FaqWhereInput>>;
+  OR?: InputMaybe<Array<FaqWhereInput>>;
+  answer?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  question?: InputMaybe<StringFilter>;
+};
+
+export type FaqWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
 
 export enum Gender {
   F = 'F',
@@ -395,18 +563,96 @@ export type LoginInput = {
   role: Role;
 };
 
+export type Message = {
+  __typename?: 'Message';
+  Message: Scalars['String'];
+  id: Scalars['ID'];
+  reciever: Scalars['String'];
+  sender: Scalars['String'];
+};
+
+export type MessageCreateInput = {
+  Message: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  reciever: Scalars['String'];
+  sender: Scalars['String'];
+};
+
+export type MessageOrderByWithRelationInput = {
+  Message?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  reciever?: InputMaybe<SortOrder>;
+  sender?: InputMaybe<SortOrder>;
+};
+
+export enum MessageScalarFieldEnum {
+  Message = 'Message',
+  Id = 'id',
+  Reciever = 'reciever',
+  Sender = 'sender'
+}
+
+export type MessageUpdateInput = {
+  Message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  reciever?: InputMaybe<StringFieldUpdateOperationsInput>;
+  sender?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type MessageWhereInput = {
+  AND?: InputMaybe<Array<MessageWhereInput>>;
+  Message?: InputMaybe<StringFilter>;
+  NOT?: InputMaybe<Array<MessageWhereInput>>;
+  OR?: InputMaybe<Array<MessageWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  reciever?: InputMaybe<StringFilter>;
+  sender?: InputMaybe<StringFilter>;
+};
+
+export type MessageWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   approveUser: User;
+  createChat: Chat;
+  createCounselor: Counselor;
+  createCounselorSession: CounselorSession;
+  createEvent: Event;
+  createFaq: Faq;
+  createMessage: Message;
   createPost: Post;
+  createSchedule: Schedule;
   createUser: User;
+  deleteChat: Chat;
+  deleteCounselor: Counselor;
+  deleteCounselorSession: CounselorSession;
+  deleteEvent: Event;
+  deleteFaq: Faq;
+  deleteMessage: Message;
   deletePost: Post;
+  deleteSchedule: Schedule;
   deleteUser: User;
+  findOneChat: Chat;
+  findOneCounselor: Counselor;
+  findOneCounselorSession: CounselorSession;
+  findOneEvent: Event;
+  findOneFaq: Faq;
+  findOneMessage: Message;
   findOnePost: Post;
+  findOneSchedule: Schedule;
   findOneUser: User;
   loginUser: Auth;
   rejectUser: User;
+  updateChat: Chat;
+  updateCounselor: Counselor;
+  updateCounselorSession: CounselorSession;
+  updateEvent: Event;
+  updateFaq: Faq;
+  updateMessage: Message;
   updatePost: Post;
+  updateSchedule: Schedule;
   updateUser: User;
 };
 
@@ -416,8 +662,43 @@ export type MutationApproveUserArgs = {
 };
 
 
+export type MutationCreateChatArgs = {
+  data: ChatCreateInput;
+};
+
+
+export type MutationCreateCounselorArgs = {
+  data: CounselorCreateInput;
+};
+
+
+export type MutationCreateCounselorSessionArgs = {
+  data: CounselorSessionCreateInput;
+};
+
+
+export type MutationCreateEventArgs = {
+  data: EventCreateInput;
+};
+
+
+export type MutationCreateFaqArgs = {
+  data: FaqCreateInput;
+};
+
+
+export type MutationCreateMessageArgs = {
+  data: MessageCreateInput;
+};
+
+
 export type MutationCreatePostArgs = {
   data: PostCreateInput;
+};
+
+
+export type MutationCreateScheduleArgs = {
+  data: ScheduleCreateInput;
 };
 
 
@@ -426,8 +707,43 @@ export type MutationCreateUserArgs = {
 };
 
 
+export type MutationDeleteChatArgs = {
+  where: ChatWhereUniqueInput;
+};
+
+
+export type MutationDeleteCounselorArgs = {
+  where: CounselorWhereUniqueInput;
+};
+
+
+export type MutationDeleteCounselorSessionArgs = {
+  where: CounselorSessionWhereUniqueInput;
+};
+
+
+export type MutationDeleteEventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationDeleteFaqArgs = {
+  where: FaqWhereUniqueInput;
+};
+
+
+export type MutationDeleteMessageArgs = {
+  where: MessageWhereUniqueInput;
+};
+
+
 export type MutationDeletePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+export type MutationDeleteScheduleArgs = {
+  where: ScheduleWhereUniqueInput;
 };
 
 
@@ -436,8 +752,43 @@ export type MutationDeleteUserArgs = {
 };
 
 
+export type MutationFindOneChatArgs = {
+  where: ChatWhereUniqueInput;
+};
+
+
+export type MutationFindOneCounselorArgs = {
+  where: CounselorWhereUniqueInput;
+};
+
+
+export type MutationFindOneCounselorSessionArgs = {
+  where: CounselorSessionWhereUniqueInput;
+};
+
+
+export type MutationFindOneEventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationFindOneFaqArgs = {
+  where: FaqWhereUniqueInput;
+};
+
+
+export type MutationFindOneMessageArgs = {
+  where: MessageWhereUniqueInput;
+};
+
+
 export type MutationFindOnePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+export type MutationFindOneScheduleArgs = {
+  where: ScheduleWhereUniqueInput;
 };
 
 
@@ -456,9 +807,51 @@ export type MutationRejectUserArgs = {
 };
 
 
+export type MutationUpdateChatArgs = {
+  data: ChatUpdateInput;
+  where: ChatWhereUniqueInput;
+};
+
+
+export type MutationUpdateCounselorArgs = {
+  data: CounselorUpdateInput;
+  where: CounselorWhereUniqueInput;
+};
+
+
+export type MutationUpdateCounselorSessionArgs = {
+  data: CounselorSessionUpdateInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+
+export type MutationUpdateEventArgs = {
+  data: EventUpdateInput;
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationUpdateFaqArgs = {
+  data: FaqUpdateInput;
+  where: FaqWhereUniqueInput;
+};
+
+
+export type MutationUpdateMessageArgs = {
+  data: MessageUpdateInput;
+  where: MessageWhereUniqueInput;
+};
+
+
 export type MutationUpdatePostArgs = {
   data: PostUpdateInput;
   where: PostWhereUniqueInput;
+};
+
+
+export type MutationUpdateScheduleArgs = {
+  data: ScheduleUpdateInput;
+  where: ScheduleWhereUniqueInput;
 };
 
 
@@ -703,8 +1096,75 @@ export type PostWhereUniqueInput = {
 
 export type Query = {
   __typename?: 'Query';
+  findAllChats: Chat;
+  findAllCounselorSessions: CounselorSession;
+  findAllCounselors: Counselor;
+  findAllEvents: Array<Event>;
+  findAllFaqs: Faq;
+  findAllMessages: Message;
   findAllPosts: Post;
+  findAllSchedules: Schedule;
   findAllUsers: Array<User>;
+};
+
+
+export type QueryFindAllChatsArgs = {
+  cursor?: InputMaybe<ChatWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ChatScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ChatOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ChatWhereInput>;
+};
+
+
+export type QueryFindAllCounselorSessionsArgs = {
+  cursor?: InputMaybe<CounselorSessionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CounselorSessionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CounselorSessionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CounselorSessionWhereInput>;
+};
+
+
+export type QueryFindAllCounselorsArgs = {
+  cursor?: InputMaybe<CounselorWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CounselorScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CounselorOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CounselorWhereInput>;
+};
+
+
+export type QueryFindAllEventsArgs = {
+  cursor?: InputMaybe<EventWhereUniqueInput>;
+  distinct?: InputMaybe<Array<EventScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<EventOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryFindAllFaqsArgs = {
+  cursor?: InputMaybe<FaqWhereUniqueInput>;
+  distinct?: InputMaybe<Array<FaqScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<FaqOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FaqWhereInput>;
+};
+
+
+export type QueryFindAllMessagesArgs = {
+  cursor?: InputMaybe<MessageWhereUniqueInput>;
+  distinct?: InputMaybe<Array<MessageScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<MessageOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MessageWhereInput>;
 };
 
 
@@ -715,6 +1175,16 @@ export type QueryFindAllPostsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PostWhereInput>;
+};
+
+
+export type QueryFindAllSchedulesArgs = {
+  cursor?: InputMaybe<ScheduleWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ScheduleScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ScheduleOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduleWhereInput>;
 };
 
 
@@ -739,6 +1209,44 @@ export enum Role {
   Student = 'STUDENT',
   User = 'USER'
 }
+
+export type Schedule = {
+  __typename?: 'Schedule';
+  id: Scalars['ID'];
+  scheduleDate: Scalars['DateTime'];
+};
+
+export type ScheduleCreateInput = {
+  id?: InputMaybe<Scalars['String']>;
+  scheduleDate: Scalars['DateTime'];
+};
+
+export type ScheduleOrderByWithRelationInput = {
+  id?: InputMaybe<SortOrder>;
+  scheduleDate?: InputMaybe<SortOrder>;
+};
+
+export enum ScheduleScalarFieldEnum {
+  Id = 'id',
+  ScheduleDate = 'scheduleDate'
+}
+
+export type ScheduleUpdateInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scheduleDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ScheduleWhereInput = {
+  AND?: InputMaybe<Array<ScheduleWhereInput>>;
+  NOT?: InputMaybe<Array<ScheduleWhereInput>>;
+  OR?: InputMaybe<Array<ScheduleWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  scheduleDate?: InputMaybe<DateTimeFilter>;
+};
+
+export type ScheduleWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -971,11 +1479,6 @@ export type StudentWhereUniqueInput = {
   matrix?: InputMaybe<Scalars['String']>;
 };
 
-export enum UploadingState {
-  Uploaded = 'uploaded',
-  Uploading = 'uploading'
-}
-
 export type User = {
   __typename?: 'User';
   _count: UserCount;
@@ -1022,15 +1525,73 @@ export type UserCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
+export type UserCreateNestedManyWithoutCounselingSessionInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutCounselingSessionInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutCounselingSessionInput>>;
+};
+
+export type UserCreateNestedOneWithoutCounselorInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselorInput>;
+  create?: InputMaybe<UserCreateWithoutCounselorInput>;
+};
+
 export type UserCreateNestedOneWithoutPostsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutPostsInput>;
   create?: InputMaybe<UserCreateWithoutPostsInput>;
 };
 
+export type UserCreateOrConnectWithoutCounselingSessionInput = {
+  create: UserCreateWithoutCounselingSessionInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutCounselorInput = {
+  create: UserCreateWithoutCounselorInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutPostsInput = {
   create: UserCreateWithoutPostsInput;
   where: UserWhereUniqueInput;
+};
+
+export type UserCreateWithoutCounselingSessionInput = {
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutUserInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type UserCreateWithoutCounselorInput = {
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutParticipantsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutUserInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutPostsInput = {
@@ -1055,6 +1616,10 @@ export type UserListRelationFilter = {
   every?: InputMaybe<UserWhereInput>;
   none?: InputMaybe<UserWhereInput>;
   some?: InputMaybe<UserWhereInput>;
+};
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export type UserOrderByWithRelationInput = {
@@ -1094,6 +1659,22 @@ export enum UserScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
+export type UserScalarWhereInput = {
+  AND?: InputMaybe<Array<UserScalarWhereInput>>;
+  NOT?: InputMaybe<Array<UserScalarWhereInput>>;
+  OR?: InputMaybe<Array<UserScalarWhereInput>>;
+  accountStatus?: InputMaybe<EnumAccountStatusFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<StringFilter>;
+  gender?: InputMaybe<EnumGenderNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  mobile?: InputMaybe<StringNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringNullableFilter>;
+  role?: InputMaybe<EnumRoleFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
 export type UserUpdateInput = {
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
@@ -1113,12 +1694,92 @@ export type UserUpdateInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
+export type UserUpdateManyMutationInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateManyWithWhereWithoutCounselingSessionInput = {
+  data: UserUpdateManyMutationInput;
+  where: UserScalarWhereInput;
+};
+
+export type UserUpdateManyWithoutCounselingSessionInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutCounselingSessionInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutCounselingSessionInput>>;
+  delete?: InputMaybe<Array<UserWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserUpdateWithWhereUniqueWithoutCounselingSessionInput>>;
+  updateMany?: InputMaybe<Array<UserUpdateManyWithWhereWithoutCounselingSessionInput>>;
+  upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutCounselingSessionInput>>;
+};
+
+export type UserUpdateOneRequiredWithoutCounselorInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselorInput>;
+  create?: InputMaybe<UserCreateWithoutCounselorInput>;
+  update?: InputMaybe<UserUpdateWithoutCounselorInput>;
+  upsert?: InputMaybe<UserUpsertWithoutCounselorInput>;
+};
+
 export type UserUpdateOneRequiredWithoutPostsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutPostsInput>;
   create?: InputMaybe<UserCreateWithoutPostsInput>;
   update?: InputMaybe<UserUpdateWithoutPostsInput>;
   upsert?: InputMaybe<UserUpsertWithoutPostsInput>;
+};
+
+export type UserUpdateWithWhereUniqueWithoutCounselingSessionInput = {
+  data: UserUpdateWithoutCounselingSessionInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpdateWithoutCounselingSessionInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutCounselorInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateManyWithoutParticipantsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutPostsInput = {
@@ -1137,6 +1798,17 @@ export type UserUpdateWithoutPostsInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
   student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithWhereUniqueWithoutCounselingSessionInput = {
+  create: UserCreateWithoutCounselingSessionInput;
+  update: UserUpdateWithoutCounselingSessionInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpsertWithoutCounselorInput = {
+  create: UserCreateWithoutCounselorInput;
+  update: UserUpdateWithoutCounselorInput;
 };
 
 export type UserUpsertWithoutPostsInput = {
@@ -1179,6 +1851,28 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', loginUser: { __typename?: 'Auth', user: { __typename?: 'User', id: string, name: string, email: string, password?: string | null | undefined, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role } } };
 
+export type CreateEventMutationVariables = Exact<{
+  data: EventCreateInput;
+}>;
+
+
+export type CreateEventMutation = { __typename?: 'Mutation', createEvent: { __typename?: 'Event', id: string, title: string, eventImageURL?: string | null | undefined, eventDetails: string } };
+
+export type UpdateEventMutationVariables = Exact<{
+  data: EventUpdateInput;
+  where: EventWhereUniqueInput;
+}>;
+
+
+export type UpdateEventMutation = { __typename?: 'Mutation', updateEvent: { __typename?: 'Event', id: string, title: string, eventImageURL?: string | null | undefined, eventDetails: string } };
+
+export type DeleteEventMutationVariables = Exact<{
+  where: EventWhereUniqueInput;
+}>;
+
+
+export type DeleteEventMutation = { __typename?: 'Mutation', deleteEvent: { __typename?: 'Event', id: string, eventImageURL?: string | null | undefined } };
+
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -1199,6 +1893,11 @@ export type ApproveUserMutationVariables = Exact<{
 
 
 export type ApproveUserMutation = { __typename?: 'Mutation', approveUser: { __typename?: 'User', id: string } };
+
+export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EventsQuery = { __typename?: 'Query', findAllEvents: Array<{ __typename?: 'Event', id: string, title: string, eventImageURL?: string | null | undefined, eventDetails: string }> };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1247,6 +1946,113 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const CreateEventDocument = gql`
+    mutation createEvent($data: EventCreateInput!) {
+  createEvent(data: $data) {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}
+    `;
+export type CreateEventMutationFn = Apollo.MutationFunction<CreateEventMutation, CreateEventMutationVariables>;
+
+/**
+ * __useCreateEventMutation__
+ *
+ * To run a mutation, you first call `useCreateEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEventMutation, { data, loading, error }] = useCreateEventMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateEventMutation(baseOptions?: Apollo.MutationHookOptions<CreateEventMutation, CreateEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateEventMutation, CreateEventMutationVariables>(CreateEventDocument, options);
+      }
+export type CreateEventMutationHookResult = ReturnType<typeof useCreateEventMutation>;
+export type CreateEventMutationResult = Apollo.MutationResult<CreateEventMutation>;
+export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventMutation, CreateEventMutationVariables>;
+export const UpdateEventDocument = gql`
+    mutation updateEvent($data: EventUpdateInput!, $where: EventWhereUniqueInput!) {
+  updateEvent(data: $data, where: $where) {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}
+    `;
+export type UpdateEventMutationFn = Apollo.MutationFunction<UpdateEventMutation, UpdateEventMutationVariables>;
+
+/**
+ * __useUpdateEventMutation__
+ *
+ * To run a mutation, you first call `useUpdateEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateEventMutation, { data, loading, error }] = useUpdateEventMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateEventMutation(baseOptions?: Apollo.MutationHookOptions<UpdateEventMutation, UpdateEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateEventMutation, UpdateEventMutationVariables>(UpdateEventDocument, options);
+      }
+export type UpdateEventMutationHookResult = ReturnType<typeof useUpdateEventMutation>;
+export type UpdateEventMutationResult = Apollo.MutationResult<UpdateEventMutation>;
+export type UpdateEventMutationOptions = Apollo.BaseMutationOptions<UpdateEventMutation, UpdateEventMutationVariables>;
+export const DeleteEventDocument = gql`
+    mutation deleteEvent($where: EventWhereUniqueInput!) {
+  deleteEvent(where: $where) {
+    id
+    eventImageURL
+  }
+}
+    `;
+export type DeleteEventMutationFn = Apollo.MutationFunction<DeleteEventMutation, DeleteEventMutationVariables>;
+
+/**
+ * __useDeleteEventMutation__
+ *
+ * To run a mutation, you first call `useDeleteEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteEventMutation, { data, loading, error }] = useDeleteEventMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteEventMutation(baseOptions?: Apollo.MutationHookOptions<DeleteEventMutation, DeleteEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteEventMutation, DeleteEventMutationVariables>(DeleteEventDocument, options);
+      }
+export type DeleteEventMutationHookResult = ReturnType<typeof useDeleteEventMutation>;
+export type DeleteEventMutationResult = Apollo.MutationResult<DeleteEventMutation>;
+export type DeleteEventMutationOptions = Apollo.BaseMutationOptions<DeleteEventMutation, DeleteEventMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
@@ -1352,6 +2158,43 @@ export function useApproveUserMutation(baseOptions?: Apollo.MutationHookOptions<
 export type ApproveUserMutationHookResult = ReturnType<typeof useApproveUserMutation>;
 export type ApproveUserMutationResult = Apollo.MutationResult<ApproveUserMutation>;
 export type ApproveUserMutationOptions = Apollo.BaseMutationOptions<ApproveUserMutation, ApproveUserMutationVariables>;
+export const EventsDocument = gql`
+    query events {
+  findAllEvents {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}
+    `;
+
+/**
+ * __useEventsQuery__
+ *
+ * To run a query within a React component, call `useEventsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEventsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useEventsQuery(baseOptions?: Apollo.QueryHookOptions<EventsQuery, EventsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EventsQuery, EventsQueryVariables>(EventsDocument, options);
+      }
+export function useEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EventsQuery, EventsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EventsQuery, EventsQueryVariables>(EventsDocument, options);
+        }
+export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
+export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
+export type EventsQueryResult = Apollo.QueryResult<EventsQuery, EventsQueryVariables>;
 export const UsersDocument = gql`
     query users {
   findAllUsers {
@@ -1404,10 +2247,14 @@ export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariable
     
 export const namedOperations = {
   Query: {
+    events: 'events',
     users: 'users'
   },
   Mutation: {
     login: 'login',
+    createEvent: 'createEvent',
+    updateEvent: 'updateEvent',
+    deleteEvent: 'deleteEvent',
     createUser: 'createUser',
     rejectUser: 'rejectUser',
     approveUser: 'approveUser'
