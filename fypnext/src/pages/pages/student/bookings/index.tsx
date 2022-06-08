@@ -1,10 +1,10 @@
 import CounselorCard from "src/components/Cards/CounselorCard";
-import AdminLayout from "src/layouts/Admin";
+import StudentLayout from "src/layouts/Student";
 
 const myBookings = () => {
     return (
         <>
-            <AdminLayout>
+            <StudentLayout>
                 <div id="services" className="section relative pt-20 pb-8 md:pt-16 md:pb-0 bg-white">
                     <div className="container xl:max-w-6xl mx-auto px-4">
                         <header className="text-center mx-auto mb-12 lg:px-20">
@@ -19,7 +19,7 @@ const myBookings = () => {
                         
                     </div>
                 </div>
-            </AdminLayout>
+            </StudentLayout>
         </>
     );
 }

@@ -16,45 +16,56 @@ generator nestgraphql {
 }
 
 model User {
-  id                String             @id @default(uuid())
+  id                String            @id @default(uuid())
   name              String
-  email             String             @unique
+  email             String            @unique
   password          String?
-  mobile            String?            @unique
+  mobile            String?           @unique
   gender            Gender?
-  accountStatus     AccountStatus      @default(UNVERIFIED)
+  accountStatus     AccountStatus     @default(UNVERIFIED)
   role              Role
   student           Student?
   staff             Staff?
   counselor         Counselor?
   admin             Admin?
   posts             Post[]
-  counselingSession CounselorSession[] @relation(references: [id])
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+  counselingSession CounselorSession?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
 
 model Schedule {
-  id           String   @id @default(uuid())
-  scheduleDate DateTime
+  id       String   @id @default(uuid())
+  days     DateTime
+  timeFrom DateTime
+  timeTo   DateTime
 }
 
 model CounselorSession {
-  id           String   @id @default(uuid())
-  participants User[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                String    @id @default(uuid())
+  counsellingReason String?
+  counselor         Counselor @relation(fields: [counselorId], references: [id])
+  student           Student?  @relation(fields: [studentId], references: [id])
+  staff             Staff?    @relation(fields: [staffId], references: [id])
+  User              User?     @relation(fields: [userId], references: [id])
+  counselorId       String
+  userId            String?   @unique
+  studentId         String?
+  staffId           String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 }
 
 model Student {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  matrix    String   @unique
-  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
-  faculty   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               String             @id @default(uuid())
+  email            String             @unique
+  password         String
+  matrix           String             @unique
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty          String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
 }
 
 model Admin {
@@ -67,24 +78,26 @@ model Admin {
 }
 
 model Staff {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  staffId   String   @unique
-  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
-  faculty   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               String             @id @default(uuid())
+  email            String             @unique
+  password         String
+  staffId          String             @unique
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty          String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
 }
 
 model Counselor {
-  id         String   @id @default(uuid())
-  department String
-  user       User     @relation(fields: [id], references: [id], onDelete: Cascade)
-  expertise  String
-  Schedule   String[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id               String             @id @default(uuid())
+  department       String
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  expertise        String
+  Schedule         String[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
 }
 
 model Post {
@@ -117,24 +130,27 @@ model Event {
   eventImageURL String?
   // eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
   // imageId      String? @unique
-  eventDetails String
+  eventDetails  String
 }
 
 model FAQ {
-  id       String @id @default(uuid())
-  question String
-  answer   String
+  id        String   @id @default(uuid())
+  title     String
+  answer    String
+  icon      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Asset {
-  id              String          @id @default(uuid())
-  originalName    String?
-  fileName        String?
-  fileType        FileType        @default(IMAGE)
-  url             String?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  uploadingState  UploadingState? @default(uploaded)
+  id             String          @id @default(uuid())
+  originalName   String?
+  fileName       String?
+  fileType       FileType        @default(IMAGE)
+  url            String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  uploadingState UploadingState? @default(uploaded)
   // eventImageAsset Event?          @relation("ImageEventAsset")
 }
 
@@ -163,7 +179,7 @@ enum Role {
   USER
   STUDENT
   COUNSELOR
-  DEPARTMENT_MANAGER
+  STAFF
 }
 
 enum Gender {

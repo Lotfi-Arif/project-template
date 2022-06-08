@@ -12,6 +12,7 @@ const Register = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
+    const [role, setRole] = useState(Role as any);
 
     const router = useRouter()
 
@@ -24,8 +25,8 @@ const Register = () => {
                         email: email,
                         password: password,
                         mobile: mobile,
-                        role: Role.Student,
-                        accountStatus: AccountStatus.Unverified 
+                        role: role,
+                        accountStatus: AccountStatus.Unverified
                     },
                 }
             })
@@ -70,7 +71,7 @@ const Register = () => {
                                     <input type="tel" name={mobile} onChange={(e) => { setMobile(e.target.value) }} id="mobileNumber" className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="965-748-89-90" required />
 
                                 </div>
-                                <div className="mb-4 md:flex md:justify-between">
+                                <div className="mb-4">
                                     <div className="mb-4 md:mr-2 md:mb-0">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="name">
                                             Full Name
@@ -86,20 +87,30 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className="mb-4 md:flex md:justify-between">
+                                <div className="mb-4">
                                     <div className="mb-4 md:mr-2 md:mb-0">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="password">
                                             Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
                                             type="password"
                                             placeholder="******************"
                                             name={password}
                                             onChange={(e) => { setPassword(e.target.value) }}
                                         />
-                                        <p className="text-xs italic text-red-500">Please choose a password.</p>
+                                    </div>
+                                </div>
+                                <div className='mb-4'>
+                                    <p className='mb-4'>Register as:</p>
+                                    <div className="flex items-center mb-4">
+                                        <input id="default-radio-1" type="radio" value={Role.Student} name="role" className="w-4 h-4 ml-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={(e) => { setRole(e.target.value) }} />
+                                        <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Student</label>
+                                        <input id="default-radio-1" type="radio" value={Role.Staff} name="role" className="w-4 h-4 ml-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={(e) => { setRole(e.target.value) }} />
+                                        <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Staff</label>
+                                        <input id="default-radio-1" type="radio" value={Role.Counselor} name="role" className="w-4 h-4 ml-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={(e) => { setRole(e.target.value) }} />
+                                        <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Counselor</label>
                                     </div>
                                 </div>
                                 <div className="mb-6 text-center">

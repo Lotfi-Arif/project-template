@@ -6,7 +6,7 @@ import { StaffOrderByWithRelationInput } from '../staff/staff-order-by-with-rela
 import { CounselorOrderByWithRelationInput } from '../counselor/counselor-order-by-with-relation.input';
 import { AdminOrderByWithRelationInput } from '../admin/admin-order-by-with-relation.input';
 import { PostOrderByRelationAggregateInput } from '../post/post-order-by-relation-aggregate.input';
-import { CounselorSessionOrderByRelationAggregateInput } from '../counselor-session/counselor-session-order-by-relation-aggregate.input';
+import { CounselorSessionOrderByWithRelationInput } from '../counselor-session/counselor-session-order-by-with-relation.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -50,8 +50,8 @@ export class UserOrderByWithRelationInput {
     @Field(() => PostOrderByRelationAggregateInput, {nullable:true})
     posts?: PostOrderByRelationAggregateInput;
 
-    @Field(() => CounselorSessionOrderByRelationAggregateInput, {nullable:true})
-    counselingSession?: CounselorSessionOrderByRelationAggregateInput;
+    @Field(() => CounselorSessionOrderByWithRelationInput, {nullable:true})
+    counselingSession?: CounselorSessionOrderByWithRelationInput;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

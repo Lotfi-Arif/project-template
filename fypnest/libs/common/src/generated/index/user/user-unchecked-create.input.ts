@@ -8,7 +8,7 @@ import { StaffUncheckedCreateNestedOneWithoutUserInput } from '../staff/staff-un
 import { CounselorUncheckedCreateNestedOneWithoutUserInput } from '../counselor/counselor-unchecked-create-nested-one-without-user.input';
 import { AdminUncheckedCreateNestedOneWithoutUserInput } from '../admin/admin-unchecked-create-nested-one-without-user.input';
 import { PostUncheckedCreateNestedManyWithoutAuthorInput } from '../post/post-unchecked-create-nested-many-without-author.input';
-import { CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput } from '../counselor-session/counselor-session-unchecked-create-nested-many-without-participants.input';
+import { CounselorSessionUncheckedCreateNestedOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-create-nested-one-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -52,8 +52,8 @@ export class UserUncheckedCreateInput {
     @Field(() => PostUncheckedCreateNestedManyWithoutAuthorInput, {nullable:true})
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput;
 
-    @Field(() => CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput, {nullable:true})
-    counselingSession?: CounselorSessionUncheckedCreateNestedManyWithoutParticipantsInput;
+    @Field(() => CounselorSessionUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
+    counselingSession?: CounselorSessionUncheckedCreateNestedOneWithoutUserInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

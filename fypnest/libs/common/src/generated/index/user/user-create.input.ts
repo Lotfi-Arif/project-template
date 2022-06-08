@@ -8,7 +8,7 @@ import { StaffCreateNestedOneWithoutUserInput } from '../staff/staff-create-nest
 import { CounselorCreateNestedOneWithoutUserInput } from '../counselor/counselor-create-nested-one-without-user.input';
 import { AdminCreateNestedOneWithoutUserInput } from '../admin/admin-create-nested-one-without-user.input';
 import { PostCreateNestedManyWithoutAuthorInput } from '../post/post-create-nested-many-without-author.input';
-import { CounselorSessionCreateNestedManyWithoutParticipantsInput } from '../counselor-session/counselor-session-create-nested-many-without-participants.input';
+import { CounselorSessionCreateNestedOneWithoutUserInput } from '../counselor-session/counselor-session-create-nested-one-without-user.input';
 
 @InputType()
 export class UserCreateInput {
@@ -52,8 +52,8 @@ export class UserCreateInput {
     @Field(() => PostCreateNestedManyWithoutAuthorInput, {nullable:true})
     posts?: PostCreateNestedManyWithoutAuthorInput;
 
-    @Field(() => CounselorSessionCreateNestedManyWithoutParticipantsInput, {nullable:true})
-    counselingSession?: CounselorSessionCreateNestedManyWithoutParticipantsInput;
+    @Field(() => CounselorSessionCreateNestedOneWithoutUserInput, {nullable:true})
+    counselingSession?: CounselorSessionCreateNestedOneWithoutUserInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

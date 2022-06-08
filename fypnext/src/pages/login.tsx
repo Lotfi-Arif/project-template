@@ -1,9 +1,8 @@
 import Image from 'next/image'
-import { TabGroup } from '@statikly/funk'
 import Link from 'next/link';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
-import { LoginMutation, Role, useLoginMutation } from 'schema/generated/graphql';
+import { Role, useLoginMutation } from 'schema/generated/graphql';
 import { withApollo } from 'utils/hooks/withApollo';
 
 const Login = () => {
@@ -36,40 +35,7 @@ const Login = () => {
     return (
         <>
             <div className="mx-auto bg-white shadow-lg mt-14 md:w-2/3 lg:w-2/3 sm:w-2/3 rounded-2xl">
-                <TabGroup numTabs={3} direction={TabGroup.direction.HORIZONTAL}>
-                    <TabGroup.TabList>
-                        <TabGroup.Tab
-                            index={0}
-                            className="rounded-t-xl h-12 px-12 transition-colors duration-150"
-                            activeClassName="bg-black text-white"
-                            inactiveClassName="text-black"
-                        >
-                            Student Login
-                        </TabGroup.Tab>
-                        <TabGroup.Tab
-                            index={1}
-                            className=" rounded-t-xl h-12 px-12 transition-colors duration-150"
-                            activeClassName="bg-black text-white"
-                            inactiveClassName="text-black"
-                        >
-                            Staff Login
-                        </TabGroup.Tab>
-                        <TabGroup.Tab
-                            index={2}
-                            className=" rounded-t-xl h-12 px-12 transition-colors duration-150"
-                            activeClassName="bg-black text-white"
-                            inactiveClassName="text-black"
-                        >
-                            Counselor Login
-                        </TabGroup.Tab>
-                    </TabGroup.TabList>
-                    <TabGroup.TabPanel
-                        index={0}
-                        className="p-16 transition-all transform h-auto"
-                        activeClassName="opacity-100 duration-500 translate-x-0"
-                        inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        <div className="grid grid-cols-2 text-left">
+            <div className="grid grid-cols-2 text-left">
                             <div className="row-start-auto my-auto mx-auto p-4">
                                 <h1 className="text-3xl text-sky-400">
                                     Peace of mind allows <br />Positive mental health
@@ -150,25 +116,6 @@ const Login = () => {
                                 <Image src="/register.svg" alt='registeration' width={723} height={723} />
                             </div>
                         </div>
-                    </TabGroup.TabPanel>
-                    <TabGroup.TabPanel
-                        index={1}
-                        className="p-16 transition-all transform h-64 flex flex-col"
-                        activeClassName="opacity-100 duration-500 translate-x-0"
-                        inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        Staff Login
-                    </TabGroup.TabPanel>
-                    <TabGroup.TabPanel
-                        index={2}
-                        className="p-16 transition-all transform h-64"
-                        activeClassName="opacity-100 duration-500 translate-x-0"
-                        inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        Counselor Login
-                    </TabGroup.TabPanel>
-                </TabGroup>
-
             </div>
         </>
     );

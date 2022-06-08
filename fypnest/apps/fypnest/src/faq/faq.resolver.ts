@@ -10,25 +10,23 @@ import { UpdateOneFaqArgs } from '@app/common/generated/index/prisma/update-one-
 
 @Resolver(() => FAQ)
 export class FaqsResolver {
-  constructor(private readonly faqsService: FAQsService) {
-  }
+  constructor(private readonly faqsService: FAQsService) {}
 
-  @Query(() => FAQ)
+  @Query(() => [FAQ])
   async findAllFaqs(@Args() faqFindManyArgs: FindManyFaqArgs, @Info() info) {
     try {
-      const faqs = new PrismaSelect(info).value
-      return this.faqsService.findAll({ ...faqFindManyArgs, ...faqs })
+      const faqs = new PrismaSelect(info).value;
+      return this.faqsService.findAll({ ...faqFindManyArgs, ...faqs });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => FAQ)
   async findOneFaq(@Args() faqFindUnique: FindUniqueFaqArgs, @Info() info) {
     try {
       const faq = new PrismaSelect(info).value;
-      return this.faqsService.findOne({ ...faqFindUnique, ...faq })
+      return this.faqsService.findOne({ ...faqFindUnique, ...faq });
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +36,7 @@ export class FaqsResolver {
   async createFaq(@Args() faqCreateArgs: CreateOneFaqArgs, @Info() info) {
     try {
       const newFaq = new PrismaSelect(info).value;
-      return this.faqsService.createFAQ({ ...faqCreateArgs, ...newFaq })
+      return this.faqsService.createFAQ({ ...faqCreateArgs, ...newFaq });
     } catch (error) {
       console.error(error);
     }
@@ -48,18 +46,17 @@ export class FaqsResolver {
   async updateFaq(@Args() faqUpdateArgs: UpdateOneFaqArgs, @Info() info) {
     try {
       const update = new PrismaSelect(info).value;
-      return this.faqsService.updateFAQ({ ...faqUpdateArgs, ...update })
+      return this.faqsService.updateFAQ({ ...faqUpdateArgs, ...update });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => FAQ)
   async deleteFaq(@Args() faqDeletArgs: DeleteOneFaqArgs, @Info() info) {
     try {
       const faq = new PrismaSelect(info).value;
-      return this.faqsService.deleteFAQ({ ...faqDeletArgs, ...faq })
+      return this.faqsService.deleteFAQ({ ...faqDeletArgs, ...faq });
     } catch (error) {
       console.error(error);
     }

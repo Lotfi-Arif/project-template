@@ -54,8 +54,8 @@ export class User {
     @Field(() => [Post], {nullable:true})
     posts?: Array<Post>;
 
-    @Field(() => [CounselorSession], {nullable:true})
-    counselingSession?: Array<CounselorSession>;
+    @Field(() => CounselorSession, {nullable:true})
+    counselingSession?: CounselorSession | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

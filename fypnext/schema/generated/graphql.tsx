@@ -162,7 +162,9 @@ export type ChatWhereUniqueInput = {
 
 export type Counselor = {
   __typename?: 'Counselor';
+  CounselorSession?: Maybe<Array<CounselorSession>>;
   Schedule?: Maybe<Array<Scalars['String']>>;
+  _count: CounselorCount;
   createdAt: Scalars['DateTime'];
   department: Scalars['String'];
   expertise: Scalars['String'];
@@ -171,7 +173,13 @@ export type Counselor = {
   user: User;
 };
 
+export type CounselorCount = {
+  __typename?: 'CounselorCount';
+  CounselorSession: Scalars['Int'];
+};
+
 export type CounselorCreateInput = {
+  CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutCounselorInput>;
   Schedule?: InputMaybe<CounselorCreateScheduleInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   department: Scalars['String'];
@@ -180,10 +188,21 @@ export type CounselorCreateInput = {
   user?: InputMaybe<UserCreateNestedOneWithoutCounselorInput>;
 };
 
+export type CounselorCreateNestedOneWithoutCounselorSessionInput = {
+  connect?: InputMaybe<CounselorWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CounselorCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<CounselorCreateWithoutCounselorSessionInput>;
+};
+
 export type CounselorCreateNestedOneWithoutUserInput = {
   connect?: InputMaybe<CounselorWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CounselorCreateOrConnectWithoutUserInput>;
   create?: InputMaybe<CounselorCreateWithoutUserInput>;
+};
+
+export type CounselorCreateOrConnectWithoutCounselorSessionInput = {
+  create: CounselorCreateWithoutCounselorSessionInput;
+  where: CounselorWhereUniqueInput;
 };
 
 export type CounselorCreateOrConnectWithoutUserInput = {
@@ -195,7 +214,17 @@ export type CounselorCreateScheduleInput = {
   set: Array<Scalars['String']>;
 };
 
+export type CounselorCreateWithoutCounselorSessionInput = {
+  Schedule?: InputMaybe<CounselorCreateScheduleInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  department: Scalars['String'];
+  expertise: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<UserCreateNestedOneWithoutCounselorInput>;
+};
+
 export type CounselorCreateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutCounselorInput>;
   Schedule?: InputMaybe<CounselorCreateScheduleInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   department: Scalars['String'];
@@ -204,6 +233,7 @@ export type CounselorCreateWithoutUserInput = {
 };
 
 export type CounselorOrderByWithRelationInput = {
+  CounselorSession?: InputMaybe<CounselorSessionOrderByRelationAggregateInput>;
   Schedule?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   department?: InputMaybe<SortOrder>;
@@ -229,39 +259,160 @@ export enum CounselorScalarFieldEnum {
 
 export type CounselorSession = {
   __typename?: 'CounselorSession';
-  _count: CounselorSessionCount;
+  User?: Maybe<User>;
+  counsellingReason?: Maybe<Scalars['String']>;
+  counselor: Counselor;
+  counselorId: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  participants?: Maybe<Array<User>>;
+  staff?: Maybe<Staff>;
+  staffId?: Maybe<Scalars['String']>;
+  student?: Maybe<Student>;
+  studentId?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-};
-
-export type CounselorSessionCount = {
-  __typename?: 'CounselorSessionCount';
-  participants: Scalars['Int'];
+  userId?: Maybe<Scalars['String']>;
 };
 
 export type CounselorSessionCreateInput = {
+  User?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
-  participants?: InputMaybe<UserCreateNestedManyWithoutCounselingSessionInput>;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type CounselorSessionCreateNestedManyWithoutParticipantsInput = {
-  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutParticipantsInput>>;
-  create?: InputMaybe<Array<CounselorSessionCreateWithoutParticipantsInput>>;
+export type CounselorSessionCreateManyCounselorInput = {
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  staffId?: InputMaybe<Scalars['String']>;
+  studentId?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
-export type CounselorSessionCreateOrConnectWithoutParticipantsInput = {
-  create: CounselorSessionCreateWithoutParticipantsInput;
+export type CounselorSessionCreateManyCounselorInputEnvelope = {
+  data: Array<CounselorSessionCreateManyCounselorInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CounselorSessionCreateManyStaffInput = {
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselorId: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  studentId?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+export type CounselorSessionCreateManyStaffInputEnvelope = {
+  data: Array<CounselorSessionCreateManyStaffInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CounselorSessionCreateManyStudentInput = {
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselorId: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  staffId?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+export type CounselorSessionCreateManyStudentInputEnvelope = {
+  data: Array<CounselorSessionCreateManyStudentInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CounselorSessionCreateNestedManyWithoutCounselorInput = {
+  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutCounselorInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutCounselorInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyCounselorInputEnvelope>;
+};
+
+export type CounselorSessionCreateNestedManyWithoutStaffInput = {
+  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutStaffInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutStaffInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyStaffInputEnvelope>;
+};
+
+export type CounselorSessionCreateNestedManyWithoutStudentInput = {
+  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutStudentInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutStudentInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyStudentInputEnvelope>;
+};
+
+export type CounselorSessionCreateNestedOneWithoutUserInput = {
+  connect?: InputMaybe<CounselorSessionWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CounselorSessionCreateOrConnectWithoutUserInput>;
+  create?: InputMaybe<CounselorSessionCreateWithoutUserInput>;
+};
+
+export type CounselorSessionCreateOrConnectWithoutCounselorInput = {
+  create: CounselorSessionCreateWithoutCounselorInput;
   where: CounselorSessionWhereUniqueInput;
 };
 
-export type CounselorSessionCreateWithoutParticipantsInput = {
+export type CounselorSessionCreateOrConnectWithoutStaffInput = {
+  create: CounselorSessionCreateWithoutStaffInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionCreateOrConnectWithoutStudentInput = {
+  create: CounselorSessionCreateWithoutStudentInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionCreateOrConnectWithoutUserInput = {
+  create: CounselorSessionCreateWithoutUserInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionCreateWithoutCounselorInput = {
+  User?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type CounselorSessionCreateWithoutStaffInput = {
+  User?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type CounselorSessionCreateWithoutStudentInput = {
+  User?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type CounselorSessionCreateWithoutUserInput = {
+  counsellingReason?: InputMaybe<Scalars['String']>;
+  counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -276,96 +427,252 @@ export type CounselorSessionOrderByRelationAggregateInput = {
 };
 
 export type CounselorSessionOrderByWithRelationInput = {
+  User?: InputMaybe<UserOrderByWithRelationInput>;
+  counsellingReason?: InputMaybe<SortOrder>;
+  counselor?: InputMaybe<CounselorOrderByWithRelationInput>;
+  counselorId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  participants?: InputMaybe<UserOrderByRelationAggregateInput>;
+  staff?: InputMaybe<StaffOrderByWithRelationInput>;
+  staffId?: InputMaybe<SortOrder>;
+  student?: InputMaybe<StudentOrderByWithRelationInput>;
+  studentId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type CounselorSessionRelationFilter = {
+  is?: InputMaybe<CounselorSessionWhereInput>;
+  isNot?: InputMaybe<CounselorSessionWhereInput>;
 };
 
 export enum CounselorSessionScalarFieldEnum {
+  CounsellingReason = 'counsellingReason',
+  CounselorId = 'counselorId',
   CreatedAt = 'createdAt',
   Id = 'id',
-  UpdatedAt = 'updatedAt'
+  StaffId = 'staffId',
+  StudentId = 'studentId',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
 }
 
 export type CounselorSessionScalarWhereInput = {
   AND?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
   NOT?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
   OR?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
+  counsellingReason?: InputMaybe<StringNullableFilter>;
+  counselorId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  staffId?: InputMaybe<StringNullableFilter>;
+  studentId?: InputMaybe<StringNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringNullableFilter>;
 };
 
 export type CounselorSessionUpdateInput = {
+  User?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  participants?: InputMaybe<UserUpdateManyWithoutCounselingSessionInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type CounselorSessionUpdateManyMutationInput = {
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
-export type CounselorSessionUpdateManyWithWhereWithoutParticipantsInput = {
+export type CounselorSessionUpdateManyWithWhereWithoutCounselorInput = {
   data: CounselorSessionUpdateManyMutationInput;
   where: CounselorSessionScalarWhereInput;
 };
 
-export type CounselorSessionUpdateManyWithoutParticipantsInput = {
+export type CounselorSessionUpdateManyWithWhereWithoutStaffInput = {
+  data: CounselorSessionUpdateManyMutationInput;
+  where: CounselorSessionScalarWhereInput;
+};
+
+export type CounselorSessionUpdateManyWithWhereWithoutStudentInput = {
+  data: CounselorSessionUpdateManyMutationInput;
+  where: CounselorSessionScalarWhereInput;
+};
+
+export type CounselorSessionUpdateManyWithoutCounselorInput = {
   connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutParticipantsInput>>;
-  create?: InputMaybe<Array<CounselorSessionCreateWithoutParticipantsInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutCounselorInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutCounselorInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyCounselorInputEnvelope>;
   delete?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
   deleteMany?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
   disconnect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
   set?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
-  update?: InputMaybe<Array<CounselorSessionUpdateWithWhereUniqueWithoutParticipantsInput>>;
-  updateMany?: InputMaybe<Array<CounselorSessionUpdateManyWithWhereWithoutParticipantsInput>>;
-  upsert?: InputMaybe<Array<CounselorSessionUpsertWithWhereUniqueWithoutParticipantsInput>>;
+  update?: InputMaybe<Array<CounselorSessionUpdateWithWhereUniqueWithoutCounselorInput>>;
+  updateMany?: InputMaybe<Array<CounselorSessionUpdateManyWithWhereWithoutCounselorInput>>;
+  upsert?: InputMaybe<Array<CounselorSessionUpsertWithWhereUniqueWithoutCounselorInput>>;
 };
 
-export type CounselorSessionUpdateWithWhereUniqueWithoutParticipantsInput = {
-  data: CounselorSessionUpdateWithoutParticipantsInput;
+export type CounselorSessionUpdateManyWithoutStaffInput = {
+  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutStaffInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutStaffInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyStaffInputEnvelope>;
+  delete?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CounselorSessionUpdateWithWhereUniqueWithoutStaffInput>>;
+  updateMany?: InputMaybe<Array<CounselorSessionUpdateManyWithWhereWithoutStaffInput>>;
+  upsert?: InputMaybe<Array<CounselorSessionUpsertWithWhereUniqueWithoutStaffInput>>;
+};
+
+export type CounselorSessionUpdateManyWithoutStudentInput = {
+  connect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CounselorSessionCreateOrConnectWithoutStudentInput>>;
+  create?: InputMaybe<Array<CounselorSessionCreateWithoutStudentInput>>;
+  createMany?: InputMaybe<CounselorSessionCreateManyStudentInputEnvelope>;
+  delete?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CounselorSessionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CounselorSessionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CounselorSessionUpdateWithWhereUniqueWithoutStudentInput>>;
+  updateMany?: InputMaybe<Array<CounselorSessionUpdateManyWithWhereWithoutStudentInput>>;
+  upsert?: InputMaybe<Array<CounselorSessionUpsertWithWhereUniqueWithoutStudentInput>>;
+};
+
+export type CounselorSessionUpdateOneWithoutUserInput = {
+  connect?: InputMaybe<CounselorSessionWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CounselorSessionCreateOrConnectWithoutUserInput>;
+  create?: InputMaybe<CounselorSessionCreateWithoutUserInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<CounselorSessionUpdateWithoutUserInput>;
+  upsert?: InputMaybe<CounselorSessionUpsertWithoutUserInput>;
+};
+
+export type CounselorSessionUpdateWithWhereUniqueWithoutCounselorInput = {
+  data: CounselorSessionUpdateWithoutCounselorInput;
   where: CounselorSessionWhereUniqueInput;
 };
 
-export type CounselorSessionUpdateWithoutParticipantsInput = {
+export type CounselorSessionUpdateWithWhereUniqueWithoutStaffInput = {
+  data: CounselorSessionUpdateWithoutStaffInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionUpdateWithWhereUniqueWithoutStudentInput = {
+  data: CounselorSessionUpdateWithoutStudentInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionUpdateWithoutCounselorInput = {
+  User?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
-export type CounselorSessionUpsertWithWhereUniqueWithoutParticipantsInput = {
-  create: CounselorSessionCreateWithoutParticipantsInput;
-  update: CounselorSessionUpdateWithoutParticipantsInput;
+export type CounselorSessionUpdateWithoutStaffInput = {
+  User?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CounselorSessionUpdateWithoutStudentInput = {
+  User?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CounselorSessionUpdateWithoutUserInput = {
+  counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CounselorSessionUpsertWithWhereUniqueWithoutCounselorInput = {
+  create: CounselorSessionCreateWithoutCounselorInput;
+  update: CounselorSessionUpdateWithoutCounselorInput;
   where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionUpsertWithWhereUniqueWithoutStaffInput = {
+  create: CounselorSessionCreateWithoutStaffInput;
+  update: CounselorSessionUpdateWithoutStaffInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionUpsertWithWhereUniqueWithoutStudentInput = {
+  create: CounselorSessionCreateWithoutStudentInput;
+  update: CounselorSessionUpdateWithoutStudentInput;
+  where: CounselorSessionWhereUniqueInput;
+};
+
+export type CounselorSessionUpsertWithoutUserInput = {
+  create: CounselorSessionCreateWithoutUserInput;
+  update: CounselorSessionUpdateWithoutUserInput;
 };
 
 export type CounselorSessionWhereInput = {
   AND?: InputMaybe<Array<CounselorSessionWhereInput>>;
   NOT?: InputMaybe<Array<CounselorSessionWhereInput>>;
   OR?: InputMaybe<Array<CounselorSessionWhereInput>>;
+  User?: InputMaybe<UserRelationFilter>;
+  counsellingReason?: InputMaybe<StringNullableFilter>;
+  counselor?: InputMaybe<CounselorRelationFilter>;
+  counselorId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  participants?: InputMaybe<UserListRelationFilter>;
+  staff?: InputMaybe<StaffRelationFilter>;
+  staffId?: InputMaybe<StringNullableFilter>;
+  student?: InputMaybe<StudentRelationFilter>;
+  studentId?: InputMaybe<StringNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringNullableFilter>;
 };
 
 export type CounselorSessionWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type CounselorUpdateInput = {
+  CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutCounselorInput>;
   Schedule?: InputMaybe<CounselorUpdateScheduleInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   department?: InputMaybe<StringFieldUpdateOperationsInput>;
   expertise?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutCounselorInput>;
+};
+
+export type CounselorUpdateOneRequiredWithoutCounselorSessionInput = {
+  connect?: InputMaybe<CounselorWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CounselorCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<CounselorCreateWithoutCounselorSessionInput>;
+  update?: InputMaybe<CounselorUpdateWithoutCounselorSessionInput>;
+  upsert?: InputMaybe<CounselorUpsertWithoutCounselorSessionInput>;
 };
 
 export type CounselorUpdateOneWithoutUserInput = {
@@ -383,12 +690,27 @@ export type CounselorUpdateScheduleInput = {
   set?: InputMaybe<Array<Scalars['String']>>;
 };
 
-export type CounselorUpdateWithoutUserInput = {
+export type CounselorUpdateWithoutCounselorSessionInput = {
   Schedule?: InputMaybe<CounselorUpdateScheduleInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   department?: InputMaybe<StringFieldUpdateOperationsInput>;
   expertise?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCounselorInput>;
+};
+
+export type CounselorUpdateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutCounselorInput>;
+  Schedule?: InputMaybe<CounselorUpdateScheduleInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  department?: InputMaybe<StringFieldUpdateOperationsInput>;
+  expertise?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CounselorUpsertWithoutCounselorSessionInput = {
+  create: CounselorCreateWithoutCounselorSessionInput;
+  update: CounselorUpdateWithoutCounselorSessionInput;
 };
 
 export type CounselorUpsertWithoutUserInput = {
@@ -398,6 +720,7 @@ export type CounselorUpsertWithoutUserInput = {
 
 export type CounselorWhereInput = {
   AND?: InputMaybe<Array<CounselorWhereInput>>;
+  CounselorSession?: InputMaybe<CounselorSessionListRelationFilter>;
   NOT?: InputMaybe<Array<CounselorWhereInput>>;
   OR?: InputMaybe<Array<CounselorWhereInput>>;
   Schedule?: InputMaybe<StringNullableListFilter>;
@@ -510,32 +833,47 @@ export type EventWhereUniqueInput = {
 export type Faq = {
   __typename?: 'FAQ';
   answer: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  icon: Scalars['String'];
   id: Scalars['ID'];
-  question: Scalars['String'];
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type FaqCreateInput = {
   answer: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  icon: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
-  question: Scalars['String'];
+  title: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type FaqOrderByWithRelationInput = {
   answer?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  icon?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  question?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
 };
 
 export enum FaqScalarFieldEnum {
   Answer = 'answer',
+  CreatedAt = 'createdAt',
+  Icon = 'icon',
   Id = 'id',
-  Question = 'question'
+  Title = 'title',
+  UpdatedAt = 'updatedAt'
 }
 
 export type FaqUpdateInput = {
   answer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  icon?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  question?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type FaqWhereInput = {
@@ -543,8 +881,11 @@ export type FaqWhereInput = {
   NOT?: InputMaybe<Array<FaqWhereInput>>;
   OR?: InputMaybe<Array<FaqWhereInput>>;
   answer?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  icon?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
-  question?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
 export type FaqWhereUniqueInput = {
@@ -1097,10 +1438,10 @@ export type PostWhereUniqueInput = {
 export type Query = {
   __typename?: 'Query';
   findAllChats: Chat;
-  findAllCounselorSessions: CounselorSession;
+  findAllCounselorSessions: Array<CounselorSession>;
   findAllCounselors: Counselor;
   findAllEvents: Array<Event>;
-  findAllFaqs: Faq;
+  findAllFaqs: Array<Faq>;
   findAllMessages: Message;
   findAllPosts: Post;
   findAllSchedules: Schedule;
@@ -1205,43 +1546,55 @@ export enum QueryMode {
 export enum Role {
   Admin = 'ADMIN',
   Counselor = 'COUNSELOR',
-  DepartmentManager = 'DEPARTMENT_MANAGER',
+  Staff = 'STAFF',
   Student = 'STUDENT',
   User = 'USER'
 }
 
 export type Schedule = {
   __typename?: 'Schedule';
+  days: Scalars['DateTime'];
   id: Scalars['ID'];
-  scheduleDate: Scalars['DateTime'];
+  timeFrom: Scalars['DateTime'];
+  timeTo: Scalars['DateTime'];
 };
 
 export type ScheduleCreateInput = {
+  days: Scalars['DateTime'];
   id?: InputMaybe<Scalars['String']>;
-  scheduleDate: Scalars['DateTime'];
+  timeFrom: Scalars['DateTime'];
+  timeTo: Scalars['DateTime'];
 };
 
 export type ScheduleOrderByWithRelationInput = {
+  days?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  scheduleDate?: InputMaybe<SortOrder>;
+  timeFrom?: InputMaybe<SortOrder>;
+  timeTo?: InputMaybe<SortOrder>;
 };
 
 export enum ScheduleScalarFieldEnum {
+  Days = 'days',
   Id = 'id',
-  ScheduleDate = 'scheduleDate'
+  TimeFrom = 'timeFrom',
+  TimeTo = 'timeTo'
 }
 
 export type ScheduleUpdateInput = {
+  days?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  scheduleDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  timeFrom?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type ScheduleWhereInput = {
   AND?: InputMaybe<Array<ScheduleWhereInput>>;
   NOT?: InputMaybe<Array<ScheduleWhereInput>>;
   OR?: InputMaybe<Array<ScheduleWhereInput>>;
+  days?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  scheduleDate?: InputMaybe<DateTimeFilter>;
+  timeFrom?: InputMaybe<DateTimeFilter>;
+  timeTo?: InputMaybe<DateTimeFilter>;
 };
 
 export type ScheduleWhereUniqueInput = {
@@ -1255,6 +1608,8 @@ export enum SortOrder {
 
 export type Staff = {
   __typename?: 'Staff';
+  CounselorSession?: Maybe<Array<CounselorSession>>;
+  _count: StaffCount;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   faculty: Scalars['String'];
@@ -1265,10 +1620,26 @@ export type Staff = {
   user: User;
 };
 
+export type StaffCount = {
+  __typename?: 'StaffCount';
+  CounselorSession: Scalars['Int'];
+};
+
+export type StaffCreateNestedOneWithoutCounselorSessionInput = {
+  connect?: InputMaybe<StaffWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<StaffCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<StaffCreateWithoutCounselorSessionInput>;
+};
+
 export type StaffCreateNestedOneWithoutUserInput = {
   connect?: InputMaybe<StaffWhereUniqueInput>;
   connectOrCreate?: InputMaybe<StaffCreateOrConnectWithoutUserInput>;
   create?: InputMaybe<StaffCreateWithoutUserInput>;
+};
+
+export type StaffCreateOrConnectWithoutCounselorSessionInput = {
+  create: StaffCreateWithoutCounselorSessionInput;
+  where: StaffWhereUniqueInput;
 };
 
 export type StaffCreateOrConnectWithoutUserInput = {
@@ -1276,7 +1647,18 @@ export type StaffCreateOrConnectWithoutUserInput = {
   where: StaffWhereUniqueInput;
 };
 
+export type StaffCreateWithoutCounselorSessionInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  faculty: Scalars['String'];
+  password: Scalars['String'];
+  staffId: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<UserCreateNestedOneWithoutStaffInput>;
+};
+
 export type StaffCreateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutStaffInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   faculty: Scalars['String'];
@@ -1286,6 +1668,7 @@ export type StaffCreateWithoutUserInput = {
 };
 
 export type StaffOrderByWithRelationInput = {
+  CounselorSession?: InputMaybe<CounselorSessionOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   faculty?: InputMaybe<SortOrder>;
@@ -1301,6 +1684,16 @@ export type StaffRelationFilter = {
   isNot?: InputMaybe<StaffWhereInput>;
 };
 
+export type StaffUpdateOneWithoutCounselorSessionInput = {
+  connect?: InputMaybe<StaffWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<StaffCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<StaffCreateWithoutCounselorSessionInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<StaffUpdateWithoutCounselorSessionInput>;
+  upsert?: InputMaybe<StaffUpsertWithoutCounselorSessionInput>;
+};
+
 export type StaffUpdateOneWithoutUserInput = {
   connect?: InputMaybe<StaffWhereUniqueInput>;
   connectOrCreate?: InputMaybe<StaffCreateOrConnectWithoutUserInput>;
@@ -1311,13 +1704,29 @@ export type StaffUpdateOneWithoutUserInput = {
   upsert?: InputMaybe<StaffUpsertWithoutUserInput>;
 };
 
-export type StaffUpdateWithoutUserInput = {
+export type StaffUpdateWithoutCounselorSessionInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   staffId?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutStaffInput>;
+};
+
+export type StaffUpdateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutStaffInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  staffId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type StaffUpsertWithoutCounselorSessionInput = {
+  create: StaffCreateWithoutCounselorSessionInput;
+  update: StaffUpdateWithoutCounselorSessionInput;
 };
 
 export type StaffUpsertWithoutUserInput = {
@@ -1327,6 +1736,7 @@ export type StaffUpsertWithoutUserInput = {
 
 export type StaffWhereInput = {
   AND?: InputMaybe<Array<StaffWhereInput>>;
+  CounselorSession?: InputMaybe<CounselorSessionListRelationFilter>;
   NOT?: InputMaybe<Array<StaffWhereInput>>;
   OR?: InputMaybe<Array<StaffWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -1389,6 +1799,8 @@ export type StringNullableListFilter = {
 
 export type Student = {
   __typename?: 'Student';
+  CounselorSession?: Maybe<Array<CounselorSession>>;
+  _count: StudentCount;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   faculty: Scalars['String'];
@@ -1399,10 +1811,26 @@ export type Student = {
   user: User;
 };
 
+export type StudentCount = {
+  __typename?: 'StudentCount';
+  CounselorSession: Scalars['Int'];
+};
+
+export type StudentCreateNestedOneWithoutCounselorSessionInput = {
+  connect?: InputMaybe<StudentWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<StudentCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<StudentCreateWithoutCounselorSessionInput>;
+};
+
 export type StudentCreateNestedOneWithoutUserInput = {
   connect?: InputMaybe<StudentWhereUniqueInput>;
   connectOrCreate?: InputMaybe<StudentCreateOrConnectWithoutUserInput>;
   create?: InputMaybe<StudentCreateWithoutUserInput>;
+};
+
+export type StudentCreateOrConnectWithoutCounselorSessionInput = {
+  create: StudentCreateWithoutCounselorSessionInput;
+  where: StudentWhereUniqueInput;
 };
 
 export type StudentCreateOrConnectWithoutUserInput = {
@@ -1410,7 +1838,18 @@ export type StudentCreateOrConnectWithoutUserInput = {
   where: StudentWhereUniqueInput;
 };
 
+export type StudentCreateWithoutCounselorSessionInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  faculty: Scalars['String'];
+  matrix: Scalars['String'];
+  password: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<UserCreateNestedOneWithoutStudentInput>;
+};
+
 export type StudentCreateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutStudentInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   faculty: Scalars['String'];
@@ -1420,6 +1859,7 @@ export type StudentCreateWithoutUserInput = {
 };
 
 export type StudentOrderByWithRelationInput = {
+  CounselorSession?: InputMaybe<CounselorSessionOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   faculty?: InputMaybe<SortOrder>;
@@ -1435,6 +1875,16 @@ export type StudentRelationFilter = {
   isNot?: InputMaybe<StudentWhereInput>;
 };
 
+export type StudentUpdateOneWithoutCounselorSessionInput = {
+  connect?: InputMaybe<StudentWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<StudentCreateOrConnectWithoutCounselorSessionInput>;
+  create?: InputMaybe<StudentCreateWithoutCounselorSessionInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<StudentUpdateWithoutCounselorSessionInput>;
+  upsert?: InputMaybe<StudentUpsertWithoutCounselorSessionInput>;
+};
+
 export type StudentUpdateOneWithoutUserInput = {
   connect?: InputMaybe<StudentWhereUniqueInput>;
   connectOrCreate?: InputMaybe<StudentCreateOrConnectWithoutUserInput>;
@@ -1445,13 +1895,29 @@ export type StudentUpdateOneWithoutUserInput = {
   upsert?: InputMaybe<StudentUpsertWithoutUserInput>;
 };
 
-export type StudentUpdateWithoutUserInput = {
+export type StudentUpdateWithoutCounselorSessionInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
   matrix?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutStudentInput>;
+};
+
+export type StudentUpdateWithoutUserInput = {
+  CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutStudentInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  faculty?: InputMaybe<StringFieldUpdateOperationsInput>;
+  matrix?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type StudentUpsertWithoutCounselorSessionInput = {
+  create: StudentCreateWithoutCounselorSessionInput;
+  update: StudentUpdateWithoutCounselorSessionInput;
 };
 
 export type StudentUpsertWithoutUserInput = {
@@ -1461,6 +1927,7 @@ export type StudentUpsertWithoutUserInput = {
 
 export type StudentWhereInput = {
   AND?: InputMaybe<Array<StudentWhereInput>>;
+  CounselorSession?: InputMaybe<CounselorSessionListRelationFilter>;
   NOT?: InputMaybe<Array<StudentWhereInput>>;
   OR?: InputMaybe<Array<StudentWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -1484,7 +1951,7 @@ export type User = {
   _count: UserCount;
   accountStatus: AccountStatus;
   admin?: Maybe<Admin>;
-  counselingSession?: Maybe<Array<CounselorSession>>;
+  counselingSession?: Maybe<CounselorSession>;
   counselor?: Maybe<Counselor>;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
@@ -1502,14 +1969,13 @@ export type User = {
 
 export type UserCount = {
   __typename?: 'UserCount';
-  counselingSession: Scalars['Int'];
   posts: Scalars['Int'];
 };
 
 export type UserCreateInput = {
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
@@ -1525,10 +1991,10 @@ export type UserCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type UserCreateNestedManyWithoutCounselingSessionInput = {
-  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutCounselingSessionInput>>;
-  create?: InputMaybe<Array<UserCreateWithoutCounselingSessionInput>>;
+export type UserCreateNestedOneWithoutCounselingSessionInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselingSessionInput>;
+  create?: InputMaybe<UserCreateWithoutCounselingSessionInput>;
 };
 
 export type UserCreateNestedOneWithoutCounselorInput = {
@@ -1543,6 +2009,18 @@ export type UserCreateNestedOneWithoutPostsInput = {
   create?: InputMaybe<UserCreateWithoutPostsInput>;
 };
 
+export type UserCreateNestedOneWithoutStaffInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutStaffInput>;
+  create?: InputMaybe<UserCreateWithoutStaffInput>;
+};
+
+export type UserCreateNestedOneWithoutStudentInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutStudentInput>;
+  create?: InputMaybe<UserCreateWithoutStudentInput>;
+};
+
 export type UserCreateOrConnectWithoutCounselingSessionInput = {
   create: UserCreateWithoutCounselingSessionInput;
   where: UserWhereUniqueInput;
@@ -1555,6 +2033,16 @@ export type UserCreateOrConnectWithoutCounselorInput = {
 
 export type UserCreateOrConnectWithoutPostsInput = {
   create: UserCreateWithoutPostsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutStaffInput = {
+  create: UserCreateWithoutStaffInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutStudentInput = {
+  create: UserCreateWithoutStudentInput;
   where: UserWhereUniqueInput;
 };
 
@@ -1579,7 +2067,7 @@ export type UserCreateWithoutCounselingSessionInput = {
 export type UserCreateWithoutCounselorInput = {
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   gender?: InputMaybe<Gender>;
@@ -1597,7 +2085,7 @@ export type UserCreateWithoutCounselorInput = {
 export type UserCreateWithoutPostsInput = {
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
@@ -1612,20 +2100,46 @@ export type UserCreateWithoutPostsInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type UserListRelationFilter = {
-  every?: InputMaybe<UserWhereInput>;
-  none?: InputMaybe<UserWhereInput>;
-  some?: InputMaybe<UserWhereInput>;
+export type UserCreateWithoutStaffInput = {
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  student?: InputMaybe<StudentCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type UserOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
+export type UserCreateWithoutStudentInput = {
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserOrderByWithRelationInput = {
   accountStatus?: InputMaybe<SortOrder>;
   admin?: InputMaybe<AdminOrderByWithRelationInput>;
-  counselingSession?: InputMaybe<CounselorSessionOrderByRelationAggregateInput>;
+  counselingSession?: InputMaybe<CounselorSessionOrderByWithRelationInput>;
   counselor?: InputMaybe<CounselorOrderByWithRelationInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
@@ -1659,26 +2173,10 @@ export enum UserScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
-export type UserScalarWhereInput = {
-  AND?: InputMaybe<Array<UserScalarWhereInput>>;
-  NOT?: InputMaybe<Array<UserScalarWhereInput>>;
-  OR?: InputMaybe<Array<UserScalarWhereInput>>;
-  accountStatus?: InputMaybe<EnumAccountStatusFilter>;
-  createdAt?: InputMaybe<DateTimeFilter>;
-  email?: InputMaybe<StringFilter>;
-  gender?: InputMaybe<EnumGenderNullableFilter>;
-  id?: InputMaybe<StringFilter>;
-  mobile?: InputMaybe<StringNullableFilter>;
-  name?: InputMaybe<StringFilter>;
-  password?: InputMaybe<StringNullableFilter>;
-  role?: InputMaybe<EnumRoleFilter>;
-  updatedAt?: InputMaybe<DateTimeFilter>;
-};
-
 export type UserUpdateInput = {
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionUpdateManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1692,37 +2190,6 @@ export type UserUpdateInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
   student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type UserUpdateManyMutationInput = {
-  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  name?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type UserUpdateManyWithWhereWithoutCounselingSessionInput = {
-  data: UserUpdateManyMutationInput;
-  where: UserScalarWhereInput;
-};
-
-export type UserUpdateManyWithoutCounselingSessionInput = {
-  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutCounselingSessionInput>>;
-  create?: InputMaybe<Array<UserCreateWithoutCounselingSessionInput>>;
-  delete?: InputMaybe<Array<UserWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<UserScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
-  set?: InputMaybe<Array<UserWhereUniqueInput>>;
-  update?: InputMaybe<Array<UserUpdateWithWhereUniqueWithoutCounselingSessionInput>>;
-  updateMany?: InputMaybe<Array<UserUpdateManyWithWhereWithoutCounselingSessionInput>>;
-  upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutCounselingSessionInput>>;
 };
 
 export type UserUpdateOneRequiredWithoutCounselorInput = {
@@ -1741,9 +2208,30 @@ export type UserUpdateOneRequiredWithoutPostsInput = {
   upsert?: InputMaybe<UserUpsertWithoutPostsInput>;
 };
 
-export type UserUpdateWithWhereUniqueWithoutCounselingSessionInput = {
-  data: UserUpdateWithoutCounselingSessionInput;
-  where: UserWhereUniqueInput;
+export type UserUpdateOneRequiredWithoutStaffInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutStaffInput>;
+  create?: InputMaybe<UserCreateWithoutStaffInput>;
+  update?: InputMaybe<UserUpdateWithoutStaffInput>;
+  upsert?: InputMaybe<UserUpsertWithoutStaffInput>;
+};
+
+export type UserUpdateOneRequiredWithoutStudentInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutStudentInput>;
+  create?: InputMaybe<UserCreateWithoutStudentInput>;
+  update?: InputMaybe<UserUpdateWithoutStudentInput>;
+  upsert?: InputMaybe<UserUpsertWithoutStudentInput>;
+};
+
+export type UserUpdateOneWithoutCounselingSessionInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselingSessionInput>;
+  create?: InputMaybe<UserCreateWithoutCounselingSessionInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutCounselingSessionInput>;
+  upsert?: InputMaybe<UserUpsertWithoutCounselingSessionInput>;
 };
 
 export type UserUpdateWithoutCounselingSessionInput = {
@@ -1767,7 +2255,7 @@ export type UserUpdateWithoutCounselingSessionInput = {
 export type UserUpdateWithoutCounselorInput = {
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionUpdateManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
@@ -1785,7 +2273,7 @@ export type UserUpdateWithoutCounselorInput = {
 export type UserUpdateWithoutPostsInput = {
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
-  counselingSession?: InputMaybe<CounselorSessionUpdateManyWithoutParticipantsInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1800,10 +2288,45 @@ export type UserUpdateWithoutPostsInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
-export type UserUpsertWithWhereUniqueWithoutCounselingSessionInput = {
+export type UserUpdateWithoutStaffInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutStudentInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithoutCounselingSessionInput = {
   create: UserCreateWithoutCounselingSessionInput;
   update: UserUpdateWithoutCounselingSessionInput;
-  where: UserWhereUniqueInput;
 };
 
 export type UserUpsertWithoutCounselorInput = {
@@ -1816,13 +2339,23 @@ export type UserUpsertWithoutPostsInput = {
   update: UserUpdateWithoutPostsInput;
 };
 
+export type UserUpsertWithoutStaffInput = {
+  create: UserCreateWithoutStaffInput;
+  update: UserUpdateWithoutStaffInput;
+};
+
+export type UserUpsertWithoutStudentInput = {
+  create: UserCreateWithoutStudentInput;
+  update: UserUpdateWithoutStudentInput;
+};
+
 export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accountStatus?: InputMaybe<EnumAccountStatusFilter>;
   admin?: InputMaybe<AdminRelationFilter>;
-  counselingSession?: InputMaybe<CounselorSessionListRelationFilter>;
+  counselingSession?: InputMaybe<CounselorSessionRelationFilter>;
   counselor?: InputMaybe<CounselorRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
@@ -1873,6 +2406,13 @@ export type DeleteEventMutationVariables = Exact<{
 
 export type DeleteEventMutation = { __typename?: 'Mutation', deleteEvent: { __typename?: 'Event', id: string, eventImageURL?: string | null | undefined } };
 
+export type CreateFaqMutationVariables = Exact<{
+  data: FaqCreateInput;
+}>;
+
+
+export type CreateFaqMutation = { __typename?: 'Mutation', createFaq: { __typename?: 'FAQ', id: string, title: string, answer: string, icon: string } };
+
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -1898,6 +2438,11 @@ export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type EventsQuery = { __typename?: 'Query', findAllEvents: Array<{ __typename?: 'Event', id: string, title: string, eventImageURL?: string | null | undefined, eventDetails: string }> };
+
+export type FaqsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FaqsQuery = { __typename?: 'Query', findAllFaqs: Array<{ __typename?: 'FAQ', id: string, title: string, answer: string, icon: string }> };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2053,6 +2598,42 @@ export function useDeleteEventMutation(baseOptions?: Apollo.MutationHookOptions<
 export type DeleteEventMutationHookResult = ReturnType<typeof useDeleteEventMutation>;
 export type DeleteEventMutationResult = Apollo.MutationResult<DeleteEventMutation>;
 export type DeleteEventMutationOptions = Apollo.BaseMutationOptions<DeleteEventMutation, DeleteEventMutationVariables>;
+export const CreateFaqDocument = gql`
+    mutation createFaq($data: FAQCreateInput!) {
+  createFaq(data: $data) {
+    id
+    title
+    answer
+    icon
+  }
+}
+    `;
+export type CreateFaqMutationFn = Apollo.MutationFunction<CreateFaqMutation, CreateFaqMutationVariables>;
+
+/**
+ * __useCreateFaqMutation__
+ *
+ * To run a mutation, you first call `useCreateFaqMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateFaqMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createFaqMutation, { data, loading, error }] = useCreateFaqMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateFaqMutation(baseOptions?: Apollo.MutationHookOptions<CreateFaqMutation, CreateFaqMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateFaqMutation, CreateFaqMutationVariables>(CreateFaqDocument, options);
+      }
+export type CreateFaqMutationHookResult = ReturnType<typeof useCreateFaqMutation>;
+export type CreateFaqMutationResult = Apollo.MutationResult<CreateFaqMutation>;
+export type CreateFaqMutationOptions = Apollo.BaseMutationOptions<CreateFaqMutation, CreateFaqMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
@@ -2195,6 +2776,43 @@ export function useEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Eve
 export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
 export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
 export type EventsQueryResult = Apollo.QueryResult<EventsQuery, EventsQueryVariables>;
+export const FaqsDocument = gql`
+    query faqs {
+  findAllFaqs {
+    id
+    title
+    answer
+    icon
+  }
+}
+    `;
+
+/**
+ * __useFaqsQuery__
+ *
+ * To run a query within a React component, call `useFaqsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFaqsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFaqsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFaqsQuery(baseOptions?: Apollo.QueryHookOptions<FaqsQuery, FaqsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FaqsQuery, FaqsQueryVariables>(FaqsDocument, options);
+      }
+export function useFaqsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FaqsQuery, FaqsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FaqsQuery, FaqsQueryVariables>(FaqsDocument, options);
+        }
+export type FaqsQueryHookResult = ReturnType<typeof useFaqsQuery>;
+export type FaqsLazyQueryHookResult = ReturnType<typeof useFaqsLazyQuery>;
+export type FaqsQueryResult = Apollo.QueryResult<FaqsQuery, FaqsQueryVariables>;
 export const UsersDocument = gql`
     query users {
   findAllUsers {
@@ -2248,6 +2866,7 @@ export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariable
 export const namedOperations = {
   Query: {
     events: 'events',
+    faqs: 'faqs',
     users: 'users'
   },
   Mutation: {
@@ -2255,6 +2874,7 @@ export const namedOperations = {
     createEvent: 'createEvent',
     updateEvent: 'updateEvent',
     deleteEvent: 'deleteEvent',
+    createFaq: 'createFaq',
     createUser: 'createUser',
     rejectUser: 'rejectUser',
     approveUser: 'approveUser'
