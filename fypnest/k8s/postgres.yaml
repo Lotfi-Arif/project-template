@@ -9,6 +9,10 @@ metadata:
 data:
   username: developer1
   password: developer1
+  host: 'postgres'
+  port: '5432'
+  database: 'fyp'
+  uri: 'postgresql://developer1:developer1@postgres:5432/fyp'
 ---
 ## Service
 apiVersion: v1

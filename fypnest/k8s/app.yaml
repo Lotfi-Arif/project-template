@@ -18,5 +18,25 @@ spec:
             configMapKeyRef:
               name: pgsecret
               key: password
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: pgsecret
+              key: host
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: pgsecret
+              key: port
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: pgsecret
+              key: database
+        - name: DATABASE_URI
+          valueFrom:
+            configMapKeyRef:
+              name: pgsecret
+              key: uri
       ports:
       - containerPort: 3000
