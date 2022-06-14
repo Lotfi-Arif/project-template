@@ -18,7 +18,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-svc
+  name: postgres
   labels:
     app: postgres
 spec:
@@ -36,7 +36,7 @@ kind: StatefulSet
 metadata:
   name: postgres
 spec:
-  serviceName: "postgres-svc"
+  serviceName: "postgres"
   replicas: 1
   selector:
     matchLabels:
@@ -52,12 +52,12 @@ spec:
         env:
           - name: POSTGRES_PASSWORD
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: pgsecret
                 key: password
           - name: POSTGRES_USER
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: pgsecret
                 key: username
           - name: POSTGRES_DB

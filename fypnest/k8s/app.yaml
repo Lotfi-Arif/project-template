@@ -39,4 +39,4 @@ spec:
               name: pgsecret
               key: uri
       ports:
-      - containerPort: 3000
+      - containerPort: 3001
