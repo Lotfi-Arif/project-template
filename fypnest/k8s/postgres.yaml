@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: pgsecret
   labels:
-    app: postgres
+    service: postgres
 data:
   username: developer1
   password: developer1
@@ -20,15 +20,13 @@ kind: Service
 metadata:
   name: postgres
   labels:
-    app: postgres
+    service: postgres
 spec:
-  type: NodePort
   selector:
-    app: postgres
+    service: postgres
+  type: ClusterIP
   ports:
   - port: 5432
-    targetPort: 5432
-    name: postgres
 ---
 ## Statefulset
 apiVersion: apps/v1
@@ -40,11 +38,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres 
+      # app: postgres
+      service: postgres 
   template:
     metadata:
       labels:
-        app: postgres
+        # app: postgres
+        service: postgres
     spec:
       containers:
       - name: postgres
