@@ -76,3 +76,6 @@ Nest is [MIT licensed](LICENSE).
 ### Requirements
 - Docker
 - Kind (local kubernetes)
+
+### How to deploy
+run ./deploy is enough
