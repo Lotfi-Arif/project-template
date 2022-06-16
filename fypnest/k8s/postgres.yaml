@@ -1,0 +1,79 @@
+## Config Map
+## TODO: It should be secret
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgsecret
+  labels:
+    service: postgres
+data:
+  username: developer1
+  password: developer1
+  host: 'postgres'
+  port: '5432'
+  database: 'fyp'
+  uri: 'postgresql://developer1:developer1@postgres:5432/fyp'
+---
+## Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    service: postgres
+spec:
+  selector:
+    service: postgres
+  type: ClusterIP
+  ports:
+  - port: 5432
+---
+## Statefulset
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      # app: postgres
+      service: postgres 
+  template:
+    metadata:
+      labels:
+        # app: postgres
+        service: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:14.3
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: pgsecret
+                key: password
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: pgsecret
+                key: username
+          - name: POSTGRES_DB
+            value: fyp
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 10Gi

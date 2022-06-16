@@ -71,3 +71,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Deploy on K8S
+### Requirements
+- Docker
+- Kind (local kubernetes)
+
+### How to deploy
+run ./deploy is enough
