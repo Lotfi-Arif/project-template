@@ -1,11 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URI")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,6 +5,11 @@ generator client {
 generator nestgraphql {
   provider = "node node_modules/prisma-nestjs-graphql"
   output   = "../libs/common/src/generated/index"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URI")
 }
 
 model User {
@@ -24,14 +21,14 @@ model User {
   gender            Gender?
   accountStatus     AccountStatus     @default(UNVERIFIED)
   role              Role
-  student           Student?
-  staff             Staff?
-  counselor         Counselor?
-  admin             Admin?
-  posts             Post[]
-  counselingSession CounselorSession?
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
+  admin             Admin?
+  counselor         Counselor?
+  counselingSession CounselorSession?
+  posts             Post[]
+  staff             Staff?
+  student           Student?
 }
 
 model Schedule {
@@ -44,16 +41,16 @@ model Schedule {
 model CounselorSession {
   id                String    @id @default(uuid())
   counsellingReason String?
-  counselor         Counselor @relation(fields: [counselorId], references: [id])
-  student           Student?  @relation(fields: [studentId], references: [id])
-  staff             Staff?    @relation(fields: [staffId], references: [id])
-  User              User?     @relation(fields: [userId], references: [id])
   counselorId       String
   userId            String?   @unique
   studentId         String?
   staffId           String?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+  counselor         Counselor @relation(fields: [counselorId], references: [id])
+  staff             Staff?    @relation(fields: [staffId], references: [id])
+  student           Student?  @relation(fields: [studentId], references: [id])
+  User              User?     @relation(fields: [userId], references: [id])
 }
 
 model Student {
@@ -61,10 +58,10 @@ model Student {
   email            String             @unique
   password         String
   matrix           String             @unique
-  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   faculty          String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   CounselorSession CounselorSession[]
 }
 
@@ -72,9 +69,9 @@ model Admin {
   id        String   @id @unique
   email     String   @unique
   password  String
-  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
 }
 
 model Staff {
@@ -82,21 +79,21 @@ model Staff {
   email            String             @unique
   password         String
   staffId          String             @unique
-  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   faculty          String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   CounselorSession CounselorSession[]
 }
 
 model Counselor {
   id               String             @id @default(uuid())
   department       String
-  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   expertise        String
   Schedule         String[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   CounselorSession CounselorSession[]
 }
 
@@ -105,9 +102,9 @@ model Post {
   title     String
   body      String
   userId    String
-  author    User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [userId], references: [id])
 }
 
 model Chat {
@@ -128,8 +125,6 @@ model Event {
   id            String  @id @default(uuid())
   title         String
   eventImageURL String?
-  // eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
-  // imageId      String? @unique
   eventDetails  String
 }
 
@@ -151,7 +146,6 @@ model Asset {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   uploadingState UploadingState? @default(uploaded)
-  // eventImageAsset Event?          @relation("ImageEventAsset")
 }
 
 enum FileType {

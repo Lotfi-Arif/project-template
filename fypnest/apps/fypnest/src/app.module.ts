@@ -17,6 +17,7 @@ import { CounsellorsModule } from './counselors/counselors.module';
 import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from './schedule/schedule.module';
 import config from '@app/common/configs/config';
 
 @Module({
@@ -54,6 +55,7 @@ import config from '@app/common/configs/config';
     CounsellorsModule,
     CounselorSessionsModule,
     AuthModule,
+    ScheduleModule,
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService],

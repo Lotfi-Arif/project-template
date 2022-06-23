@@ -5,13 +5,13 @@ import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-str
 import { NullableEnumGenderFieldUpdateOperationsInput } from '../prisma/nullable-enum-gender-field-update-operations.input';
 import { EnumAccountStatusFieldUpdateOperationsInput } from '../prisma/enum-account-status-field-update-operations.input';
 import { EnumRoleFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
-import { StudentUncheckedUpdateOneWithoutUserInput } from '../student/student-unchecked-update-one-without-user.input';
-import { StaffUncheckedUpdateOneWithoutUserInput } from '../staff/staff-unchecked-update-one-without-user.input';
-import { CounselorUncheckedUpdateOneWithoutUserInput } from '../counselor/counselor-unchecked-update-one-without-user.input';
-import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecked-update-one-without-user.input';
-import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
-import { CounselorSessionUncheckedUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-one-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecked-update-one-without-user.input';
+import { CounselorUncheckedUpdateOneWithoutUserInput } from '../counselor/counselor-unchecked-update-one-without-user.input';
+import { CounselorSessionUncheckedUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-one-without-user.input';
+import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
+import { StaffUncheckedUpdateOneWithoutUserInput } from '../staff/staff-unchecked-update-one-without-user.input';
+import { StudentUncheckedUpdateOneWithoutUserInput } from '../student/student-unchecked-update-one-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -40,27 +40,27 @@ export class UserUncheckedUpdateInput {
     @Field(() => EnumRoleFieldUpdateOperationsInput, {nullable:true})
     role?: EnumRoleFieldUpdateOperationsInput;
 
-    @Field(() => StudentUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    student?: StudentUncheckedUpdateOneWithoutUserInput;
-
-    @Field(() => StaffUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    staff?: StaffUncheckedUpdateOneWithoutUserInput;
-
-    @Field(() => CounselorUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    counselor?: CounselorUncheckedUpdateOneWithoutUserInput;
-
-    @Field(() => AdminUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    admin?: AdminUncheckedUpdateOneWithoutUserInput;
-
-    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
-
-    @Field(() => CounselorSessionUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    counselingSession?: CounselorSessionUncheckedUpdateOneWithoutUserInput;
-
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => AdminUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    admin?: AdminUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => CounselorUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    counselor?: CounselorUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => CounselorSessionUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    counselingSession?: CounselorSessionUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
+    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
+
+    @Field(() => StaffUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    staff?: StaffUncheckedUpdateOneWithoutUserInput;
+
+    @Field(() => StudentUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    student?: StudentUncheckedUpdateOneWithoutUserInput;
 }

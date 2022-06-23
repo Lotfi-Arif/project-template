@@ -5,13 +5,13 @@ import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { EnumGenderNullableFilter } from '../prisma/enum-gender-nullable-filter.input';
 import { EnumAccountStatusFilter } from '../prisma/enum-account-status-filter.input';
 import { EnumRoleFilter } from '../prisma/enum-role-filter.input';
-import { StudentRelationFilter } from '../student/student-relation-filter.input';
-import { StaffRelationFilter } from '../staff/staff-relation-filter.input';
-import { CounselorRelationFilter } from '../counselor/counselor-relation-filter.input';
-import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
-import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
-import { CounselorSessionRelationFilter } from '../counselor-session/counselor-session-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
+import { CounselorRelationFilter } from '../counselor/counselor-relation-filter.input';
+import { CounselorSessionRelationFilter } from '../counselor-session/counselor-session-relation-filter.input';
+import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
+import { StaffRelationFilter } from '../staff/staff-relation-filter.input';
+import { StudentRelationFilter } from '../student/student-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -49,27 +49,27 @@ export class UserWhereInput {
     @Field(() => EnumRoleFilter, {nullable:true})
     role?: EnumRoleFilter;
 
-    @Field(() => StudentRelationFilter, {nullable:true})
-    student?: StudentRelationFilter;
-
-    @Field(() => StaffRelationFilter, {nullable:true})
-    staff?: StaffRelationFilter;
-
-    @Field(() => CounselorRelationFilter, {nullable:true})
-    counselor?: CounselorRelationFilter;
-
-    @Field(() => AdminRelationFilter, {nullable:true})
-    admin?: AdminRelationFilter;
-
-    @Field(() => PostListRelationFilter, {nullable:true})
-    posts?: PostListRelationFilter;
-
-    @Field(() => CounselorSessionRelationFilter, {nullable:true})
-    counselingSession?: CounselorSessionRelationFilter;
-
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => AdminRelationFilter, {nullable:true})
+    admin?: AdminRelationFilter;
+
+    @Field(() => CounselorRelationFilter, {nullable:true})
+    counselor?: CounselorRelationFilter;
+
+    @Field(() => CounselorSessionRelationFilter, {nullable:true})
+    counselingSession?: CounselorSessionRelationFilter;
+
+    @Field(() => PostListRelationFilter, {nullable:true})
+    posts?: PostListRelationFilter;
+
+    @Field(() => StaffRelationFilter, {nullable:true})
+    staff?: StaffRelationFilter;
+
+    @Field(() => StudentRelationFilter, {nullable:true})
+    student?: StudentRelationFilter;
 }
