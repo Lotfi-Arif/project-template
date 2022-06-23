@@ -10,56 +10,83 @@ import { FindUniqueScheduleArgs } from '@app/common/generated/index/schedule/fin
 
 @Resolver(() => Schedule)
 export class SchedulesResolver {
-  constructor(private readonly schedulesService: SchedulesService) {
-  }
+  constructor(private readonly schedulesService: SchedulesService) {}
 
   @Query(() => Schedule)
-  async findAllSchedules(@Args() scheduleFindManyArgs: FindManyScheduleArgs, @Info() info) {
+  async findAllSchedules(
+    @Args() scheduleFindManyArgs: FindManyScheduleArgs,
+    @Info() info,
+  ) {
     try {
-      const schedules = new PrismaSelect(info).value
-      return this.schedulesService.findAll({ ...scheduleFindManyArgs, ...schedules })
+      const schedules = new PrismaSelect(info).value;
+      return this.schedulesService.findAll({
+        ...scheduleFindManyArgs,
+        ...schedules,
+      });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Schedule)
-  async findOneSchedule(@Args() scheduleFindUnique: FindUniqueScheduleArgs, @Info() info) {
+  async findOneSchedule(
+    @Args() scheduleFindUnique: FindUniqueScheduleArgs,
+    @Info() info,
+  ) {
     try {
       const schedule = new PrismaSelect(info).value;
-      return this.schedulesService.findOne({ ...scheduleFindUnique, ...schedule })
+      return this.schedulesService.findOne({
+        ...scheduleFindUnique,
+        ...schedule,
+      });
     } catch (error) {
       console.error(error);
     }
   }
 
   @Mutation(() => Schedule)
-  async createSchedule(@Args() scheduleCreateArgs: CreateOneScheduleArgs, @Info() info) {
+  async createSchedule(
+    @Args() scheduleCreateArgs: CreateOneScheduleArgs,
+    @Info() info,
+  ) {
     try {
       const newSchedule = new PrismaSelect(info).value;
-      return this.schedulesService.createSchedule({ ...scheduleCreateArgs, ...newSchedule })
+      return this.schedulesService.createSchedule({
+        ...scheduleCreateArgs,
+        ...newSchedule,
+      });
     } catch (error) {
       console.error(error);
     }
   }
 
   @Mutation(() => Schedule)
-  async updateSchedule(@Args() scheduleUpdateArgs: UpdateOneScheduleArgs, @Info() info) {
+  async updateSchedule(
+    @Args() scheduleUpdateArgs: UpdateOneScheduleArgs,
+    @Info() info,
+  ) {
     try {
       const update = new PrismaSelect(info).value;
-      return this.schedulesService.updateSchedule({ ...scheduleUpdateArgs, ...update })
+      return this.schedulesService.updateSchedule({
+        ...scheduleUpdateArgs,
+        ...update,
+      });
     } catch (error) {
       console.error(error);
     }
-
   }
 
   @Mutation(() => Schedule)
-  async deleteSchedule(@Args() scheduleDeletArgs: DeleteOneScheduleArgs, @Info() info) {
+  async deleteSchedule(
+    @Args() scheduleDeletArgs: DeleteOneScheduleArgs,
+    @Info() info,
+  ) {
     try {
       const schedule = new PrismaSelect(info).value;
-      return this.schedulesService.deleteSchedule({ ...scheduleDeletArgs, ...schedule })
+      return this.schedulesService.deleteSchedule({
+        ...scheduleDeletArgs,
+        ...schedule,
+      });
     } catch (error) {
       console.error(error);
     }

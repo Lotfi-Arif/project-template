@@ -125,12 +125,12 @@ model Message {
 }
 
 model Event {
-  id            String  @id @default(uuid())
+  id            String   @id @default(uuid())
   title         String
   eventImageURL String?
-  // eventImage   Asset?  @relation("ImageEventAsset", fields: [imageId], references: [id])
-  // imageId      String? @unique
   eventDetails  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model FAQ {
