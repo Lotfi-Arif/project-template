@@ -1,13 +1,13 @@
-mutation login($data: LoginInput!) {
+mutation loginUser($data: LoginInput!) {
   loginUser(data: $data) {
-    user {
-      id
-      name
-      email
-      password
-      mobile
-      accountStatus
-      role
-    }
+    accessToken
+    refreshToken
+  }
+}
+
+mutation signup($data: SignupInput!) {
+  signup(data: $data) {
+    accessToken
+    refreshToken
   }
 }

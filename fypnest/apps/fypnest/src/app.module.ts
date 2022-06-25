@@ -18,6 +18,7 @@ import { CounselorSessionsModule } from './counselor-sessions/counselor-sessions
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import config from '@app/common/configs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -25,6 +26,9 @@ import config from '@app/common/configs/config';
     UsersModule,
     ProvidersModule,
     PostsModule,
+    EventEmitterModule.forRoot({
+      wildcard: true,
+    }),
     GraphQLModule.forRoot({
       cors: false,
       autoSchemaFile: join(process.cwd(), './graphql/fypnest.gql'),

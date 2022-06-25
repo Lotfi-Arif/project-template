@@ -32,10 +32,7 @@ export class UserWhereInput {
     name?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
-    email?: StringFilter;
-
-    @Field(() => StringNullableFilter, {nullable:true})
-    password?: StringNullableFilter;
+    password?: StringFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     mobile?: StringNullableFilter;

@@ -14,9 +14,6 @@ export class UserMinAggregate {
     name?: string;
 
     @Field(() => String, {nullable:true})
-    email?: string;
-
-    @Field(() => String, {nullable:true})
     password?: string;
 
     @Field(() => String, {nullable:true})

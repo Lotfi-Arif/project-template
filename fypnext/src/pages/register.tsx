@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from "next/router";
-import { useUsersQuery, useCreateUserMutation, Role, AccountStatus } from 'schema/generated/graphql';
+import { useUsersQuery, Role, AccountStatus, useSignupMutation } from 'schema/generated/graphql';
 import { withApollo } from "utils/hooks/withApollo";
 
 const Register = () => {
 
     const { error } = useUsersQuery()
-    const [createUserMutation] = useCreateUserMutation()
+    const [signup] = useSignupMutation();
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +18,7 @@ const Register = () => {
 
     const onSubmit = async (): Promise<void> => {
         try {
-            await createUserMutation({
+            await signup({
                 variables: {
                     data: {
                         name: name,

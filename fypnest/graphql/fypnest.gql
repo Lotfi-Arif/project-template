@@ -8,6 +8,7 @@ type CounselorCount {
 
 type Counselor {
   id: ID!
+  email: String!
   department: String!
   user: User!
   expertise: String!
@@ -30,7 +31,6 @@ type StaffCount {
 type Staff {
   id: ID!
   email: String!
-  password: String!
   staffId: String!
   user: User!
   faculty: String!
@@ -62,10 +62,9 @@ type StudentCount {
 type Student {
   id: ID!
   email: String!
-  password: String!
-  matrix: String!
+  matrix: String
   user: User!
-  faculty: String!
+  faculty: String
   createdAt: DateTime!
   updatedAt: DateTime!
   CounselorSession: [CounselorSession!]
@@ -75,7 +74,6 @@ type Student {
 type Admin {
   id: ID!
   email: String!
-  password: String!
   user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -98,8 +96,7 @@ type UserCount {
 type User {
   id: ID!
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus!
@@ -155,6 +152,8 @@ type Event {
   title: String!
   eventImageURL: String
   eventDetails: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type FAQ {
@@ -174,11 +173,17 @@ type Schedule {
 }
 
 type Auth {
+  """JWT access token"""
+  accessToken: String!
+
+  """JWT refresh token"""
+  refreshToken: String!
   user: User!
 }
 
 type Query {
   findAllUsers(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  me: User!
   findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): Post!
   findAllMessages(where: MessageWhereInput, orderBy: [MessageOrderByWithRelationInput!], cursor: MessageWhereUniqueInput, take: Int, skip: Int, distinct: [MessageScalarFieldEnum!]): Message!
   findAllChats(where: ChatWhereInput, orderBy: [ChatOrderByWithRelationInput!], cursor: ChatWhereUniqueInput, take: Int, skip: Int, distinct: [ChatScalarFieldEnum!]): Chat!
@@ -187,6 +192,7 @@ type Query {
   findAllSchedules(where: ScheduleWhereInput, orderBy: [ScheduleOrderByWithRelationInput!], cursor: ScheduleWhereUniqueInput, take: Int, skip: Int, distinct: [ScheduleScalarFieldEnum!]): Schedule!
   findAllCounselors(where: CounselorWhereInput, orderBy: [CounselorOrderByWithRelationInput!], cursor: CounselorWhereUniqueInput, take: Int, skip: Int, distinct: [CounselorScalarFieldEnum!]): Counselor!
   findAllCounselorSessions(where: CounselorSessionWhereInput, orderBy: [CounselorSessionOrderByWithRelationInput!], cursor: CounselorSessionWhereUniqueInput, take: Int, skip: Int, distinct: [CounselorSessionScalarFieldEnum!]): [CounselorSession!]!
+  currentUser: User!
 }
 
 input UserWhereInput {
@@ -195,8 +201,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: StringFilter
   name: StringFilter
-  email: StringFilter
-  password: StringNullableFilter
+  password: StringFilter
   mobile: StringNullableFilter
   gender: EnumGenderNullableFilter
   accountStatus: EnumAccountStatusFilter
@@ -327,10 +332,9 @@ input StudentWhereInput {
   NOT: [StudentWhereInput!]
   id: StringFilter
   email: StringFilter
-  password: StringFilter
-  matrix: StringFilter
+  matrix: StringNullableFilter
   user: UserRelationFilter
-  faculty: StringFilter
+  faculty: StringNullableFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
   CounselorSession: CounselorSessionListRelationFilter
@@ -397,6 +401,7 @@ input CounselorWhereInput {
   OR: [CounselorWhereInput!]
   NOT: [CounselorWhereInput!]
   id: StringFilter
+  email: StringFilter
   department: StringFilter
   user: UserRelationFilter
   expertise: StringFilter
@@ -425,7 +430,6 @@ input StaffWhereInput {
   NOT: [StaffWhereInput!]
   id: StringFilter
   email: StringFilter
-  password: StringFilter
   staffId: StringFilter
   user: UserRelationFilter
   faculty: StringFilter
@@ -445,7 +449,6 @@ input AdminWhereInput {
   NOT: [AdminWhereInput!]
   id: StringFilter
   email: StringFilter
-  password: StringFilter
   user: UserRelationFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
@@ -478,7 +481,6 @@ input CounselorSessionRelationFilter {
 input UserOrderByWithRelationInput {
   id: SortOrder
   name: SortOrder
-  email: SortOrder
   password: SortOrder
   mobile: SortOrder
   gender: SortOrder
@@ -502,7 +504,6 @@ enum SortOrder {
 input StudentOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
-  password: SortOrder
   matrix: SortOrder
   user: UserOrderByWithRelationInput
   faculty: SortOrder
@@ -518,7 +519,6 @@ input CounselorSessionOrderByRelationAggregateInput {
 input StaffOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
-  password: SortOrder
   staffId: SortOrder
   user: UserOrderByWithRelationInput
   faculty: SortOrder
@@ -529,6 +529,7 @@ input StaffOrderByWithRelationInput {
 
 input CounselorOrderByWithRelationInput {
   id: SortOrder
+  email: SortOrder
   department: SortOrder
   user: UserOrderByWithRelationInput
   expertise: SortOrder
@@ -541,7 +542,6 @@ input CounselorOrderByWithRelationInput {
 input AdminOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
-  password: SortOrder
   user: UserOrderByWithRelationInput
   createdAt: SortOrder
   updatedAt: SortOrder
@@ -568,14 +568,12 @@ input CounselorSessionOrderByWithRelationInput {
 
 input UserWhereUniqueInput {
   id: String
-  email: String
   mobile: String
 }
 
 enum UserScalarFieldEnum {
   id
   name
-  email
   password
   mobile
   gender
@@ -672,6 +670,8 @@ input EventWhereInput {
   title: StringFilter
   eventImageURL: StringNullableFilter
   eventDetails: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
 }
 
 input EventOrderByWithRelationInput {
@@ -679,6 +679,8 @@ input EventOrderByWithRelationInput {
   title: SortOrder
   eventImageURL: SortOrder
   eventDetails: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input EventWhereUniqueInput {
@@ -690,6 +692,8 @@ enum EventScalarFieldEnum {
   title
   eventImageURL
   eventDetails
+  createdAt
+  updatedAt
 }
 
 input FAQWhereInput {
@@ -756,10 +760,12 @@ enum ScheduleScalarFieldEnum {
 
 input CounselorWhereUniqueInput {
   id: String
+  email: String
 }
 
 enum CounselorScalarFieldEnum {
   id
+  email
   department
   expertise
   Schedule
@@ -785,7 +791,6 @@ enum CounselorSessionScalarFieldEnum {
 
 type Mutation {
   findOneUser(where: UserWhereUniqueInput!): User!
-  createUser(data: UserCreateInput!): User!
   approveUser(id: String!): User!
   rejectUser(id: String!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
@@ -823,38 +828,61 @@ type Mutation {
   updateCounselorSession(data: CounselorSessionUpdateInput!, where: CounselorSessionWhereUniqueInput!): CounselorSession!
   deleteCounselorSession(where: CounselorSessionWhereUniqueInput!): CounselorSession!
   loginUser(data: LoginInput!): Auth!
+  signup(data: SignupInput!): Auth!
 }
 
-input UserCreateInput {
-  id: String
-  name: String!
-  email: String!
-  password: String
-  mobile: String
-  gender: Gender
-  accountStatus: AccountStatus
-  role: Role!
-  student: StudentCreateNestedOneWithoutUserInput
-  staff: StaffCreateNestedOneWithoutUserInput
-  counselor: CounselorCreateNestedOneWithoutUserInput
-  admin: AdminCreateNestedOneWithoutUserInput
-  posts: PostCreateNestedManyWithoutAuthorInput
-  counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
-  createdAt: DateTime
-  updatedAt: DateTime
+input UserUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  accountStatus: EnumAccountStatusFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  student: StudentUpdateOneWithoutUserInput
+  staff: StaffUpdateOneWithoutUserInput
+  counselor: CounselorUpdateOneWithoutUserInput
+  admin: AdminUpdateOneWithoutUserInput
+  posts: PostUpdateManyWithoutAuthorInput
+  counselingSession: CounselorSessionUpdateOneWithoutUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input StudentCreateNestedOneWithoutUserInput {
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableEnumGenderFieldUpdateOperationsInput {
+  set: Gender
+}
+
+input EnumAccountStatusFieldUpdateOperationsInput {
+  set: AccountStatus
+}
+
+input EnumRoleFieldUpdateOperationsInput {
+  set: Role
+}
+
+input StudentUpdateOneWithoutUserInput {
   create: StudentCreateWithoutUserInput
   connectOrCreate: StudentCreateOrConnectWithoutUserInput
+  upsert: StudentUpsertWithoutUserInput
+  disconnect: Boolean
+  delete: Boolean
   connect: StudentWhereUniqueInput
+  update: StudentUpdateWithoutUserInput
 }
 
 input StudentCreateWithoutUserInput {
   email: String!
-  password: String!
-  matrix: String!
-  faculty: String!
+  matrix: String
+  faculty: String
   createdAt: DateTime
   updatedAt: DateTime
   CounselorSession: CounselorSessionCreateNestedManyWithoutStudentInput
@@ -884,6 +912,7 @@ input CounselorCreateNestedOneWithoutCounselorSessionInput {
 }
 
 input CounselorCreateWithoutCounselorSessionInput {
+  email: String!
   department: String!
   user: UserCreateNestedOneWithoutCounselorInput
   expertise: String!
@@ -901,8 +930,7 @@ input UserCreateNestedOneWithoutCounselorInput {
 input UserCreateWithoutCounselorInput {
   id: String
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus
@@ -916,6 +944,23 @@ input UserCreateWithoutCounselorInput {
   updatedAt: DateTime
 }
 
+input StudentCreateNestedOneWithoutUserInput {
+  create: StudentCreateWithoutUserInput
+  connectOrCreate: StudentCreateOrConnectWithoutUserInput
+  connect: StudentWhereUniqueInput
+}
+
+input StudentCreateOrConnectWithoutUserInput {
+  where: StudentWhereUniqueInput!
+  create: StudentCreateWithoutUserInput!
+}
+
+input StudentWhereUniqueInput {
+  id: String
+  email: String
+  matrix: String
+}
+
 input StaffCreateNestedOneWithoutUserInput {
   create: StaffCreateWithoutUserInput
   connectOrCreate: StaffCreateOrConnectWithoutUserInput
@@ -924,7 +969,6 @@ input StaffCreateNestedOneWithoutUserInput {
 
 input StaffCreateWithoutUserInput {
   email: String!
-  password: String!
   staffId: String!
   faculty: String!
   createdAt: DateTime
@@ -957,10 +1001,9 @@ input StudentCreateNestedOneWithoutCounselorSessionInput {
 
 input StudentCreateWithoutCounselorSessionInput {
   email: String!
-  password: String!
-  matrix: String!
+  matrix: String
   user: UserCreateNestedOneWithoutStudentInput
-  faculty: String!
+  faculty: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -974,8 +1017,7 @@ input UserCreateNestedOneWithoutStudentInput {
 input UserCreateWithoutStudentInput {
   id: String
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus
@@ -996,6 +1038,7 @@ input CounselorCreateNestedOneWithoutUserInput {
 }
 
 input CounselorCreateWithoutUserInput {
+  email: String!
   department: String!
   expertise: String!
   Schedule: CounselorCreateScheduleInput
@@ -1033,7 +1076,6 @@ input StaffCreateNestedOneWithoutCounselorSessionInput {
 
 input StaffCreateWithoutCounselorSessionInput {
   email: String!
-  password: String!
   staffId: String!
   user: UserCreateNestedOneWithoutStaffInput
   faculty: String!
@@ -1050,8 +1092,7 @@ input UserCreateNestedOneWithoutStaffInput {
 input UserCreateWithoutStaffInput {
   id: String
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus
@@ -1073,7 +1114,6 @@ input AdminCreateNestedOneWithoutUserInput {
 
 input AdminCreateWithoutUserInput {
   email: String!
-  password: String!
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1167,8 +1207,7 @@ input UserCreateNestedOneWithoutCounselingSessionInput {
 input UserCreateWithoutCounselingSessionInput {
   id: String
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus
@@ -1220,12 +1259,6 @@ input UserCreateOrConnectWithoutStudentInput {
 input StudentCreateOrConnectWithoutCounselorSessionInput {
   where: StudentWhereUniqueInput!
   create: StudentCreateWithoutCounselorSessionInput!
-}
-
-input StudentWhereUniqueInput {
-  id: String
-  email: String
-  matrix: String
 }
 
 input CounselorSessionCreateOrConnectWithoutStaffInput {
@@ -1283,60 +1316,6 @@ input CounselorSessionCreateManyStudentInput {
   updatedAt: DateTime
 }
 
-input StudentCreateOrConnectWithoutUserInput {
-  where: StudentWhereUniqueInput!
-  create: StudentCreateWithoutUserInput!
-}
-
-input UserUpdateInput {
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
-  mobile: NullableStringFieldUpdateOperationsInput
-  gender: NullableEnumGenderFieldUpdateOperationsInput
-  accountStatus: EnumAccountStatusFieldUpdateOperationsInput
-  role: EnumRoleFieldUpdateOperationsInput
-  student: StudentUpdateOneWithoutUserInput
-  staff: StaffUpdateOneWithoutUserInput
-  counselor: CounselorUpdateOneWithoutUserInput
-  admin: AdminUpdateOneWithoutUserInput
-  posts: PostUpdateManyWithoutAuthorInput
-  counselingSession: CounselorSessionUpdateOneWithoutUserInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
-}
-
-input NullableEnumGenderFieldUpdateOperationsInput {
-  set: Gender
-}
-
-input EnumAccountStatusFieldUpdateOperationsInput {
-  set: AccountStatus
-}
-
-input EnumRoleFieldUpdateOperationsInput {
-  set: Role
-}
-
-input StudentUpdateOneWithoutUserInput {
-  create: StudentCreateWithoutUserInput
-  connectOrCreate: StudentCreateOrConnectWithoutUserInput
-  upsert: StudentUpsertWithoutUserInput
-  disconnect: Boolean
-  delete: Boolean
-  connect: StudentWhereUniqueInput
-  update: StudentUpdateWithoutUserInput
-}
-
 input StudentUpsertWithoutUserInput {
   update: StudentUpdateWithoutUserInput!
   create: StudentCreateWithoutUserInput!
@@ -1344,9 +1323,8 @@ input StudentUpsertWithoutUserInput {
 
 input StudentUpdateWithoutUserInput {
   email: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  matrix: StringFieldUpdateOperationsInput
-  faculty: StringFieldUpdateOperationsInput
+  matrix: NullableStringFieldUpdateOperationsInput
+  faculty: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   CounselorSession: CounselorSessionUpdateManyWithoutStudentInput
@@ -1400,6 +1378,7 @@ input CounselorUpsertWithoutCounselorSessionInput {
 }
 
 input CounselorUpdateWithoutCounselorSessionInput {
+  email: StringFieldUpdateOperationsInput
   department: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutCounselorInput
   expertise: StringFieldUpdateOperationsInput
@@ -1424,8 +1403,7 @@ input UserUpsertWithoutCounselorInput {
 input UserUpdateWithoutCounselorInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   mobile: NullableStringFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
   accountStatus: EnumAccountStatusFieldUpdateOperationsInput
@@ -1456,7 +1434,6 @@ input StaffUpsertWithoutUserInput {
 
 input StaffUpdateWithoutUserInput {
   email: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
   staffId: StringFieldUpdateOperationsInput
   faculty: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -1511,10 +1488,9 @@ input StudentUpsertWithoutCounselorSessionInput {
 
 input StudentUpdateWithoutCounselorSessionInput {
   email: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  matrix: StringFieldUpdateOperationsInput
+  matrix: NullableStringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutStudentInput
-  faculty: StringFieldUpdateOperationsInput
+  faculty: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -1535,8 +1511,7 @@ input UserUpsertWithoutStudentInput {
 input UserUpdateWithoutStudentInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   mobile: NullableStringFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
   accountStatus: EnumAccountStatusFieldUpdateOperationsInput
@@ -1566,6 +1541,7 @@ input CounselorUpsertWithoutUserInput {
 }
 
 input CounselorUpdateWithoutUserInput {
+  email: StringFieldUpdateOperationsInput
   department: StringFieldUpdateOperationsInput
   expertise: StringFieldUpdateOperationsInput
   Schedule: CounselorUpdateScheduleInput
@@ -1626,7 +1602,6 @@ input StaffUpsertWithoutCounselorSessionInput {
 
 input StaffUpdateWithoutCounselorSessionInput {
   email: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
   staffId: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutStaffInput
   faculty: StringFieldUpdateOperationsInput
@@ -1650,8 +1625,7 @@ input UserUpsertWithoutStaffInput {
 input UserUpdateWithoutStaffInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   mobile: NullableStringFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
   accountStatus: EnumAccountStatusFieldUpdateOperationsInput
@@ -1682,7 +1656,6 @@ input AdminUpsertWithoutUserInput {
 
 input AdminUpdateWithoutUserInput {
   email: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -1788,8 +1761,7 @@ input UserUpsertWithoutCounselingSessionInput {
 input UserUpdateWithoutCounselingSessionInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   mobile: NullableStringFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
   accountStatus: EnumAccountStatusFieldUpdateOperationsInput
@@ -1872,8 +1844,7 @@ input UserCreateNestedOneWithoutPostsInput {
 input UserCreateWithoutPostsInput {
   id: String
   name: String!
-  email: String!
-  password: String
+  password: String!
   mobile: String
   gender: Gender
   accountStatus: AccountStatus
@@ -1917,8 +1888,7 @@ input UserUpsertWithoutPostsInput {
 input UserUpdateWithoutPostsInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  password: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   mobile: NullableStringFieldUpdateOperationsInput
   gender: NullableEnumGenderFieldUpdateOperationsInput
   accountStatus: EnumAccountStatusFieldUpdateOperationsInput
@@ -1965,6 +1935,8 @@ input EventCreateInput {
   title: String!
   eventImageURL: String
   eventDetails: String!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input EventUpdateInput {
@@ -1972,6 +1944,8 @@ input EventUpdateInput {
   title: StringFieldUpdateOperationsInput
   eventImageURL: NullableStringFieldUpdateOperationsInput
   eventDetails: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input FAQCreateInput {
@@ -2007,6 +1981,7 @@ input ScheduleUpdateInput {
 }
 
 input CounselorCreateInput {
+  email: String!
   department: String!
   user: UserCreateNestedOneWithoutCounselorInput
   expertise: String!
@@ -2017,6 +1992,7 @@ input CounselorCreateInput {
 }
 
 input CounselorUpdateInput {
+  email: StringFieldUpdateOperationsInput
   department: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutCounselorInput
   expertise: StringFieldUpdateOperationsInput
@@ -2052,4 +2028,13 @@ input LoginInput {
   email: String!
   password: String!
   role: Role!
+}
+
+input SignupInput {
+  email: String!
+  password: String!
+  name: String
+  role: Role!
+  mobile: String
+  accountStatus: AccountStatus!
 }

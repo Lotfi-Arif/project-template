@@ -15,9 +15,6 @@ export class UsersService {
   getMe(userId: string, select?: any) {
     return this.prisma.user.findUnique({ where: { id: userId }, ...select });
   }
-  async createUser(userCreateOneArgs: Prisma.UserCreateArgs) {
-    return this.prisma.user.create(userCreateOneArgs);
-  }
   async updateUser(userUpdateArgs: Prisma.UserUpdateArgs) {
     return this.prisma.user.update(userUpdateArgs);
   }

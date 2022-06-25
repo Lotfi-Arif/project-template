@@ -17,10 +17,7 @@ export class UserGroupBy {
     name!: string;
 
     @Field(() => String, {nullable:false})
-    email!: string;
-
-    @Field(() => String, {nullable:true})
-    password?: string;
+    password!: string;
 
     @Field(() => String, {nullable:true})
     mobile?: string;

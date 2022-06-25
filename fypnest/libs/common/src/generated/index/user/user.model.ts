@@ -22,10 +22,7 @@ export class User {
     name!: string;
 
     @Field(() => String, {nullable:false})
-    email!: string;
-
-    @Field(() => String, {nullable:true})
-    password!: string | null;
+    password!: string;
 
     @Field(() => String, {nullable:true})
     mobile!: string | null;

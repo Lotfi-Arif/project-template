@@ -1,12 +1,7 @@
-mutation createUser($data: UserCreateInput!) {
-  createUser(data: $data) {
-    id
-    name
-    email
-    password
-    mobile
-    accountStatus
-    role
+mutation signup($data: SignupInput!) {
+  signup(data: $data) {
+    accessToken
+    refreshToken
   }
 }
 

@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { InputType, Field } from '@nestjs/graphql';
 import { Role } from '@app/common/generated/index/prisma/role.enum';
+import { AccountStatus } from '@app/common/generated/index/prisma/account-status.enum';
 
 @InputType()
 export class SignupInput {
@@ -14,10 +15,14 @@ export class SignupInput {
   password: string;
 
   @Field({ nullable: true })
-  firstName: string;
+  name: string;
 
-  @Field({ nullable: true })
-  lastName: string;
   @Field(() => Role, {})
   role: Role;
+
+  @Field({ nullable: true })
+  mobile: string;
+
+  @Field(() => AccountStatus, {})
+  accountStatus: AccountStatus;
 }
