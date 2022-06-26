@@ -9,7 +9,8 @@ const Register = () => {
     const { error } = useUsersQuery()
     const [signup] = useSignupMutation();
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
     const [role, setRole] = useState(Role as any);
@@ -21,7 +22,8 @@ const Register = () => {
             await signup({
                 variables: {
                     data: {
-                        name: name,
+                        firstName: firstName,
+                        lastName: lastName,
                         email: email,
                         password: password,
                         mobile: mobile,
@@ -73,16 +75,29 @@ const Register = () => {
                                 </div>
                                 <div className="mb-4">
                                     <div className="mb-4 md:mr-2 md:mb-0">
-                                        <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="name">
-                                            Full Name
+                                        <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="firstName">
+                                            First Name
                                         </label>
                                         <input
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                            id="name"
+                                            id="firstName"
                                             type="text"
-                                            placeholder="name"
-                                            name={name}
-                                            onChange={(e) => { setName(e.target.value) }}
+                                            placeholder="firstName"
+                                            name={firstName}
+                                            onChange={(e) => { setFirstName(e.target.value) }}
+                                        />
+                                    </div>
+                                    <div className="mb-4 md:mr-2 md:mb-0">
+                                        <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="lastName">
+                                            Last Name
+                                        </label>
+                                        <input
+                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            id="lastName"
+                                            type="text"
+                                            placeholder="lastName"
+                                            name={lastName}
+                                            onChange={(e) => { setLastName(e.target.value) }}
                                         />
                                     </div>
                                 </div>

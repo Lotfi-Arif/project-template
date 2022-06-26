@@ -12,6 +12,23 @@ export class UsersService {
   async findOne(userFindOneArgs: Prisma.UserFindUniqueArgs) {
     return this.prisma.user.findUnique(userFindOneArgs);
   }
+
+  getStudents(studentWhereMany: Prisma.StudentFindManyArgs) {
+    return this.prisma.student.findMany(studentWhereMany);
+  }
+
+  getOneStudent(studentWhereUnique: Prisma.StudentFindUniqueArgs) {
+    return this.prisma.student.findUnique(studentWhereUnique);
+  }
+
+  getCounselors(counselorWhereMany: Prisma.CounselorFindManyArgs) {
+    return this.prisma.counselor.findMany(counselorWhereMany);
+  }
+
+  getOneCounselor(counselorWhereUnique: Prisma.CounselorFindUniqueArgs) {
+    return this.prisma.counselor.findUnique(counselorWhereUnique);
+  }
+
   getMe(userId: string, select?: any) {
     return this.prisma.user.findUnique({ where: { id: userId }, ...select });
   }

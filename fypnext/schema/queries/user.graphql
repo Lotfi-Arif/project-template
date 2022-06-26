@@ -1,17 +1,47 @@
 query users {
   findAllUsers {
     id
-    name
+    counselor {
+      firstName
+      lastName
+    }
+    student {
+      firstName
+      lastName
+    }
+    staff {
+      firstName
+      lastName
+    }
     mobile
     accountStatus
     role
   }
 }
 
+query counselors {
+  findAllCounselors {
+    id
+    firstName
+    lastName
+    department
+    email
+    expertise
+    Schedule {
+      id
+      days
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+    }
+  }
+}
+
 query currentUser {
   currentUser {
     id
-    name
     mobile
     accountStatus
     role
@@ -21,12 +51,10 @@ query currentUser {
 query me {
   me {
     id
-    name
     student {
       email
       user {
         id
-        name
         mobile
         accountStatus
         role
@@ -34,8 +62,9 @@ query me {
     }
     staff {
       email
+      firstName
+      lastName
       user {
-        name
         mobile
         accountStatus
         role
@@ -43,8 +72,9 @@ query me {
     }
     counselor {
       email
+      firstName
+      lastName
       user {
-        name
         mobile
         accountStatus
         role
@@ -56,13 +86,16 @@ query me {
 query counselor {
   me {
     id
-    name
     role
     counselor {
+      firstName
+      lastName
       email
       department
       expertise
-      Schedule
+      Schedule {
+        id
+      }
       createdAt
       updatedAt
       CounselorSession {
@@ -85,9 +118,10 @@ query counselor {
 query staff {
   me {
     id
-    name
     role
     staff {
+      firstName
+      lastName
       email
       staffId
       faculty

@@ -32,6 +32,8 @@ export class AuthService {
     password,
     email,
     mobile,
+    firstName,
+    lastName,
     accountStatus,
     ...payload
   }: SignupInput): Promise<Token> {
@@ -54,12 +56,15 @@ export class AuthService {
       const user = await this.prisma.user.create({
         data: {
           password: hashedPassword,
-          // ...verification,
           mobile,
+          firstName,
+          lastName,
           accountStatus,
           ...payload,
           [payload.role.toLowerCase()]: {
             create: {
+              firstName,
+              lastName,
               email,
             },
           },
@@ -93,7 +98,7 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('USER_NOT_FOUND');
     }
-    if (user.accountStatus == AccountStatus.UNVERIFIED) {
+    if (user.status && user.status == AccountStatus.UNVERIFIED) {
       throw new UnauthorizedException('UNVERIFIED_EMAIL');
     }
 
@@ -111,7 +116,6 @@ export class AuthService {
       role: role,
     });
   }
-
   validateUser(userId: string): Promise<User> {
     return this.prisma.user.findUnique({
       where: { id: userId },

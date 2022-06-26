@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
-import { Role, useLoginMutation } from 'schema/generated/graphql';
+import { LoginInput, Role, useLoginMutation } from 'schema/generated/graphql';
 import { withApollo } from 'utils/hooks/withApollo';
 
 const Login = () => {
@@ -13,15 +13,15 @@ const Login = () => {
     const [message, setError] = useState('')
     const [signIn] = useLoginMutation()
 
-    const onSubmit = async ({ email, password }, error) => {
+    const onSubmit = async (data: LoginInput, error) => {
         error.preventDefault()
         try {
             await signIn({
                 variables: {
                     data:{
-                        email,
-                        password,
-                        role: Role.Student
+                        email: data.email,
+                        password: data.password,
+                        role: Role.Counselor
                     }
                 }
             })

@@ -11,7 +11,10 @@ export class UserMaxAggregate {
     id?: string;
 
     @Field(() => String, {nullable:true})
-    name?: string;
+    firstName?: string;
+
+    @Field(() => String, {nullable:true})
+    lastName?: string;
 
     @Field(() => String, {nullable:true})
     password?: string;

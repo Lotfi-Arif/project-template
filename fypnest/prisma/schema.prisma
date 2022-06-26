@@ -17,7 +17,8 @@ generator nestgraphql {
 
 model User {
   id                String            @id @default(uuid())
-  name              String
+  firstName         String
+  lastName          String
   password          String
   mobile            String?           @unique
   gender            Gender?
@@ -34,10 +35,14 @@ model User {
 }
 
 model Schedule {
-  id       String   @id @default(uuid())
-  days     DateTime
-  timeFrom DateTime
-  timeTo   DateTime
+  id               String             @id @default(uuid())
+  days             DateTime
+  timeFrom         DateTime
+  timeTo           DateTime
+  hour             DateTime
+  CounselorSession CounselorSession[]
+  Counselor        Counselor?         @relation(fields: [counselorId], references: [id])
+  counselorId      String?
 }
 
 model CounselorSession {
@@ -46,17 +51,22 @@ model CounselorSession {
   counselor         Counselor @relation(fields: [counselorId], references: [id])
   student           Student?  @relation(fields: [studentId], references: [id])
   staff             Staff?    @relation(fields: [staffId], references: [id])
-  User              User?     @relation(fields: [userId], references: [id])
+  user              User?     @relation(fields: [userId], references: [id])
+  counselorSchedule Schedule  @relation(fields: [scheduleId], references: [id])
+  scheduleId        String
   counselorId       String
   userId            String?   @unique
   studentId         String?
   staffId           String?
+  counsellingDate   DateTime
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 }
 
 model Student {
   id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
   email            String             @unique
   matrix           String?            @unique
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
@@ -67,7 +77,9 @@ model Student {
 }
 
 model Admin {
-  id        String   @id @unique
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
   email     String   @unique
   user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
@@ -76,6 +88,8 @@ model Admin {
 
 model Staff {
   id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
   email            String             @unique
   staffId          String             @unique
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
@@ -87,11 +101,13 @@ model Staff {
 
 model Counselor {
   id               String             @id @default(uuid())
+  firstName        String
+  lastName         String
   email            String             @unique
-  department       String
+  department       String?
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
-  expertise        String
-  Schedule         String[]
+  expertise        String?
+  Schedule         Schedule[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   CounselorSession CounselorSession[]

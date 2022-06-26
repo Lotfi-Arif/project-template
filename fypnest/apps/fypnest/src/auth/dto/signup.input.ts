@@ -15,7 +15,10 @@ export class SignupInput {
   password: string;
 
   @Field({ nullable: true })
-  name: string;
+  firstName: string;
+
+  @Field({ nullable: true })
+  lastName: string;
 
   @Field(() => Role, {})
   role: Role;

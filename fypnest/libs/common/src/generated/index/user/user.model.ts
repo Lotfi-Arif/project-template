@@ -19,7 +19,10 @@ export class User {
     id!: string;
 
     @Field(() => String, {nullable:false})
-    name!: string;
+    firstName!: string;
+
+    @Field(() => String, {nullable:false})
+    lastName!: string;
 
     @Field(() => String, {nullable:false})
     password!: string;

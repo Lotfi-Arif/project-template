@@ -120,6 +120,41 @@ export const ssrUsers = {
       withPage: withPageUsers,
       usePage: useUsers,
     }
+export async function getServerPageCounselors
+    (options: Omit<Apollo.QueryOptions<Types.CounselorsQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.CounselorsQuery>({ ...options, query: Operations.CounselorsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useCounselors = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.CounselorsQuery, Types.CounselorsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.CounselorsDocument, options);
+};
+export type PageCounselorsComp = React.FC<{data?: Types.CounselorsQuery, error?: Apollo.ApolloError}>;
+export const withPageCounselors = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.CounselorsQuery, Types.CounselorsQueryVariables>) => (WrappedComponent:PageCounselorsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.CounselorsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrCounselors = {
+      getServerPage: getServerPageCounselors,
+      withPage: withPageCounselors,
+      usePage: useCounselors,
+    }
 export async function getServerPageCurrentUser
     (options: Omit<Apollo.QueryOptions<Types.CurrentUserQueryVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);

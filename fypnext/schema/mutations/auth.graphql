@@ -1,5 +1,5 @@
-mutation loginUser($data: LoginInput!) {
-  loginUser(data: $data) {
+mutation login($data: LoginInput!) {
+  login(data: $data) {
     accessToken
     refreshToken
   }

@@ -1,5 +1,5 @@
 import { User } from '@app/common/generated/index/user/user.model';
-import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { Auth } from 'model/auth.model';
 import { AuthService } from './auth.service';
@@ -12,17 +12,17 @@ export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Mutation(() => Auth)
-  async loginUser(@Args('data') { email, password, role }: LoginInput) {
-    try {
-      const result = await this.authService.login(
-        email.toLowerCase(),
-        password,
-        role,
-      );
-      return result;
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  async login(@Args('data') { email, password, role }: LoginInput) {
+    const { accessToken, refreshToken } = await this.authService.login(
+      email.toLowerCase(),
+      password,
+      role,
+    );
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 
   @Mutation(() => Auth)
