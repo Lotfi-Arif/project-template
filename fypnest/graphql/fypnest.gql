@@ -52,9 +52,9 @@ type Staff {
   firstName: String!
   lastName: String!
   email: String!
-  staffId: String!
+  staffMatrix: String
   user: User!
-  faculty: String!
+  faculty: String
   createdAt: DateTime!
   updatedAt: DateTime!
   CounselorSession: [CounselorSession!]
@@ -494,9 +494,9 @@ input StaffWhereInput {
   firstName: StringFilter
   lastName: StringFilter
   email: StringFilter
-  staffId: StringFilter
+  staffMatrix: StringNullableFilter
   user: UserRelationFilter
-  faculty: StringFilter
+  faculty: StringNullableFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
   CounselorSession: CounselorSessionListRelationFilter
@@ -641,7 +641,7 @@ input StaffOrderByWithRelationInput {
   firstName: SortOrder
   lastName: SortOrder
   email: SortOrder
-  staffId: SortOrder
+  staffMatrix: SortOrder
   user: UserOrderByWithRelationInput
   faculty: SortOrder
   createdAt: SortOrder
@@ -1109,8 +1109,8 @@ input StaffCreateWithoutUserInput {
   firstName: String!
   lastName: String!
   email: String!
-  staffId: String!
-  faculty: String!
+  staffMatrix: String
+  faculty: String
   createdAt: DateTime
   updatedAt: DateTime
   CounselorSession: CounselorSessionCreateNestedManyWithoutStaffInput
@@ -1241,9 +1241,9 @@ input StaffCreateWithoutCounselorSessionInput {
   firstName: String!
   lastName: String!
   email: String!
-  staffId: String!
+  staffMatrix: String
   user: UserCreateNestedOneWithoutStaffInput
-  faculty: String!
+  faculty: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1667,7 +1667,7 @@ input StaffCreateOrConnectWithoutCounselorSessionInput {
 input StaffWhereUniqueInput {
   id: String
   email: String
-  staffId: String
+  staffMatrix: String
 }
 
 input CounselorSessionCreateOrConnectWithoutCounselorScheduleInput {
@@ -1913,8 +1913,8 @@ input StaffUpdateWithoutUserInput {
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  staffId: StringFieldUpdateOperationsInput
-  faculty: StringFieldUpdateOperationsInput
+  staffMatrix: NullableStringFieldUpdateOperationsInput
+  faculty: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   CounselorSession: CounselorSessionUpdateManyWithoutStaffInput
@@ -2118,9 +2118,9 @@ input StaffUpdateWithoutCounselorSessionInput {
   firstName: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  staffId: StringFieldUpdateOperationsInput
+  staffMatrix: NullableStringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutStaffInput
-  faculty: StringFieldUpdateOperationsInput
+  faculty: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }

@@ -5,6 +5,8 @@ import { useApproveUserMutation, useRejectUserMutation } from "schema/generated/
 
 const UserRow = (users) => {
 
+    console.log(users.user)
+
     const [rejectUser] = useRejectUserMutation();
     const [approveUser] = useApproveUserMutation();
 
@@ -34,7 +36,7 @@ const UserRow = (users) => {
                         <div className="mr-2">
 
                         </div>
-                        <span>{users.user.name}</span>
+                        <span>{users.user.firstNmae} <span> {users.user.lastName}</span></span>
                     </div>
                 </td>
                 <td className="py-3 px-6 text-center">
@@ -47,7 +49,7 @@ const UserRow = (users) => {
                 </td>
 
                 <td className="py-3 px-6 text-center">
-                    <span className={users.user.accountStatus === "APPROVED"? "bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs": "bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs"}>{users.user.accountStatus}</span>
+                    <span className={users.user.accountStatus === "APPROVED" ? "bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs" : "bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs"}>{users.user.accountStatus}</span>
                 </td>
                 <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">
