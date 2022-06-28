@@ -10,6 +10,8 @@ import { Counselor } from '../counselor/counselor.model';
 import { Admin } from '../admin/admin.model';
 import { Post } from '../post/post.model';
 import { CounselorSession } from '../counselor-session/counselor-session.model';
+import { Message } from '../message/message.model';
+import { Chat } from '../chat/chat.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -62,6 +64,15 @@ export class User {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => [Message], {nullable:true})
+    Message?: Array<Message>;
+
+    @Field(() => Chat, {nullable:true})
+    Chat?: Chat | null;
+
+    @Field(() => String, {nullable:true})
+    chatId!: string | null;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

@@ -12,6 +12,8 @@ import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
 import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
 import { CounselorSessionRelationFilter } from '../counselor-session/counselor-session-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
+import { ChatRelationFilter } from '../chat/chat-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -72,4 +74,13 @@ export class UserWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => MessageListRelationFilter, {nullable:true})
+    Message?: MessageListRelationFilter;
+
+    @Field(() => ChatRelationFilter, {nullable:true})
+    Chat?: ChatRelationFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    chatId?: StringNullableFilter;
 }

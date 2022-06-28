@@ -40,6 +40,9 @@ export class UserGroupBy {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
 
+    @Field(() => String, {nullable:true})
+    chatId?: string;
+
     @Field(() => UserCountAggregate, {nullable:true})
     _count?: UserCountAggregate;
 

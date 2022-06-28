@@ -12,6 +12,8 @@ import { AdminUpdateOneWithoutUserInput } from '../admin/admin-update-one-withou
 import { PostUpdateManyWithoutAuthorInput } from '../post/post-update-many-without-author.input';
 import { CounselorSessionUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-update-one-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { MessageUpdateManyWithoutSenderInput } from '../message/message-update-many-without-sender.input';
+import { ChatUpdateOneWithoutUsersInput } from '../chat/chat-update-one-without-users.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -63,4 +65,10 @@ export class UserUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => MessageUpdateManyWithoutSenderInput, {nullable:true})
+    Message?: MessageUpdateManyWithoutSenderInput;
+
+    @Field(() => ChatUpdateOneWithoutUsersInput, {nullable:true})
+    Chat?: ChatUpdateOneWithoutUsersInput;
 }

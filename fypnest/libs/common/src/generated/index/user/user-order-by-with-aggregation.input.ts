@@ -38,6 +38,9 @@ export class UserOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    chatId?: keyof typeof SortOrder;
+
     @Field(() => UserCountOrderByAggregateInput, {nullable:true})
     _count?: UserCountOrderByAggregateInput;
 

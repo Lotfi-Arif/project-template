@@ -32,6 +32,9 @@ model User {
   counselingSession CounselorSession?
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
+  Message           Message[]
+  Chat              Chat?             @relation(fields: [chatId], references: [id])
+  chatId            String?
 }
 
 model Schedule {
@@ -124,17 +127,23 @@ model Post {
 }
 
 model Chat {
-  id         String   @id @default(uuid())
-  chatStatus String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String    @id @default(uuid())
+  chatName  String
+  Message   Message[]
+  users     User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Message {
-  id       String @id @default(uuid())
-  sender   String
-  reciever String
-  Message  String
+  id        String   @id @default(uuid())
+  sender    User     @relation(fields: [userId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  Message   String
+  userId    String
+  chatId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Event {

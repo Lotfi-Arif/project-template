@@ -9,6 +9,8 @@ import { CounselorCreateNestedOneWithoutUserInput } from '../counselor/counselor
 import { AdminCreateNestedOneWithoutUserInput } from '../admin/admin-create-nested-one-without-user.input';
 import { PostCreateNestedManyWithoutAuthorInput } from '../post/post-create-nested-many-without-author.input';
 import { CounselorSessionCreateNestedOneWithoutUserInput } from '../counselor-session/counselor-session-create-nested-one-without-user.input';
+import { MessageCreateNestedManyWithoutSenderInput } from '../message/message-create-nested-many-without-sender.input';
+import { ChatCreateNestedOneWithoutUsersInput } from '../chat/chat-create-nested-one-without-users.input';
 
 @InputType()
 export class UserCreateInput {
@@ -60,4 +62,10 @@ export class UserCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => MessageCreateNestedManyWithoutSenderInput, {nullable:true})
+    Message?: MessageCreateNestedManyWithoutSenderInput;
+
+    @Field(() => ChatCreateNestedOneWithoutUsersInput, {nullable:true})
+    Chat?: ChatCreateNestedOneWithoutUsersInput;
 }

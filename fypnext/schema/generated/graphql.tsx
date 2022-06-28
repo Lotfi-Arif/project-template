@@ -121,48 +121,152 @@ export type Auth = {
 
 export type Chat = {
   __typename?: 'Chat';
-  chatStatus: Scalars['String'];
+  Message?: Maybe<Array<Message>>;
+  _count: ChatCount;
+  chatName: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   updatedAt: Scalars['DateTime'];
+  users?: Maybe<Array<User>>;
+};
+
+export type ChatCount = {
+  __typename?: 'ChatCount';
+  Message: Scalars['Int'];
+  users: Scalars['Int'];
 };
 
 export type ChatCreateInput = {
-  chatStatus: Scalars['String'];
+  Message?: InputMaybe<MessageCreateNestedManyWithoutChatInput>;
+  chatName: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  users?: InputMaybe<UserCreateNestedManyWithoutChatInput>;
+};
+
+export type ChatCreateNestedOneWithoutMessageInput = {
+  connect?: InputMaybe<ChatWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ChatCreateOrConnectWithoutMessageInput>;
+  create?: InputMaybe<ChatCreateWithoutMessageInput>;
+};
+
+export type ChatCreateNestedOneWithoutUsersInput = {
+  connect?: InputMaybe<ChatWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ChatCreateOrConnectWithoutUsersInput>;
+  create?: InputMaybe<ChatCreateWithoutUsersInput>;
+};
+
+export type ChatCreateOrConnectWithoutMessageInput = {
+  create: ChatCreateWithoutMessageInput;
+  where: ChatWhereUniqueInput;
+};
+
+export type ChatCreateOrConnectWithoutUsersInput = {
+  create: ChatCreateWithoutUsersInput;
+  where: ChatWhereUniqueInput;
+};
+
+export type ChatCreateWithoutMessageInput = {
+  chatName: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  users?: InputMaybe<UserCreateNestedManyWithoutChatInput>;
+};
+
+export type ChatCreateWithoutUsersInput = {
+  Message?: InputMaybe<MessageCreateNestedManyWithoutChatInput>;
+  chatName: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type ChatOrderByWithRelationInput = {
-  chatStatus?: InputMaybe<SortOrder>;
+  Message?: InputMaybe<MessageOrderByRelationAggregateInput>;
+  chatName?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  users?: InputMaybe<UserOrderByRelationAggregateInput>;
+};
+
+export type ChatRelationFilter = {
+  is?: InputMaybe<ChatWhereInput>;
+  isNot?: InputMaybe<ChatWhereInput>;
 };
 
 export enum ChatScalarFieldEnum {
-  ChatStatus = 'chatStatus',
+  ChatName = 'chatName',
   CreatedAt = 'createdAt',
   Id = 'id',
   UpdatedAt = 'updatedAt'
 }
 
 export type ChatUpdateInput = {
-  chatStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutChatInput>;
+  chatName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  users?: InputMaybe<UserUpdateManyWithoutChatInput>;
+};
+
+export type ChatUpdateOneRequiredWithoutMessageInput = {
+  connect?: InputMaybe<ChatWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ChatCreateOrConnectWithoutMessageInput>;
+  create?: InputMaybe<ChatCreateWithoutMessageInput>;
+  update?: InputMaybe<ChatUpdateWithoutMessageInput>;
+  upsert?: InputMaybe<ChatUpsertWithoutMessageInput>;
+};
+
+export type ChatUpdateOneWithoutUsersInput = {
+  connect?: InputMaybe<ChatWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ChatCreateOrConnectWithoutUsersInput>;
+  create?: InputMaybe<ChatCreateWithoutUsersInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<ChatUpdateWithoutUsersInput>;
+  upsert?: InputMaybe<ChatUpsertWithoutUsersInput>;
+};
+
+export type ChatUpdateWithoutMessageInput = {
+  chatName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  users?: InputMaybe<UserUpdateManyWithoutChatInput>;
+};
+
+export type ChatUpdateWithoutUsersInput = {
+  Message?: InputMaybe<MessageUpdateManyWithoutChatInput>;
+  chatName?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
+export type ChatUpsertWithoutMessageInput = {
+  create: ChatCreateWithoutMessageInput;
+  update: ChatUpdateWithoutMessageInput;
+};
+
+export type ChatUpsertWithoutUsersInput = {
+  create: ChatCreateWithoutUsersInput;
+  update: ChatUpdateWithoutUsersInput;
+};
+
 export type ChatWhereInput = {
   AND?: InputMaybe<Array<ChatWhereInput>>;
+  Message?: InputMaybe<MessageListRelationFilter>;
   NOT?: InputMaybe<Array<ChatWhereInput>>;
   OR?: InputMaybe<Array<ChatWhereInput>>;
-  chatStatus?: InputMaybe<StringFilter>;
+  chatName?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+  users?: InputMaybe<UserListRelationFilter>;
 };
 
 export type ChatWhereUniqueInput = {
@@ -1097,37 +1201,222 @@ export type LoginInput = {
 export type Message = {
   __typename?: 'Message';
   Message: Scalars['String'];
+  chat: Chat;
+  chatId: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  reciever: Scalars['String'];
-  sender: Scalars['String'];
+  sender: User;
+  updatedAt: Scalars['DateTime'];
+  userId: Scalars['String'];
 };
 
 export type MessageCreateInput = {
   Message: Scalars['String'];
+  chat: ChatCreateNestedOneWithoutMessageInput;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
-  reciever: Scalars['String'];
-  sender: Scalars['String'];
+  sender: UserCreateNestedOneWithoutMessageInput;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type MessageCreateManyChatInput = {
+  Message: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  userId: Scalars['String'];
+};
+
+export type MessageCreateManyChatInputEnvelope = {
+  data: Array<MessageCreateManyChatInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type MessageCreateManySenderInput = {
+  Message: Scalars['String'];
+  chatId: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type MessageCreateManySenderInputEnvelope = {
+  data: Array<MessageCreateManySenderInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type MessageCreateNestedManyWithoutChatInput = {
+  connect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<MessageCreateOrConnectWithoutChatInput>>;
+  create?: InputMaybe<Array<MessageCreateWithoutChatInput>>;
+  createMany?: InputMaybe<MessageCreateManyChatInputEnvelope>;
+};
+
+export type MessageCreateNestedManyWithoutSenderInput = {
+  connect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<MessageCreateOrConnectWithoutSenderInput>>;
+  create?: InputMaybe<Array<MessageCreateWithoutSenderInput>>;
+  createMany?: InputMaybe<MessageCreateManySenderInputEnvelope>;
+};
+
+export type MessageCreateOrConnectWithoutChatInput = {
+  create: MessageCreateWithoutChatInput;
+  where: MessageWhereUniqueInput;
+};
+
+export type MessageCreateOrConnectWithoutSenderInput = {
+  create: MessageCreateWithoutSenderInput;
+  where: MessageWhereUniqueInput;
+};
+
+export type MessageCreateWithoutChatInput = {
+  Message: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  sender: UserCreateNestedOneWithoutMessageInput;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type MessageCreateWithoutSenderInput = {
+  Message: Scalars['String'];
+  chat: ChatCreateNestedOneWithoutMessageInput;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type MessageListRelationFilter = {
+  every?: InputMaybe<MessageWhereInput>;
+  none?: InputMaybe<MessageWhereInput>;
+  some?: InputMaybe<MessageWhereInput>;
+};
+
+export type MessageOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export type MessageOrderByWithRelationInput = {
   Message?: InputMaybe<SortOrder>;
+  chat?: InputMaybe<ChatOrderByWithRelationInput>;
+  chatId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  reciever?: InputMaybe<SortOrder>;
-  sender?: InputMaybe<SortOrder>;
+  sender?: InputMaybe<UserOrderByWithRelationInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
 };
 
 export enum MessageScalarFieldEnum {
   Message = 'Message',
+  ChatId = 'chatId',
+  CreatedAt = 'createdAt',
   Id = 'id',
-  Reciever = 'reciever',
-  Sender = 'sender'
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
 }
+
+export type MessageScalarWhereInput = {
+  AND?: InputMaybe<Array<MessageScalarWhereInput>>;
+  Message?: InputMaybe<StringFilter>;
+  NOT?: InputMaybe<Array<MessageScalarWhereInput>>;
+  OR?: InputMaybe<Array<MessageScalarWhereInput>>;
+  chatId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
 
 export type MessageUpdateInput = {
   Message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  chat?: InputMaybe<ChatUpdateOneRequiredWithoutMessageInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  reciever?: InputMaybe<StringFieldUpdateOperationsInput>;
-  sender?: InputMaybe<StringFieldUpdateOperationsInput>;
+  sender?: InputMaybe<UserUpdateOneRequiredWithoutMessageInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type MessageUpdateManyMutationInput = {
+  Message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type MessageUpdateManyWithWhereWithoutChatInput = {
+  data: MessageUpdateManyMutationInput;
+  where: MessageScalarWhereInput;
+};
+
+export type MessageUpdateManyWithWhereWithoutSenderInput = {
+  data: MessageUpdateManyMutationInput;
+  where: MessageScalarWhereInput;
+};
+
+export type MessageUpdateManyWithoutChatInput = {
+  connect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<MessageCreateOrConnectWithoutChatInput>>;
+  create?: InputMaybe<Array<MessageCreateWithoutChatInput>>;
+  createMany?: InputMaybe<MessageCreateManyChatInputEnvelope>;
+  delete?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<MessageScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  set?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  update?: InputMaybe<Array<MessageUpdateWithWhereUniqueWithoutChatInput>>;
+  updateMany?: InputMaybe<Array<MessageUpdateManyWithWhereWithoutChatInput>>;
+  upsert?: InputMaybe<Array<MessageUpsertWithWhereUniqueWithoutChatInput>>;
+};
+
+export type MessageUpdateManyWithoutSenderInput = {
+  connect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<MessageCreateOrConnectWithoutSenderInput>>;
+  create?: InputMaybe<Array<MessageCreateWithoutSenderInput>>;
+  createMany?: InputMaybe<MessageCreateManySenderInputEnvelope>;
+  delete?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<MessageScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  set?: InputMaybe<Array<MessageWhereUniqueInput>>;
+  update?: InputMaybe<Array<MessageUpdateWithWhereUniqueWithoutSenderInput>>;
+  updateMany?: InputMaybe<Array<MessageUpdateManyWithWhereWithoutSenderInput>>;
+  upsert?: InputMaybe<Array<MessageUpsertWithWhereUniqueWithoutSenderInput>>;
+};
+
+export type MessageUpdateWithWhereUniqueWithoutChatInput = {
+  data: MessageUpdateWithoutChatInput;
+  where: MessageWhereUniqueInput;
+};
+
+export type MessageUpdateWithWhereUniqueWithoutSenderInput = {
+  data: MessageUpdateWithoutSenderInput;
+  where: MessageWhereUniqueInput;
+};
+
+export type MessageUpdateWithoutChatInput = {
+  Message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  sender?: InputMaybe<UserUpdateOneRequiredWithoutMessageInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type MessageUpdateWithoutSenderInput = {
+  Message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  chat?: InputMaybe<ChatUpdateOneRequiredWithoutMessageInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type MessageUpsertWithWhereUniqueWithoutChatInput = {
+  create: MessageCreateWithoutChatInput;
+  update: MessageUpdateWithoutChatInput;
+  where: MessageWhereUniqueInput;
+};
+
+export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
+  create: MessageCreateWithoutSenderInput;
+  update: MessageUpdateWithoutSenderInput;
+  where: MessageWhereUniqueInput;
 };
 
 export type MessageWhereInput = {
@@ -1135,9 +1424,13 @@ export type MessageWhereInput = {
   Message?: InputMaybe<StringFilter>;
   NOT?: InputMaybe<Array<MessageWhereInput>>;
   OR?: InputMaybe<Array<MessageWhereInput>>;
+  chat?: InputMaybe<ChatRelationFilter>;
+  chatId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  reciever?: InputMaybe<StringFilter>;
-  sender?: InputMaybe<StringFilter>;
+  sender?: InputMaybe<UserRelationFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
 };
 
 export type MessageWhereUniqueInput = {
@@ -1151,7 +1444,6 @@ export type Mutation = {
   createCounselorSession: CounselorSession;
   createEvent: Event;
   createFaq: Faq;
-  createMessage: Message;
   createPost: Post;
   createSchedule: Schedule;
   deleteChat: Chat;
@@ -1172,6 +1464,7 @@ export type Mutation = {
   findOneUser: User;
   login: Auth;
   rejectUser: User;
+  sendMessage: Message;
   signup: Auth;
   updateChat: Chat;
   updateCounselorSession: CounselorSession;
@@ -1206,11 +1499,6 @@ export type MutationCreateEventArgs = {
 
 export type MutationCreateFaqArgs = {
   data: FaqCreateInput;
-};
-
-
-export type MutationCreateMessageArgs = {
-  data: MessageCreateInput;
 };
 
 
@@ -1311,6 +1599,11 @@ export type MutationLoginArgs = {
 
 export type MutationRejectUserArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationSendMessageArgs = {
+  data: MessageCreateInput;
 };
 
 
@@ -1603,7 +1896,6 @@ export type PostWhereUniqueInput = {
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
-  findAllChats: Chat;
   findAllCounselorSessions: Array<CounselorSession>;
   findAllCounselors: Array<Counselor>;
   findAllEvents: Array<Event>;
@@ -1611,18 +1903,10 @@ export type Query = {
   findAllMessages: Message;
   findAllPosts: Post;
   findAllSchedules: Schedule;
+  findAllUserChats: Chat;
   findAllUsers: Array<User>;
+  findChatMessages: Array<Message>;
   me: User;
-};
-
-
-export type QueryFindAllChatsArgs = {
-  cursor?: InputMaybe<ChatWhereUniqueInput>;
-  distinct?: InputMaybe<Array<ChatScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<ChatOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<ChatWhereInput>;
 };
 
 
@@ -1696,6 +1980,16 @@ export type QueryFindAllSchedulesArgs = {
 };
 
 
+export type QueryFindAllUserChatsArgs = {
+  cursor?: InputMaybe<ChatWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ChatScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ChatOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ChatWhereInput>;
+};
+
+
 export type QueryFindAllUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<UserScalarFieldEnum>>;
@@ -1703,6 +1997,11 @@ export type QueryFindAllUsersArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryFindChatMessagesArgs = {
+  id: Scalars['String'];
 };
 
 export enum QueryMode {
@@ -2305,11 +2604,25 @@ export type StudentWhereUniqueInput = {
   matrix?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  onChatCreations: Chat;
+  onChatMessage: Message;
+};
+
+
+export type SubscriptionOnChatMessageArgs = {
+  id: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
+  Chat?: Maybe<Chat>;
+  Message?: Maybe<Array<Message>>;
   _count: UserCount;
   accountStatus: AccountStatus;
   admin?: Maybe<Admin>;
+  chatId?: Maybe<Scalars['String']>;
   counselingSession?: Maybe<CounselorSession>;
   counselor?: Maybe<Counselor>;
   createdAt: Scalars['DateTime'];
@@ -2328,7 +2641,33 @@ export type User = {
 
 export type UserCount = {
   __typename?: 'UserCount';
+  Message: Scalars['Int'];
   posts: Scalars['Int'];
+};
+
+export type UserCreateManyChatInput = {
+  accountStatus?: InputMaybe<AccountStatus>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  firstName: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  lastName: Scalars['String'];
+  mobile?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  role: Role;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type UserCreateManyChatInputEnvelope = {
+  data: Array<UserCreateManyChatInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type UserCreateNestedManyWithoutChatInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutChatInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutChatInput>>;
+  createMany?: InputMaybe<UserCreateManyChatInputEnvelope>;
 };
 
 export type UserCreateNestedOneWithoutCounselingSessionInput = {
@@ -2341,6 +2680,12 @@ export type UserCreateNestedOneWithoutCounselorInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselorInput>;
   create?: InputMaybe<UserCreateWithoutCounselorInput>;
+};
+
+export type UserCreateNestedOneWithoutMessageInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutMessageInput>;
+  create?: InputMaybe<UserCreateWithoutMessageInput>;
 };
 
 export type UserCreateNestedOneWithoutPostsInput = {
@@ -2361,6 +2706,11 @@ export type UserCreateNestedOneWithoutStudentInput = {
   create?: InputMaybe<UserCreateWithoutStudentInput>;
 };
 
+export type UserCreateOrConnectWithoutChatInput = {
+  create: UserCreateWithoutChatInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutCounselingSessionInput = {
   create: UserCreateWithoutCounselingSessionInput;
   where: UserWhereUniqueInput;
@@ -2368,6 +2718,11 @@ export type UserCreateOrConnectWithoutCounselingSessionInput = {
 
 export type UserCreateOrConnectWithoutCounselorInput = {
   create: UserCreateWithoutCounselorInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutMessageInput = {
+  create: UserCreateWithoutMessageInput;
   where: UserWhereUniqueInput;
 };
 
@@ -2386,7 +2741,29 @@ export type UserCreateOrConnectWithoutStudentInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateWithoutChatInput = {
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  firstName: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  lastName: Scalars['String'];
+  mobile?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutUserInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
 export type UserCreateWithoutCounselingSessionInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
@@ -2405,6 +2782,8 @@ export type UserCreateWithoutCounselingSessionInput = {
 };
 
 export type UserCreateWithoutCounselorInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
@@ -2422,7 +2801,29 @@ export type UserCreateWithoutCounselorInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
+export type UserCreateWithoutMessageInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  accountStatus?: InputMaybe<AccountStatus>;
+  admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorCreateNestedOneWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  firstName: Scalars['String'];
+  gender?: InputMaybe<Gender>;
+  id?: InputMaybe<Scalars['String']>;
+  lastName: Scalars['String'];
+  mobile?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  posts?: InputMaybe<PostCreateNestedManyWithoutAuthorInput>;
+  role: Role;
+  staff?: InputMaybe<StaffCreateNestedOneWithoutUserInput>;
+  student?: InputMaybe<StudentCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
 export type UserCreateWithoutPostsInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
@@ -2441,6 +2842,8 @@ export type UserCreateWithoutPostsInput = {
 };
 
 export type UserCreateWithoutStaffInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
@@ -2459,6 +2862,8 @@ export type UserCreateWithoutStaffInput = {
 };
 
 export type UserCreateWithoutStudentInput = {
+  Chat?: InputMaybe<ChatCreateNestedOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageCreateNestedManyWithoutSenderInput>;
   accountStatus?: InputMaybe<AccountStatus>;
   admin?: InputMaybe<AdminCreateNestedOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionCreateNestedOneWithoutUserInput>;
@@ -2476,9 +2881,22 @@ export type UserCreateWithoutStudentInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
+export type UserListRelationFilter = {
+  every?: InputMaybe<UserWhereInput>;
+  none?: InputMaybe<UserWhereInput>;
+  some?: InputMaybe<UserWhereInput>;
+};
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
 export type UserOrderByWithRelationInput = {
+  Chat?: InputMaybe<ChatOrderByWithRelationInput>;
+  Message?: InputMaybe<MessageOrderByRelationAggregateInput>;
   accountStatus?: InputMaybe<SortOrder>;
   admin?: InputMaybe<AdminOrderByWithRelationInput>;
+  chatId?: InputMaybe<SortOrder>;
   counselingSession?: InputMaybe<CounselorSessionOrderByWithRelationInput>;
   counselor?: InputMaybe<CounselorOrderByWithRelationInput>;
   createdAt?: InputMaybe<SortOrder>;
@@ -2502,6 +2920,7 @@ export type UserRelationFilter = {
 
 export enum UserScalarFieldEnum {
   AccountStatus = 'accountStatus',
+  ChatId = 'chatId',
   CreatedAt = 'createdAt',
   FirstName = 'firstName',
   Gender = 'gender',
@@ -2513,7 +2932,26 @@ export enum UserScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
+export type UserScalarWhereInput = {
+  AND?: InputMaybe<Array<UserScalarWhereInput>>;
+  NOT?: InputMaybe<Array<UserScalarWhereInput>>;
+  OR?: InputMaybe<Array<UserScalarWhereInput>>;
+  accountStatus?: InputMaybe<EnumAccountStatusFilter>;
+  chatId?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  firstName?: InputMaybe<StringFilter>;
+  gender?: InputMaybe<EnumGenderNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  lastName?: InputMaybe<StringFilter>;
+  mobile?: InputMaybe<StringNullableFilter>;
+  password?: InputMaybe<StringFilter>;
+  role?: InputMaybe<EnumRoleFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
 export type UserUpdateInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
@@ -2532,12 +2970,52 @@ export type UserUpdateInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
+export type UserUpdateManyMutationInput = {
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateManyWithWhereWithoutChatInput = {
+  data: UserUpdateManyMutationInput;
+  where: UserScalarWhereInput;
+};
+
+export type UserUpdateManyWithoutChatInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutChatInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutChatInput>>;
+  createMany?: InputMaybe<UserCreateManyChatInputEnvelope>;
+  delete?: InputMaybe<Array<UserWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserUpdateWithWhereUniqueWithoutChatInput>>;
+  updateMany?: InputMaybe<Array<UserUpdateManyWithWhereWithoutChatInput>>;
+  upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutChatInput>>;
+};
+
 export type UserUpdateOneRequiredWithoutCounselorInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCounselorInput>;
   create?: InputMaybe<UserCreateWithoutCounselorInput>;
   update?: InputMaybe<UserUpdateWithoutCounselorInput>;
   upsert?: InputMaybe<UserUpsertWithoutCounselorInput>;
+};
+
+export type UserUpdateOneRequiredWithoutMessageInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutMessageInput>;
+  create?: InputMaybe<UserCreateWithoutMessageInput>;
+  update?: InputMaybe<UserUpdateWithoutMessageInput>;
+  upsert?: InputMaybe<UserUpsertWithoutMessageInput>;
 };
 
 export type UserUpdateOneRequiredWithoutPostsInput = {
@@ -2574,7 +3052,34 @@ export type UserUpdateOneWithoutCounselingSessionInput = {
   upsert?: InputMaybe<UserUpsertWithoutCounselingSessionInput>;
 };
 
+export type UserUpdateWithWhereUniqueWithoutChatInput = {
+  data: UserUpdateWithoutChatInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpdateWithoutChatInput = {
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
 export type UserUpdateWithoutCounselingSessionInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
@@ -2593,6 +3098,8 @@ export type UserUpdateWithoutCounselingSessionInput = {
 };
 
 export type UserUpdateWithoutCounselorInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
@@ -2610,7 +3117,29 @@ export type UserUpdateWithoutCounselorInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
+export type UserUpdateWithoutMessageInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
+  admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
+  counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
+  counselor?: InputMaybe<CounselorUpdateOneWithoutUserInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  gender?: InputMaybe<NullableEnumGenderFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  mobile?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  posts?: InputMaybe<PostUpdateManyWithoutAuthorInput>;
+  role?: InputMaybe<EnumRoleFieldUpdateOperationsInput>;
+  staff?: InputMaybe<StaffUpdateOneWithoutUserInput>;
+  student?: InputMaybe<StudentUpdateOneWithoutUserInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
 export type UserUpdateWithoutPostsInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
@@ -2629,6 +3158,8 @@ export type UserUpdateWithoutPostsInput = {
 };
 
 export type UserUpdateWithoutStaffInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
@@ -2647,6 +3178,8 @@ export type UserUpdateWithoutStaffInput = {
 };
 
 export type UserUpdateWithoutStudentInput = {
+  Chat?: InputMaybe<ChatUpdateOneWithoutUsersInput>;
+  Message?: InputMaybe<MessageUpdateManyWithoutSenderInput>;
   accountStatus?: InputMaybe<EnumAccountStatusFieldUpdateOperationsInput>;
   admin?: InputMaybe<AdminUpdateOneWithoutUserInput>;
   counselingSession?: InputMaybe<CounselorSessionUpdateOneWithoutUserInput>;
@@ -2664,6 +3197,12 @@ export type UserUpdateWithoutStudentInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
+export type UserUpsertWithWhereUniqueWithoutChatInput = {
+  create: UserCreateWithoutChatInput;
+  update: UserUpdateWithoutChatInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserUpsertWithoutCounselingSessionInput = {
   create: UserCreateWithoutCounselingSessionInput;
   update: UserUpdateWithoutCounselingSessionInput;
@@ -2672,6 +3211,11 @@ export type UserUpsertWithoutCounselingSessionInput = {
 export type UserUpsertWithoutCounselorInput = {
   create: UserCreateWithoutCounselorInput;
   update: UserUpdateWithoutCounselorInput;
+};
+
+export type UserUpsertWithoutMessageInput = {
+  create: UserCreateWithoutMessageInput;
+  update: UserUpdateWithoutMessageInput;
 };
 
 export type UserUpsertWithoutPostsInput = {
@@ -2691,10 +3235,13 @@ export type UserUpsertWithoutStudentInput = {
 
 export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
+  Chat?: InputMaybe<ChatRelationFilter>;
+  Message?: InputMaybe<MessageListRelationFilter>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accountStatus?: InputMaybe<EnumAccountStatusFilter>;
   admin?: InputMaybe<AdminRelationFilter>;
+  chatId?: InputMaybe<StringNullableFilter>;
   counselingSession?: InputMaybe<CounselorSessionRelationFilter>;
   counselor?: InputMaybe<CounselorRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -2759,6 +3306,13 @@ export type CreateFaqMutationVariables = Exact<{
 
 export type CreateFaqMutation = { __typename?: 'Mutation', createFaq: { __typename?: 'FAQ', id: string, title: string, answer: string, icon: string } };
 
+export type SendMessageMutationVariables = Exact<{
+  data: MessageCreateInput;
+}>;
+
+
+export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'Message', id: string, chatId: string, Message: string, userId: string, sender: { __typename?: 'User', id: string } } };
+
 export type RejectUserMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -2772,6 +3326,25 @@ export type ApproveUserMutationVariables = Exact<{
 
 
 export type ApproveUserMutation = { __typename?: 'Mutation', approveUser: { __typename?: 'User', id: string } };
+
+export type OnChatMessageSubscriptionVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type OnChatMessageSubscription = { __typename?: 'Subscription', onChatMessage: { __typename?: 'Message', Message: string, id: string, chatId: string, sender: { __typename?: 'User', id: string } } };
+
+export type FindChatMessagesQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type FindChatMessagesQuery = { __typename?: 'Query', findChatMessages: Array<{ __typename?: 'Message', Message: string, id: string, chatId: string, sender: { __typename?: 'User', id: string } }> };
+
+export type FindAllMessagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindAllMessagesQuery = { __typename?: 'Query', findAllMessages: { __typename?: 'Message', Message: string, chatId: string, sender: { __typename?: 'User', id: string } } };
 
 export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2796,7 +3369,7 @@ export type CounselorsQuery = { __typename?: 'Query', findAllCounselors: Array<{
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role } };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, student?: { __typename?: 'Student', lastName: string, firstName: string, email: string } | null | undefined, staff?: { __typename?: 'Staff', lastName: string, firstName: string, email: string } | null | undefined, counselor?: { __typename?: 'Counselor', lastName: string, firstName: string, email: string } | null | undefined } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3025,6 +3598,45 @@ export function useCreateFaqMutation(baseOptions?: Apollo.MutationHookOptions<Cr
 export type CreateFaqMutationHookResult = ReturnType<typeof useCreateFaqMutation>;
 export type CreateFaqMutationResult = Apollo.MutationResult<CreateFaqMutation>;
 export type CreateFaqMutationOptions = Apollo.BaseMutationOptions<CreateFaqMutation, CreateFaqMutationVariables>;
+export const SendMessageDocument = gql`
+    mutation sendMessage($data: MessageCreateInput!) {
+  sendMessage(data: $data) {
+    id
+    sender {
+      id
+    }
+    chatId
+    Message
+    userId
+  }
+}
+    `;
+export type SendMessageMutationFn = Apollo.MutationFunction<SendMessageMutation, SendMessageMutationVariables>;
+
+/**
+ * __useSendMessageMutation__
+ *
+ * To run a mutation, you first call `useSendMessageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendMessageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendMessageMutation, { data, loading, error }] = useSendMessageMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<SendMessageMutation, SendMessageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SendMessageMutation, SendMessageMutationVariables>(SendMessageDocument, options);
+      }
+export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
+export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
+export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
 export const RejectUserDocument = gql`
     mutation rejectUser($id: String!) {
   rejectUser(id: $id) {
@@ -3091,6 +3703,119 @@ export function useApproveUserMutation(baseOptions?: Apollo.MutationHookOptions<
 export type ApproveUserMutationHookResult = ReturnType<typeof useApproveUserMutation>;
 export type ApproveUserMutationResult = Apollo.MutationResult<ApproveUserMutation>;
 export type ApproveUserMutationOptions = Apollo.BaseMutationOptions<ApproveUserMutation, ApproveUserMutationVariables>;
+export const OnChatMessageDocument = gql`
+    subscription onChatMessage($id: String!) {
+  onChatMessage(id: $id) {
+    Message
+    id
+    sender {
+      id
+    }
+    chatId
+  }
+}
+    `;
+
+/**
+ * __useOnChatMessageSubscription__
+ *
+ * To run a query within a React component, call `useOnChatMessageSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnChatMessageSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnChatMessageSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useOnChatMessageSubscription(baseOptions: Apollo.SubscriptionHookOptions<OnChatMessageSubscription, OnChatMessageSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnChatMessageSubscription, OnChatMessageSubscriptionVariables>(OnChatMessageDocument, options);
+      }
+export type OnChatMessageSubscriptionHookResult = ReturnType<typeof useOnChatMessageSubscription>;
+export type OnChatMessageSubscriptionResult = Apollo.SubscriptionResult<OnChatMessageSubscription>;
+export const FindChatMessagesDocument = gql`
+    query findChatMessages($id: String!) {
+  findChatMessages(id: $id) {
+    Message
+    id
+    sender {
+      id
+    }
+    chatId
+  }
+}
+    `;
+
+/**
+ * __useFindChatMessagesQuery__
+ *
+ * To run a query within a React component, call `useFindChatMessagesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindChatMessagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindChatMessagesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindChatMessagesQuery(baseOptions: Apollo.QueryHookOptions<FindChatMessagesQuery, FindChatMessagesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindChatMessagesQuery, FindChatMessagesQueryVariables>(FindChatMessagesDocument, options);
+      }
+export function useFindChatMessagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindChatMessagesQuery, FindChatMessagesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindChatMessagesQuery, FindChatMessagesQueryVariables>(FindChatMessagesDocument, options);
+        }
+export type FindChatMessagesQueryHookResult = ReturnType<typeof useFindChatMessagesQuery>;
+export type FindChatMessagesLazyQueryHookResult = ReturnType<typeof useFindChatMessagesLazyQuery>;
+export type FindChatMessagesQueryResult = Apollo.QueryResult<FindChatMessagesQuery, FindChatMessagesQueryVariables>;
+export const FindAllMessagesDocument = gql`
+    query findAllMessages {
+  findAllMessages {
+    Message
+    sender {
+      id
+    }
+    chatId
+  }
+}
+    `;
+
+/**
+ * __useFindAllMessagesQuery__
+ *
+ * To run a query within a React component, call `useFindAllMessagesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindAllMessagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindAllMessagesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFindAllMessagesQuery(baseOptions?: Apollo.QueryHookOptions<FindAllMessagesQuery, FindAllMessagesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindAllMessagesQuery, FindAllMessagesQueryVariables>(FindAllMessagesDocument, options);
+      }
+export function useFindAllMessagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllMessagesQuery, FindAllMessagesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindAllMessagesQuery, FindAllMessagesQueryVariables>(FindAllMessagesDocument, options);
+        }
+export type FindAllMessagesQueryHookResult = ReturnType<typeof useFindAllMessagesQuery>;
+export type FindAllMessagesLazyQueryHookResult = ReturnType<typeof useFindAllMessagesLazyQuery>;
+export type FindAllMessagesQueryResult = Apollo.QueryResult<FindAllMessagesQuery, FindAllMessagesQueryVariables>;
 export const EventsDocument = gql`
     query events {
   findAllEvents {
@@ -3266,9 +3991,21 @@ export const CurrentUserDocument = gql`
     query currentUser {
   currentUser {
     id
-    mobile
-    accountStatus
-    role
+    student {
+      lastName
+      firstName
+      email
+    }
+    staff {
+      lastName
+      firstName
+      email
+    }
+    counselor {
+      lastName
+      firstName
+      email
+    }
   }
 }
     `;
@@ -3492,6 +4229,8 @@ export type StaffQueryResult = Apollo.QueryResult<StaffQuery, StaffQueryVariable
     
 export const namedOperations = {
   Query: {
+    findChatMessages: 'findChatMessages',
+    findAllMessages: 'findAllMessages',
     events: 'events',
     faqs: 'faqs',
     users: 'users',
@@ -3508,7 +4247,11 @@ export const namedOperations = {
     updateEvent: 'updateEvent',
     deleteEvent: 'deleteEvent',
     createFaq: 'createFaq',
+    sendMessage: 'sendMessage',
     rejectUser: 'rejectUser',
     approveUser: 'approveUser'
+  },
+  Subscription: {
+    onChatMessage: 'onChatMessage'
   }
 }

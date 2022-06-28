@@ -42,9 +42,21 @@ query counselors {
 query currentUser {
   currentUser {
     id
-    mobile
-    accountStatus
-    role
+    student {
+      lastName
+      firstName
+      email
+    }
+    staff {
+      lastName
+      firstName
+      email
+    }
+    counselor {
+      lastName
+      firstName
+      email
+    }
   }
 }
 

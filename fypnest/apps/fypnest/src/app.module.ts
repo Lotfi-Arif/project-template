@@ -30,6 +30,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     }),
     GraphQLModule.forRoot({
       cors: false,
+      installSubscriptionHandlers: true,
       autoSchemaFile: join(process.cwd(), './graphql/fypnest.gql'),
       include: [
         UsersModule,

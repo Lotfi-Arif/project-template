@@ -117,8 +117,35 @@ type Post {
   updatedAt: DateTime!
 }
 
+type ChatCount {
+  Message: Int!
+  users: Int!
+}
+
+type Chat {
+  id: ID!
+  chatName: String!
+  Message: [Message!]
+  users: [User!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: ChatCount!
+}
+
+type Message {
+  id: ID!
+  sender: User!
+  chat: Chat!
+  Message: String!
+  userId: String!
+  chatId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type UserCount {
   posts: Int!
+  Message: Int!
 }
 
 type User {
@@ -138,6 +165,9 @@ type User {
   counselingSession: CounselorSession
   createdAt: DateTime!
   updatedAt: DateTime!
+  Message: [Message!]
+  Chat: Chat
+  chatId: String
   _count: UserCount!
 }
 
@@ -160,20 +190,6 @@ enum Role {
   STUDENT
   COUNSELOR
   STAFF
-}
-
-type Message {
-  id: ID!
-  sender: String!
-  reciever: String!
-  Message: String!
-}
-
-type Chat {
-  id: ID!
-  chatStatus: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type Event {
@@ -209,7 +225,8 @@ type Query {
   me: User!
   findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): Post!
   findAllMessages(where: MessageWhereInput, orderBy: [MessageOrderByWithRelationInput!], cursor: MessageWhereUniqueInput, take: Int, skip: Int, distinct: [MessageScalarFieldEnum!]): Message!
-  findAllChats(where: ChatWhereInput, orderBy: [ChatOrderByWithRelationInput!], cursor: ChatWhereUniqueInput, take: Int, skip: Int, distinct: [ChatScalarFieldEnum!]): Chat!
+  findChatMessages(id: String!): [Message!]!
+  findAllUserChats(where: ChatWhereInput, orderBy: [ChatOrderByWithRelationInput!], cursor: ChatWhereUniqueInput, take: Int, skip: Int, distinct: [ChatScalarFieldEnum!]): Chat!
   findAllEvents(where: EventWhereInput, orderBy: [EventOrderByWithRelationInput!], cursor: EventWhereUniqueInput, take: Int, skip: Int, distinct: [EventScalarFieldEnum!]): [Event!]!
   findAllFaqs(where: FAQWhereInput, orderBy: [FAQOrderByWithRelationInput!], cursor: FAQWhereUniqueInput, take: Int, skip: Int, distinct: [FAQScalarFieldEnum!]): [FAQ!]!
   findAllSchedules(where: ScheduleWhereInput, orderBy: [ScheduleOrderByWithRelationInput!], cursor: ScheduleWhereUniqueInput, take: Int, skip: Int, distinct: [ScheduleScalarFieldEnum!]): Schedule!
@@ -237,6 +254,9 @@ input UserWhereInput {
   counselingSession: CounselorSessionRelationFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
+  Message: MessageListRelationFilter
+  Chat: ChatRelationFilter
+  chatId: StringNullableFilter
 }
 
 input StringFilter {
@@ -529,6 +549,49 @@ input CounselorSessionRelationFilter {
   isNot: CounselorSessionWhereInput
 }
 
+input MessageListRelationFilter {
+  every: MessageWhereInput
+  some: MessageWhereInput
+  none: MessageWhereInput
+}
+
+input MessageWhereInput {
+  AND: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+  id: StringFilter
+  sender: UserRelationFilter
+  chat: ChatRelationFilter
+  Message: StringFilter
+  userId: StringFilter
+  chatId: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ChatRelationFilter {
+  is: ChatWhereInput
+  isNot: ChatWhereInput
+}
+
+input ChatWhereInput {
+  AND: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
+  id: StringFilter
+  chatName: StringFilter
+  Message: MessageListRelationFilter
+  users: UserListRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
 input UserOrderByWithRelationInput {
   id: SortOrder
   firstName: SortOrder
@@ -546,6 +609,9 @@ input UserOrderByWithRelationInput {
   counselingSession: CounselorSessionOrderByWithRelationInput
   createdAt: SortOrder
   updatedAt: SortOrder
+  Message: MessageOrderByRelationAggregateInput
+  Chat: ChatOrderByWithRelationInput
+  chatId: SortOrder
 }
 
 enum SortOrder {
@@ -644,6 +710,23 @@ input ScheduleOrderByWithRelationInput {
   counselorId: SortOrder
 }
 
+input MessageOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ChatOrderByWithRelationInput {
+  id: SortOrder
+  chatName: SortOrder
+  Message: MessageOrderByRelationAggregateInput
+  users: UserOrderByRelationAggregateInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
 input UserWhereUniqueInput {
   id: String
   mobile: String
@@ -660,6 +743,7 @@ enum UserScalarFieldEnum {
   role
   createdAt
   updatedAt
+  chatId
 }
 
 input CounselorWhereUniqueInput {
@@ -701,21 +785,15 @@ enum PostScalarFieldEnum {
   updatedAt
 }
 
-input MessageWhereInput {
-  AND: [MessageWhereInput!]
-  OR: [MessageWhereInput!]
-  NOT: [MessageWhereInput!]
-  id: StringFilter
-  sender: StringFilter
-  reciever: StringFilter
-  Message: StringFilter
-}
-
 input MessageOrderByWithRelationInput {
   id: SortOrder
-  sender: SortOrder
-  reciever: SortOrder
+  sender: UserOrderByWithRelationInput
+  chat: ChatOrderByWithRelationInput
   Message: SortOrder
+  userId: SortOrder
+  chatId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input MessageWhereUniqueInput {
@@ -724,26 +802,11 @@ input MessageWhereUniqueInput {
 
 enum MessageScalarFieldEnum {
   id
-  sender
-  reciever
   Message
-}
-
-input ChatWhereInput {
-  AND: [ChatWhereInput!]
-  OR: [ChatWhereInput!]
-  NOT: [ChatWhereInput!]
-  id: StringFilter
-  chatStatus: StringFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
-}
-
-input ChatOrderByWithRelationInput {
-  id: SortOrder
-  chatStatus: SortOrder
-  createdAt: SortOrder
-  updatedAt: SortOrder
+  userId
+  chatId
+  createdAt
+  updatedAt
 }
 
 input ChatWhereUniqueInput {
@@ -752,7 +815,7 @@ input ChatWhereUniqueInput {
 
 enum ChatScalarFieldEnum {
   id
-  chatStatus
+  chatName
   createdAt
   updatedAt
 }
@@ -867,7 +930,7 @@ type Mutation {
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
   deletePost(where: PostWhereUniqueInput!): Post!
   findOneMessage(where: MessageWhereUniqueInput!): Message!
-  createMessage(data: MessageCreateInput!): Message!
+  sendMessage(data: MessageCreateInput!): Message!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message!
   deleteMessage(where: MessageWhereUniqueInput!): Message!
   findOneChat(where: ChatWhereUniqueInput!): Chat!
@@ -911,6 +974,8 @@ input UserUpdateInput {
   counselingSession: CounselorSessionUpdateOneWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
 }
 
 input StringFieldUpdateOperationsInput {
@@ -1013,6 +1078,8 @@ input UserCreateWithoutCounselorInput {
   counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
   createdAt: DateTime
   updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+  Chat: ChatCreateNestedOneWithoutUsersInput
 }
 
 input StudentCreateNestedOneWithoutUserInput {
@@ -1107,6 +1174,8 @@ input UserCreateWithoutStudentInput {
   counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
   createdAt: DateTime
   updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+  Chat: ChatCreateNestedOneWithoutUsersInput
 }
 
 input CounselorCreateNestedOneWithoutUserInput {
@@ -1201,6 +1270,8 @@ input UserCreateWithoutStaffInput {
   counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
   createdAt: DateTime
   updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+  Chat: ChatCreateNestedOneWithoutUsersInput
 }
 
 input AdminCreateNestedOneWithoutUserInput {
@@ -1352,6 +1423,193 @@ input UserCreateWithoutCounselingSessionInput {
   posts: PostCreateNestedManyWithoutAuthorInput
   createdAt: DateTime
   updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+  Chat: ChatCreateNestedOneWithoutUsersInput
+}
+
+input MessageCreateNestedManyWithoutSenderInput {
+  create: [MessageCreateWithoutSenderInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+  connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateWithoutSenderInput {
+  id: String
+  chat: ChatCreateNestedOneWithoutMessageInput!
+  Message: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ChatCreateNestedOneWithoutMessageInput {
+  create: ChatCreateWithoutMessageInput
+  connectOrCreate: ChatCreateOrConnectWithoutMessageInput
+  connect: ChatWhereUniqueInput
+}
+
+input ChatCreateWithoutMessageInput {
+  id: String
+  chatName: String!
+  users: UserCreateNestedManyWithoutChatInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserCreateNestedManyWithoutChatInput {
+  create: [UserCreateWithoutChatInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutChatInput!]
+  createMany: UserCreateManyChatInputEnvelope
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateWithoutChatInput {
+  id: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  mobile: String
+  gender: Gender
+  accountStatus: AccountStatus
+  role: Role!
+  student: StudentCreateNestedOneWithoutUserInput
+  staff: StaffCreateNestedOneWithoutUserInput
+  counselor: CounselorCreateNestedOneWithoutUserInput
+  admin: AdminCreateNestedOneWithoutUserInput
+  posts: PostCreateNestedManyWithoutAuthorInput
+  counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
+  createdAt: DateTime
+  updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+}
+
+input UserCreateOrConnectWithoutChatInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutChatInput!
+}
+
+input UserCreateManyChatInputEnvelope {
+  data: [UserCreateManyChatInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserCreateManyChatInput {
+  id: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  mobile: String
+  gender: Gender
+  accountStatus: AccountStatus
+  role: Role!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ChatCreateOrConnectWithoutMessageInput {
+  where: ChatWhereUniqueInput!
+  create: ChatCreateWithoutMessageInput!
+}
+
+input MessageCreateOrConnectWithoutSenderInput {
+  where: MessageWhereUniqueInput!
+  create: MessageCreateWithoutSenderInput!
+}
+
+input MessageCreateManySenderInputEnvelope {
+  data: [MessageCreateManySenderInput!]!
+  skipDuplicates: Boolean
+}
+
+input MessageCreateManySenderInput {
+  id: String
+  Message: String!
+  chatId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ChatCreateNestedOneWithoutUsersInput {
+  create: ChatCreateWithoutUsersInput
+  connectOrCreate: ChatCreateOrConnectWithoutUsersInput
+  connect: ChatWhereUniqueInput
+}
+
+input ChatCreateWithoutUsersInput {
+  id: String
+  chatName: String!
+  Message: MessageCreateNestedManyWithoutChatInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input MessageCreateNestedManyWithoutChatInput {
+  create: [MessageCreateWithoutChatInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutChatInput!]
+  createMany: MessageCreateManyChatInputEnvelope
+  connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateWithoutChatInput {
+  id: String
+  sender: UserCreateNestedOneWithoutMessageInput!
+  Message: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserCreateNestedOneWithoutMessageInput {
+  create: UserCreateWithoutMessageInput
+  connectOrCreate: UserCreateOrConnectWithoutMessageInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutMessageInput {
+  id: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  mobile: String
+  gender: Gender
+  accountStatus: AccountStatus
+  role: Role!
+  student: StudentCreateNestedOneWithoutUserInput
+  staff: StaffCreateNestedOneWithoutUserInput
+  counselor: CounselorCreateNestedOneWithoutUserInput
+  admin: AdminCreateNestedOneWithoutUserInput
+  posts: PostCreateNestedManyWithoutAuthorInput
+  counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
+  createdAt: DateTime
+  updatedAt: DateTime
+  Chat: ChatCreateNestedOneWithoutUsersInput
+}
+
+input UserCreateOrConnectWithoutMessageInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutMessageInput!
+}
+
+input MessageCreateOrConnectWithoutChatInput {
+  where: MessageWhereUniqueInput!
+  create: MessageCreateWithoutChatInput!
+}
+
+input MessageCreateManyChatInputEnvelope {
+  data: [MessageCreateManyChatInput!]!
+  skipDuplicates: Boolean
+}
+
+input MessageCreateManyChatInput {
+  id: String
+  Message: String!
+  userId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ChatCreateOrConnectWithoutUsersInput {
+  where: ChatWhereUniqueInput!
+  create: ChatCreateWithoutUsersInput!
 }
 
 input UserCreateOrConnectWithoutCounselingSessionInput {
@@ -1632,6 +1890,8 @@ input UserUpdateWithoutCounselorInput {
   counselingSession: CounselorSessionUpdateOneWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
 }
 
 input StaffUpdateOneWithoutUserInput {
@@ -1747,6 +2007,8 @@ input UserUpdateWithoutStudentInput {
   counselingSession: CounselorSessionUpdateOneWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
 }
 
 input CounselorUpdateOneWithoutUserInput {
@@ -1892,6 +2154,8 @@ input UserUpdateWithoutStaffInput {
   counselingSession: CounselorSessionUpdateOneWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
 }
 
 input AdminUpdateOneWithoutUserInput {
@@ -2114,6 +2378,260 @@ input UserUpdateWithoutCounselingSessionInput {
   posts: PostUpdateManyWithoutAuthorInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
+}
+
+input MessageUpdateManyWithoutSenderInput {
+  create: [MessageCreateWithoutSenderInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+  set: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  delete: [MessageWhereUniqueInput!]
+  connect: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutSenderInput!]
+  deleteMany: [MessageScalarWhereInput!]
+}
+
+input MessageUpsertWithWhereUniqueWithoutSenderInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutSenderInput!
+  create: MessageCreateWithoutSenderInput!
+}
+
+input MessageUpdateWithoutSenderInput {
+  id: StringFieldUpdateOperationsInput
+  chat: ChatUpdateOneRequiredWithoutMessageInput
+  Message: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ChatUpdateOneRequiredWithoutMessageInput {
+  create: ChatCreateWithoutMessageInput
+  connectOrCreate: ChatCreateOrConnectWithoutMessageInput
+  upsert: ChatUpsertWithoutMessageInput
+  connect: ChatWhereUniqueInput
+  update: ChatUpdateWithoutMessageInput
+}
+
+input ChatUpsertWithoutMessageInput {
+  update: ChatUpdateWithoutMessageInput!
+  create: ChatCreateWithoutMessageInput!
+}
+
+input ChatUpdateWithoutMessageInput {
+  id: StringFieldUpdateOperationsInput
+  chatName: StringFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutChatInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateManyWithoutChatInput {
+  create: [UserCreateWithoutChatInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutChatInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutChatInput!]
+  createMany: UserCreateManyChatInputEnvelope
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutChatInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutChatInput!]
+  deleteMany: [UserScalarWhereInput!]
+}
+
+input UserUpsertWithWhereUniqueWithoutChatInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutChatInput!
+  create: UserCreateWithoutChatInput!
+}
+
+input UserUpdateWithoutChatInput {
+  id: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  accountStatus: EnumAccountStatusFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  student: StudentUpdateOneWithoutUserInput
+  staff: StaffUpdateOneWithoutUserInput
+  counselor: CounselorUpdateOneWithoutUserInput
+  admin: AdminUpdateOneWithoutUserInput
+  posts: PostUpdateManyWithoutAuthorInput
+  counselingSession: CounselorSessionUpdateOneWithoutUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+}
+
+input UserUpdateWithWhereUniqueWithoutChatInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutChatInput!
+}
+
+input UserUpdateManyWithWhereWithoutChatInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyMutationInput!
+}
+
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+  id: StringFilter
+  firstName: StringFilter
+  lastName: StringFilter
+  password: StringFilter
+  mobile: StringNullableFilter
+  gender: EnumGenderNullableFilter
+  accountStatus: EnumAccountStatusFilter
+  role: EnumRoleFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  chatId: StringNullableFilter
+}
+
+input UserUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  accountStatus: EnumAccountStatusFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateWithWhereUniqueWithoutSenderInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutSenderInput!
+}
+
+input MessageUpdateManyWithWhereWithoutSenderInput {
+  where: MessageScalarWhereInput!
+  data: MessageUpdateManyMutationInput!
+}
+
+input MessageScalarWhereInput {
+  AND: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  NOT: [MessageScalarWhereInput!]
+  id: StringFilter
+  Message: StringFilter
+  userId: StringFilter
+  chatId: StringFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input MessageUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  Message: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ChatUpdateOneWithoutUsersInput {
+  create: ChatCreateWithoutUsersInput
+  connectOrCreate: ChatCreateOrConnectWithoutUsersInput
+  upsert: ChatUpsertWithoutUsersInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: ChatWhereUniqueInput
+  update: ChatUpdateWithoutUsersInput
+}
+
+input ChatUpsertWithoutUsersInput {
+  update: ChatUpdateWithoutUsersInput!
+  create: ChatCreateWithoutUsersInput!
+}
+
+input ChatUpdateWithoutUsersInput {
+  id: StringFieldUpdateOperationsInput
+  chatName: StringFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutChatInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateManyWithoutChatInput {
+  create: [MessageCreateWithoutChatInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutChatInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutChatInput!]
+  createMany: MessageCreateManyChatInputEnvelope
+  set: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  delete: [MessageWhereUniqueInput!]
+  connect: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutChatInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutChatInput!]
+  deleteMany: [MessageScalarWhereInput!]
+}
+
+input MessageUpsertWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutChatInput!
+  create: MessageCreateWithoutChatInput!
+}
+
+input MessageUpdateWithoutChatInput {
+  id: StringFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutMessageInput
+  Message: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutMessageInput {
+  create: UserCreateWithoutMessageInput
+  connectOrCreate: UserCreateOrConnectWithoutMessageInput
+  upsert: UserUpsertWithoutMessageInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutMessageInput
+}
+
+input UserUpsertWithoutMessageInput {
+  update: UserUpdateWithoutMessageInput!
+  create: UserCreateWithoutMessageInput!
+}
+
+input UserUpdateWithoutMessageInput {
+  id: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumGenderFieldUpdateOperationsInput
+  accountStatus: EnumAccountStatusFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  student: StudentUpdateOneWithoutUserInput
+  staff: StaffUpdateOneWithoutUserInput
+  counselor: CounselorUpdateOneWithoutUserInput
+  admin: AdminUpdateOneWithoutUserInput
+  posts: PostUpdateManyWithoutAuthorInput
+  counselingSession: CounselorSessionUpdateOneWithoutUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  Chat: ChatUpdateOneWithoutUsersInput
+}
+
+input MessageUpdateWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutChatInput!
+}
+
+input MessageUpdateManyWithWhereWithoutChatInput {
+  where: MessageScalarWhereInput!
+  data: MessageUpdateManyMutationInput!
 }
 
 input CounselorSessionUpdateWithWhereUniqueWithoutCounselorInput {
@@ -2241,6 +2759,8 @@ input UserCreateWithoutPostsInput {
   counselingSession: CounselorSessionCreateNestedOneWithoutUserInput
   createdAt: DateTime
   updatedAt: DateTime
+  Message: MessageCreateNestedManyWithoutSenderInput
+  Chat: ChatCreateNestedOneWithoutUsersInput
 }
 
 input UserCreateOrConnectWithoutPostsInput {
@@ -2286,32 +2806,42 @@ input UserUpdateWithoutPostsInput {
   counselingSession: CounselorSessionUpdateOneWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutSenderInput
+  Chat: ChatUpdateOneWithoutUsersInput
 }
 
 input MessageCreateInput {
   id: String
-  sender: String!
-  reciever: String!
+  sender: UserCreateNestedOneWithoutMessageInput!
+  chat: ChatCreateNestedOneWithoutMessageInput!
   Message: String!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input MessageUpdateInput {
   id: StringFieldUpdateOperationsInput
-  sender: StringFieldUpdateOperationsInput
-  reciever: StringFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutMessageInput
+  chat: ChatUpdateOneRequiredWithoutMessageInput
   Message: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input ChatCreateInput {
   id: String
-  chatStatus: String!
+  chatName: String!
+  Message: MessageCreateNestedManyWithoutChatInput
+  users: UserCreateNestedManyWithoutChatInput
   createdAt: DateTime
   updatedAt: DateTime
 }
 
 input ChatUpdateInput {
   id: StringFieldUpdateOperationsInput
-  chatStatus: StringFieldUpdateOperationsInput
+  chatName: StringFieldUpdateOperationsInput
+  Message: MessageUpdateManyWithoutChatInput
+  users: UserUpdateManyWithoutChatInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2412,4 +2942,9 @@ input SignupInput {
   role: Role!
   mobile: String
   accountStatus: AccountStatus!
+}
+
+type Subscription {
+  onChatMessage(id: String!): Message!
+  onChatCreations: Chat!
 }

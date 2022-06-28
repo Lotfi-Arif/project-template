@@ -15,6 +15,112 @@ import { getApolloClient } from './utils/hooks/withApollo.tsx';
 
 
 
+
+export async function getServerPageOnChatMessage
+    (options: Omit<Apollo.QueryOptions<Types.OnChatMessageSubscriptionVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.OnChatMessageSubscription>({ ...options, query: Operations.OnChatMessageDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useOnChatMessage = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.OnChatMessageSubscription, Types.OnChatMessageSubscriptionVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.OnChatMessageDocument, options);
+};
+export type PageOnChatMessageComp = React.FC<{data?: Types.OnChatMessageSubscription, error?: Apollo.ApolloError}>;
+export const withPageOnChatMessage = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.OnChatMessageSubscription, Types.OnChatMessageSubscriptionVariables>) => (WrappedComponent:PageOnChatMessageComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.OnChatMessageDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrOnChatMessage = {
+      getServerPage: getServerPageOnChatMessage,
+      withPage: withPageOnChatMessage,
+      usePage: useOnChatMessage,
+    }
+export async function getServerPageFindChatMessages
+    (options: Omit<Apollo.QueryOptions<Types.FindChatMessagesQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.FindChatMessagesQuery>({ ...options, query: Operations.FindChatMessagesDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useFindChatMessages = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindChatMessagesQuery, Types.FindChatMessagesQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.FindChatMessagesDocument, options);
+};
+export type PageFindChatMessagesComp = React.FC<{data?: Types.FindChatMessagesQuery, error?: Apollo.ApolloError}>;
+export const withPageFindChatMessages = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindChatMessagesQuery, Types.FindChatMessagesQueryVariables>) => (WrappedComponent:PageFindChatMessagesComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.FindChatMessagesDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrFindChatMessages = {
+      getServerPage: getServerPageFindChatMessages,
+      withPage: withPageFindChatMessages,
+      usePage: useFindChatMessages,
+    }
+export async function getServerPageFindAllMessages
+    (options: Omit<Apollo.QueryOptions<Types.FindAllMessagesQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.FindAllMessagesQuery>({ ...options, query: Operations.FindAllMessagesDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useFindAllMessages = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindAllMessagesQuery, Types.FindAllMessagesQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.FindAllMessagesDocument, options);
+};
+export type PageFindAllMessagesComp = React.FC<{data?: Types.FindAllMessagesQuery, error?: Apollo.ApolloError}>;
+export const withPageFindAllMessages = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindAllMessagesQuery, Types.FindAllMessagesQueryVariables>) => (WrappedComponent:PageFindAllMessagesComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.FindAllMessagesDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrFindAllMessages = {
+      getServerPage: getServerPageFindAllMessages,
+      withPage: withPageFindAllMessages,
+      usePage: useFindAllMessages,
+    }
 export async function getServerPageEvents
     (options: Omit<Apollo.QueryOptions<Types.EventsQueryVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);

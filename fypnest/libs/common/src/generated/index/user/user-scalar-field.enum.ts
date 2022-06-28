@@ -10,7 +10,8 @@ export enum UserScalarFieldEnum {
     accountStatus = "accountStatus",
     role = "role",
     createdAt = "createdAt",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    chatId = "chatId"
 }
 
 

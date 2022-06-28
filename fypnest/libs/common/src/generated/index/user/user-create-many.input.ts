@@ -36,4 +36,7 @@ export class UserCreateManyInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => String, {nullable:true})
+    chatId?: string;
 }

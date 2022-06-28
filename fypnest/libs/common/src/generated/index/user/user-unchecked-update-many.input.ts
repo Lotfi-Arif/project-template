@@ -39,4 +39,7 @@ export class UserUncheckedUpdateManyInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    chatId?: NullableStringFieldUpdateOperationsInput;
 }

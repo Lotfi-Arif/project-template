@@ -9,6 +9,7 @@ import { CounselorUncheckedCreateNestedOneWithoutUserInput } from '../counselor/
 import { AdminUncheckedCreateNestedOneWithoutUserInput } from '../admin/admin-unchecked-create-nested-one-without-user.input';
 import { PostUncheckedCreateNestedManyWithoutAuthorInput } from '../post/post-unchecked-create-nested-many-without-author.input';
 import { CounselorSessionUncheckedCreateNestedOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-create-nested-one-without-user.input';
+import { MessageUncheckedCreateNestedManyWithoutSenderInput } from '../message/message-unchecked-create-nested-many-without-sender.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -60,4 +61,10 @@ export class UserUncheckedCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => MessageUncheckedCreateNestedManyWithoutSenderInput, {nullable:true})
+    Message?: MessageUncheckedCreateNestedManyWithoutSenderInput;
+
+    @Field(() => String, {nullable:true})
+    chatId?: string;
 }

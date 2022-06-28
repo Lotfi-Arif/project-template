@@ -12,6 +12,7 @@ import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecke
 import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
 import { CounselorSessionUncheckedUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-one-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { MessageUncheckedUpdateManyWithoutSenderInput } from '../message/message-unchecked-update-many-without-sender.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -63,4 +64,10 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => MessageUncheckedUpdateManyWithoutSenderInput, {nullable:true})
+    Message?: MessageUncheckedUpdateManyWithoutSenderInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    chatId?: NullableStringFieldUpdateOperationsInput;
 }

@@ -35,5 +35,8 @@ export class UserCountAggregateInput {
     updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
+    chatId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

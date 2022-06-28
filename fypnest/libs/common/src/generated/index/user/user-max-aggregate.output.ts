@@ -36,4 +36,7 @@ export class UserMaxAggregate {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => String, {nullable:true})
+    chatId?: string;
 }

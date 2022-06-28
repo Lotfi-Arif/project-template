@@ -34,6 +34,7 @@
         "@tailwindcss/forms": "^0.5.0",
         "@tailwindcss/typography": "^0.5.2",
         "apexcharts-clevision": "3.28.5",
+        "apollo": "^2.34.0",
         "apollo-upload-client": "^17.0.0",
         "chart.js": "^3.7.1",
         "clsx": "^1.1.1",

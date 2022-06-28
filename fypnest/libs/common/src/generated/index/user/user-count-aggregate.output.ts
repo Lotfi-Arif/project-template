@@ -36,5 +36,8 @@ export class UserCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
+    chatId!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

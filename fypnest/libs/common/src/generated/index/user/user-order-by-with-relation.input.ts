@@ -7,6 +7,8 @@ import { CounselorOrderByWithRelationInput } from '../counselor/counselor-order-
 import { AdminOrderByWithRelationInput } from '../admin/admin-order-by-with-relation.input';
 import { PostOrderByRelationAggregateInput } from '../post/post-order-by-relation-aggregate.input';
 import { CounselorSessionOrderByWithRelationInput } from '../counselor-session/counselor-session-order-by-with-relation.input';
+import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
+import { ChatOrderByWithRelationInput } from '../chat/chat-order-by-with-relation.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -58,4 +60,13 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => MessageOrderByRelationAggregateInput, {nullable:true})
+    Message?: MessageOrderByRelationAggregateInput;
+
+    @Field(() => ChatOrderByWithRelationInput, {nullable:true})
+    Chat?: ChatOrderByWithRelationInput;
+
+    @Field(() => SortOrder, {nullable:true})
+    chatId?: keyof typeof SortOrder;
 }
