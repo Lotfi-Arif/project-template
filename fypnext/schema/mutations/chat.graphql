@@ -1,0 +1,13 @@
+mutation createChat($data: ChatCreateInput!) {
+  createChat(data: $data) {
+    id
+    chatName
+    Message {
+        id
+        Message
+    }
+    users {
+      id
+    }
+  }
+}

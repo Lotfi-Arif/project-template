@@ -16,6 +16,7 @@ import { getApolloClient } from './utils/hooks/withApollo.tsx';
 
 
 
+
 export async function getServerPageOnChatMessage
     (options: Omit<Apollo.QueryOptions<Types.OnChatMessageSubscriptionVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);

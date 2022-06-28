@@ -3277,6 +3277,13 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', accessToken: string, refreshToken: string } };
 
+export type CreateChatMutationVariables = Exact<{
+  data: ChatCreateInput;
+}>;
+
+
+export type CreateChatMutation = { __typename?: 'Mutation', createChat: { __typename?: 'Chat', id: string, chatName: string, Message?: Array<{ __typename?: 'Message', id: string, Message: string }> | null | undefined, users?: Array<{ __typename?: 'User', id: string }> | null | undefined } };
+
 export type CreateEventMutationVariables = Exact<{
   data: EventCreateInput;
 }>;
@@ -3455,6 +3462,47 @@ export function useSignupMutation(baseOptions?: Apollo.MutationHookOptions<Signu
 export type SignupMutationHookResult = ReturnType<typeof useSignupMutation>;
 export type SignupMutationResult = Apollo.MutationResult<SignupMutation>;
 export type SignupMutationOptions = Apollo.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
+export const CreateChatDocument = gql`
+    mutation createChat($data: ChatCreateInput!) {
+  createChat(data: $data) {
+    id
+    chatName
+    Message {
+      id
+      Message
+    }
+    users {
+      id
+    }
+  }
+}
+    `;
+export type CreateChatMutationFn = Apollo.MutationFunction<CreateChatMutation, CreateChatMutationVariables>;
+
+/**
+ * __useCreateChatMutation__
+ *
+ * To run a mutation, you first call `useCreateChatMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateChatMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createChatMutation, { data, loading, error }] = useCreateChatMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateChatMutation(baseOptions?: Apollo.MutationHookOptions<CreateChatMutation, CreateChatMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateChatMutation, CreateChatMutationVariables>(CreateChatDocument, options);
+      }
+export type CreateChatMutationHookResult = ReturnType<typeof useCreateChatMutation>;
+export type CreateChatMutationResult = Apollo.MutationResult<CreateChatMutation>;
+export type CreateChatMutationOptions = Apollo.BaseMutationOptions<CreateChatMutation, CreateChatMutationVariables>;
 export const CreateEventDocument = gql`
     mutation createEvent($data: EventCreateInput!) {
   createEvent(data: $data) {
@@ -4243,6 +4291,7 @@ export const namedOperations = {
   Mutation: {
     login: 'login',
     signup: 'signup',
+    createChat: 'createChat',
     createEvent: 'createEvent',
     updateEvent: 'updateEvent',
     deleteEvent: 'deleteEvent',
