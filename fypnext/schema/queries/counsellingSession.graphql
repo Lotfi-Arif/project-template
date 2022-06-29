@@ -1,0 +1,15 @@
+query sessions {
+  findAllCounselorSessions {
+    id
+    counsellingReason
+    counselor {
+      id
+    }
+    student {
+      id
+    }
+    staff {
+      id
+    }
+  }
+}

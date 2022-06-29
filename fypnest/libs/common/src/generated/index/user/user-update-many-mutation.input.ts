@@ -19,9 +19,6 @@ export class UserUpdateManyMutationInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     lastName?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    password?: StringFieldUpdateOperationsInput;
-
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     mobile?: NullableStringFieldUpdateOperationsInput;
 

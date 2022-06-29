@@ -1,29 +1,27 @@
-import { useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import { FindChatMessagesQueryVariables, useCreateChatMutation, useFindChatMessagesQuery, useUsersQuery } from "schema/generated/graphql";
+import { Chat, useCreateChatMutation, UserCreateNestedManyWithoutChatInput, useUsersQuery } from "schema/generated/graphql";
+import { withApollo } from "utils/hooks/withApollo";
 import ChatCard from "../widgets/ChatCard";
 import SearchField from "../widgets/SearchField";
 import UserCard from "../widgets/UserCard";
 
 export interface ChatsProps {
-    chats: FindChatMessagesQueryVariables[]
-    
-    // onClick: Function;
-    currentUser: string
+    chats: Chat[]
+
+    onClick: Function;
+    currentUser: UserCreateNestedManyWithoutChatInput
     currentChat: string
 }
 
 export interface Chats {
     isCreatingChat: boolean
-
-
 }
 
 
 const Chats: React.FC<ChatsProps> = (props: ChatsProps) => {
     const [isCreatingChat, setisCreatingChat] = useState(false)
     const [search, setsearch] = useState('')
-    const [users, setusers] = useState<string[]>([props.currentUser])
+    const [users, setusers] = useState(props.currentUser)
     const [newChat, setNewChat] = useState('')
     const { data, loading, error } = useUsersQuery();
     const [createChat] = useCreateChatMutation()
@@ -31,7 +29,7 @@ const Chats: React.FC<ChatsProps> = (props: ChatsProps) => {
         createChat({
             variables: {
                 data: {
-                    ChatName: newChat,
+                    chatName: newChat,
                     users: users
                 }
             }
@@ -47,25 +45,26 @@ const Chats: React.FC<ChatsProps> = (props: ChatsProps) => {
     }, [isCreatingChat])
 
     const renderChats = () => {
-        const result = props.chats.filter((chat) => chat.chatName.contains.includes(search));
-        
-return result.map((chat) => {
-            const selected = chat.id === props.currentChat.toString
-            
-return <ChatCard selected={selected} key={chat.id} onClick={props.onClick} id={chat.id} chat={chat.ChatName} description={chat.description} image={"https://images.unsplash.com/photo-1541250628459-d8f2f0157289?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&auto=format&fit=crop&w=1350&q=80"} />;
-        });
+        // const result = props.chats.filter((chat) => chat.chatName.includes(search));
+
+        // return result.map((chat) => {
+        //     const selected = chat.id.toString === props.currentChat.toString
+
+        //     return <ChatCard selected={selected} key={chat.id} onClick={props.onClick} id={chat.id} chat={chat.chatName} image={"https://images.unsplash.com/photo-1541250628459-d8f2f0157289?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&auto=format&fit=crop&w=1350&q=80"} />;
+        // });
     }
     const renderUsers = () => {
-        const result = data ? data.users.filter((user) => (user.email.includes(search) || users.includes(user.id)) && user.id !== props.currentUser) : [];
-        
-return result.map((user) => {
-            const selected = users.find((selectedUser) => selectedUser === user.id) ? true : false;
+        const result = data ? data.findAllUsers.filter((user) => (user.firstName.includes(search) || users.connect.includes({ id : user.id }) && user.id !== props.currentUser)): [];
+
+        return result.map((user) => {
+            const selected = users.connect.find((selectedUser) => selectedUser === user.id) ? true : false;
 
 
             return <UserCard selected={selected} onClick={() => {
-                users.find((selectedUser) => selectedUser === user.id) ?
-                    setusers(users.filter((selectedUser) => selectedUser !== user.id)) : setusers([...users, user.id])
-            }} key={user.id} id={user.id} username={user.username} email={user.email} image={"https://images.unsplash.com/photo-1541250628459-d8f2f0157289?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&auto=format&fit=crop&w=1350&q=80"} />;
+                users.connect.find((selectedUser) => selectedUser === user.id) 
+                // ?
+                // setusers(users.connect.((selectedUser) => selectedUser !== user.id)) : setusers(users)
+            }} key={user.id} id={user.id} username={user.firstName} email={user.mobile} image={"https://images.unsplash.com/photo-1541250628459-d8f2f0157289?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjQzMzEwfQ&auto=format&fit=crop&w=1350&q=80"} />;
         })
     }
 
@@ -117,4 +116,4 @@ return result.map((user) => {
 
 }
 
-export default Chats;
+export default withApollo(Chats);

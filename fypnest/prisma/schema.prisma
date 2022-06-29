@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URI")
+  url      = "postgresql://postgres:postgres@localhost:5432/ecs_test?schema=public"
 }
 
 generator client {
@@ -19,7 +19,6 @@ model User {
   id                String            @id @default(uuid())
   firstName         String
   lastName          String
-  password          String
   mobile            String?           @unique
   gender            Gender?
   accountStatus     AccountStatus     @default(UNVERIFIED)
@@ -29,7 +28,7 @@ model User {
   counselor         Counselor?
   admin             Admin?
   posts             Post[]
-  counselingSession CounselorSession?
+  counselingSession CounselorSession[]
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   Message           Message[]
@@ -39,10 +38,10 @@ model User {
 
 model Schedule {
   id               String             @id @default(uuid())
-  days             DateTime
-  timeFrom         DateTime
-  timeTo           DateTime
-  hour             DateTime
+  days             String?
+  timeFrom         String?
+  timeTo           String?
+  hour             String?
   CounselorSession CounselorSession[]
   Counselor        Counselor?         @relation(fields: [counselorId], references: [id])
   counselorId      String?
@@ -61,7 +60,7 @@ model CounselorSession {
   userId            String?   @unique
   studentId         String?
   staffId           String?
-  counsellingDate   DateTime
+  counsellingDate   String?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 }
@@ -70,6 +69,7 @@ model Student {
   id               String             @id @default(uuid())
   firstName        String
   lastName         String
+  password         String
   email            String             @unique
   matrix           String?            @unique
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
@@ -81,9 +81,8 @@ model Student {
 
 model Admin {
   id        String   @id @default(uuid())
-  firstName String
-  lastName  String
   email     String   @unique
+  password  String
   user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,9 +90,8 @@ model Admin {
 
 model Staff {
   id               String             @id @default(uuid())
-  firstName        String
-  lastName         String
   email            String             @unique
+  password         String
   staffMatrix      String?            @unique
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   faculty          String?
@@ -104,9 +102,8 @@ model Staff {
 
 model Counselor {
   id               String             @id @default(uuid())
-  firstName        String
-  lastName         String
   email            String             @unique
+  password         String
   department       String?
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   expertise        String?

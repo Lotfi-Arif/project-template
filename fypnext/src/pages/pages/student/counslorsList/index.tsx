@@ -2,6 +2,7 @@ import { useCounselorsQuery } from "schema/generated/graphql";
 import CounselorCard from "src/components/Cards/CounselorCard";
 import StudentLayout from "src/layouts/Student";
 import { withApollo } from "utils/hooks/withApollo";
+import Booking from "../booking";
 
 const CounselorsList = () => {
 
@@ -26,7 +27,11 @@ const CounselorsList = () => {
                         <div className="flex flex-wrap space-x-10 mx-auto my-auto">
                             {counselors.map((counselor) => {
 
-                                return <CounselorCard key={counselor.id} counselor={counselor} />
+                                return (
+                                    <>
+                                        <CounselorCard key={counselor.id} counselor={counselor} />
+                                    </>
+                                )
                             })}
                         </div>
 

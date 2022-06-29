@@ -11,10 +11,11 @@ import { AccountStatus } from '@prisma/client';
 import { UserEntity } from '@app/common/decorators/user.decorator';
 import { Counselor } from '@app/common/generated/index/counselor/counselor.model';
 import { FindManyCounselorArgs } from '@app/common/generated/index/counselor/find-many-counselor.args';
+import { FindUniqueCounselorArgs } from '@app/common/generated/index/counselor/find-unique-counselor.args';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Query(() => [User])
   async findAllUsers(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {
@@ -37,6 +38,16 @@ export class UsersResolver {
         ...counselorFindManyArgs,
         ...counselors,
       });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  @Query(() => Counselor)
+  async getOneCounselor( @Args('id') id: string, @Info() info ) {
+    try {
+      const counselors = new PrismaSelect(info).value;
+      return this.usersService.getOneCounselor({ where: { id: id }, ...counselors });
     } catch (error) {
       console.error(error);
     }

@@ -26,7 +26,7 @@ export class AuthService {
     private emitter: EventEmitter2,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-  ) {}
+  ) { }
 
   async createUser({
     password,
@@ -55,7 +55,6 @@ export class AuthService {
       //     : undefined;
       const user = await this.prisma.user.create({
         data: {
-          password: hashedPassword,
           mobile,
           firstName,
           lastName,
@@ -63,8 +62,7 @@ export class AuthService {
           ...payload,
           [payload.role.toLowerCase()]: {
             create: {
-              firstName,
-              lastName,
+              password: hashedPassword,
               email,
             },
           },
@@ -73,8 +71,7 @@ export class AuthService {
       this.emitter.emit('user.created', user);
 
       return this.generateTokens({
-        userId: user.id,
-        role: payload.role,
+        userId: user.id
       });
     } catch (e) {
       if (
@@ -88,23 +85,18 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string, role: Role): Promise<Token> {
-    const model = role.toLowerCase();
+  async loginStudent(email: string, password: string): Promise<Token> {
 
-    const user = await this.prisma[model as any].findUnique({
+    const user = await this.prisma.student.findUnique({
       where: { email },
-      include: { user: true },
     });
     if (!user) {
       throw new NotFoundException('USER_NOT_FOUND');
     }
-    if (user.status && user.status == AccountStatus.UNVERIFIED) {
-      throw new UnauthorizedException('UNVERIFIED_EMAIL');
-    }
 
     const passwordValid = await this.passwordService.validatePassword(
       password,
-      user.password,
+      user.password
     );
 
     if (!passwordValid) {
@@ -112,8 +104,53 @@ export class AuthService {
     }
 
     return this.generateTokens({
-      userId: user.id,
-      role: role,
+      userId: user.id
+    });
+  }
+
+  async loginCouselor(email: string, password: string): Promise<Token> {
+
+    const user = await this.prisma.counselor.findUnique({
+      where: { email },
+    });
+    if (!user) {
+      throw new NotFoundException('USER_NOT_FOUND');
+    }
+
+    const passwordValid = await this.passwordService.validatePassword(
+      password,
+      user.password
+    );
+
+    if (!passwordValid) {
+      throw new BadRequestException('INVALID_CREDENTIALS');
+    }
+
+    return this.generateTokens({
+      userId: user.id
+    });
+  }
+
+  async loginStaff(email: string, password: string): Promise<Token> {
+
+    const user = await this.prisma.staff.findUnique({
+      where: { email },
+    });
+    if (!user) {
+      throw new NotFoundException('USER_NOT_FOUND');
+    }
+
+    const passwordValid = await this.passwordService.validatePassword(
+      password,
+      user.password
+    );
+
+    if (!passwordValid) {
+      throw new BadRequestException('INVALID_CREDENTIALS');
+    }
+
+    return this.generateTokens({
+      userId: user.id
     });
   }
   validateUser(userId: string): Promise<User> {
@@ -139,7 +176,7 @@ export class AuthService {
     );
   }
 
-  generateTokens(payload: { userId: string; role: Role }): Token {
+  generateTokens(payload: { userId: string; }): Token {
     return {
       accessToken: this.generateAccessToken(payload),
       refreshToken: this.generateRefreshToken(payload),
@@ -151,13 +188,12 @@ export class AuthService {
     return this.jwtService.decode(token) as { email; iat; exp };
   }
 
-  private generateAccessToken(payload: { userId: string; role: Role }): string {
+  private generateAccessToken(payload: { userId: string; }): string {
     return this.jwtService.sign(payload);
   }
 
   private generateRefreshToken(payload: {
     userId: string;
-    role: Role;
   }): string {
     const securityConfig = this.configService.get<SecurityConfig>('security');
     return this.jwtService.sign(payload, {
@@ -168,12 +204,11 @@ export class AuthService {
 
   refreshToken(token: string) {
     try {
-      const { userId, role } = this.jwtService.verify(token, {
+      const { userId } = this.jwtService.verify(token, {
         secret: this.configService.get('JWT_REFRESH_SECRET'),
       });
       return this.generateTokens({
         userId,
-        role,
       });
     } catch (e) {
       throw new UnauthorizedException();

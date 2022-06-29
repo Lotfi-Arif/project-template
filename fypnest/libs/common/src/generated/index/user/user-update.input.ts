@@ -10,7 +10,7 @@ import { StaffUpdateOneWithoutUserInput } from '../staff/staff-update-one-withou
 import { CounselorUpdateOneWithoutUserInput } from '../counselor/counselor-update-one-without-user.input';
 import { AdminUpdateOneWithoutUserInput } from '../admin/admin-update-one-without-user.input';
 import { PostUpdateManyWithoutAuthorInput } from '../post/post-update-many-without-author.input';
-import { CounselorSessionUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-update-one-without-user.input';
+import { CounselorSessionUpdateManyWithoutUserInput } from '../counselor-session/counselor-session-update-many-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { MessageUpdateManyWithoutSenderInput } from '../message/message-update-many-without-sender.input';
 import { ChatUpdateOneWithoutUsersInput } from '../chat/chat-update-one-without-users.input';
@@ -26,9 +26,6 @@ export class UserUpdateInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     lastName?: StringFieldUpdateOperationsInput;
-
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    password?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     mobile?: NullableStringFieldUpdateOperationsInput;
@@ -57,8 +54,8 @@ export class UserUpdateInput {
     @Field(() => PostUpdateManyWithoutAuthorInput, {nullable:true})
     posts?: PostUpdateManyWithoutAuthorInput;
 
-    @Field(() => CounselorSessionUpdateOneWithoutUserInput, {nullable:true})
-    counselingSession?: CounselorSessionUpdateOneWithoutUserInput;
+    @Field(() => CounselorSessionUpdateManyWithoutUserInput, {nullable:true})
+    counselingSession?: CounselorSessionUpdateManyWithoutUserInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

@@ -83,22 +83,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -115,7 +99,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "args": [],
             "type": {
@@ -293,23 +277,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -372,18 +340,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -396,7 +352,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -597,19 +553,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -771,18 +715,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -795,7 +727,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -2444,22 +2376,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -2476,7 +2392,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "args": [],
             "type": {
@@ -2913,23 +2829,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -3044,23 +2944,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -3187,23 +3071,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -3314,18 +3182,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -3338,7 +3194,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3446,19 +3302,13 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -4544,6 +4394,184 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CounselorSessionCreateManyUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "counsellingDate",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "counsellingReason",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "counselorId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "staffId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CounselorSessionCreateManyUserInputEnvelope",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorSessionCreateManyUserInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "skipDuplicates",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CounselorSessionCreateNestedManyWithoutCounselorInput",
         "description": null,
         "fields": null,
@@ -4876,7 +4904,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+        "name": "CounselorSessionCreateNestedManyWithoutUserInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -4884,9 +4912,17 @@
             "name": "connect",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionWhereUniqueInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionWhereUniqueInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4896,9 +4932,17 @@
             "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateOrConnectWithoutUserInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionCreateOrConnectWithoutUserInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4908,8 +4952,28 @@
             "name": "create",
             "description": null,
             "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionCreateWithoutUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createMany",
+            "description": null,
+            "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateWithoutUserInput",
+              "name": "CounselorSessionCreateManyUserInputEnvelope",
               "ofType": null
             },
             "defaultValue": null,
@@ -6045,41 +6109,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "CounselorSessionRelationFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "is",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isNot",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "ENUM",
         "name": "CounselorSessionScalarFieldEnum",
         "description": null,
@@ -6675,6 +6704,49 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CounselorSessionUpdateManyWithWhereWithoutStudentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorSessionUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorSessionScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CounselorSessionUpdateManyWithWhereWithoutUserInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -7609,7 +7681,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CounselorSessionUpdateOneWithoutUserInput",
+        "name": "CounselorSessionUpdateManyWithoutUserInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -7617,9 +7689,17 @@
             "name": "connect",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionWhereUniqueInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionWhereUniqueInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7629,9 +7709,17 @@
             "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateOrConnectWithoutUserInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionCreateOrConnectWithoutUserInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7641,8 +7729,28 @@
             "name": "create",
             "description": null,
             "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionCreateWithoutUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createMany",
+            "description": null,
+            "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateWithoutUserInput",
+              "name": "CounselorSessionCreateManyUserInputEnvelope",
               "ofType": null
             },
             "defaultValue": null,
@@ -7653,9 +7761,37 @@
             "name": "delete",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionScalarWhereInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7665,9 +7801,37 @@
             "name": "disconnect",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionWhereUniqueInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7677,9 +7841,37 @@
             "name": "update",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateWithoutUserInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionUpdateWithWhereUniqueWithoutUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionUpdateManyWithWhereWithoutUserInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7689,9 +7881,17 @@
             "name": "upsert",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpsertWithoutUserInput",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CounselorSessionUpsertWithWhereUniqueWithoutUserInput",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -7846,6 +8046,49 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "CounselorSessionUpdateWithoutStudentInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorSessionWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CounselorSessionUpdateWithWhereUniqueWithoutUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorSessionUpdateWithoutUserInput",
                 "ofType": null
               }
             },
@@ -8707,7 +8950,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CounselorSessionUpsertWithoutUserInput",
+        "name": "CounselorSessionUpsertWithWhereUniqueWithoutUserInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -8736,6 +8979,22 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "CounselorSessionUpdateWithoutUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorSessionWhereUniqueInput",
                 "ofType": null
               }
             },
@@ -9362,19 +9621,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -9481,19 +9728,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -9612,19 +9847,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -9920,18 +10143,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -9944,7 +10155,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -11680,22 +11891,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
                 "ofType": null
               }
             },
@@ -14946,7 +15141,73 @@
             "deprecationReason": null
           },
           {
-            "name": "login",
+            "name": "loginCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "LoginInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Auth",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "loginStaff",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "LoginInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Auth",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "loginStudent",
             "description": null,
             "args": [
               {
@@ -18910,6 +19171,39 @@
             "deprecationReason": null
           },
           {
+            "name": "getOneCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "me",
             "description": null,
             "args": [],
@@ -21450,29 +21744,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21494,7 +21768,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "args": [],
             "type": {
@@ -21510,17 +21784,13 @@
             "deprecationReason": null
           },
           {
-            "name": "staffId",
+            "name": "staffMatrix",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21808,20 +22078,16 @@
             "name": "faculty",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "firstName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -21837,32 +22103,12 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "staffMatrix",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staffId",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -21947,20 +22193,16 @@
             "name": "faculty",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "firstName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -21976,32 +22218,12 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "staffMatrix",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staffId",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22079,18 +22301,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -22103,7 +22313,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -22115,7 +22325,7 @@
             "deprecationReason": null
           },
           {
-            "name": "staffId",
+            "name": "staffMatrix",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -22415,7 +22625,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22423,7 +22633,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -22435,23 +22645,11 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "staffMatrix",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staffId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22534,7 +22732,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22542,7 +22740,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -22554,23 +22752,11 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "staffMatrix",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staffId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22787,19 +22973,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -22819,7 +22993,7 @@
             "deprecationReason": null
           },
           {
-            "name": "lastName",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -22831,11 +23005,11 @@
             "deprecationReason": null
           },
           {
-            "name": "staffId",
+            "name": "staffMatrix",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -22902,7 +23076,7 @@
             "deprecationReason": null
           },
           {
-            "name": "staffId",
+            "name": "staffMatrix",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -23439,6 +23613,22 @@
             "deprecationReason": null
           },
           {
+            "name": "password",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "args": [],
@@ -23774,6 +23964,22 @@
             "deprecationReason": null
           },
           {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -23905,6 +24111,22 @@
             "deprecationReason": null
           },
           {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -24013,6 +24235,18 @@
           },
           {
             "name": "matrix",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -24356,6 +24590,18 @@
             "deprecationReason": null
           },
           {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -24468,6 +24714,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -24740,6 +24998,18 @@
             "deprecationReason": null
           },
           {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -24973,9 +25243,17 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "CounselorSession",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CounselorSession",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -25081,22 +25359,6 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "posts",
             "description": null,
             "args": [],
@@ -25185,6 +25447,22 @@
         "fields": [
           {
             "name": "Message",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "counselingSession",
             "description": null,
             "args": [],
             "type": {
@@ -25314,22 +25592,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26128,7 +26390,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26222,22 +26484,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26459,22 +26705,6 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "posts",
             "description": null,
             "type": {
@@ -26602,7 +26832,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26684,22 +26914,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26821,7 +27035,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26915,22 +27129,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -27064,7 +27262,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27158,22 +27356,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -27295,7 +27477,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27389,22 +27571,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -27526,7 +27692,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedOneWithoutUserInput",
+              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27620,22 +27786,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -27839,7 +27989,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionOrderByWithRelationInput",
+              "name": "CounselorSessionOrderByRelationAggregateInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27920,18 +28070,6 @@
           },
           {
             "name": "mobile",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -28094,12 +28232,6 @@
           },
           {
             "name": "mobile",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -28282,18 +28414,6 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -28381,7 +28501,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -28466,18 +28586,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -28633,18 +28741,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -29486,7 +29582,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -29571,18 +29667,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -29793,18 +29877,6 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "posts",
             "description": null,
             "type": {
@@ -29928,7 +30000,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30001,18 +30073,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30131,7 +30191,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30216,18 +30276,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30358,7 +30406,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30443,18 +30491,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30573,7 +30609,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30658,18 +30694,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30788,7 +30812,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateOneWithoutUserInput",
+              "name": "CounselorSessionUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30873,18 +30897,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31392,7 +31404,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionRelationFilter",
+              "name": "CounselorSessionListRelationFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -31477,18 +31489,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,

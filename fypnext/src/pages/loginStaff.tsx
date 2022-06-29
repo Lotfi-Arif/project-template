@@ -2,16 +2,22 @@ import Image from 'next/image'
 import Link from 'next/link';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
-import { LoginInput, Role, useLoginMutation } from 'schema/generated/graphql';
+import { LoginInput, useLoginStudentMutation } from 'schema/generated/graphql';
 import { withApollo } from 'utils/hooks/withApollo';
+import { useRouter } from 'next/router';
 
-const Login = () => {
+const LoginStaff = () => {
 
     const cookie = new Cookies();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setError] = useState('')
-    const [signIn] = useLoginMutation()
+    const [signIn] = useLoginStudentMutation()
+
+    const router = useRouter();
+
+
+    console.log(router.query)
 
     const onSubmit = async (data: LoginInput, error) => {
         error.preventDefault()
@@ -20,8 +26,7 @@ const Login = () => {
                 variables: {
                     data:{
                         email: data.email,
-                        password: data.password,
-                        role: Role.Counselor
+                        password: data.password
                     }
                 }
             })
@@ -121,4 +126,4 @@ const Login = () => {
     );
 }
 
-export default withApollo(Login);
+export default withApollo(LoginStaff);

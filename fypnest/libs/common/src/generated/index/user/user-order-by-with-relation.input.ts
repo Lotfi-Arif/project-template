@@ -6,7 +6,7 @@ import { StaffOrderByWithRelationInput } from '../staff/staff-order-by-with-rela
 import { CounselorOrderByWithRelationInput } from '../counselor/counselor-order-by-with-relation.input';
 import { AdminOrderByWithRelationInput } from '../admin/admin-order-by-with-relation.input';
 import { PostOrderByRelationAggregateInput } from '../post/post-order-by-relation-aggregate.input';
-import { CounselorSessionOrderByWithRelationInput } from '../counselor-session/counselor-session-order-by-with-relation.input';
+import { CounselorSessionOrderByRelationAggregateInput } from '../counselor-session/counselor-session-order-by-relation-aggregate.input';
 import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
 import { ChatOrderByWithRelationInput } from '../chat/chat-order-by-with-relation.input';
 
@@ -21,9 +21,6 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => SortOrder, {nullable:true})
     lastName?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    password?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     mobile?: keyof typeof SortOrder;
@@ -52,8 +49,8 @@ export class UserOrderByWithRelationInput {
     @Field(() => PostOrderByRelationAggregateInput, {nullable:true})
     posts?: PostOrderByRelationAggregateInput;
 
-    @Field(() => CounselorSessionOrderByWithRelationInput, {nullable:true})
-    counselingSession?: CounselorSessionOrderByWithRelationInput;
+    @Field(() => CounselorSessionOrderByRelationAggregateInput, {nullable:true})
+    counselingSession?: CounselorSessionOrderByRelationAggregateInput;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

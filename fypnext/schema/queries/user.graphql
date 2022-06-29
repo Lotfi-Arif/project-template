@@ -1,17 +1,16 @@
 query users {
   findAllUsers {
     id
+    firstName
+    lastName
     counselor {
-      firstName
-      lastName
+      id
     }
     student {
-      firstName
-      lastName
+      id
     }
     staff {
-      firstName
-      lastName
+      id
     }
     mobile
     accountStatus
@@ -22,14 +21,38 @@ query users {
 query counselors {
   findAllCounselors {
     id
-    firstName
-    lastName
     department
     email
     expertise
     Schedule {
       id
       days
+    }
+    user{
+    firstName
+    lastName
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+    }
+  }
+}
+
+query getOneCounselor($id: String!) {
+  getOneCounselor(id: $id) {
+    id
+    department
+    email
+    expertise
+    Schedule {
+      id
+      days
+    }
+    user{
+    firstName
+    lastName
     }
     createdAt
     updatedAt
@@ -42,19 +65,16 @@ query counselors {
 query currentUser {
   currentUser {
     id
-    student {
       lastName
+      role
       firstName
+    student {
       email
     }
     staff {
-      lastName
-      firstName
       email
     }
     counselor {
-      lastName
-      firstName
       email
     }
   }
@@ -63,6 +83,10 @@ query currentUser {
 query me {
   me {
     id
+    firstName
+    lastName
+    accountStatus
+    role
     student {
       email
       user {
@@ -74,8 +98,6 @@ query me {
     }
     staff {
       email
-      firstName
-      lastName
       user {
         mobile
         accountStatus
@@ -84,8 +106,6 @@ query me {
     }
     counselor {
       email
-      firstName
-      lastName
       user {
         mobile
         accountStatus
@@ -99,9 +119,9 @@ query counselor {
   me {
     id
     role
+    firstName
+    lastName
     counselor {
-      firstName
-      lastName
       email
       department
       expertise
@@ -131,11 +151,11 @@ query staff {
   me {
     id
     role
-    staff {
       firstName
       lastName
+    staff {
       email
-      staffId
+      staffMatrix
       faculty
       CounselorSession {
         id

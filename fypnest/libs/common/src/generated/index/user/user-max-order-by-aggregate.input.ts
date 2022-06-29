@@ -15,9 +15,6 @@ export class UserMaxOrderByAggregateInput {
     lastName?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    password?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     mobile?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

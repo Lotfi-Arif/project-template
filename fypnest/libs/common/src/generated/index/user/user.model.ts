@@ -26,9 +26,6 @@ export class User {
     @Field(() => String, {nullable:false})
     lastName!: string;
 
-    @Field(() => String, {nullable:false})
-    password!: string;
-
     @Field(() => String, {nullable:true})
     mobile!: string | null;
 
@@ -56,8 +53,8 @@ export class User {
     @Field(() => [Post], {nullable:true})
     posts?: Array<Post>;
 
-    @Field(() => CounselorSession, {nullable:true})
-    counselingSession?: CounselorSession | null;
+    @Field(() => [CounselorSession], {nullable:true})
+    counselingSession?: Array<CounselorSession>;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

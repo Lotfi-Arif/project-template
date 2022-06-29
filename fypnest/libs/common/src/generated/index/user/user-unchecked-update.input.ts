@@ -10,7 +10,7 @@ import { StaffUncheckedUpdateOneWithoutUserInput } from '../staff/staff-unchecke
 import { CounselorUncheckedUpdateOneWithoutUserInput } from '../counselor/counselor-unchecked-update-one-without-user.input';
 import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecked-update-one-without-user.input';
 import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
-import { CounselorSessionUncheckedUpdateOneWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-one-without-user.input';
+import { CounselorSessionUncheckedUpdateManyWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-many-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { MessageUncheckedUpdateManyWithoutSenderInput } from '../message/message-unchecked-update-many-without-sender.input';
 
@@ -25,9 +25,6 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     lastName?: StringFieldUpdateOperationsInput;
-
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    password?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     mobile?: NullableStringFieldUpdateOperationsInput;
@@ -56,8 +53,8 @@ export class UserUncheckedUpdateInput {
     @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
     posts?: PostUncheckedUpdateManyWithoutAuthorInput;
 
-    @Field(() => CounselorSessionUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    counselingSession?: CounselorSessionUncheckedUpdateOneWithoutUserInput;
+    @Field(() => CounselorSessionUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    counselingSession?: CounselorSessionUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

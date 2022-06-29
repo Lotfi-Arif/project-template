@@ -28,9 +28,6 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     lastName?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    password?: StringWithAggregatesFilter;
-
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     mobile?: StringNullableWithAggregatesFilter;
 

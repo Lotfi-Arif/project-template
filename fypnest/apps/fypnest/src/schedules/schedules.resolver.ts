@@ -7,6 +7,7 @@ import { CreateOneScheduleArgs } from '@app/common/generated/index/schedule/crea
 import { DeleteOneScheduleArgs } from '@app/common/generated/index/schedule/delete-one-schedule.args';
 import { UpdateOneScheduleArgs } from '@app/common/generated/index/schedule/update-one-schedule.args';
 import { FindUniqueScheduleArgs } from '@app/common/generated/index/schedule/find-unique-schedule.args';
+import { CounselorSession } from '@app/common/generated/index/counselor-session/counselor-session.model';
 
 @Resolver(() => Schedule)
 export class SchedulesResolver {
@@ -90,5 +91,13 @@ export class SchedulesResolver {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  convertEpochTime(epochDate: number) {
+    const newDate = new Date(0);
+    newDate.setSeconds(epochDate);
+    const monthDateAndYear =
+      newDate.getMonth() + newDate.getDate() + newDate.getFullYear();
+    return monthDateAndYear;
   }
 }

@@ -10,7 +10,7 @@ import { StaffRelationFilter } from '../staff/staff-relation-filter.input';
 import { CounselorRelationFilter } from '../counselor/counselor-relation-filter.input';
 import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
 import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
-import { CounselorSessionRelationFilter } from '../counselor-session/counselor-session-relation-filter.input';
+import { CounselorSessionListRelationFilter } from '../counselor-session/counselor-session-list-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
 import { ChatRelationFilter } from '../chat/chat-relation-filter.input';
@@ -35,9 +35,6 @@ export class UserWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     lastName?: StringFilter;
-
-    @Field(() => StringFilter, {nullable:true})
-    password?: StringFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     mobile?: StringNullableFilter;
@@ -66,8 +63,8 @@ export class UserWhereInput {
     @Field(() => PostListRelationFilter, {nullable:true})
     posts?: PostListRelationFilter;
 
-    @Field(() => CounselorSessionRelationFilter, {nullable:true})
-    counselingSession?: CounselorSessionRelationFilter;
+    @Field(() => CounselorSessionListRelationFilter, {nullable:true})
+    counselingSession?: CounselorSessionListRelationFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

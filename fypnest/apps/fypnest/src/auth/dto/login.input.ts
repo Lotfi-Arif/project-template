@@ -1,6 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { InputType, Field } from '@nestjs/graphql';
-import { Role } from '@app/common/generated/index/prisma/role.enum';
 
 @InputType()
 export class LoginInput {
@@ -12,7 +11,4 @@ export class LoginInput {
   @IsNotEmpty()
   @MinLength(8)
   password: string;
-
-  @Field(() => Role)
-  role: Role;
 }

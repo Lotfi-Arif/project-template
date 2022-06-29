@@ -12,11 +12,36 @@ export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Mutation(() => Auth)
-  async login(@Args('data') { email, password, role }: LoginInput) {
-    const { accessToken, refreshToken } = await this.authService.login(
+  async loginStudent(@Args('data') { email, password }: LoginInput) {
+    const { accessToken, refreshToken } = await this.authService.loginStudent(
       email.toLowerCase(),
-      password,
-      role,
+      password
+    );
+
+    return {
+      accessToken,
+      refreshToken,
+    };
+  }
+
+  @Mutation(() => Auth)
+  async loginStaff(@Args('data') { email, password }: LoginInput) {
+    const { accessToken, refreshToken } = await this.authService.loginStaff(
+      email.toLowerCase(),
+      password
+    );
+
+    return {
+      accessToken,
+      refreshToken,
+    };
+  }
+
+  @Mutation(() => Auth)
+  async loginCounselor(@Args('data') { email, password }: LoginInput) {
+    const { accessToken, refreshToken } = await this.authService.loginCouselor(
+      email.toLowerCase(),
+      password
     );
 
     return {

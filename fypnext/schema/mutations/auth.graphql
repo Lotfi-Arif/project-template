@@ -1,5 +1,19 @@
-mutation login($data: LoginInput!) {
-  login(data: $data) {
+mutation loginStudent($data: LoginInput!) {
+  loginStudent(data: $data) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation loginStaff($data: LoginInput!) {
+  loginStaff(data: $data) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation loginCounselor($data: LoginInput!) {
+  loginCounselor(data: $data) {
     accessToken
     refreshToken
   }

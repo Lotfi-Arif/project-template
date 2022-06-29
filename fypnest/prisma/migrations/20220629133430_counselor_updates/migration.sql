@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "CounselorSession" ALTER COLUMN "counsellingDate" DROP NOT NULL,
+ALTER COLUMN "counsellingDate" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Schedule" ALTER COLUMN "days" DROP NOT NULL,
+ALTER COLUMN "timeFrom" DROP NOT NULL,
+ALTER COLUMN "timeTo" DROP NOT NULL,
+ALTER COLUMN "hour" DROP NOT NULL;
