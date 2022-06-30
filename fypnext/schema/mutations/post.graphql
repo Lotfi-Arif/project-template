@@ -1,0 +1,32 @@
+mutation createPost($data: PostCreateInput!) {
+  createPost(data: $data) {
+    id
+    title
+    body
+    author {
+        id
+    }
+  }
+}
+
+mutation updatePost($data: PostUpdateInput!, $where: PostWhereUniqueInput!) {
+  updatePost(data: $data, where: $where) {
+    id
+    title
+    body
+    author {
+        id
+    }
+  }
+}
+
+mutation deletePost($where: PostWhereUniqueInput!) {
+  deletePost(where: $where) {
+    id
+    title
+    body
+    author {
+        id
+    }
+  }
+}

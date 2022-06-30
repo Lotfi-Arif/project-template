@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useDeleteEventMutation } from "schema/generated/graphql";
 
 
-const EventRow = (events) => {
+const PostRow = (posts) => {
 
 
     const [deleteEvent] = useDeleteEventMutation();
@@ -29,28 +29,28 @@ const EventRow = (events) => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                     <div className="flex items-center">
                         <div className="mr-2">
-                            <img className="h-6 w-6" src={events.event.eventImageURL} alt="Event Image" />
+                            <img className="h-6 w-6" src={posts.post.eventImageURL} alt="Event Image" />
                         </div>
-                        <span className="font-medium">{events.event.title}</span>
+                        <span className="font-medium">{posts.post.title}</span>
                     </div>
                 </td>
                 <span className="text-gray-700 py-1 px-3 items-center table-caption">
-                    {events.event.eventDetails}
+                    {posts.event.eventDetails}
                 </span>
                 <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                            <Link href={`/pages/admin/manageevents/viewEvent/${events.event.id}`} passHref>
+                            <Link href={'/pages/admin/manageevents/viewEvent'} passHref>
                                 <EyeIcon />
                             </Link>
                         </button>
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                            <Link href={'/pages/admin/manageevents/editEvent'} passHref>
+                            <Link href={`/pages/admin/manageevents/editEvent/${posts.post.id}`} passHref>
                                 <PencilIcon />
                             </Link>
                         </button>
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110" onClick={() => {
-                            onDelete(events.event.id)
+                            onDelete(posts.event.id)
                         }}>
                             <TrashIcon />
                         </button>
@@ -61,4 +61,4 @@ const EventRow = (events) => {
     );
 }
 
-export default EventRow;
+export default PostRow;

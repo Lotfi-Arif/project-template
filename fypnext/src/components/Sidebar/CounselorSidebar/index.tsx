@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
-import { LoginIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon } from "@heroicons/react/outline";
+import { BackspaceIcon, LoginIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon } from "@heroicons/react/outline";
+import { useCookies } from "react-cookie";
 
 export default function CounselorSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [cookie] = useCookies(["user"])
   const router = useRouter();
 
   return (
@@ -163,37 +165,42 @@ export default function CounselorSidebar() {
             </h6>
             {/* Navigation */}
 
+            {
+              cookie.user ?
+                <div> </div> :
+                <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                  <li className="items-center">
+                    <Link href="/login">
+                      <a
+                        href="#pablo"
+                        className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                      >
+                        <LoginIcon className="items-center inline-flex h-5 w-5 m-2" />
+                        Login
+                      </a>
+                    </Link>
+                  </li>
+
+                  <li className="items-center">
+                    <Link href="/register">
+                      <a
+                        href="#pablo"
+                        className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                      >
+                        <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
+                        Register
+                      </a>
+                    </Link>
+                  </li>
+                </ul>}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
-                <Link href="/login">
+                <Link href="/">
                   <a
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <LoginIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Login
-                  </a>
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/register">
-                  <a
-                    href="#pablo"
-                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Register
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/landing">
-                  <a
-                    href="#pablo"
-                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    <BackspaceIcon className="items-center inline-flex h-5 w-5 m-2" />
                     Return to Landing Page
                   </a>
                 </Link>

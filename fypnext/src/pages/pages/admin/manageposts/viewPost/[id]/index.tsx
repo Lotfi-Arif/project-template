@@ -1,17 +1,7 @@
-import { useEventsQuery } from "schema/generated/graphql";
 import Navbar from "src/components/Navbar/MainNavbar";
 import { withApollo } from "utils/hooks/withApollo";
 
-const ViewEvent = () => {
-
-    const { data, loading } = useEventsQuery();
-
-    if (loading) {
-        return (<></>);
-    }
-
-    const events = data?.findAllEvents;
-
+const ViewPost = () => {
 
     return (
         <>
@@ -72,4 +62,4 @@ const ViewEvent = () => {
     );
 }
 
-export default withApollo(ViewEvent);
+export default withApollo(ViewPost);

@@ -6,3 +6,13 @@ query events {
     eventDetails
   }
 }
+
+
+query event($where: EventWhereUniqueInput!) {
+  findOneEvent(where: $where) {
+    id
+    title
+    eventImageURL
+    eventDetails
+  }
+}

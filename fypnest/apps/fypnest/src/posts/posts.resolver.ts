@@ -12,7 +12,7 @@ import { UpdateOnePostArgs } from '@app/common/generated/index/post/update-one-p
 export class PostsResolver {
   constructor(private readonly postService: PostsService) {}
 
-  @Query(() => Post)
+  @Query(() => [Post])
   async findAllPosts(@Args() postFindManyArgs: FindManyPostArgs, @Info() info) {
     try {
       const posts = new PrismaSelect(info).value;
@@ -22,7 +22,7 @@ export class PostsResolver {
     }
   }
 
-  @Mutation(() => Post)
+  @Query(() => Post)
   async findOnePost(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;

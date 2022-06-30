@@ -20,6 +20,9 @@ import { getApolloClient } from './utils/hooks/withApollo.tsx';
 
 
 
+
+
+
 export async function getServerPageOnChatMessage
     (options: Omit<Apollo.QueryOptions<Types.OnChatMessageSubscriptionVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);
@@ -195,6 +198,41 @@ export const ssrEvents = {
       withPage: withPageEvents,
       usePage: useEvents,
     }
+export async function getServerPageEvent
+    (options: Omit<Apollo.QueryOptions<Types.EventQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.EventQuery>({ ...options, query: Operations.EventDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useEvent = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.EventQuery, Types.EventQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.EventDocument, options);
+};
+export type PageEventComp = React.FC<{data?: Types.EventQuery, error?: Apollo.ApolloError}>;
+export const withPageEvent = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.EventQuery, Types.EventQueryVariables>) => (WrappedComponent:PageEventComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.EventDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrEvent = {
+      getServerPage: getServerPageEvent,
+      withPage: withPageEvent,
+      usePage: useEvent,
+    }
 export async function getServerPageFaqs
     (options: Omit<Apollo.QueryOptions<Types.FaqsQueryVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);
@@ -229,6 +267,41 @@ export const ssrFaqs = {
       getServerPage: getServerPageFaqs,
       withPage: withPageFaqs,
       usePage: useFaqs,
+    }
+export async function getServerPageFindAllPosts
+    (options: Omit<Apollo.QueryOptions<Types.FindAllPostsQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.FindAllPostsQuery>({ ...options, query: Operations.FindAllPostsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useFindAllPosts = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindAllPostsQuery, Types.FindAllPostsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.FindAllPostsDocument, options);
+};
+export type PageFindAllPostsComp = React.FC<{data?: Types.FindAllPostsQuery, error?: Apollo.ApolloError}>;
+export const withPageFindAllPosts = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindAllPostsQuery, Types.FindAllPostsQueryVariables>) => (WrappedComponent:PageFindAllPostsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.FindAllPostsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrFindAllPosts = {
+      getServerPage: getServerPageFindAllPosts,
+      withPage: withPageFindAllPosts,
+      usePage: useFindAllPosts,
     }
 export async function getServerPageUsers
     (options: Omit<Apollo.QueryOptions<Types.UsersQueryVariables>, 'query'>, ctx: any ){

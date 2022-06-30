@@ -73,6 +73,16 @@ type CounselorSession {
   studentId: String
   staffId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -223,10 +233,12 @@ type Query {
   findAllSchedules(where: ScheduleWhereInput, orderBy: [ScheduleOrderByWithRelationInput!], cursor: ScheduleWhereUniqueInput, take: Int, skip: Int, distinct: [ScheduleScalarFieldEnum!]): Schedule!
   findAllFaqs(where: FAQWhereInput, orderBy: [FAQOrderByWithRelationInput!], cursor: FAQWhereUniqueInput, take: Int, skip: Int, distinct: [FAQScalarFieldEnum!]): [FAQ!]!
   findAllEvents(where: EventWhereInput, orderBy: [EventOrderByWithRelationInput!], cursor: EventWhereUniqueInput, take: Int, skip: Int, distinct: [EventScalarFieldEnum!]): [Event!]!
+  findOneEvent(where: EventWhereUniqueInput!): Event!
   findAllUserChats(where: ChatWhereInput, orderBy: [ChatOrderByWithRelationInput!], cursor: ChatWhereUniqueInput, take: Int, skip: Int, distinct: [ChatScalarFieldEnum!]): Chat!
   findAllMessages(where: MessageWhereInput, orderBy: [MessageOrderByWithRelationInput!], cursor: MessageWhereUniqueInput, take: Int, skip: Int, distinct: [MessageScalarFieldEnum!]): Message!
   findChatMessages(id: String!): [Message!]!
-  findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): Post!
+  findAllPosts(where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): [Post!]!
+  findOnePost(where: PostWhereUniqueInput!): Post!
   findAllUsers(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
   findAllCounselors(where: CounselorWhereInput, orderBy: [CounselorOrderByWithRelationInput!], cursor: CounselorWhereUniqueInput, take: Int, skip: Int, distinct: [CounselorScalarFieldEnum!]): [Counselor!]!
   getOneCounselor(id: String!): Counselor!
@@ -250,6 +262,16 @@ input CounselorSessionWhereInput {
   studentId: StringNullableFilter
   staffId: StringNullableFilter
   counsellingDate: StringNullableFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  email: StringNullableFilter
+  gender: StringNullableFilter
+  maritalStatus: StringNullableFilter
+  address: StringNullableFilter
+  race: StringNullableFilter
+  city: StringNullableFilter
+  state: StringNullableFilter
+  zipCode: StringNullableFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
 }
@@ -597,6 +619,16 @@ input CounselorSessionOrderByWithRelationInput {
   studentId: SortOrder
   staffId: SortOrder
   counsellingDate: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  email: SortOrder
+  gender: SortOrder
+  maritalStatus: SortOrder
+  address: SortOrder
+  race: SortOrder
+  city: SortOrder
+  state: SortOrder
+  zipCode: SortOrder
   createdAt: SortOrder
   updatedAt: SortOrder
 }
@@ -729,6 +761,16 @@ enum CounselorSessionScalarFieldEnum {
   studentId
   staffId
   counsellingDate
+  firstName
+  lastName
+  email
+  gender
+  maritalStatus
+  address
+  race
+  city
+  state
+  zipCode
   createdAt
   updatedAt
 }
@@ -922,7 +964,6 @@ type Mutation {
   createFaq(data: FAQCreateInput!): FAQ!
   updateFaq(data: FAQUpdateInput!, where: FAQWhereUniqueInput!): FAQ!
   deleteFaq(where: FAQWhereUniqueInput!): FAQ!
-  findOneEvent(where: EventWhereUniqueInput!): Event!
   createEvent(data: EventCreateInput!): Event!
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event!
   deleteEvent(where: EventWhereUniqueInput!): Event!
@@ -934,7 +975,6 @@ type Mutation {
   sendMessage(data: MessageCreateInput!): Message!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message!
   deleteMessage(where: MessageWhereUniqueInput!): Message!
-  findOnePost(where: PostWhereUniqueInput!): Post!
   createPost(data: PostCreateInput!): Post!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
   deletePost(where: PostWhereUniqueInput!): Post!
@@ -969,6 +1009,16 @@ input CounselorSessionCreateInput {
   user: UserCreateNestedOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput!
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1048,6 +1098,16 @@ input CounselorSessionCreateWithoutStudentInput {
   user: UserCreateNestedOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput!
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1141,6 +1201,16 @@ input CounselorSessionCreateWithoutCounselorScheduleInput {
   staff: StaffCreateNestedOneWithoutCounselorSessionInput
   user: UserCreateNestedOneWithoutCounselingSessionInput
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1219,6 +1289,16 @@ input CounselorSessionCreateWithoutStaffInput {
   user: UserCreateNestedOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput!
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1374,6 +1454,16 @@ input CounselorSessionCreateWithoutUserInput {
   staff: StaffCreateNestedOneWithoutCounselorSessionInput
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput!
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1425,6 +1515,16 @@ input CounselorSessionCreateWithoutCounselorInput {
   user: UserCreateNestedOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput!
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1447,6 +1547,16 @@ input CounselorSessionCreateManyCounselorInput {
   studentId: String
   staffId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1479,6 +1589,16 @@ input CounselorSessionCreateManyUserInput {
   studentId: String
   staffId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1633,6 +1753,16 @@ input CounselorSessionCreateManyStaffInput {
   userId: String
   studentId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1682,6 +1812,16 @@ input CounselorSessionCreateManyCounselorScheduleInput {
   studentId: String
   staffId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1737,6 +1877,16 @@ input CounselorSessionCreateManyStudentInput {
   userId: String
   staffId: String
   counsellingDate: String
+  firstName: String
+  lastName: String
+  email: String
+  gender: String
+  maritalStatus: String
+  address: String
+  race: String
+  city: String
+  state: String
+  zipCode: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -1765,6 +1915,16 @@ input CounselorSessionUpdateInput {
   user: UserUpdateOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleUpdateOneRequiredWithoutCounselorSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -1904,6 +2064,16 @@ input CounselorSessionUpdateWithoutStudentInput {
   user: UserUpdateOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleUpdateOneRequiredWithoutCounselorSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2048,6 +2218,16 @@ input CounselorSessionUpdateWithoutCounselorScheduleInput {
   staff: StaffUpdateOneWithoutCounselorSessionInput
   user: UserUpdateOneWithoutCounselingSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2164,6 +2344,16 @@ input CounselorSessionUpdateWithoutStaffInput {
   user: UserUpdateOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleUpdateOneRequiredWithoutCounselorSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2398,6 +2588,16 @@ input CounselorSessionUpdateWithoutUserInput {
   staff: StaffUpdateOneWithoutCounselorSessionInput
   counselorSchedule: ScheduleUpdateOneRequiredWithoutCounselorSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2478,6 +2678,16 @@ input CounselorSessionUpdateWithoutCounselorInput {
   user: UserUpdateOneWithoutCounselingSessionInput
   counselorSchedule: ScheduleUpdateOneRequiredWithoutCounselorSessionInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2504,6 +2714,16 @@ input CounselorSessionScalarWhereInput {
   studentId: StringNullableFilter
   staffId: StringNullableFilter
   counsellingDate: StringNullableFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  email: StringNullableFilter
+  gender: StringNullableFilter
+  maritalStatus: StringNullableFilter
+  address: StringNullableFilter
+  race: StringNullableFilter
+  city: StringNullableFilter
+  state: StringNullableFilter
+  zipCode: StringNullableFilter
   createdAt: DateTimeFilter
   updatedAt: DateTimeFilter
 }
@@ -2512,6 +2732,16 @@ input CounselorSessionUpdateManyMutationInput {
   id: StringFieldUpdateOperationsInput
   counsellingReason: NullableStringFieldUpdateOperationsInput
   counsellingDate: NullableStringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  gender: NullableStringFieldUpdateOperationsInput
+  maritalStatus: NullableStringFieldUpdateOperationsInput
+  address: NullableStringFieldUpdateOperationsInput
+  race: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  zipCode: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }

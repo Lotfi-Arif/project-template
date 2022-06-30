@@ -25,7 +25,7 @@ export class EventsResolver {
     }
   }
 
-  @Mutation(() => Event)
+  @Query(() => Event)
   async findOneEvent(
     @Args() eventFindUnique: FindUniqueEventArgs,
     @Info() info,

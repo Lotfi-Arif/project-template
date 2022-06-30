@@ -3,7 +3,7 @@ import React from "react";
 // components
 
 import AdminNavbar from "src/components/Navbar/AdminNavbar";
-import Sidebar from "src/components/Sidebar/CounselorSidebarimport React from "react";
+import Sidebar from "src/components/Sidebar/CounselorSidebar"
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -11,7 +11,7 @@ import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
 import { InformationCircleIcon, LoginIcon, PhotographIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon, ViewGridAddIcon } from "@heroicons/react/outline";
 
-export default function UserSidebar() {
+export function UserSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
 
@@ -191,7 +191,7 @@ export default function UserSidebar() {
     </>
   );
 }
-";
+
 import HeaderStats from "src/components/Headers";
 
 const CounselorLayout = ({ children }) => {

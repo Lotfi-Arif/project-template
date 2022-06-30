@@ -16,12 +16,12 @@ generator nestgraphql {
 }
 
 model User {
-  id                String            @id @default(uuid())
+  id                String             @id @default(uuid())
   firstName         String
   lastName          String
-  mobile            String?           @unique
+  mobile            String?            @unique
   gender            Gender?
-  accountStatus     AccountStatus     @default(UNVERIFIED)
+  accountStatus     AccountStatus      @default(UNVERIFIED)
   role              Role
   student           Student?
   staff             Staff?
@@ -29,10 +29,10 @@ model User {
   admin             Admin?
   posts             Post[]
   counselingSession CounselorSession[]
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   Message           Message[]
-  Chat              Chat?             @relation(fields: [chatId], references: [id])
+  Chat              Chat?              @relation(fields: [chatId], references: [id])
   chatId            String?
 }
 
@@ -61,6 +61,16 @@ model CounselorSession {
   studentId         String?
   staffId           String?
   counsellingDate   String?
+  firstName         String?
+  lastName          String?
+  email             String?
+  gender            String?
+  maritalStatus     String?
+  address           String?
+  race              String?
+  city              String?
+  state             String?
+  zipCode           String?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 }
@@ -205,4 +215,9 @@ enum Gender {
   M
   F
   OTHERS
+}
+enum MaritalStatus {
+  Married
+  Single
+  Widowed
 }

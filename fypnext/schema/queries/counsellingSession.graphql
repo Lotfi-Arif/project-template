@@ -11,5 +11,16 @@ query sessions {
     staff {
       id
     }
+    firstName        
+    lastName
+    email
+    gender
+    maritalStatus     
+    address
+    race   
+    city   
+    state  
+    zipCode
+    counsellingDate
   }
 }

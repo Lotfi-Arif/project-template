@@ -1,0 +1,7 @@
+query findAllPosts {
+  findAllPosts {
+    id
+    title
+    body
+  }
+}

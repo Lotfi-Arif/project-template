@@ -1,20 +1,43 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { CounselorSessionCreateInput, useCounselorsQuery, useCreateCounselorSessionMutation } from "schema/generated/graphql";
-import { useGetOneCounselor } from "schema/generated/page";
+import { useEffect, useState } from "react";
+import { startOfWeek, endOfWeek, getDay, startOfDay, endOfDay, add, format, addHours, getHours, getTime } from 'date-fns'
+import momentTZ from 'moment-timezone';
 import StudentLayout from "src/layouts/Student";
+import { Gender, MaritalStatus, useCreateCounselorSessionMutation } from "schema/generated/graphql";
 import { withApollo } from "utils/hooks/withApollo";
+import { stat } from "fs";
 
-const Booking = () => {
+const Counselor = () => {
 
-
-  const [createCounselorSession] = useCreateCounselorSessionMutation();
-  const [counsellingDate, setCounsellingDate] = useState('')
-  const [counsellingReason, setCounsellingReason] = useState('')
   const router = useRouter()
+  const { id, scheduleId } = router.query
+  const [country, setCountry] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
+  const [startDay, setStartDay] = useState(startOfWeek(Date.now(), { weekStartsOn: 1 }))
+  const [endDay, setEndDay] = useState(endOfWeek(Date.now(), { weekStartsOn: 1 }))
+  const [createCounselorSession] = useCreateCounselorSessionMutation();
+  const [counsellingDate, setCounsellingDate] = useState('');
+  const [counsellingReason, setCounsellingReason] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
+  const [address, setAddress] = useState('');
+  const [race, setRace] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipcode] = useState('');
 
-  const { id, schedule } = router.query
-  
+
+
+
+  useEffect(() => {
+    const countryDate = momentTZ.tz(startDay, country)
+    console.log('country:', countryDate);
+    setStartDay(startOfWeek(countryDate.toDate(), { weekStartsOn: 1 }))
+    setEndDay(endOfWeek(countryDate.toDate(), { weekStartsOn: 1 }))
+
+  }, [country])
 
   const onSubmit = async (error) => {
     error.preventDefault()
@@ -24,12 +47,24 @@ const Booking = () => {
           data: {
             counsellingDate: counsellingDate,
             counsellingReason: counsellingReason,
-            counselor: { connect: {
-              id: id as any
-            }},
+            counselor: {
+              connect: {
+                id: id as any
+              }
+            },
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            gender: gender,
+            maritalStatus: maritalStatus,
+            address: address,
+            race: race,
+            city: city,
+            state: state,
+            zipCode: zipCode,
             counselorSchedule: {
               connect: {
-                id: schedule as any
+                id: scheduleId as any
               }
             }
           }
@@ -40,17 +75,13 @@ const Booking = () => {
     }
   }
 
+
+
   return (
     <>
       <StudentLayout>
-        <div className="mt-10 sm:mt-0">
+        <div className="mt-10 pt-28 sm:mt-0">
           <div className="md:grid md:grid-cols-3 md:gap-6">
-            <div className="md:col-span-1">
-              <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
-                <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
-              </div>
-            </div>
             <div className="mt-5 md:mt-0 md:col-span-2">
               <form action="#" method="POST">
                 <div className="shadow overflow-hidden sm:rounded-md">
@@ -62,8 +93,9 @@ const Booking = () => {
                         </label>
                         <input
                           type="text"
-                          name="first-name"
+                          name={firstName}
                           id="first-name"
+                          onChange={(e) => { setFirstName(e.target.value) }}
                           autoComplete="given-name"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -75,20 +107,22 @@ const Booking = () => {
                         </label>
                         <input
                           type="text"
-                          name="last-name"
+                          name={lastName}
+                          onChange={(e) => { setLastName(e.target.value) }}
                           id="last-name"
                           autoComplete="family-name"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-4">
+                      <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
                           Email address
                         </label>
                         <input
                           type="text"
-                          name="email-address"
+                          name={email}
+                          onChange={(e) => { setEmail(e.target.value) }}
                           id="email-address"
                           autoComplete="email"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -96,30 +130,71 @@ const Booking = () => {
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                          Country
+                        <label htmlFor="Gender" className="block text-sm font-medium text-gray-700">
+                          Gender
                         </label>
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                          <option>United States</option>
-                          <option>Canada</option>
-                          <option>Mexico</option>
-                        </select>
+                        <input
+                          type="text"
+                          name={gender}
+                          onChange={(e) => { setGender(e.target.value) }}
+                          id="Gender"
+                          autoComplete="gender"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
                       </div>
 
-                      <div className="col-span-6">
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700">
+                          Marital Status
+                        </label>
+                        <input
+                          type="text"
+                          name={maritalStatus}
+                          onChange={(e) => { setMaritalStatus(e.target.value) }}
+                          id="maritalStatus"
+                          autoComplete="maritalStatus"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="counsellingReason" className="block text-sm font-medium text-gray-700">
+                          Counselling Reason
+                        </label>
+                        <input
+                          type="text"
+                          name={counsellingReason}
+                          onChange={(e) => { setCounsellingReason(e.target.value) }}
+                          id="counsellingReason"
+                          autoComplete="counsellingReason"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                           Street address
                         </label>
                         <input
                           type="text"
-                          name="street-address"
+                          name={address}
+                          onChange={(e) => { setAddress(e.target.value) }}
                           id="street-address"
                           autoComplete="street-address"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="Race" className="block text-sm font-medium text-gray-700">
+                          Race
+                        </label>
+                        <input
+                          type="text"
+                          name={race}
+                          onChange={(e) => { setRace(e.target.value) }}
+                          id="Race"
+                          autoComplete="Race"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -130,7 +205,8 @@ const Booking = () => {
                         </label>
                         <input
                           type="text"
-                          name="city"
+                          name={city}
+                          onChange={(e) => { setCity(e.target.value) }}
                           id="city"
                           autoComplete="address-level2"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -143,7 +219,8 @@ const Booking = () => {
                         </label>
                         <input
                           type="text"
-                          name="region"
+                          name={state}
+                          onChange={(e) => { setState(e.target.value) }}
                           id="region"
                           autoComplete="address-level1"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -156,7 +233,8 @@ const Booking = () => {
                         </label>
                         <input
                           type="text"
-                          name="postal-code"
+                          name={zipCode}
+                          onChange={(e) => { setZipcode(e.target.value) }}
                           id="postal-code"
                           autoComplete="postal-code"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -167,6 +245,7 @@ const Booking = () => {
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
                       type="submit"
+                      onClick={(e) => onSubmit(e)}
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Save
@@ -182,4 +261,4 @@ const Booking = () => {
   );
 }
 
-export default withApollo(Booking);
+export default withApollo(Counselor);
