@@ -8,7 +8,6 @@ import { Student } from '../student/student.model';
 import { Staff } from '../staff/staff.model';
 import { Counselor } from '../counselor/counselor.model';
 import { Admin } from '../admin/admin.model';
-import { Post } from '../post/post.model';
 import { CounselorSession } from '../counselor-session/counselor-session.model';
 import { Message } from '../message/message.model';
 import { Chat } from '../chat/chat.model';
@@ -49,9 +48,6 @@ export class User {
 
     @Field(() => Admin, {nullable:true})
     admin?: Admin | null;
-
-    @Field(() => [Post], {nullable:true})
-    posts?: Array<Post>;
 
     @Field(() => [CounselorSession], {nullable:true})
     counselingSession?: Array<CounselorSession>;

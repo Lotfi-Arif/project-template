@@ -2,41 +2,49 @@ import Image from 'next/image'
 import Link from 'next/link';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
-import { LoginInput, useLoginStudentMutation } from 'schema/generated/graphql';
+import { LoginInput, useLoginStaffMutation, useLoginStudentMutation } from 'schema/generated/graphql';
 import { withApollo } from 'utils/hooks/withApollo';
 import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
 
 const LoginStaff = () => {
 
-    const cookie = new Cookies();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setError] = useState('')
-    const [signIn] = useLoginStudentMutation()
+    const router = useRouter()
+    const [cookie, setCookie] = useCookies(["user"])
+    const [signIn] = useLoginStaffMutation({
+        onCompleted(data?) {
 
-    const router = useRouter();
+            setCookie('user', data.loginStaff.accessToken, {
+                path: "/",
+                maxAge: 3600, // Expires after 1hr
+                sameSite: true,
+            })
+            console.log('here in the login', data);
+
+            router.push('/pages/staff')
+        },
+    })
 
 
-    console.log(router.query)
 
     const onSubmit = async (data: LoginInput, error) => {
         error.preventDefault()
         try {
             await signIn({
                 variables: {
-                    data:{
+                    data: {
                         email: data.email,
                         password: data.password
                     }
                 }
             })
         } catch (error) {
-
             setError(error.message)
-
         }
     }
-
     return (
         <>
             <div className="mx-auto bg-white shadow-lg mt-14 md:w-2/3 lg:w-2/3 sm:w-2/3 rounded-2xl">

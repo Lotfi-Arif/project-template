@@ -9,7 +9,6 @@ import { useCookies } from 'react-cookie'
 const navigation = [
   { name: 'Overview', href: '/', current: true },
   { name: 'Events', href: '/events', current: false },
-  { name: 'Our Social media', href: '#', current: false },
   { name: 'FAQ', href: '/pages/FAQ', current: false },
 ]
 

@@ -11,6 +11,7 @@ const CreatePost = () => {
     const { error } = useFindAllPostsQuery();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [image, setImage] = useState('');
     const {data} = useMeQuery()
 
     const router = useRouter()
@@ -23,6 +24,7 @@ const CreatePost = () => {
                     data: {
                         title: title,
                         body: body,
+                        image: image
                     }
                 }
             })
@@ -40,18 +42,22 @@ const CreatePost = () => {
                     <div className="sm:max-w-lg w-full p-10 bg-white shadow-2xl rounded-xl z-10">
                         <div className="text-center">
                             <h2 className="mt-5 text-3xl font-bold text-gray-900">
-                                Edit Event Form!
+                                Edit post Form!
                             </h2>
                             <p className="mt-2 text-sm text-gray-400">Lorem ipsum is placeholder text.</p>
                         </div>
                         <form className="mt-8 space-y-3" action="#" method="POST">
                             <div className="grid grid-cols-1 space-y-2">
-                                <label className="text-sm font-bold text-gray-500 tracking-wide">Event Title</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Event Title" name={title} onChange={(e) => { setTitle(e.target.value) }} />
+                                <label className="text-sm font-bold text-gray-500 tracking-wide">Post Title</label>
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Title" name={title} onChange={(e) => { setTitle(e.target.value) }} />
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
-                                <label className="text-sm font-bold text-gray-500 tracking-wide">Event Details</label>
-                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Event Details" name={body} onChange={(e) => { setBody(e.target.value) }} />
+                                <label className="text-sm font-bold text-gray-500 tracking-wide">Post Details</label>
+                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Post Details" name={body} onChange={(e) => { setBody(e.target.value) }} />
+                            </div>
+                            <div className="grid grid-cols-1 space-y-2">
+                                <label className="text-sm font-bold text-gray-500 tracking-wide">Post Image</label>
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Image URL" name={image} onChange={(e) => { setImage(e.target.value) }} />
                             </div>
                             <p className="text-sm text-gray-300">
                                 <span>File type: types of images</span>

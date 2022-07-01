@@ -22,12 +22,11 @@ model User {
   mobile            String?            @unique
   gender            Gender?
   accountStatus     AccountStatus      @default(UNVERIFIED)
-  role              Role
+  role              Role  
   student           Student?
   staff             Staff?
   counselor         Counselor?
   admin             Admin?
-  posts             Post[]
   counselingSession CounselorSession[]
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
@@ -77,8 +76,6 @@ model CounselorSession {
 
 model Student {
   id               String             @id @default(uuid())
-  firstName        String
-  lastName         String
   password         String
   email            String             @unique
   matrix           String?            @unique
@@ -127,8 +124,7 @@ model Post {
   id        String   @id @default(uuid())
   title     String
   body      String
-  userId    String
-  author    User     @relation(fields: [userId], references: [id])
+  image     String?  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -216,6 +212,7 @@ enum Gender {
   F
   OTHERS
 }
+
 enum MaritalStatus {
   Married
   Single

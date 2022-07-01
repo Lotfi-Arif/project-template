@@ -7,9 +7,11 @@ const ViewEvent = () => {
 
     const router = useRouter()
     const { id, isRefetch } = router.query
-    const {data, error} = useEventQuery(id as any);
+    const {data} = useEventQuery(id as any);
 
-    console.log(data)
+    
+
+    //   console.log(data.findOneEvent)
 
     return (
         <>

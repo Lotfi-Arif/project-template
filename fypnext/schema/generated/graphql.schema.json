@@ -3468,8 +3468,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3508,8 +3508,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3787,8 +3787,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -3823,8 +3823,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4014,8 +4014,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4050,8 +4050,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4320,8 +4320,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4356,8 +4356,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4610,8 +4610,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4646,8 +4646,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4904,8 +4904,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -4940,8 +4940,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -5198,8 +5198,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -5234,8 +5234,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6122,8 +6122,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6158,8 +6158,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6365,8 +6365,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6401,8 +6401,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6624,8 +6624,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6660,8 +6660,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6871,8 +6871,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6907,8 +6907,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -7118,8 +7118,8 @@
             "name": "gender",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "Gender",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -7154,8 +7154,8 @@
             "name": "maritalStatus",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -7918,7 +7918,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumGenderNullableFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -7954,7 +7954,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumMaritalStatusNullableFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8181,7 +8181,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8217,7 +8217,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8408,7 +8408,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8444,7 +8444,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10156,7 +10156,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10192,7 +10192,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10395,7 +10395,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10431,7 +10431,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10646,7 +10646,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10682,7 +10682,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10885,7 +10885,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10921,7 +10921,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11124,7 +11124,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11160,7 +11160,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11730,7 +11730,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumGenderNullableFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -11766,7 +11766,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumMaritalStatusNullableFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -13213,81 +13213,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "EnumMaritalStatusNullableFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "MaritalStatus",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedEnumMaritalStatusNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "MaritalStatus",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "EnumRoleFieldUpdateOperationsInput",
         "description": null,
         "fields": null,
@@ -14628,35 +14553,6 @@
         ],
         "interfaces": null,
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "MaritalStatus",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "Married",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Single",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Widowed",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "possibleTypes": null
       },
       {
@@ -18701,81 +18597,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "NestedEnumMaritalStatusNullableFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "MaritalStatus",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedEnumMaritalStatusNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "MaritalStatus",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "NestedEnumRoleFilter",
         "description": null,
         "fields": null,
@@ -19192,29 +19013,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "NullableEnumMaritalStatusFieldUpdateOperationsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "set",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "MaritalStatus",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "NullableStringFieldUpdateOperationsInput",
         "description": null,
         "fields": null,
@@ -19241,22 +19039,6 @@
         "name": "Post",
         "description": null,
         "fields": [
-          {
-            "name": "author",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "body",
             "description": null,
@@ -19306,6 +19088,18 @@
             "deprecationReason": null
           },
           {
+            "name": "image",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -19336,22 +19130,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -19366,22 +19144,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateNestedOneWithoutPostsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "body",
             "description": null,
             "type": {
@@ -19422,74 +19184,7 @@
             "deprecationReason": null
           },
           {
-            "name": "title",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostCreateManyAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "body",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
+            "name": "image",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -19522,328 +19217,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostCreateManyAuthorInputEnvelope",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostCreateManyAuthorInput",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "skipDuplicates",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostCreateNestedManyWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostCreateOrConnectWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostCreateWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createMany",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateManyAuthorInputEnvelope",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostCreateOrConnectWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostCreateWithoutAuthorInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostCreateWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "body",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "title",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostListRelationFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "every",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "none",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "some",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostOrderByRelationAggregateInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "_count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
               "ofType": null
             },
             "defaultValue": null,
@@ -19862,18 +19235,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserOrderByWithRelationInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "body",
             "description": null,
             "type": {
@@ -19910,6 +19271,18 @@
             "deprecationReason": null
           },
           {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "type": {
@@ -19923,18 +19296,6 @@
           },
           {
             "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -19977,6 +19338,12 @@
             "deprecationReason": null
           },
           {
+            "name": "image",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "isDeprecated": false,
@@ -19987,157 +19354,8 @@
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostScalarWhereInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NOT",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OR",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "body",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "title",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -20147,18 +19365,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "body",
             "description": null,
             "type": {
@@ -20195,70 +19401,11 @@
             "deprecationReason": null
           },
           {
-            "name": "title",
+            "name": "image",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpdateManyMutationInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "body",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -20284,445 +19431,6 @@
               "kind": "INPUT_OBJECT",
               "name": "DateTimeFieldUpdateOperationsInput",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpdateManyWithWhereWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostUpdateManyMutationInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostScalarWhereInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpdateManyWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostCreateOrConnectWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostCreateWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createMany",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateManyAuthorInputEnvelope",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "delete",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deleteMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "disconnect",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "set",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostUpdateWithWhereUniqueWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updateMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostUpdateManyWithWhereWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "upsert",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "PostUpsertWithWhereUniqueWithoutAuthorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpdateWithWhereUniqueWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostUpdateWithoutAuthorInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpdateWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "body",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "title",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PostUpsertWithWhereUniqueWithoutAuthorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostCreateWithoutAuthorInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostUpdateWithoutAuthorInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostWhereUniqueInput",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -20800,18 +19508,6 @@
             "deprecationReason": null
           },
           {
-            "name": "author",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserRelationFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "body",
             "description": null,
             "type": {
@@ -20848,6 +19544,18 @@
             "deprecationReason": null
           },
           {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "type": {
@@ -20865,18 +19573,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "DateTimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -21971,14 +20667,14 @@
             "description": null,
             "args": [
               {
-                "name": "where",
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "EventWhereUniqueInput",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -26335,22 +25031,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -26360,22 +25040,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -26702,38 +25366,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "matrix",
             "description": null,
             "type": {
@@ -26849,38 +25481,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "matrix",
             "description": null,
             "type": {
@@ -26980,31 +25580,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27336,30 +25912,6 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "matrix",
             "description": null,
             "type": {
@@ -27460,30 +26012,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27732,31 +26260,7 @@
             "deprecationReason": null
           },
           {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -28141,26 +26645,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Post",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "args": [],
@@ -28245,22 +26729,6 @@
           },
           {
             "name": "counselingSession",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
             "description": null,
             "args": [],
             "type": {
@@ -28685,53 +27153,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserCreateNestedOneWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateOrConnectWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserCreateNestedOneWithoutStaffInput",
         "description": null,
         "fields": null,
@@ -28998,49 +27419,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserCreateOrConnectWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutPostsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserCreateOrConnectWithoutStaffInput",
         "description": null,
         "fields": null,
@@ -29272,18 +27650,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -29480,18 +27846,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -29702,18 +28056,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -29782,233 +28124,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ChatCreateNestedOneWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "accountStatus",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "AccountStatus",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "admin",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AdminCreateNestedOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "counselingSession",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionCreateNestedManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "counselor",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorCreateNestedOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "gender",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "Gender",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "mobile",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staff",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StaffCreateNestedOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "student",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StudentCreateNestedOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserCreateWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "Chat",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ChatCreateNestedOneWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Message",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "MessageCreateNestedManyWithoutSenderInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30359,18 +28474,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -30567,18 +28670,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostCreateNestedManyWithoutAuthorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30856,18 +28947,6 @@
             "type": {
               "kind": "ENUM",
               "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostOrderByRelationAggregateInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31368,18 +29447,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31968,77 +30035,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserUpdateOneRequiredWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateOrConnectWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserUpdateWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "upsert",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserUpsertWithoutPostsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserUpdateOneRequiredWithoutStaffInput",
         "description": null,
         "fields": null,
@@ -32456,18 +30452,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -32652,18 +30636,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32862,18 +30834,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -32938,221 +30898,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ChatUpdateOneWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "accountStatus",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "EnumAccountStatusFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "admin",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AdminUpdateOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "counselingSession",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorSessionUpdateManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "counselor",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorUpdateOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "firstName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "gender",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableEnumGenderFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "mobile",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "staff",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StaffUpdateOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "student",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StudentUpdateOneWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserUpdateWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "Chat",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ChatUpdateOneWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Message",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "MessageUpdateManyWithoutSenderInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -33483,18 +31228,6 @@
             "deprecationReason": null
           },
           {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -33679,18 +31412,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostUpdateManyWithoutAuthorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -33914,49 +31635,6 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "UserUpdateWithoutMessageInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserUpsertWithoutPostsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutPostsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserUpdateWithoutPostsInput",
                 "ofType": null
               }
             },
@@ -34271,18 +31949,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "posts",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "PostListRelationFilter",
               "ofType": null
             },
             "defaultValue": null,

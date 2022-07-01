@@ -7,7 +7,6 @@ import { StudentCreateNestedOneWithoutUserInput } from '../student/student-creat
 import { StaffCreateNestedOneWithoutUserInput } from '../staff/staff-create-nested-one-without-user.input';
 import { CounselorCreateNestedOneWithoutUserInput } from '../counselor/counselor-create-nested-one-without-user.input';
 import { AdminCreateNestedOneWithoutUserInput } from '../admin/admin-create-nested-one-without-user.input';
-import { PostCreateNestedManyWithoutAuthorInput } from '../post/post-create-nested-many-without-author.input';
 import { CounselorSessionCreateNestedManyWithoutUserInput } from '../counselor-session/counselor-session-create-nested-many-without-user.input';
 import { MessageCreateNestedManyWithoutSenderInput } from '../message/message-create-nested-many-without-sender.input';
 import { ChatCreateNestedOneWithoutUsersInput } from '../chat/chat-create-nested-one-without-users.input';
@@ -47,9 +46,6 @@ export class UserCreateInput {
 
     @Field(() => AdminCreateNestedOneWithoutUserInput, {nullable:true})
     admin?: AdminCreateNestedOneWithoutUserInput;
-
-    @Field(() => PostCreateNestedManyWithoutAuthorInput, {nullable:true})
-    posts?: PostCreateNestedManyWithoutAuthorInput;
 
     @Field(() => CounselorSessionCreateNestedManyWithoutUserInput, {nullable:true})
     counselingSession?: CounselorSessionCreateNestedManyWithoutUserInput;

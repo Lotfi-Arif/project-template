@@ -3,5 +3,6 @@ query findAllPosts {
     id
     title
     body
+    image
   }
 }

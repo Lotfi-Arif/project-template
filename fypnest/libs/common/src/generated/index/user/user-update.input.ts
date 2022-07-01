@@ -9,7 +9,6 @@ import { StudentUpdateOneWithoutUserInput } from '../student/student-update-one-
 import { StaffUpdateOneWithoutUserInput } from '../staff/staff-update-one-without-user.input';
 import { CounselorUpdateOneWithoutUserInput } from '../counselor/counselor-update-one-without-user.input';
 import { AdminUpdateOneWithoutUserInput } from '../admin/admin-update-one-without-user.input';
-import { PostUpdateManyWithoutAuthorInput } from '../post/post-update-many-without-author.input';
 import { CounselorSessionUpdateManyWithoutUserInput } from '../counselor-session/counselor-session-update-many-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { MessageUpdateManyWithoutSenderInput } from '../message/message-update-many-without-sender.input';
@@ -50,9 +49,6 @@ export class UserUpdateInput {
 
     @Field(() => AdminUpdateOneWithoutUserInput, {nullable:true})
     admin?: AdminUpdateOneWithoutUserInput;
-
-    @Field(() => PostUpdateManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUpdateManyWithoutAuthorInput;
 
     @Field(() => CounselorSessionUpdateManyWithoutUserInput, {nullable:true})
     counselingSession?: CounselorSessionUpdateManyWithoutUserInput;

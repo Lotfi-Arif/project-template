@@ -3,11 +3,25 @@ import { useState } from 'react';
 import { useRouter } from "next/router";
 import { useUsersQuery, Role, AccountStatus, useSignupMutation } from 'schema/generated/graphql';
 import { withApollo } from "utils/hooks/withApollo";
+import { useCookies } from 'react-cookie';
 
 const Register = () => {
 
     const { error } = useUsersQuery()
-    const [signup] = useSignupMutation();
+    const [cookie, setCookie] = useCookies(["user"])
+    const [signup] = useSignupMutation({
+        onCompleted(data?) {
+
+            setCookie('user', data.signup.accessToken, {
+                path: "/",
+                maxAge: 3600, // Expires after 1hr
+                sameSite: true,
+            })
+            console.log('here in the login', data);
+
+            router.push('/')
+        },
+    });
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

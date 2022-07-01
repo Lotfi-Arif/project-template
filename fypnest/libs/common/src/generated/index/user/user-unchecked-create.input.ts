@@ -7,7 +7,6 @@ import { StudentUncheckedCreateNestedOneWithoutUserInput } from '../student/stud
 import { StaffUncheckedCreateNestedOneWithoutUserInput } from '../staff/staff-unchecked-create-nested-one-without-user.input';
 import { CounselorUncheckedCreateNestedOneWithoutUserInput } from '../counselor/counselor-unchecked-create-nested-one-without-user.input';
 import { AdminUncheckedCreateNestedOneWithoutUserInput } from '../admin/admin-unchecked-create-nested-one-without-user.input';
-import { PostUncheckedCreateNestedManyWithoutAuthorInput } from '../post/post-unchecked-create-nested-many-without-author.input';
 import { CounselorSessionUncheckedCreateNestedManyWithoutUserInput } from '../counselor-session/counselor-session-unchecked-create-nested-many-without-user.input';
 import { MessageUncheckedCreateNestedManyWithoutSenderInput } from '../message/message-unchecked-create-nested-many-without-sender.input';
 
@@ -46,9 +45,6 @@ export class UserUncheckedCreateInput {
 
     @Field(() => AdminUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput;
-
-    @Field(() => PostUncheckedCreateNestedManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput;
 
     @Field(() => CounselorSessionUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     counselingSession?: CounselorSessionUncheckedCreateNestedManyWithoutUserInput;

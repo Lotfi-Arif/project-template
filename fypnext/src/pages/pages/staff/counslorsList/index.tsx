@@ -1,17 +1,17 @@
-import { useSessionsQuery } from "schema/generated/graphql";
-import BookingCard from "src/components/Cards/BookingCard";
+import { useCounselorsQuery } from "schema/generated/graphql";
+import CounselorCard from "src/components/Cards/CounselorCard";
 import StudentLayout from "src/layouts/Student";
 import { withApollo } from "utils/hooks/withApollo";
 
-const MyBookings = () => {
+const CounselorsList = () => {
 
-    const { data, loading } = useSessionsQuery();
+    const { data, loading } = useCounselorsQuery();
 
     if (loading) {
         return (<></>);
     }
 
-    const counselorSessions = data?.findAllCounselorSessions;
+    const counselors = data?.findAllCounselors;
 
 
     return (
@@ -20,15 +20,15 @@ const MyBookings = () => {
                 <div id="services" className="section relative pt-20 pb-8 md:pt-16 md:pb-0 bg-white">
                     <div className="container xl:max-w-6xl mx-auto px-4">
                         <header className="text-center mx-auto mb-12 lg:px-20">
-                            <h2 className="text-2xl leading-normal mb-2 font-bold text-black">My Bookings</h2>
+                            <h2 className="text-2xl leading-normal mb-2 font-bold text-black">Available Counselors</h2>
                         </header>
 
                         <div className="flex flex-wrap space-x-10 mx-auto my-auto">
-                            {counselorSessions.map((session) => {
+                            {counselors.map((counselor) => {
 
                                 return (
                                     <>
-                                        <BookingCard key={session.id} session={session} />
+                                        <CounselorCard key={counselor.id} counselor={counselor} />
                                     </>
                                 )
                             })}
@@ -41,4 +41,4 @@ const MyBookings = () => {
     );
 }
 
-export default withApollo(MyBookings);
+export default withApollo(CounselorsList);

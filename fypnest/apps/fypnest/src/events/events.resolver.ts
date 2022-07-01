@@ -27,12 +27,11 @@ export class EventsResolver {
 
   @Query(() => Event)
   async findOneEvent(
-    @Args() eventFindUnique: FindUniqueEventArgs,
-    @Info() info,
+    @Args('id') id: string, @Info() info 
   ) {
     try {
       const event = new PrismaSelect(info).value;
-      return this.eventsService.findOne({ ...eventFindUnique, ...event });
+      return this.eventsService.findOne({ where: {id: id}, ...event });
     } catch (error) {
       console.error(error);
     }

@@ -9,7 +9,6 @@ import { StudentUncheckedUpdateOneWithoutUserInput } from '../student/student-un
 import { StaffUncheckedUpdateOneWithoutUserInput } from '../staff/staff-unchecked-update-one-without-user.input';
 import { CounselorUncheckedUpdateOneWithoutUserInput } from '../counselor/counselor-unchecked-update-one-without-user.input';
 import { AdminUncheckedUpdateOneWithoutUserInput } from '../admin/admin-unchecked-update-one-without-user.input';
-import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
 import { CounselorSessionUncheckedUpdateManyWithoutUserInput } from '../counselor-session/counselor-session-unchecked-update-many-without-user.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { MessageUncheckedUpdateManyWithoutSenderInput } from '../message/message-unchecked-update-many-without-sender.input';
@@ -49,9 +48,6 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => AdminUncheckedUpdateOneWithoutUserInput, {nullable:true})
     admin?: AdminUncheckedUpdateOneWithoutUserInput;
-
-    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
-    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
 
     @Field(() => CounselorSessionUncheckedUpdateManyWithoutUserInput, {nullable:true})
     counselingSession?: CounselorSessionUncheckedUpdateManyWithoutUserInput;

@@ -9,7 +9,6 @@ import { StudentRelationFilter } from '../student/student-relation-filter.input'
 import { StaffRelationFilter } from '../staff/staff-relation-filter.input';
 import { CounselorRelationFilter } from '../counselor/counselor-relation-filter.input';
 import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
-import { PostListRelationFilter } from '../post/post-list-relation-filter.input';
 import { CounselorSessionListRelationFilter } from '../counselor-session/counselor-session-list-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
@@ -59,9 +58,6 @@ export class UserWhereInput {
 
     @Field(() => AdminRelationFilter, {nullable:true})
     admin?: AdminRelationFilter;
-
-    @Field(() => PostListRelationFilter, {nullable:true})
-    posts?: PostListRelationFilter;
 
     @Field(() => CounselorSessionListRelationFilter, {nullable:true})
     counselingSession?: CounselorSessionListRelationFilter;
