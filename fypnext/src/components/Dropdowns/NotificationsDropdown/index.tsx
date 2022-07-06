@@ -7,9 +7,9 @@ const NotificationDropdown = () => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
+    // createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
+    //   placement: "bottom-start",
+    // });
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {

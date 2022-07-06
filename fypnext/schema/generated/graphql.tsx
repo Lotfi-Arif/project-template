@@ -288,6 +288,18 @@ export type CounselorCount = {
   Schedule: Scalars['Int'];
 };
 
+export type CounselorCreateInput = {
+  CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutCounselorInput>;
+  Schedule?: InputMaybe<ScheduleCreateNestedManyWithoutCounselorInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  department?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+  expertise?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<UserCreateNestedOneWithoutCounselorInput>;
+};
+
 export type CounselorCreateNestedOneWithoutCounselorSessionInput = {
   connect?: InputMaybe<CounselorWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CounselorCreateOrConnectWithoutCounselorSessionInput>;
@@ -392,9 +404,11 @@ export type CounselorSession = {
   counselorId: Scalars['String'];
   counselorSchedule: Schedule;
   createdAt: Scalars['DateTime'];
+  days?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
+  hour?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastName?: Maybe<Scalars['String']>;
   maritalStatus?: Maybe<Scalars['String']>;
@@ -405,6 +419,8 @@ export type CounselorSession = {
   state?: Maybe<Scalars['String']>;
   student?: Maybe<Student>;
   studentId?: Maybe<Scalars['String']>;
+  timeFrom?: Maybe<Scalars['String']>;
+  timeTo?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
   user?: Maybe<User>;
   userId?: Maybe<Scalars['String']>;
@@ -419,9 +435,11 @@ export type CounselorSessionCreateInput = {
   counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -429,6 +447,8 @@ export type CounselorSessionCreateInput = {
   staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
   state?: InputMaybe<Scalars['String']>;
   student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   user?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -440,9 +460,11 @@ export type CounselorSessionCreateManyCounselorInput = {
   counsellingDate?: InputMaybe<Scalars['String']>;
   counsellingReason?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -451,6 +473,8 @@ export type CounselorSessionCreateManyCounselorInput = {
   staffId?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
   studentId?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   userId?: InputMaybe<Scalars['String']>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -468,9 +492,11 @@ export type CounselorSessionCreateManyCounselorScheduleInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselorId: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -478,6 +504,8 @@ export type CounselorSessionCreateManyCounselorScheduleInput = {
   staffId?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
   studentId?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   userId?: InputMaybe<Scalars['String']>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -495,9 +523,11 @@ export type CounselorSessionCreateManyStaffInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselorId: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -505,6 +535,8 @@ export type CounselorSessionCreateManyStaffInput = {
   scheduleId: Scalars['String'];
   state?: InputMaybe<Scalars['String']>;
   studentId?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   userId?: InputMaybe<Scalars['String']>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -522,9 +554,11 @@ export type CounselorSessionCreateManyStudentInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselorId: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -532,6 +566,8 @@ export type CounselorSessionCreateManyStudentInput = {
   scheduleId: Scalars['String'];
   staffId?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   userId?: InputMaybe<Scalars['String']>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -549,9 +585,11 @@ export type CounselorSessionCreateManyUserInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselorId: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -560,6 +598,8 @@ export type CounselorSessionCreateManyUserInput = {
   staffId?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
   studentId?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   zipCode?: InputMaybe<Scalars['String']>;
 };
@@ -636,9 +676,11 @@ export type CounselorSessionCreateWithoutCounselorInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -646,6 +688,8 @@ export type CounselorSessionCreateWithoutCounselorInput = {
   staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
   state?: InputMaybe<Scalars['String']>;
   student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   user?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -658,9 +702,11 @@ export type CounselorSessionCreateWithoutCounselorScheduleInput = {
   counsellingReason?: InputMaybe<Scalars['String']>;
   counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -668,6 +714,8 @@ export type CounselorSessionCreateWithoutCounselorScheduleInput = {
   staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
   state?: InputMaybe<Scalars['String']>;
   student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   user?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -681,15 +729,19 @@ export type CounselorSessionCreateWithoutStaffInput = {
   counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
   race?: InputMaybe<Scalars['String']>;
   state?: InputMaybe<Scalars['String']>;
   student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   user?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -703,15 +755,19 @@ export type CounselorSessionCreateWithoutStudentInput = {
   counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
   race?: InputMaybe<Scalars['String']>;
   staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
   state?: InputMaybe<Scalars['String']>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   user?: InputMaybe<UserCreateNestedOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<Scalars['String']>;
@@ -725,9 +781,11 @@ export type CounselorSessionCreateWithoutUserInput = {
   counselor: CounselorCreateNestedOneWithoutCounselorSessionInput;
   counselorSchedule: ScheduleCreateNestedOneWithoutCounselorSessionInput;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  days?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
+  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   maritalStatus?: InputMaybe<Scalars['String']>;
@@ -735,6 +793,8 @@ export type CounselorSessionCreateWithoutUserInput = {
   staff?: InputMaybe<StaffCreateNestedOneWithoutCounselorSessionInput>;
   state?: InputMaybe<Scalars['String']>;
   student?: InputMaybe<StudentCreateNestedOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<Scalars['String']>;
+  timeTo?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   zipCode?: InputMaybe<Scalars['String']>;
 };
@@ -758,9 +818,11 @@ export type CounselorSessionOrderByWithRelationInput = {
   counselorId?: InputMaybe<SortOrder>;
   counselorSchedule?: InputMaybe<ScheduleOrderByWithRelationInput>;
   createdAt?: InputMaybe<SortOrder>;
+  days?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   firstName?: InputMaybe<SortOrder>;
   gender?: InputMaybe<SortOrder>;
+  hour?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   maritalStatus?: InputMaybe<SortOrder>;
@@ -771,6 +833,8 @@ export type CounselorSessionOrderByWithRelationInput = {
   state?: InputMaybe<SortOrder>;
   student?: InputMaybe<StudentOrderByWithRelationInput>;
   studentId?: InputMaybe<SortOrder>;
+  timeFrom?: InputMaybe<SortOrder>;
+  timeTo?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
@@ -784,9 +848,11 @@ export enum CounselorSessionScalarFieldEnum {
   CounsellingReason = 'counsellingReason',
   CounselorId = 'counselorId',
   CreatedAt = 'createdAt',
+  Days = 'days',
   Email = 'email',
   FirstName = 'firstName',
   Gender = 'gender',
+  Hour = 'hour',
   Id = 'id',
   LastName = 'lastName',
   MaritalStatus = 'maritalStatus',
@@ -795,6 +861,8 @@ export enum CounselorSessionScalarFieldEnum {
   StaffId = 'staffId',
   State = 'state',
   StudentId = 'studentId',
+  TimeFrom = 'timeFrom',
+  TimeTo = 'timeTo',
   UpdatedAt = 'updatedAt',
   UserId = 'userId',
   ZipCode = 'zipCode'
@@ -810,9 +878,11 @@ export type CounselorSessionScalarWhereInput = {
   counsellingReason?: InputMaybe<StringNullableFilter>;
   counselorId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  days?: InputMaybe<StringNullableFilter>;
   email?: InputMaybe<StringNullableFilter>;
   firstName?: InputMaybe<StringNullableFilter>;
   gender?: InputMaybe<StringNullableFilter>;
+  hour?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   lastName?: InputMaybe<StringNullableFilter>;
   maritalStatus?: InputMaybe<StringNullableFilter>;
@@ -821,6 +891,8 @@ export type CounselorSessionScalarWhereInput = {
   staffId?: InputMaybe<StringNullableFilter>;
   state?: InputMaybe<StringNullableFilter>;
   studentId?: InputMaybe<StringNullableFilter>;
+  timeFrom?: InputMaybe<StringNullableFilter>;
+  timeTo?: InputMaybe<StringNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringNullableFilter>;
   zipCode?: InputMaybe<StringNullableFilter>;
@@ -834,9 +906,11 @@ export type CounselorSessionUpdateInput = {
   counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   counselorSchedule?: InputMaybe<ScheduleUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -844,6 +918,8 @@ export type CounselorSessionUpdateInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -855,14 +931,18 @@ export type CounselorSessionUpdateManyMutationInput = {
   counsellingDate?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   race?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
@@ -994,9 +1074,11 @@ export type CounselorSessionUpdateWithoutCounselorInput = {
   counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   counselorSchedule?: InputMaybe<ScheduleUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1004,6 +1086,8 @@ export type CounselorSessionUpdateWithoutCounselorInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1016,9 +1100,11 @@ export type CounselorSessionUpdateWithoutCounselorScheduleInput = {
   counsellingReason?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1026,6 +1112,8 @@ export type CounselorSessionUpdateWithoutCounselorScheduleInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1039,15 +1127,19 @@ export type CounselorSessionUpdateWithoutStaffInput = {
   counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   counselorSchedule?: InputMaybe<ScheduleUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   race?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1061,15 +1153,19 @@ export type CounselorSessionUpdateWithoutStudentInput = {
   counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   counselorSchedule?: InputMaybe<ScheduleUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   race?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneWithoutCounselingSessionInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1083,9 +1179,11 @@ export type CounselorSessionUpdateWithoutUserInput = {
   counselor?: InputMaybe<CounselorUpdateOneRequiredWithoutCounselorSessionInput>;
   counselorSchedule?: InputMaybe<ScheduleUpdateOneRequiredWithoutCounselorSessionInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   firstName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   gender?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   maritalStatus?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1093,6 +1191,8 @@ export type CounselorSessionUpdateWithoutUserInput = {
   staff?: InputMaybe<StaffUpdateOneWithoutCounselorSessionInput>;
   state?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   student?: InputMaybe<StudentUpdateOneWithoutCounselorSessionInput>;
+  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   zipCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
@@ -1139,9 +1239,11 @@ export type CounselorSessionWhereInput = {
   counselorId?: InputMaybe<StringFilter>;
   counselorSchedule?: InputMaybe<ScheduleRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  days?: InputMaybe<StringNullableFilter>;
   email?: InputMaybe<StringNullableFilter>;
   firstName?: InputMaybe<StringNullableFilter>;
   gender?: InputMaybe<StringNullableFilter>;
+  hour?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   lastName?: InputMaybe<StringNullableFilter>;
   maritalStatus?: InputMaybe<StringNullableFilter>;
@@ -1152,6 +1254,8 @@ export type CounselorSessionWhereInput = {
   state?: InputMaybe<StringNullableFilter>;
   student?: InputMaybe<StudentRelationFilter>;
   studentId?: InputMaybe<StringNullableFilter>;
+  timeFrom?: InputMaybe<StringNullableFilter>;
+  timeTo?: InputMaybe<StringNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringNullableFilter>;
@@ -1161,6 +1265,18 @@ export type CounselorSessionWhereInput = {
 export type CounselorSessionWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
+};
+
+export type CounselorUpdateInput = {
+  CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutCounselorInput>;
+  Schedule?: InputMaybe<ScheduleUpdateManyWithoutCounselorInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  department?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  expertise?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCounselorInput>;
 };
 
 export type CounselorUpdateOneRequiredWithoutCounselorSessionInput = {
@@ -1682,12 +1798,14 @@ export type Mutation = {
   __typename?: 'Mutation';
   approveUser: User;
   createChat: Chat;
+  createCounselor: Counselor;
   createCounselorSession: CounselorSession;
   createEvent: Event;
   createFaq: Faq;
   createPost: Post;
   createSchedule: Schedule;
   deleteChat: Chat;
+  deleteCounselor: Counselor;
   deleteCounselorSession: CounselorSession;
   deleteEvent: Event;
   deleteFaq: Faq;
@@ -1699,7 +1817,6 @@ export type Mutation = {
   findOneCounselorSession: CounselorSession;
   findOneFaq: Faq;
   findOneMessage: Message;
-  findOneSchedule: Schedule;
   findOneUser: User;
   loginCounselor: Auth;
   loginStaff: Auth;
@@ -1708,6 +1825,7 @@ export type Mutation = {
   sendMessage: Message;
   signup: Auth;
   updateChat: Chat;
+  updateCounselor: Counselor;
   updateCounselorSession: CounselorSession;
   updateEvent: Event;
   updateFaq: Faq;
@@ -1725,6 +1843,11 @@ export type MutationApproveUserArgs = {
 
 export type MutationCreateChatArgs = {
   data: ChatCreateInput;
+};
+
+
+export type MutationCreateCounselorArgs = {
+  data: CounselorCreateInput;
 };
 
 
@@ -1755,6 +1878,11 @@ export type MutationCreateScheduleArgs = {
 
 export type MutationDeleteChatArgs = {
   where: ChatWhereUniqueInput;
+};
+
+
+export type MutationDeleteCounselorArgs = {
+  where: CounselorWhereUniqueInput;
 };
 
 
@@ -1813,11 +1941,6 @@ export type MutationFindOneMessageArgs = {
 };
 
 
-export type MutationFindOneScheduleArgs = {
-  where: ScheduleWhereUniqueInput;
-};
-
-
 export type MutationFindOneUserArgs = {
   where: UserWhereUniqueInput;
 };
@@ -1856,6 +1979,12 @@ export type MutationSignupArgs = {
 export type MutationUpdateChatArgs = {
   data: ChatUpdateInput;
   where: ChatWhereUniqueInput;
+};
+
+
+export type MutationUpdateCounselorArgs = {
+  data: CounselorUpdateInput;
+  where: CounselorWhereUniqueInput;
 };
 
 
@@ -2039,13 +2168,14 @@ export type Query = {
   findAllFaqs: Array<Faq>;
   findAllMessages: Message;
   findAllPosts: Array<Post>;
-  findAllSchedules: Schedule;
+  findAllSchedules: Array<Schedule>;
   findAllUserChats: Chat;
   findAllUsers: Array<User>;
   findChatMessages: Array<Message>;
+  findOneCounselor: Counselor;
   findOneEvent: Event;
   findOnePost: Post;
-  getOneCounselor: Counselor;
+  findOneSchedule: Schedule;
   me: User;
 };
 
@@ -2145,18 +2275,23 @@ export type QueryFindChatMessagesArgs = {
 };
 
 
+export type QueryFindOneCounselorArgs = {
+  where: CounselorWhereUniqueInput;
+};
+
+
 export type QueryFindOneEventArgs = {
   id: Scalars['String'];
 };
 
 
 export type QueryFindOnePostArgs = {
-  where: PostWhereUniqueInput;
+  id: Scalars['String'];
 };
 
 
-export type QueryGetOneCounselorArgs = {
-  id: Scalars['String'];
+export type QueryFindOneScheduleArgs = {
+  where: ScheduleWhereUniqueInput;
 };
 
 export enum QueryMode {
@@ -2178,11 +2313,7 @@ export type Schedule = {
   CounselorSession?: Maybe<Array<CounselorSession>>;
   _count: ScheduleCount;
   counselorId?: Maybe<Scalars['String']>;
-  days?: Maybe<Scalars['String']>;
-  hour?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  timeFrom?: Maybe<Scalars['String']>;
-  timeTo?: Maybe<Scalars['String']>;
 };
 
 export type ScheduleCount = {
@@ -2193,19 +2324,11 @@ export type ScheduleCount = {
 export type ScheduleCreateInput = {
   Counselor?: InputMaybe<CounselorCreateNestedOneWithoutScheduleInput>;
   CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutCounselorScheduleInput>;
-  days?: InputMaybe<Scalars['String']>;
-  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
-  timeFrom?: InputMaybe<Scalars['String']>;
-  timeTo?: InputMaybe<Scalars['String']>;
 };
 
 export type ScheduleCreateManyCounselorInput = {
-  days?: InputMaybe<Scalars['String']>;
-  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
-  timeFrom?: InputMaybe<Scalars['String']>;
-  timeTo?: InputMaybe<Scalars['String']>;
 };
 
 export type ScheduleCreateManyCounselorInputEnvelope = {
@@ -2238,20 +2361,12 @@ export type ScheduleCreateOrConnectWithoutCounselorSessionInput = {
 
 export type ScheduleCreateWithoutCounselorInput = {
   CounselorSession?: InputMaybe<CounselorSessionCreateNestedManyWithoutCounselorScheduleInput>;
-  days?: InputMaybe<Scalars['String']>;
-  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
-  timeFrom?: InputMaybe<Scalars['String']>;
-  timeTo?: InputMaybe<Scalars['String']>;
 };
 
 export type ScheduleCreateWithoutCounselorSessionInput = {
   Counselor?: InputMaybe<CounselorCreateNestedOneWithoutScheduleInput>;
-  days?: InputMaybe<Scalars['String']>;
-  hour?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
-  timeFrom?: InputMaybe<Scalars['String']>;
-  timeTo?: InputMaybe<Scalars['String']>;
 };
 
 export type ScheduleListRelationFilter = {
@@ -2268,11 +2383,7 @@ export type ScheduleOrderByWithRelationInput = {
   Counselor?: InputMaybe<CounselorOrderByWithRelationInput>;
   CounselorSession?: InputMaybe<CounselorSessionOrderByRelationAggregateInput>;
   counselorId?: InputMaybe<SortOrder>;
-  days?: InputMaybe<SortOrder>;
-  hour?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  timeFrom?: InputMaybe<SortOrder>;
-  timeTo?: InputMaybe<SortOrder>;
 };
 
 export type ScheduleRelationFilter = {
@@ -2282,11 +2393,7 @@ export type ScheduleRelationFilter = {
 
 export enum ScheduleScalarFieldEnum {
   CounselorId = 'counselorId',
-  Days = 'days',
-  Hour = 'hour',
-  Id = 'id',
-  TimeFrom = 'timeFrom',
-  TimeTo = 'timeTo'
+  Id = 'id'
 }
 
 export type ScheduleScalarWhereInput = {
@@ -2294,29 +2401,17 @@ export type ScheduleScalarWhereInput = {
   NOT?: InputMaybe<Array<ScheduleScalarWhereInput>>;
   OR?: InputMaybe<Array<ScheduleScalarWhereInput>>;
   counselorId?: InputMaybe<StringNullableFilter>;
-  days?: InputMaybe<StringNullableFilter>;
-  hour?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
-  timeFrom?: InputMaybe<StringNullableFilter>;
-  timeTo?: InputMaybe<StringNullableFilter>;
 };
 
 export type ScheduleUpdateInput = {
   Counselor?: InputMaybe<CounselorUpdateOneWithoutScheduleInput>;
   CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutCounselorScheduleInput>;
-  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type ScheduleUpdateManyMutationInput = {
-  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type ScheduleUpdateManyWithWhereWithoutCounselorInput = {
@@ -2353,20 +2448,12 @@ export type ScheduleUpdateWithWhereUniqueWithoutCounselorInput = {
 
 export type ScheduleUpdateWithoutCounselorInput = {
   CounselorSession?: InputMaybe<CounselorSessionUpdateManyWithoutCounselorScheduleInput>;
-  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type ScheduleUpdateWithoutCounselorSessionInput = {
   Counselor?: InputMaybe<CounselorUpdateOneWithoutScheduleInput>;
-  days?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  hour?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  timeFrom?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  timeTo?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type ScheduleUpsertWithWhereUniqueWithoutCounselorInput = {
@@ -2387,11 +2474,7 @@ export type ScheduleWhereInput = {
   NOT?: InputMaybe<Array<ScheduleWhereInput>>;
   OR?: InputMaybe<Array<ScheduleWhereInput>>;
   counselorId?: InputMaybe<StringNullableFilter>;
-  days?: InputMaybe<StringNullableFilter>;
-  hour?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
-  timeFrom?: InputMaybe<StringNullableFilter>;
-  timeTo?: InputMaybe<StringNullableFilter>;
 };
 
 export type ScheduleWhereUniqueInput = {
@@ -3442,6 +3525,18 @@ export type SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SessionsQuery = { __typename?: 'Query', findAllCounselorSessions: Array<{ __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: string | null | undefined, counselor: { __typename?: 'Counselor', id: string, user: { __typename?: 'User', firstName: string, lastName: string } }, student?: { __typename?: 'Student', id: string } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined }> };
 
+export type FindOneCounselorQueryVariables = Exact<{
+  where: CounselorWhereUniqueInput;
+}>;
+
+
+export type FindOneCounselorQuery = { __typename?: 'Query', findOneCounselor: { __typename?: 'Counselor', id: string, department?: string | null | undefined, email: string, expertise?: string | null | undefined, createdAt: any, updatedAt: any, Schedule?: Array<{ __typename?: 'Schedule', id: string }> | null | undefined, user: { __typename?: 'User', firstName: string, lastName: string }, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string, days?: string | null | undefined }> | null | undefined } };
+
+export type CounselorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CounselorsQuery = { __typename?: 'Query', findAllCounselors: Array<{ __typename?: 'Counselor', id: string, department?: string | null | undefined, email: string, expertise?: string | null | undefined, createdAt: any, updatedAt: any, Schedule?: Array<{ __typename?: 'Schedule', id: string }> | null | undefined, user: { __typename?: 'User', firstName: string, lastName: string }, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string, days?: string | null | undefined }> | null | undefined }> };
+
 export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3464,22 +3559,17 @@ export type FindAllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FindAllPostsQuery = { __typename?: 'Query', findAllPosts: Array<{ __typename?: 'Post', id: string, title: string, body: string, image?: string | null | undefined }> };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type UsersQuery = { __typename?: 'Query', findAllUsers: Array<{ __typename?: 'User', id: string, firstName: string, lastName: string, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role, counselor?: { __typename?: 'Counselor', id: string } | null | undefined, student?: { __typename?: 'Student', id: string } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined }> };
-
-export type CounselorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CounselorsQuery = { __typename?: 'Query', findAllCounselors: Array<{ __typename?: 'Counselor', id: string, department?: string | null | undefined, email: string, expertise?: string | null | undefined, createdAt: any, updatedAt: any, Schedule?: Array<{ __typename?: 'Schedule', id: string, days?: string | null | undefined }> | null | undefined, user: { __typename?: 'User', firstName: string, lastName: string }, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string }> | null | undefined }> };
-
-export type GetOneCounselorQueryVariables = Exact<{
+export type PostQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetOneCounselorQuery = { __typename?: 'Query', getOneCounselor: { __typename?: 'Counselor', id: string, department?: string | null | undefined, email: string, expertise?: string | null | undefined, createdAt: any, updatedAt: any, Schedule?: Array<{ __typename?: 'Schedule', id: string, days?: string | null | undefined }> | null | undefined, user: { __typename?: 'User', firstName: string, lastName: string }, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string }> | null | undefined } };
+export type PostQuery = { __typename?: 'Query', findOnePost: { __typename?: 'Post', id: string, title: string, body: string, image?: string | null | undefined } };
+
+export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UsersQuery = { __typename?: 'Query', findAllUsers: Array<{ __typename?: 'User', id: string, firstName: string, lastName: string, mobile?: string | null | undefined, accountStatus: AccountStatus, role: Role, counselor?: { __typename?: 'Counselor', id: string } | null | undefined, student?: { __typename?: 'Student', id: string } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined }> };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4261,6 +4351,107 @@ export function useSessionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<S
 export type SessionsQueryHookResult = ReturnType<typeof useSessionsQuery>;
 export type SessionsLazyQueryHookResult = ReturnType<typeof useSessionsLazyQuery>;
 export type SessionsQueryResult = Apollo.QueryResult<SessionsQuery, SessionsQueryVariables>;
+export const FindOneCounselorDocument = gql`
+    query findOneCounselor($where: CounselorWhereUniqueInput!) {
+  findOneCounselor(where: $where) {
+    id
+    department
+    email
+    expertise
+    Schedule {
+      id
+    }
+    user {
+      firstName
+      lastName
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+      days
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindOneCounselorQuery__
+ *
+ * To run a query within a React component, call `useFindOneCounselorQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindOneCounselorQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindOneCounselorQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useFindOneCounselorQuery(baseOptions: Apollo.QueryHookOptions<FindOneCounselorQuery, FindOneCounselorQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindOneCounselorQuery, FindOneCounselorQueryVariables>(FindOneCounselorDocument, options);
+      }
+export function useFindOneCounselorLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindOneCounselorQuery, FindOneCounselorQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindOneCounselorQuery, FindOneCounselorQueryVariables>(FindOneCounselorDocument, options);
+        }
+export type FindOneCounselorQueryHookResult = ReturnType<typeof useFindOneCounselorQuery>;
+export type FindOneCounselorLazyQueryHookResult = ReturnType<typeof useFindOneCounselorLazyQuery>;
+export type FindOneCounselorQueryResult = Apollo.QueryResult<FindOneCounselorQuery, FindOneCounselorQueryVariables>;
+export const CounselorsDocument = gql`
+    query counselors {
+  findAllCounselors {
+    id
+    department
+    email
+    expertise
+    Schedule {
+      id
+    }
+    user {
+      firstName
+      lastName
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+      days
+    }
+  }
+}
+    `;
+
+/**
+ * __useCounselorsQuery__
+ *
+ * To run a query within a React component, call `useCounselorsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCounselorsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCounselorsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCounselorsQuery(baseOptions?: Apollo.QueryHookOptions<CounselorsQuery, CounselorsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CounselorsQuery, CounselorsQueryVariables>(CounselorsDocument, options);
+      }
+export function useCounselorsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CounselorsQuery, CounselorsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CounselorsQuery, CounselorsQueryVariables>(CounselorsDocument, options);
+        }
+export type CounselorsQueryHookResult = ReturnType<typeof useCounselorsQuery>;
+export type CounselorsLazyQueryHookResult = ReturnType<typeof useCounselorsLazyQuery>;
+export type CounselorsQueryResult = Apollo.QueryResult<CounselorsQuery, CounselorsQueryVariables>;
 export const EventsDocument = gql`
     query events {
   findAllEvents {
@@ -4410,6 +4601,44 @@ export function useFindAllPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type FindAllPostsQueryHookResult = ReturnType<typeof useFindAllPostsQuery>;
 export type FindAllPostsLazyQueryHookResult = ReturnType<typeof useFindAllPostsLazyQuery>;
 export type FindAllPostsQueryResult = Apollo.QueryResult<FindAllPostsQuery, FindAllPostsQueryVariables>;
+export const PostDocument = gql`
+    query post($id: String!) {
+  findOnePost(id: $id) {
+    id
+    title
+    body
+    image
+  }
+}
+    `;
+
+/**
+ * __usePostQuery__
+ *
+ * To run a query within a React component, call `usePostQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePostQuery(baseOptions: Apollo.QueryHookOptions<PostQuery, PostQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostQuery, PostQueryVariables>(PostDocument, options);
+      }
+export function usePostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostQuery, PostQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostQuery, PostQueryVariables>(PostDocument, options);
+        }
+export type PostQueryHookResult = ReturnType<typeof usePostQuery>;
+export type PostLazyQueryHookResult = ReturnType<typeof usePostLazyQuery>;
+export type PostQueryResult = Apollo.QueryResult<PostQuery, PostQueryVariables>;
 export const UsersDocument = gql`
     query users {
   findAllUsers {
@@ -4458,107 +4687,6 @@ export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<User
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
-export const CounselorsDocument = gql`
-    query counselors {
-  findAllCounselors {
-    id
-    department
-    email
-    expertise
-    Schedule {
-      id
-      days
-    }
-    user {
-      firstName
-      lastName
-    }
-    createdAt
-    updatedAt
-    CounselorSession {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useCounselorsQuery__
- *
- * To run a query within a React component, call `useCounselorsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCounselorsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCounselorsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCounselorsQuery(baseOptions?: Apollo.QueryHookOptions<CounselorsQuery, CounselorsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CounselorsQuery, CounselorsQueryVariables>(CounselorsDocument, options);
-      }
-export function useCounselorsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CounselorsQuery, CounselorsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CounselorsQuery, CounselorsQueryVariables>(CounselorsDocument, options);
-        }
-export type CounselorsQueryHookResult = ReturnType<typeof useCounselorsQuery>;
-export type CounselorsLazyQueryHookResult = ReturnType<typeof useCounselorsLazyQuery>;
-export type CounselorsQueryResult = Apollo.QueryResult<CounselorsQuery, CounselorsQueryVariables>;
-export const GetOneCounselorDocument = gql`
-    query getOneCounselor($id: String!) {
-  getOneCounselor(id: $id) {
-    id
-    department
-    email
-    expertise
-    Schedule {
-      id
-      days
-    }
-    user {
-      firstName
-      lastName
-    }
-    createdAt
-    updatedAt
-    CounselorSession {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useGetOneCounselorQuery__
- *
- * To run a query within a React component, call `useGetOneCounselorQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetOneCounselorQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetOneCounselorQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetOneCounselorQuery(baseOptions: Apollo.QueryHookOptions<GetOneCounselorQuery, GetOneCounselorQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetOneCounselorQuery, GetOneCounselorQueryVariables>(GetOneCounselorDocument, options);
-      }
-export function useGetOneCounselorLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOneCounselorQuery, GetOneCounselorQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetOneCounselorQuery, GetOneCounselorQueryVariables>(GetOneCounselorDocument, options);
-        }
-export type GetOneCounselorQueryHookResult = ReturnType<typeof useGetOneCounselorQuery>;
-export type GetOneCounselorLazyQueryHookResult = ReturnType<typeof useGetOneCounselorLazyQuery>;
-export type GetOneCounselorQueryResult = Apollo.QueryResult<GetOneCounselorQuery, GetOneCounselorQueryVariables>;
 export const CurrentUserDocument = gql`
     query currentUser {
   currentUser {
@@ -4801,13 +4929,14 @@ export const namedOperations = {
     findChatMessages: 'findChatMessages',
     findAllMessages: 'findAllMessages',
     sessions: 'sessions',
+    findOneCounselor: 'findOneCounselor',
+    counselors: 'counselors',
     events: 'events',
     event: 'event',
     faqs: 'faqs',
     findAllPosts: 'findAllPosts',
+    post: 'post',
     users: 'users',
-    counselors: 'counselors',
-    getOneCounselor: 'getOneCounselor',
     currentUser: 'currentUser',
     me: 'me',
     counselor: 'counselor',

@@ -49,10 +49,6 @@ export class AuthService {
       if (staff || counselor) {
         throw new ConflictException(`Email ${email} already used.`);
       }
-      // const verification =
-      //   payload.role == Role.COUNSELOR
-      //     ? { status: AccountStatus.UNVERIFIED }
-      //     : undefined;
       const user = await this.prisma.user.create({
         data: {
           mobile,

@@ -6,3 +6,12 @@ query findAllPosts {
     image
   }
 }
+
+query post($id: String!) {
+  findOnePost(id: $id) {
+    id
+    title
+    body
+    image
+  }
+}

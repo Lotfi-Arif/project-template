@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { useUsersQuery, Role, AccountStatus, useSignupMutation } from 'schema/generated/graphql';
 import { withApollo } from "utils/hooks/withApollo";
 import { useCookies } from 'react-cookie';
+import { toast } from "react-toastify";
+import { Feedback } from 'src/components/FeedBack';
+// import { Feedback } from "compo";
 
 const Register = () => {
 
@@ -48,7 +51,35 @@ const Register = () => {
             })
             router.push('/');
         } catch (e: any) {
-            console.log(error);
+            if (e.graphQLErrors[0].message.includes("ConflictException")) {
+                toast(
+                  <Feedback
+                    title="There's an error!"
+                    subtitle="Email already in use"
+                    type="error"
+                    disableFeedback={true}
+                  />,
+                  {
+                    progress: undefined,
+                    toastId: 1,
+                    autoClose: 3000,
+                  },
+                );
+              } else {
+                toast(
+                  <Feedback
+                    title="There's an error!"
+                    subtitle="Something went wrong"
+                    type="error"
+                    disableFeedback={true}
+                  />,
+                  {
+                    progress: undefined,
+                    toastId: 1,
+                    autoClose: 3000,
+                  },
+                );
+              }
         }
     }
 

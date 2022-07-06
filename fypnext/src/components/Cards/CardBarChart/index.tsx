@@ -127,7 +127,7 @@ const CardBarChart = () => {
         <div className="p-4 flex-auto">
           {/* Chart */}
           <div className="relative h-350-px">
-            <Bar height={100} options={options} data={data}/>
+            {/* <Bar height={100} options={options} data={data}/> */}
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { DeleteOneCounselorArgs } from '@app/common/generated/index/counselor/de
 import { UpdateOneCounselorArgs } from '@app/common/generated/index/counselor/update-one-counselor.args';
 import { FindUniqueCounselorArgs } from '@app/common/generated/index/counselor/find-unique-counselor.args';
 import { CounselorService } from './counselor.service';
+import { HttpException } from '@nestjs/common';
 
 
 @Resolver(() => Counselor)
@@ -92,5 +93,4 @@ export class CounselorResolver {
             console.error(error);
         }
     }
-
 }

@@ -45,6 +45,7 @@ import { CounselorModule } from './counselor/counselor.module';
         MessagesModule,
         FaqModule,
         SchedulesModule,
+        CounselorModule
       ],
     }),
     PrismaModule.forRoot({

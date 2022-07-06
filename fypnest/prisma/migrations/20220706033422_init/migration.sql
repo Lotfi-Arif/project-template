@@ -13,17 +13,21 @@ CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'STUDENT', 'COUNSELOR', 'STAFF');
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('M', 'F', 'OTHERS');
 
+-- CreateEnum
+CREATE TYPE "MaritalStatus" AS ENUM ('Married', 'Single', 'Widowed');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
     "mobile" TEXT,
     "gender" "Gender",
     "accountStatus" "AccountStatus" NOT NULL DEFAULT E'UNVERIFIED',
     "role" "Role" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "chatId" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -31,9 +35,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Schedule" (
     "id" TEXT NOT NULL,
-    "days" TIMESTAMP(3) NOT NULL,
-    "timeFrom" TIMESTAMP(3) NOT NULL,
-    "timeTo" TIMESTAMP(3) NOT NULL,
+    "counselorId" TEXT,
 
     CONSTRAINT "Schedule_pkey" PRIMARY KEY ("id")
 );
@@ -42,10 +44,26 @@ CREATE TABLE "Schedule" (
 CREATE TABLE "CounselorSession" (
     "id" TEXT NOT NULL,
     "counsellingReason" TEXT,
+    "scheduleId" TEXT NOT NULL,
+    "days" TEXT,
+    "timeFrom" TEXT,
+    "timeTo" TEXT,
+    "hour" TEXT,
     "counselorId" TEXT NOT NULL,
     "userId" TEXT,
     "studentId" TEXT,
     "staffId" TEXT,
+    "counsellingDate" TEXT,
+    "firstName" TEXT,
+    "lastName" TEXT,
+    "email" TEXT,
+    "gender" TEXT,
+    "maritalStatus" TEXT,
+    "address" TEXT,
+    "race" TEXT,
+    "city" TEXT,
+    "state" TEXT,
+    "zipCode" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -55,6 +73,7 @@ CREATE TABLE "CounselorSession" (
 -- CreateTable
 CREATE TABLE "Student" (
     "id" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "matrix" TEXT,
     "faculty" TEXT,
@@ -68,6 +87,7 @@ CREATE TABLE "Student" (
 CREATE TABLE "Admin" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -78,8 +98,9 @@ CREATE TABLE "Admin" (
 CREATE TABLE "Staff" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "staffId" TEXT NOT NULL,
-    "faculty" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "staffMatrix" TEXT,
+    "faculty" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -90,9 +111,9 @@ CREATE TABLE "Staff" (
 CREATE TABLE "Counselor" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "department" TEXT NOT NULL,
-    "expertise" TEXT NOT NULL,
-    "Schedule" TEXT[],
+    "password" TEXT NOT NULL,
+    "department" TEXT,
+    "expertise" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -104,7 +125,7 @@ CREATE TABLE "Post" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "body" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -114,7 +135,7 @@ CREATE TABLE "Post" (
 -- CreateTable
 CREATE TABLE "Chat" (
     "id" TEXT NOT NULL,
-    "chatStatus" TEXT NOT NULL,
+    "chatName" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -124,9 +145,11 @@ CREATE TABLE "Chat" (
 -- CreateTable
 CREATE TABLE "Message" (
     "id" TEXT NOT NULL,
-    "sender" TEXT NOT NULL,
-    "reciever" TEXT NOT NULL,
     "Message" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "chatId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );
@@ -182,22 +205,28 @@ CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
 CREATE UNIQUE INDEX "Student_matrix_key" ON "Student"("matrix");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Admin_id_key" ON "Admin"("id");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Staff_email_key" ON "Staff"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Staff_staffId_key" ON "Staff"("staffId");
+CREATE UNIQUE INDEX "Staff_staffMatrix_key" ON "Staff"("staffMatrix");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Counselor_email_key" ON "Counselor"("email");
 
 -- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_chatId_fkey" FOREIGN KEY ("chatId") REFERENCES "Chat"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Schedule" ADD CONSTRAINT "Schedule_counselorId_fkey" FOREIGN KEY ("counselorId") REFERENCES "Counselor"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "CounselorSession" ADD CONSTRAINT "CounselorSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "CounselorSession" ADD CONSTRAINT "CounselorSession_scheduleId_fkey" FOREIGN KEY ("scheduleId") REFERENCES "Schedule"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CounselorSession" ADD CONSTRAINT "CounselorSession_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "Student"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -221,4 +250,7 @@ ALTER TABLE "Staff" ADD CONSTRAINT "Staff_id_fkey" FOREIGN KEY ("id") REFERENCES
 ALTER TABLE "Counselor" ADD CONSTRAINT "Counselor_id_fkey" FOREIGN KEY ("id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Message" ADD CONSTRAINT "Message_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Message" ADD CONSTRAINT "Message_chatId_fkey" FOREIGN KEY ("chatId") REFERENCES "Chat"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

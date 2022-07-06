@@ -1,7 +1,20 @@
+import { useRouter } from "next/router";
+import { usePostQuery } from "schema/generated/graphql";
+import { usePost } from "schema/generated/page";
 import Navbar from "src/components/Navbar/MainNavbar";
 import { withApollo } from "utils/hooks/withApollo";
 
 const ViewPost = () => {
+
+    const router = useRouter()
+    const { id, isRefetch } = router.query
+    const { data } = usePostQuery({
+        variables: {
+            id: id as any
+        }
+    });
+
+    const post = data?.findOnePost;
 
     return (
         <>
@@ -13,7 +26,7 @@ const ViewPost = () => {
                     <div className="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
 
                         <a href="#_" className="block transition duration-200 ease-out transform hover:scale-110">
-                            <img className="object-cover w-full shadow-sm h-full" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80" alt="here" />
+                            <img className="object-cover w-full shadow-sm h-full" src={post?.image} alt="here" />
                         </a>
 
                         {/* <!--post categories--> */}
@@ -23,7 +36,7 @@ const ViewPost = () => {
                         <div className="mt-2">
                             {/* <!--post heading--> */}
                             <a href="#"
-                                className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline">Django Authentication with oauth using facebook,twitter and google</a>
+                                className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline">{post?.title}</a>
 
                             {/* <!--post views--> */}
                             <div className="flex justify-start items-center mt-2">
@@ -49,7 +62,7 @@ const ViewPost = () => {
 
                             {/* <!--content body--> */}
                             <div>
-                                <p className="mt-2 p-8">If you created a web application and wanted it to grow a user base reall quickly,the easiest way is to avoid bothering them with alot forms. No one likes filling up forms! A web form should and must only be used when necessary,in case a user doesnt have account with any of the social networks.That is the moment you want to implement social login on your application.</p>
+                                <p className="mt-2 p-8">{post?.body}</p>
                             </div>
 
 

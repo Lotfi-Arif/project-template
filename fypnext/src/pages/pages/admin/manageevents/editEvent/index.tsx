@@ -2,13 +2,27 @@ import { useRouter } from "next/router";
 import { useEventsQuery, useUpdateEventMutation } from "schema/generated/graphql";
 import AdminLayout from "src/layouts/Admin";
 import { withApollo } from "utils/hooks/withApollo";
-
+import { useToast } from "@chakra-ui/react";
+import { useResultCallback } from "utils/hooks/useResultCallback";
 
 const EditEvent = () => {
-    const [updateEventMutation] = useUpdateEventMutation();
+    const [updateEventMutation, eventUpdated] = useUpdateEventMutation();
     const { error } = useEventsQuery();
-
     const router = useRouter()
+    const toast = useToast();
+    useResultCallback(eventUpdated, event => {
+        toast({
+            title: `Event ${event.title} has been updated`,
+            status: 'success',
+        });
+    }, error => {
+        toast({
+            title: 'Failed to update Event',
+            description: error.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? error.graphQLErrors[0]?.message ?? error.message,
+            status: 'error',
+        });
+    });
+
 
     const onUpdate = async ({ id, title, eventDetails, eventImageURL }) => {
         try {

@@ -23,10 +23,10 @@ export class PostsResolver {
   }
 
   @Query(() => Post)
-  async findOnePost(@Args() postFindUnique: FindUniquePostArgs, @Info() info) {
+  async findOnePost(@Args('id') id: string, @Info() info ) {
     try {
       const post = new PrismaSelect(info).value;
-      return this.postService.findOne({ ...postFindUnique, ...post });
+      return this.postService.findOne({ where: {id: id}, ...post });
     } catch (error) {
       console.error(error);
     }

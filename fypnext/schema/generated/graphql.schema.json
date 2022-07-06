@@ -2490,6 +2490,133 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CounselorCreateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "CounselorSession",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CounselorSessionCreateNestedManyWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Schedule",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleCreateNestedManyWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "department",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "expertise",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateNestedOneWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CounselorCreateNestedOneWithoutCounselorSessionInput",
         "description": null,
         "fields": null,
@@ -3440,6 +3567,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "args": [],
@@ -3465,6 +3604,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "args": [],
             "type": {
@@ -3593,6 +3744,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "args": [],
             "type": {
@@ -3760,6 +3935,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -3785,6 +3972,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3873,6 +4072,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentCreateNestedOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -3987,6 +4210,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -4012,6 +4247,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4112,6 +4359,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4293,6 +4564,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -4318,6 +4601,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4402,6 +4697,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4583,6 +4902,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -4608,6 +4939,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4696,6 +5039,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4877,6 +5244,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -4902,6 +5281,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4990,6 +5381,30 @@
           },
           {
             "name": "state",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5171,6 +5586,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -5196,6 +5623,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5296,6 +5735,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6095,6 +6558,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -6120,6 +6595,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6208,6 +6695,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentCreateNestedOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6338,6 +6849,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -6363,6 +6886,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6451,6 +6986,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentCreateNestedOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6597,6 +7156,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -6622,6 +7193,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6698,6 +7281,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentCreateNestedOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -6844,6 +7451,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -6869,6 +7488,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6941,6 +7572,30 @@
           },
           {
             "name": "state",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7091,6 +7746,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -7116,6 +7783,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7204,6 +7883,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentCreateNestedOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -7412,6 +8115,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -7437,6 +8152,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7568,6 +8295,30 @@
             "deprecationReason": null
           },
           {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -7665,6 +8416,12 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "isDeprecated": false,
@@ -7678,6 +8435,12 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -7726,6 +8489,18 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -7890,6 +8665,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -7915,6 +8702,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -8011,6 +8810,30 @@
           },
           {
             "name": "studentId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -8153,6 +8976,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -8178,6 +9013,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -8266,6 +9113,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentUpdateOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8380,6 +9251,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -8405,6 +9288,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -8465,6 +9360,30 @@
           },
           {
             "name": "state",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10128,6 +11047,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -10153,6 +11084,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10241,6 +11184,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentUpdateOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10367,6 +11334,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -10392,6 +11371,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10480,6 +11471,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentUpdateOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10618,6 +11633,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -10643,6 +11670,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10719,6 +11758,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentUpdateOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10857,6 +11920,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -10882,6 +11957,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10954,6 +12041,30 @@
           },
           {
             "name": "state",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -11096,6 +12207,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -11121,6 +12244,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -11209,6 +12344,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StudentUpdateOneWithoutCounselorSessionInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11702,6 +12861,18 @@
             "deprecationReason": null
           },
           {
+            "name": "days",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -11727,6 +12898,18 @@
           },
           {
             "name": "gender",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hour",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -11858,6 +13041,30 @@
             "deprecationReason": null
           },
           {
+            "name": "timeFrom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "timeTo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -11934,6 +13141,125 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CounselorUpdateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "CounselorSession",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CounselorSessionUpdateManyWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Schedule",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleUpdateManyWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "department",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "expertise",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneRequiredWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -17100,6 +18426,39 @@
             "deprecationReason": null
           },
           {
+            "name": "createCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorCreateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createCounselorSession",
             "description": null,
             "args": [
@@ -17291,6 +18650,39 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Chat",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
                 "ofType": null
               }
             },
@@ -17661,39 +19053,6 @@
             "deprecationReason": null
           },
           {
-            "name": "findOneSchedule",
-            "description": null,
-            "args": [
-              {
-                "name": "where",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ScheduleWhereUniqueInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Schedule",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "findOneUser",
             "description": null,
             "args": [
@@ -17967,6 +19326,55 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Chat",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorUpdateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
                 "ofType": null
               }
             },
@@ -20395,9 +21803,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Schedule",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Schedule",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -20663,6 +22079,39 @@
             "deprecationReason": null
           },
           {
+            "name": "findOneCounselor",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CounselorWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "findOneEvent",
             "description": null,
             "args": [
@@ -20700,39 +22149,6 @@
             "description": null,
             "args": [
               {
-                "name": "where",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostWhereUniqueInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Post",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "getOneCounselor",
-            "description": null,
-            "args": [
-              {
                 "name": "id",
                 "description": null,
                 "type": {
@@ -20754,7 +22170,40 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Counselor",
+                "name": "Post",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "findOneSchedule",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ScheduleWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Schedule",
                 "ofType": null
               }
             },
@@ -20913,30 +22362,6 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -20948,30 +22373,6 @@
                 "name": "ID",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21040,55 +22441,7 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -21111,55 +22464,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -21457,55 +22762,7 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -21540,55 +22797,7 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -21717,55 +22926,7 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -21831,31 +22992,7 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -21942,59 +23079,11 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -22037,59 +23126,11 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22108,59 +23149,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22571,59 +23564,11 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22654,59 +23599,11 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22923,59 +23820,11 @@
             "deprecationReason": null
           },
           {
-            "name": "days",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "hour",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeFrom",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "timeTo",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,

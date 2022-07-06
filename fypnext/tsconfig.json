@@ -28,8 +28,9 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src ", "src/components/Cards/CardLineChart/CardLineChart.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src "],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "components/*"
   ]
 }

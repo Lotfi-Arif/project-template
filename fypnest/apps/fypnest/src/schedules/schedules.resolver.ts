@@ -13,7 +13,7 @@ import { CounselorSession } from '@app/common/generated/index/counselor-session/
 export class SchedulesResolver {
   constructor(private readonly schedulesService: SchedulesService) {}
 
-  @Query(() => Schedule)
+  @Query(() => [Schedule])
   async findAllSchedules(
     @Args() scheduleFindManyArgs: FindManyScheduleArgs,
     @Info() info,
@@ -29,7 +29,7 @@ export class SchedulesResolver {
     }
   }
 
-  @Mutation(() => Schedule)
+  @Query(() => Schedule)
   async findOneSchedule(
     @Args() scheduleFindUnique: FindUniqueScheduleArgs,
     @Info() info,

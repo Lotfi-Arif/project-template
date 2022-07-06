@@ -1,21 +1,34 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
-import { useCreatePostMutation, useFindAllPostsQuery, useMeQuery } from "schema/generated/graphql";
+import { useCreatePostMutation, useEventsQuery } from "schema/generated/graphql";
 import AdminLayout from "src/layouts/Admin";
 import { withApollo } from "utils/hooks/withApollo";
+import { useToast } from "@chakra-ui/react";
+import { useResultCallback } from "utils/hooks/useResultCallback";
 
 const CreatePost = () => {
 
-    const [createPostMutation] = useCreatePostMutation();
-    const { error } = useFindAllPostsQuery();
+    const [createPostMutation, eventCreated] = useCreatePostMutation();
+    const { error } = useEventsQuery();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [image, setImage] = useState('');
-    const {data} = useMeQuery()
+    const toast = useToast();
+    useResultCallback(eventCreated, event => {
+        toast({
+            title: `Post ${event.title} has been created`,
+            status: 'success',
+        });
+        router.push(`.`);
+    }, error => {
+        toast({
+            title: 'Failed to create Post',
+            description: error.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? error.graphQLErrors[0]?.message ?? error.message,
+            status: 'error',
+        });
+    });
 
     const router = useRouter()
-    const [cookie] = useCookies(["user"])
 
     const onSubmit = async (): Promise<void> => {
         try {
@@ -42,7 +55,7 @@ const CreatePost = () => {
                     <div className="sm:max-w-lg w-full p-10 bg-white shadow-2xl rounded-xl z-10">
                         <div className="text-center">
                             <h2 className="mt-5 text-3xl font-bold text-gray-900">
-                                Edit post Form!
+                                Edit Post Form!
                             </h2>
                             <p className="mt-2 text-sm text-gray-400">Lorem ipsum is placeholder text.</p>
                         </div>

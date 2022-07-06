@@ -1,12 +1,12 @@
 import ScheduleTable from "src/components/Schedule";
-import AdminLayout from "src/layouts/Admin";
+import CounselorLayout from "src/layouts/Counselor";
 
 const mySchedule = () => {
     return (
         <>
-            <AdminLayout>
+            <CounselorLayout>
                 <ScheduleTable />
-            </AdminLayout>
+            </CounselorLayout>
         </>
     );
 }

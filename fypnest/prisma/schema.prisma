@@ -22,7 +22,7 @@ model User {
   mobile            String?            @unique
   gender            Gender?
   accountStatus     AccountStatus      @default(UNVERIFIED)
-  role              Role  
+  role              Role
   student           Student?
   staff             Staff?
   counselor         Counselor?
@@ -37,10 +37,6 @@ model User {
 
 model Schedule {
   id               String             @id @default(uuid())
-  days             String?
-  timeFrom         String?
-  timeTo           String?
-  hour             String?
   CounselorSession CounselorSession[]
   Counselor        Counselor?         @relation(fields: [counselorId], references: [id])
   counselorId      String?
@@ -55,6 +51,10 @@ model CounselorSession {
   user              User?     @relation(fields: [userId], references: [id])
   counselorSchedule Schedule  @relation(fields: [scheduleId], references: [id])
   scheduleId        String
+  days              String?
+  timeFrom          String?
+  timeTo            String?
+  hour              String?
   counselorId       String
   userId            String?   @unique
   studentId         String?
@@ -124,7 +124,7 @@ model Post {
   id        String   @id @default(uuid())
   title     String
   body      String
-  image     String?  
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

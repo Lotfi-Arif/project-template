@@ -92,7 +92,7 @@ export class ChatsResolver {
   }
 
   @Subscription(() => Chat)
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   async onChatCreations(@CurrentUser() user: User) {
     return this.pubSub.asyncIterator(`onChats:${user.id}`);
   }

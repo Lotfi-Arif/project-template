@@ -3,14 +3,30 @@ import { useState } from "react";
 import { useCreateEventMutation, useEventsQuery } from "schema/generated/graphql";
 import AdminLayout from "src/layouts/Admin";
 import { withApollo } from "utils/hooks/withApollo";
+import { useToast } from "@chakra-ui/react";
+import { useResultCallback } from "utils/hooks/useResultCallback";
 
 const CreateEvent = () => {
 
-    const [createEventMutation] = useCreateEventMutation();
+    const [createEventMutation, eventCreated] = useCreateEventMutation();
     const { error } = useEventsQuery();
     const [title, setTitle] = useState('');
     const [eventDetails, setEventDetails] = useState('');
     const [eventImage, setEventImage] = useState('');
+    const toast = useToast();
+    useResultCallback(eventCreated, event => {
+        toast({
+            title: `Event ${event.title} has been created`,
+            status: 'success',
+        });
+        router.push(`.`);
+    }, error => {
+        toast({
+            title: 'Failed to create Event',
+            description: error.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? error.graphQLErrors[0]?.message ?? error.message,
+            status: 'error',
+        });
+    });
 
     const router = useRouter()
 

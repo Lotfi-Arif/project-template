@@ -1,62 +1,55 @@
-import { createContext, useContext, useState } from 'react';
-import { CurrentUserQuery, Role } from 'schema/generated/graphql';
-import Cookies from 'universal-cookie';
-import { AUTH_TOKEN, deleteTokenFromCookie, deleteUserFromCookie } from '../utils';
-const defaultContext = {
+import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
+import { useStore } from "./zustand";
 
-  isSignedIn: () => false,
-  logout: () => { },
-  // isActive:()=>false,
-  isAuthorized: (role: Role) => false
+const withAuthenticated = <T,>(
+  Component: React.ComponentType<T>,
+): React.ComponentType<T> => {
+  const WithAuthenticated: React.FC<T> = (props) => {
+    const router = useRouter();
+    const accessToken = useStore((state) => state.auth?.accessToken || null);
+    const user = useStore((state) => state.user);
+    const logout = useStore((state) => state.logout);
+    const [isAllowed, setIsAllowed] = React.useState(false);
+
+    useEffect((): void => {
+      let allowed = true;
+      if (!accessToken || !user) {
+        allowed = false;
+      }
+      if (accessToken) {
+        const decoded = jwt_decode(accessToken);
+        const now = new Date().getTime();
+        const timeDiff = (decoded as any).exp * 1000 - now;
+        if (timeDiff < 0) {
+          allowed = false;
+          logout();
+          router.push(`/auth/login`);
+        }
+      }
+      if (
+        !allowed ||
+        !user ||
+        !user.role
+      ) {
+        allowed = false;
+      }
+      // If all checks pass, means they are allowed
+      setIsAllowed(allowed);
+    }, [router, accessToken, user, isAllowed, setIsAllowed]);
+
+    return (
+      <>
+        {
+          isAllowed ? <Component {...props} /> : null // Show loading here
+        }
+      </>
+    );
+  };
+
+  return WithAuthenticated;
 };
 
-export const AuthContext = createContext(defaultContext);
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export function useProviderAuth() {
-
-  const cookie = new Cookies();
-  
-  const logout = () => {
-    deleteUserFromCookie()
-    deleteTokenFromCookie()
-  };
-
-
-  
-
-  const isSignedIn = () => {
-    if (cookie.get(AUTH_TOKEN)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const isAuthorized = (role: Role) => {
-    console.log('auth', cookie.get('user') as CurrentUserQuery);
-    const user = cookie.get('user') as CurrentUserQuery
-    if (user) {
-      if (user.currentUser.role === Role.Admin) {
-        return true;
-      }
-      if (user.currentUser.role !== role) {
-        return false;
-      }
-      return true;
-    }
-    return false;
-  }
-
-  return {
-    // login,
-    logout,
-    isSignedIn,
-    isAuthorized,
-    // isActive
-  };
-}
+export default withAuthenticated;

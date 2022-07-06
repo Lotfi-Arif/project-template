@@ -4,10 +4,14 @@ import {
   InMemoryCache,
   ApolloProvider,
   HttpLink,
+  split
 } from "@apollo/client";
+import { getMainDefinition } from "@apollo/client/utilities";
 import { NextPage } from "next";
 import React from "react";
-import {SubscriptionClient} from 'subscriptions-transport-ws'
+import { SubscriptionClient } from 'subscriptions-transport-ws'
+import { WebSocketLink } from '@apollo/client/link/ws';
+
 
 
 /* eslint-disable */
@@ -94,7 +98,7 @@ export const httpLink = new HttpLink({
 
 
 export const wsLink = isBrowser ? new SubscriptionClient(
-  process.env.NODE_ENV === 'production' ? `wss://${process.env.NEXT_PUBLIC_URL}` : `ws://localhost:3001/graphql`,
+  process.env.NODE_ENV === 'production' ? `ws://${process.env.NEXT_PUBLIC_URL}` : `ws://localhost:3001/graphql`,
   {
     reconnect: true,
     // connectionParams: {
@@ -106,10 +110,23 @@ export const getApolloClient = (initialState?: NormalizedCacheObject): ApolloCli
 
   const cache = new InMemoryCache().restore(initialState || {});
 
+  const link = isBrowser ? split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
+    },
+    new WebSocketLink(wsLink),
+    httpLink
+  ) : httpLink;
+
   return new ApolloClient({
-    cache: new InMemoryCache(),
-    uri: "http://localhost:3001/graphql"
-  });
+    link: link,
+    cache: cache,
+    ssrMode: !isBrowser
+  })
 };
 
 

@@ -2,13 +2,28 @@ import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDeleteEventMutation } from "schema/generated/graphql";
-
+import { useToast } from "@chakra-ui/react";
+import { useResultCallback } from "utils/hooks/useResultCallback";
 
 const EventRow = (events) => {
 
 
-    const [deleteEvent] = useDeleteEventMutation();
+    const [deleteEvent, eventDeleted] = useDeleteEventMutation();
     const router = useRouter();
+    const toast = useToast();
+    useResultCallback(eventDeleted, event => {
+        toast({
+            title: `Event has been deleted`,
+            status: 'success',
+        });
+        router.push(`./manageevents`);
+    }, error => {
+        toast({
+            title: 'Failed to delete Event',
+            description: error.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? error.graphQLErrors[0]?.message ?? error.message,
+            status: 'error',
+        });
+    });
 
     const onDelete = async (id: string) => {
         try {
@@ -51,6 +66,7 @@ const EventRow = (events) => {
                         </button>
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110" onClick={() => {
                             onDelete(events.event.id)
+                            // window.location.reload()
                         }}>
                             <TrashIcon />
                         </button>

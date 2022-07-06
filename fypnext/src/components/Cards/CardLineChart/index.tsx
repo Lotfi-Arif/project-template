@@ -119,7 +119,7 @@ const CardLineChart = () => {
                 <div className="p-4 flex-auto">
                     {/* Chart */}
                     <div className="relative h-350-px">
-                        <Line data={data} width={100} height={40} options={options} />
+                        {/* <Line data={data} width={100} height={40} options={options} /> */}
                     </div>
                 </div>
             </div>

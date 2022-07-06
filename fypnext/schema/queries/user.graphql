@@ -18,50 +18,6 @@ query users {
   }
 }
 
-query counselors {
-  findAllCounselors {
-    id
-    department
-    email
-    expertise
-    Schedule {
-      id
-      days
-    }
-    user{
-    firstName
-    lastName
-    }
-    createdAt
-    updatedAt
-    CounselorSession {
-      id
-    }
-  }
-}
-
-query getOneCounselor($id: String!) {
-  getOneCounselor(id: $id) {
-    id
-    department
-    email
-    expertise
-    Schedule {
-      id
-      days
-    }
-    user{
-    firstName
-    lastName
-    }
-    createdAt
-    updatedAt
-    CounselorSession {
-      id
-    }
-  }
-}
-
 query currentUser {
   currentUser {
     id

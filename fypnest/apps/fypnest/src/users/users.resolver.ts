@@ -9,45 +9,17 @@ import { UpdateOneUserArgs } from '@app/common/generated/index/user/update-one-u
 import { DeleteOneUserArgs } from '@app/common/generated/index/user/delete-one-user.args';
 import { AccountStatus } from '@prisma/client';
 import { UserEntity } from '@app/common/decorators/user.decorator';
-import { Counselor } from '@app/common/generated/index/counselor/counselor.model';
-import { FindManyCounselorArgs } from '@app/common/generated/index/counselor/find-many-counselor.args';
-import { FindUniqueCounselorArgs } from '@app/common/generated/index/counselor/find-unique-counselor.args';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService, private eventEmitter: EventEmitter2,) { }
 
   @Query(() => [User])
   async findAllUsers(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {
     try {
       const users = new PrismaSelect(info).value;
       return this.usersService.findAll({ ...userFindManyArgs, ...users });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  @Query(() => [Counselor])
-  async findAllCounselors(
-    @Args() counselorFindManyArgs: FindManyCounselorArgs,
-    @Info() info,
-  ) {
-    try {
-      const counselors = new PrismaSelect(info).value;
-      return this.usersService.getCounselors({
-        ...counselorFindManyArgs,
-        ...counselors,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  @Query(() => Counselor)
-  async getOneCounselor( @Args('id') id: string, @Info() info ) {
-    try {
-      const counselors = new PrismaSelect(info).value;
-      return this.usersService.getOneCounselor({ where: { id: id }, ...counselors });
     } catch (error) {
       console.error(error);
     }
@@ -78,6 +50,7 @@ export class UsersResolver {
         data: { accountStatus: AccountStatus.APPROVED },
         ...select,
       });
+      this.eventEmitter.emit('user.approved', result);
       return result;
     } catch (error) {
       throw new Error(error.message);
@@ -93,6 +66,7 @@ export class UsersResolver {
         data: { accountStatus: AccountStatus.REJECTED },
         ...select,
       });
+      this.eventEmitter.emit('user.rejected', result);
       return result;
     } catch (error) {
       throw new Error(error.message);
