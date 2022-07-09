@@ -18,9 +18,8 @@ function classNames(...classes: string[]) {
 
 const Navbar = () => {
 
-  const [cookie] = useCookies(["user"])
-
-  console.log(cookie.user)
+  const [cookie] = useCookies(["user"]);
+  const cookies = new Cookies();
 
   return (
     <Disclosure as="nav" className="bg-white">
@@ -171,7 +170,6 @@ const Navbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
                                 Settings
@@ -181,7 +179,7 @@ const Navbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                onClick={() => {cookies.remove('user', { path: '/' });}}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
                                 Sign out

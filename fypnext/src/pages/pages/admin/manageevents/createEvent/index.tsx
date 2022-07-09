@@ -41,7 +41,7 @@ const CreateEvent = () => {
                     }
                 }
             })
-            router.back;
+            router.back();
         } catch (e: any) {
             console.log(error);
         }
@@ -62,15 +62,15 @@ const CreateEvent = () => {
                         <form className="mt-8 space-y-3" action="#" method="POST">
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Event Title</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Event Title" name={title} onChange={(e) => { setTitle(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Event Title" name={title} onChange={(e) => { setTitle(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Event Details</label>
-                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Event Details" name={eventDetails} onChange={(e) => { setEventDetails(e.target.value) }} />
+                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Event Details" name={eventDetails} onChange={(e) => { setEventDetails(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Event Image</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Event Image URL" name={eventImage} onChange={(e) => { setEventImage(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Event Image URL" name={eventImage} onChange={(e) => { setEventImage(e.target.value) }} required/>
                             </div>
                             <p className="text-sm text-gray-300">
                                 <span>File type: types of images</span>

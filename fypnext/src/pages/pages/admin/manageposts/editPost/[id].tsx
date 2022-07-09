@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { totalmem } from "os";
 import { useState } from "react";
-import { useEventsQuery, useUpdateEventMutation, useUpdatePostMutation } from "schema/generated/graphql";
+import { useEventsQuery, usePostQuery, useUpdateEventMutation, useUpdatePostMutation } from "schema/generated/graphql";
 import AdminLayout from "src/layouts/Admin";
 import { useResultCallback } from "utils/hooks/useResultCallback";
 import { withApollo } from "utils/hooks/withApollo";
@@ -13,6 +12,12 @@ const EditPost = () => {
     const { error } = useEventsQuery();
     const router = useRouter()
     const { id, isRefetch } = router.query
+    const { data } = usePostQuery({
+        variables: {
+            id: id as any
+        }
+    });
+    const post = data?.findOnePost;
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [image, setImage] = useState('');
@@ -35,16 +40,16 @@ const EditPost = () => {
         try {
             await updatePostMutation({
                 variables: {
-                    where: { id },
+                    where: { id: id },
                     data: {
-                        title: title,
-                        body: body,
-                        image: image
+                        title: { set: title },
+                        body: { set: body },
+                        image: { set: image }
                     }
 
                 }
             })
-            router.back;
+            router.back();
         } catch (e: any) {
             console.log(error);
         }
@@ -64,21 +69,21 @@ const EditPost = () => {
                         <form className="mt-8 space-y-3" action="#" method="POST">
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Title</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder={title} name={title}  onChange={(e) => { setTitle(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder={post?.title}  name={title} onChange={(e) => { setTitle(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Details</label>
-                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder={body} name={body}  onChange={(e) => { setBody(e.target.value) }} />
+                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder={post?.body} name={body} onChange={(e) => { setBody(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Image</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder={image} name={image}  onChange={(e) => { setImage(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder={post?.image} name={image} onChange={(e) => { setImage(e.target.value) }} required />
                             </div>
                             <p className="text-sm text-gray-300">
                                 <span>File type: types of images</span>
                             </p>
                             <div>
-                                <button  onClick={(e) => onUpdate({ id, title, body, image })} type="submit" className="my-5 w-full flex justify-center bg-sky-500 text-gray-100 p-4  rounded-full tracking-wide
+                                <button onClick={() => onUpdate({ id, title, body, image })} type="submit" className="my-5 w-full flex justify-center bg-sky-500 text-gray-100 p-4  rounded-full tracking-wide
                                     font-semibold  focus:outline-none focus:shadow-outline hover:bg-sky-600 shadow-lg cursor-pointer transition ease-in duration-300">
                                     Submit
                                 </button>

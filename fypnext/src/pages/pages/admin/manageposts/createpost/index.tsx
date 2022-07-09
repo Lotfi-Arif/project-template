@@ -41,7 +41,7 @@ const CreatePost = () => {
                     }
                 }
             })
-            router.back;
+            router.back();
         } catch (e: any) {
             console.log(error);
         }
@@ -62,15 +62,15 @@ const CreatePost = () => {
                         <form className="mt-8 space-y-3" action="#" method="POST">
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Title</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Title" name={title} onChange={(e) => { setTitle(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Title" name={title} onChange={(e) => { setTitle(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Details</label>
-                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Post Details" name={body} onChange={(e) => { setBody(e.target.value) }} />
+                                <textarea className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" placeholder="Post Details" name={body} onChange={(e) => { setBody(e.target.value) }} required/>
                             </div>
                             <div className="grid grid-cols-1 space-y-2">
                                 <label className="text-sm font-bold text-gray-500 tracking-wide">Post Image</label>
-                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Image URL" name={image} onChange={(e) => { setImage(e.target.value) }} />
+                                <input className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500" type="text" placeholder="Post Image URL" name={image} onChange={(e) => { setImage(e.target.value) }} required/>
                             </div>
                             <p className="text-sm text-gray-300">
                                 <span>File type: types of images</span>

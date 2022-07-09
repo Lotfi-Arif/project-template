@@ -42,12 +42,12 @@ const PostRow = (posts) => {
                 <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                            <Link href={`/pages/admin/manageevents/viewEvent/${posts.post.id}`} passHref>
+                            <Link href={`/pages/admin/manageposts/viewPost/${posts.post.id}`} passHref>
                                 <EyeIcon />
                             </Link>
                         </button>
                         <button className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                            <Link href={`/pages/admin/manageevents/editEvent/${posts.post.id}`} passHref>
+                            <Link href={`/pages/admin/manageposts/editPost/${posts.post.id}`} passHref>
                                 <PencilIcon />
                             </Link>
                         </button>
