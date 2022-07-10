@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: fyp-backend-container
-        image: fyp-backend
+        image: hakeem99/backend
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER
@@ -63,5 +63,5 @@ spec:
             configMapKeyRef:
               name: pgsecret
               key: uri
-        ports:\watch
+        ports:
         - containerPort: 3001

@@ -29,8 +29,8 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: fyp-backend-container
-        image: fyp-backend
+      - name: fyp-frontend-container
+        image: hakeem99/frontned
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
