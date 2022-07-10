@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from 'next/image'
 import Navbar from "src/components/Navbar/MainNavbar";
-import { parseCookies } from "utils/utils";
 
-const Landing = ({ data }) => {
+const Landing = () => {
 
     return (
         <>
@@ -93,6 +92,7 @@ const Landing = ({ data }) => {
     );
 
 }
+
 // Landing.getInitialProps = async ({ req, res }) => {
 //     const data = parseCookies(req)
   

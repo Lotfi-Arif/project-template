@@ -6,6 +6,8 @@ import { useDeleteEventMutation, useDeletePostMutation } from "schema/generated/
 
 const PostRow = (posts) => {
 
+console.log('Here is posts', posts)
+
 
     const [deletePost] = useDeletePostMutation();
     const router = useRouter();
@@ -31,7 +33,7 @@ const PostRow = (posts) => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                     <div className="flex items-center">
                         <div className="mr-2">
-                            <img className="h-6 w-6" src={posts.post.image} alt="Event Image" />
+                            {/* <img className="h-6 w-6" src={posts.post.image} alt="Event Image" /> */}
                         </div>
                         <span className="font-medium">{posts.post.title}</span>
                     </div>
