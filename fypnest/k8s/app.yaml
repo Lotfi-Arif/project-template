@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: node
+  name: backend
   labels:
-    service: node
+    service: backend
 spec:
   selector:
-    app: node
+    app: backend
   type: ClusterIP
   ports:
     - port: 3001
@@ -15,18 +15,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node
+  name: backend
   labels:
-    name: node
+    name: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: node
+      app: backend
   template:
     metadata:
       labels:
-        app: node
+        app: backend
     spec:
       containers:
       - name: fyp-backend-container
@@ -63,5 +63,5 @@ spec:
             configMapKeyRef:
               name: pgsecret
               key: uri
-        ports:
+        ports:\watch
         - containerPort: 3001
