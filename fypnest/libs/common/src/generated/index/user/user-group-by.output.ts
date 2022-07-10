@@ -14,6 +14,12 @@ export class UserGroupBy {
     id!: string;
 
     @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => String, {nullable:false})
+    password!: string;
+
+    @Field(() => String, {nullable:false})
     firstName!: string;
 
     @Field(() => String, {nullable:false})

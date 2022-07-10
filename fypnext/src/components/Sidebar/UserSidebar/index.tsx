@@ -26,7 +26,7 @@ export default function UserSidebar() {
             <i className="cib-next-js"></i>
           </button>
           {/* Brand */}
-          <Link href="/pages/student/">
+          <Link href="/pages/user/">
             <a
               href="#pablo"
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
@@ -55,7 +55,7 @@ export default function UserSidebar() {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <Link href="/pages/student/">
+                  <Link href="/pages/user/">
                     <a
                       href="#pablo"
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
@@ -90,12 +90,12 @@ export default function UserSidebar() {
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
-                <Link href="/pages/student/">
+                <Link href="/pages/user/">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student") !== -1
+                      (router.pathname.indexOf("/pages/user") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
@@ -107,12 +107,12 @@ export default function UserSidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/pages/student/counslorsList">
+                <Link href="/pages/user/counslorsList">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/counslorsList") !== -1
+                      (router.pathname.indexOf("/pages/user/counslorsList") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
@@ -123,12 +123,12 @@ export default function UserSidebar() {
                 </Link>
               </li>
               <li className="items-center">
-                <Link href="/pages/student/myBookings">
+                <Link href="/pages/user/myBookings">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/myBookings") !== -1
+                      (router.pathname.indexOf("/pages/user/myBookings") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }

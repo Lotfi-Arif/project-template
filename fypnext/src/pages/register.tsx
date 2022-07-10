@@ -19,10 +19,21 @@ const Register = () => {
                 path: "/",
                 maxAge: 3600, // Expires after 1hr
                 sameSite: true,
-            })
-            console.log('here in the login', data);
+            })            
 
-            router.push('/')
+            if (data.signup.user.role === Role.Admin) {
+                router.push('/pages/admin')
+            }
+            if (data.signup.user.role === Role.Counselor) {
+                router.push('/pages/counselor')
+            }
+            if (data.signup.user.role === Role.Student || Role.Staff) {
+                router.push('/pages/user')
+            }
+
+            localStorage.setItem('user', JSON.stringify(data.signup.user));
+
+            console.log('Here is Json:', localStorage.getItem('user'))
         },
     });
     const [email, setEmail] = useState('');
@@ -30,6 +41,7 @@ const Register = () => {
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
+    const [iCard, setICard] = useState('');
     const [role, setRole] = useState(Role as any);
 
     const router = useRouter()
@@ -44,42 +56,42 @@ const Register = () => {
                         email: email,
                         password: password,
                         mobile: mobile,
+                        iCard: iCard,
                         role: role,
                         accountStatus: AccountStatus.Unverified
                     },
                 }
             })
-            router.push('/');
         } catch (e: any) {
             if (e.graphQLErrors[0].message.includes("ConflictException")) {
                 toast(
-                  <Feedback
-                    title="There's an error!"
-                    subtitle="Email already in use"
-                    type="error"
-                    disableFeedback={true}
-                  />,
-                  {
-                    progress: undefined,
-                    toastId: 1,
-                    autoClose: 3000,
-                  },
+                    <Feedback
+                        title="There's an error!"
+                        subtitle={e.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? e.graphQLErrors[0]?.message ?? e.message}
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
                 );
-              } else {
+            } else {
                 toast(
-                  <Feedback
-                    title="There's an error!"
-                    subtitle="Something went wrong"
-                    type="error"
-                    disableFeedback={true}
-                  />,
-                  {
-                    progress: undefined,
-                    toastId: 1,
-                    autoClose: 3000,
-                  },
+                    <Feedback
+                        title="There's an error!"
+                        subtitle={e.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? e.graphQLErrors[0]?.message ?? e.message}
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
                 );
-              }
+            }
         }
     }
 
@@ -127,12 +139,12 @@ const Register = () => {
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="firstName"
                                             type="text"
-                                            placeholder="firstName"
+                                            placeholder="First Name"
                                             name={firstName}
                                             onChange={(e) => { setFirstName(e.target.value) }}
                                         />
                                     </div>
-                                    <div className="mb-4 md:mr-2 md:mb-0">
+                                    <div className="mb-4 mt-4 md:mr-2 md:mb-0">
                                         <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="lastName">
                                             Last Name
                                         </label>
@@ -140,9 +152,22 @@ const Register = () => {
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="lastName"
                                             type="text"
-                                            placeholder="lastName"
+                                            placeholder="Last Name"
                                             name={lastName}
                                             onChange={(e) => { setLastName(e.target.value) }}
+                                        />
+                                    </div>
+                                    <div className="mb-4 mt-4 md:mr-2 md:mb-0">
+                                        <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="icard">
+                                            Identity Card No.
+                                        </label>
+                                        <input
+                                            className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            id="icard"
+                                            type="text"
+                                            placeholder="Identity Card No."
+                                            name={iCard}
+                                            onChange={(e) => { setICard(e.target.value) }}
                                         />
                                     </div>
                                 </div>

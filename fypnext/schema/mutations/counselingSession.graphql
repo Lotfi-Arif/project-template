@@ -10,6 +10,12 @@ mutation createCounselorSession($data: CounselorSessionCreateInput!, ) {
         firstName
         lastName
     }
+    counselorSchedule {
+      id
+      Counselor {
+        id
+    }
+    }
     firstName        
     lastName
     email

@@ -8,6 +8,12 @@ export class UserMaxAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    email?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    password?: true;
+
+    @Field(() => Boolean, {nullable:true})
     firstName?: true;
 
     @Field(() => Boolean, {nullable:true})

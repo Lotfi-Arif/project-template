@@ -1,10 +1,3 @@
-mutation signup($data: SignupInput!) {
-  signup(data: $data) {
-    accessToken
-    refreshToken
-  }
-}
-
 mutation rejectUser($id: String!) {
   rejectUser(id: $id) {
     id

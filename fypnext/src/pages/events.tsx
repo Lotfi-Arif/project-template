@@ -1,4 +1,4 @@
-import { useEventsQuery } from "schema/generated/graphql";
+import { useEventsQuery, useMeLazyQuery, useMeQuery } from "schema/generated/graphql";
 import EventsCard from "src/components/Cards/EventsCard";
 import Navbar from "src/components/Navbar/MainNavbar";
 import { withApollo } from "utils/hooks/withApollo";
@@ -6,6 +6,7 @@ import { withApollo } from "utils/hooks/withApollo";
 const Events = () => {
 
     const { data, loading } = useEventsQuery();
+
 
     if (loading) {
         return (<></>);

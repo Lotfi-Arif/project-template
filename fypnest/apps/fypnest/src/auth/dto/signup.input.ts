@@ -20,6 +20,9 @@ export class SignupInput {
   @Field({ nullable: true })
   lastName: string;
 
+  @Field({ nullable: true })
+  iCard: string;
+
   @Field(() => Role, {})
   role: Role;
 

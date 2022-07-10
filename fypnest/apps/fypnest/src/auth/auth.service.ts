@@ -1,5 +1,3 @@
-import { AccountStatus } from '@app/common/generated/index/prisma/account-status.enum';
-import { Role } from '@app/common/generated/index/prisma/role.enum';
 import { User } from '@app/common/generated/index/user/user.model';
 import {
   BadRequestException,
@@ -35,18 +33,16 @@ export class AuthService {
     firstName,
     lastName,
     accountStatus,
+    iCard,
     ...payload
   }: SignupInput): Promise<Token> {
     const hashedPassword = await this.passwordService.hashPassword(password);
 
     try {
-      const staff = await this.prisma.staff.findUnique({
+      const isUser = await this.prisma.user.findUnique({
         where: { email },
       });
-      const counselor = await this.prisma.counselor.findUnique({
-        where: { email },
-      });
-      if (staff || counselor) {
+      if (isUser) {
         throw new ConflictException(`Email ${email} already used.`);
       }
       const user = await this.prisma.user.create({
@@ -55,11 +51,12 @@ export class AuthService {
           firstName,
           lastName,
           accountStatus,
+          email,
+          password: hashedPassword,
           ...payload,
           [payload.role.toLowerCase()]: {
             create: {
-              password: hashedPassword,
-              email,
+              iCard
             },
           },
         },
@@ -81,9 +78,9 @@ export class AuthService {
     }
   }
 
-  async loginStudent(email: string, password: string): Promise<Token> {
+  async loginUser(email: string, password: string): Promise<Token> {
 
-    const user = await this.prisma.student.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { email },
     });
     if (!user) {
@@ -104,51 +101,6 @@ export class AuthService {
     });
   }
 
-  async loginCouselor(email: string, password: string): Promise<Token> {
-
-    const user = await this.prisma.counselor.findUnique({
-      where: { email },
-    });
-    if (!user) {
-      throw new NotFoundException('USER_NOT_FOUND');
-    }
-
-    const passwordValid = await this.passwordService.validatePassword(
-      password,
-      user.password
-    );
-
-    if (!passwordValid) {
-      throw new BadRequestException('INVALID_CREDENTIALS');
-    }
-
-    return this.generateTokens({
-      userId: user.id
-    });
-  }
-
-  async loginStaff(email: string, password: string): Promise<Token> {
-
-    const user = await this.prisma.staff.findUnique({
-      where: { email },
-    });
-    if (!user) {
-      throw new NotFoundException('USER_NOT_FOUND');
-    }
-
-    const passwordValid = await this.passwordService.validatePassword(
-      password,
-      user.password
-    );
-
-    if (!passwordValid) {
-      throw new BadRequestException('INVALID_CREDENTIALS');
-    }
-
-    return this.generateTokens({
-      userId: user.id
-    });
-  }
   validateUser(userId: string): Promise<User> {
     return this.prisma.user.findUnique({
       where: { id: userId },

@@ -11,6 +11,12 @@ export class UserCreateManyInput {
     id?: string;
 
     @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => String, {nullable:false})
+    password!: string;
+
+    @Field(() => String, {nullable:false})
     firstName!: string;
 
     @Field(() => String, {nullable:false})

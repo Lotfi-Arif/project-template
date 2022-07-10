@@ -17,6 +17,8 @@ generator nestgraphql {
 
 model User {
   id                String             @id @default(uuid())
+  email             String             @unique
+  password          String
   firstName         String
   lastName          String
   mobile            String?            @unique
@@ -38,8 +40,8 @@ model User {
 model Schedule {
   id               String             @id @default(uuid())
   CounselorSession CounselorSession[]
-  Counselor        Counselor?         @relation(fields: [counselorId], references: [id])
-  counselorId      String?
+  Counselor        Counselor          @relation(fields: [counselorId], references: [id])
+  counselorId      String             @unique
 }
 
 model CounselorSession {
@@ -76,8 +78,7 @@ model CounselorSession {
 
 model Student {
   id               String             @id @default(uuid())
-  password         String
-  email            String             @unique
+  iCard            String
   matrix           String?            @unique
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   faculty          String?
@@ -88,8 +89,7 @@ model Student {
 
 model Admin {
   id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
+  iCard     String
   user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -97,9 +97,8 @@ model Admin {
 
 model Staff {
   id               String             @id @default(uuid())
-  email            String             @unique
-  password         String
   staffMatrix      String?            @unique
+  iCard            String
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   faculty          String?
   createdAt        DateTime           @default(now())
@@ -109,15 +108,15 @@ model Staff {
 
 model Counselor {
   id               String             @id @default(uuid())
-  email            String             @unique
-  password         String
   department       String?
+  iCard            String
   user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
   expertise        String?
-  Schedule         Schedule[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   CounselorSession CounselorSession[]
+  scheduleId       String?
+  Schedule         Schedule?
 }
 
 model Post {

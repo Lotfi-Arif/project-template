@@ -1,27 +1,41 @@
-mutation loginStudent($data: LoginInput!) {
-  loginStudent(data: $data) {
-    accessToken
-    refreshToken
-  }
-}
-
-mutation loginStaff($data: LoginInput!) {
-  loginStaff(data: $data) {
-    accessToken
-    refreshToken
-  }
-}
-
-mutation loginCounselor($data: LoginInput!) {
-  loginCounselor(data: $data) {
-    accessToken
-    refreshToken
+mutation loginUser($data: LoginInput!) {
+  loginUser(data: $data) {
+    ...AuthTokens
   }
 }
 
 mutation signup($data: SignupInput!) {
   signup(data: $data) {
-    accessToken
-    refreshToken
+    ...AuthTokens
+  }
+}
+
+
+fragment UserData on User {
+  id
+  role
+  email
+  counselor {
+    scheduleId
+    CounselorSession {
+      days
+      timeFrom
+      timeTo
+      hour
+      firstName
+      lastName
+      email
+      }
+  }
+  staff {
+    id
+  }
+}
+
+fragment AuthTokens on Auth {
+  accessToken
+  refreshToken
+  user {
+    ...UserData
   }
 }

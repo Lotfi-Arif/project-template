@@ -73,18 +73,8 @@ const Navbar = () => {
                 !cookie.user ?
                   <div className='block'>
                     <button className='text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500'>
-                      <Link href={'/loginStudent'}>
-                        Student
-                      </Link>
-                    </button>
-                    <button className='text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500'>
-                      <Link href={'/loginStaff'}>
-                        Staff
-                      </Link>
-                    </button>
-                    <button className='text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500'>
-                      <Link href={'/loginCounselor'}>
-                        Counselor
+                      <Link href={'/login'}>
+                        Login
                       </Link>
                     </button>
                     <button className='text-white p-2 m-2 items-center disabled:opacity-70 active:translate-y-0.5 active:border-b-transparent transition duration-200 text-center ease-in-out rounded-xl disabled:cursor-not-allowed font-medium focus:outline-none border-b-4 bg-sky-500'>
@@ -179,7 +169,10 @@ const Navbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                onClick={() => {cookies.remove('user', { path: '/' });}}
+                                onClick={() => {
+                                  cookies.remove('user', { path: '/' });
+                                  localStorage.removeItem('user');
+                                }}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
                                 Sign out

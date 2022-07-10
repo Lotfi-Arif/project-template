@@ -23,6 +23,7 @@ import { getApolloClient } from './utils/hooks/withApollo.tsx';
 
 
 
+
 export async function getServerPageOnChatMessage
     (options: Omit<Apollo.QueryOptions<Types.OnChatMessageSubscriptionVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);
@@ -407,6 +408,41 @@ export const ssrPost = {
       getServerPage: getServerPagePost,
       withPage: withPagePost,
       usePage: usePost,
+    }
+export async function getServerPageSchedule
+    (options: Omit<Apollo.QueryOptions<Types.ScheduleQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.ScheduleQuery>({ ...options, query: Operations.ScheduleDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useSchedule = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ScheduleQuery, Types.ScheduleQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.ScheduleDocument, options);
+};
+export type PageScheduleComp = React.FC<{data?: Types.ScheduleQuery, error?: Apollo.ApolloError}>;
+export const withPageSchedule = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ScheduleQuery, Types.ScheduleQueryVariables>) => (WrappedComponent:PageScheduleComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.ScheduleDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrSchedule = {
+      getServerPage: getServerPageSchedule,
+      withPage: withPageSchedule,
+      usePage: useSchedule,
     }
 export async function getServerPageUsers
     (options: Omit<Apollo.QueryOptions<Types.UsersQueryVariables>, 'query'>, ctx: any ){

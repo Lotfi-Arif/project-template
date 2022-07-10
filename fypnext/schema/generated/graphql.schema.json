@@ -67,7 +67,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "iCard",
             "description": null,
             "args": [],
             "type": {
@@ -92,22 +92,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -261,23 +245,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -328,7 +296,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -341,18 +309,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -541,19 +497,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -703,7 +647,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -716,18 +660,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -773,18 +705,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -2288,17 +2208,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Schedule",
-                  "ofType": null
-                }
-              }
+              "kind": "OBJECT",
+              "name": "Schedule",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2348,7 +2260,19 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "expertise",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iCard",
             "description": null,
             "args": [],
             "type": {
@@ -2359,18 +2283,6 @@
                 "name": "String",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "expertise",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2392,17 +2304,13 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "scheduleId",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2465,22 +2373,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "Schedule",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -2511,7 +2403,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleCreateNestedManyWithoutCounselorInput",
+              "name": "ScheduleCreateNestedOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -2543,22 +2435,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -2571,7 +2447,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -2581,6 +2457,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -2896,7 +2784,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleCreateNestedManyWithoutCounselorInput",
+              "name": "ScheduleCreateNestedOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -2928,22 +2816,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -2956,7 +2828,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -2966,6 +2838,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3043,22 +2927,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -3071,7 +2939,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -3081,6 +2949,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3138,7 +3018,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleCreateNestedManyWithoutCounselorInput",
+              "name": "ScheduleCreateNestedOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -3170,22 +3050,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -3198,7 +3062,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -3208,6 +3072,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3253,7 +3129,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleOrderByRelationAggregateInput",
+              "name": "ScheduleOrderByWithRelationInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -3285,7 +3161,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "expertise",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3297,7 +3173,7 @@
             "deprecationReason": null
           },
           {
-            "name": "expertise",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3321,7 +3197,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "scheduleId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3417,13 +3293,13 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "expertise",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "expertise",
+            "name": "iCard",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -3435,7 +3311,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "scheduleId",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -13175,7 +13051,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleUpdateManyWithoutCounselorInput",
+              "name": "ScheduleUpdateOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13207,18 +13083,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -13231,11 +13095,23 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13344,7 +13220,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CounselorUpdateOneWithoutScheduleInput",
+        "name": "CounselorUpdateOneRequiredWithoutScheduleInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -13378,30 +13254,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CounselorCreateWithoutScheduleInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "delete",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "disconnect",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -13543,7 +13395,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleUpdateManyWithoutCounselorInput",
+              "name": "ScheduleUpdateOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13575,18 +13427,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -13599,11 +13439,23 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13682,18 +13534,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -13706,11 +13546,23 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13769,7 +13621,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleUpdateManyWithoutCounselorInput",
+              "name": "ScheduleUpdateOneWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13801,18 +13653,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "expertise",
             "description": null,
             "type": {
@@ -13825,11 +13665,23 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "scheduleId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -14065,7 +13917,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleListRelationFilter",
+              "name": "ScheduleRelationFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -14097,11 +13949,11 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "expertise",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -14109,11 +13961,11 @@
             "deprecationReason": null
           },
           {
-            "name": "expertise",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -14133,11 +13985,11 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "scheduleId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -14179,18 +14031,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -19086,73 +18926,7 @@
             "deprecationReason": null
           },
           {
-            "name": "loginCounselor",
-            "description": null,
-            "args": [
-              {
-                "name": "data",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "LoginInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Auth",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "loginStaff",
-            "description": null,
-            "args": [
-              {
-                "name": "data",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "LoginInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Auth",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "loginStudent",
+            "name": "loginUser",
             "description": null,
             "args": [
               {
@@ -22306,9 +22080,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Counselor",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Counselor",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -22354,9 +22132,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -22420,9 +22202,13 @@
             "name": "Counselor",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorCreateNestedOneWithoutScheduleInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorCreateNestedOneWithoutScheduleInput",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22459,77 +22245,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "ScheduleCreateManyCounselorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleCreateManyCounselorInputEnvelope",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ScheduleCreateManyCounselorInput",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "skipDuplicates",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleCreateNestedManyWithoutCounselorInput",
+        "name": "ScheduleCreateNestedOneWithoutCounselorInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -22537,17 +22253,9 @@
             "name": "connect",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleWhereUniqueInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleWhereUniqueInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22557,17 +22265,9 @@
             "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleCreateOrConnectWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleCreateOrConnectWithoutCounselorInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22577,28 +22277,8 @@
             "name": "create",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleCreateWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createMany",
-            "description": null,
-            "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ScheduleCreateManyCounselorInputEnvelope",
+              "name": "ScheduleCreateWithoutCounselorInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -22788,9 +22468,13 @@
             "name": "Counselor",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CounselorCreateNestedOneWithoutScheduleInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CounselorCreateNestedOneWithoutScheduleInput",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22802,76 +22486,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleListRelationFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "every",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ScheduleWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "none",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ScheduleWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "some",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ScheduleWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleOrderByRelationAggregateInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "_count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
               "ofType": null
             },
             "defaultValue": null,
@@ -23002,101 +22616,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "ScheduleScalarWhereInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NOT",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OR",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "counselorId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "ScheduleUpdateInput",
         "description": null,
         "fields": null,
@@ -23106,7 +22625,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorUpdateOneWithoutScheduleInput",
+              "name": "CounselorUpdateOneRequiredWithoutScheduleInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -23132,295 +22651,6 @@
               "kind": "INPUT_OBJECT",
               "name": "StringFieldUpdateOperationsInput",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleUpdateManyMutationInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleUpdateManyWithWhereWithoutCounselorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ScheduleUpdateManyMutationInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ScheduleScalarWhereInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ScheduleUpdateManyWithoutCounselorInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleCreateOrConnectWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleCreateWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createMany",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ScheduleCreateManyCounselorInputEnvelope",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "delete",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deleteMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "disconnect",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "set",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleUpdateWithWhereUniqueWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updateMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleUpdateManyWithWhereWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "upsert",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ScheduleUpsertWithWhereUniqueWithoutCounselorInput",
-                  "ofType": null
-                }
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -23504,37 +22734,89 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "ScheduleUpdateWithWhereUniqueWithoutCounselorInput",
+        "name": "ScheduleUpdateOneWithoutCounselorInput",
         "description": null,
         "fields": null,
         "inputFields": [
           {
-            "name": "data",
+            "name": "connect",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ScheduleUpdateWithoutCounselorInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleWhereUniqueInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "where",
+            "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ScheduleWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleCreateOrConnectWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleCreateWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleUpdateWithoutCounselorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScheduleUpsertWithoutCounselorInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -23591,7 +22873,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CounselorUpdateOneWithoutScheduleInput",
+              "name": "CounselorUpdateOneRequiredWithoutScheduleInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -23617,7 +22899,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "ScheduleUpsertWithWhereUniqueWithoutCounselorInput",
+        "name": "ScheduleUpsertWithoutCounselorInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -23646,22 +22928,6 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "ScheduleUpdateWithoutCounselorInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ScheduleWhereUniqueInput",
                 "ofType": null
               }
             },
@@ -23812,7 +23078,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -23842,6 +23108,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "counselorId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -23899,6 +23177,18 @@
           },
           {
             "name": "firstName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -24051,7 +23341,19 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "faculty",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iCard",
             "description": null,
             "args": [],
             "type": {
@@ -24062,18 +23364,6 @@
                 "name": "String",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "faculty",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -24088,22 +23378,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -24386,22 +23660,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -24414,7 +23672,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -24501,22 +23759,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -24529,7 +23771,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -24604,18 +23846,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -24628,7 +23858,7 @@
             "deprecationReason": null
           },
           {
-            "name": "id",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -24640,7 +23870,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -24936,18 +24166,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -24960,7 +24178,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -25043,18 +24261,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -25067,7 +24273,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -25284,18 +24490,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -25308,7 +24502,7 @@
             "deprecationReason": null
           },
           {
-            "name": "id",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -25320,7 +24514,7 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "id",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -25378,18 +24572,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -25852,7 +25034,19 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "faculty",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iCard",
             "description": null,
             "args": [],
             "type": {
@@ -25863,18 +25057,6 @@
                 "name": "String",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "faculty",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -25903,22 +25085,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -26187,22 +25353,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -26215,19 +25365,7 @@
             "deprecationReason": null
           },
           {
-            "name": "matrix",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -26237,6 +25375,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "matrix",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26302,22 +25452,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -26330,19 +25464,7 @@
             "deprecationReason": null
           },
           {
-            "name": "matrix",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -26352,6 +25474,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "matrix",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -26405,7 +25539,7 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "faculty",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -26417,7 +25551,7 @@
             "deprecationReason": null
           },
           {
-            "name": "faculty",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -26442,18 +25576,6 @@
           },
           {
             "name": "matrix",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -26737,18 +25859,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -26761,11 +25871,11 @@
             "deprecationReason": null
           },
           {
-            "name": "matrix",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26773,11 +25883,11 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "matrix",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26844,18 +25954,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "faculty",
             "description": null,
             "type": {
@@ -26868,11 +25966,11 @@
             "deprecationReason": null
           },
           {
-            "name": "matrix",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -26880,11 +25978,11 @@
             "deprecationReason": null
           },
           {
-            "name": "password",
+            "name": "matrix",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -27085,11 +26183,11 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "faculty",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -27097,11 +26195,11 @@
             "deprecationReason": null
           },
           {
-            "name": "faculty",
+            "name": "iCard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -27126,18 +26224,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -27179,18 +26265,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -27422,6 +26496,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "args": [],
@@ -27489,6 +26579,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -27629,6 +26735,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -27691,6 +26813,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -28431,6 +27569,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -28493,6 +27647,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -28634,6 +27804,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -28696,6 +27882,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -28837,6 +28039,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -28899,6 +28117,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29040,6 +28274,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -29102,6 +28352,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29255,6 +28521,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -29317,6 +28599,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29458,6 +28756,22 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -29520,6 +28834,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29743,6 +29073,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -29792,6 +29134,18 @@
           },
           {
             "name": "mobile",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -29917,6 +29271,12 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "isDeprecated": false,
@@ -29942,6 +29302,12 @@
           },
           {
             "name": "mobile",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -30064,6 +29430,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -30117,6 +29495,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -30243,6 +29633,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -30296,6 +29698,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -30386,6 +29800,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -30439,6 +29865,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31241,6 +30679,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -31294,6 +30744,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31432,6 +30894,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -31485,6 +30959,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31623,6 +31109,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -31676,6 +31174,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -31814,6 +31324,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -31867,6 +31389,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32017,6 +31551,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -32070,6 +31616,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32208,6 +31766,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -32261,6 +31831,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -32745,6 +32327,18 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "type": {
@@ -32798,6 +32392,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -32863,6 +32469,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,

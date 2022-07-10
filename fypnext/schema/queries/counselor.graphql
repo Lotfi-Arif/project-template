@@ -2,20 +2,20 @@ query findOneCounselor($where: CounselorWhereUniqueInput!) {
   findOneCounselor(where: $where) {
     id
     department
-    email
     expertise
     Schedule {
       id
     }
     user{
-    firstName
-    lastName
+      firstName
+      lastName
+      email
     }
     createdAt
     updatedAt
     CounselorSession {
       id
-       days
+      days
     }
   }
 }
@@ -24,14 +24,14 @@ query counselors {
   findAllCounselors {
     id
     department
-    email
     expertise
     Schedule {
       id
     }
     user{
-    firstName
-    lastName
+      firstName
+      lastName
+      email
     }
     createdAt
     updatedAt

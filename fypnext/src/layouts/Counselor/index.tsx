@@ -93,12 +93,12 @@ export function UserSidebar() {
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
-                <Link href="/pages/student/">
+                <Link href="/pages/user/">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student") !== -1
+                      (router.pathname.indexOf("/pages/user") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
@@ -110,12 +110,12 @@ export function UserSidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/pages/student/bookings">
+                <Link href="/pages/user/bookings">
                   <a
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/student/bookings") !== -1
+                      (router.pathname.indexOf("/pages/user/bookings") !== -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }

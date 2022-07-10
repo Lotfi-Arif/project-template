@@ -3,6 +3,7 @@ query users {
     id
     firstName
     lastName
+    email
     counselor {
       id
     }
@@ -20,18 +21,22 @@ query users {
 
 query currentUser {
   currentUser {
-    id
+      id
       lastName
       role
       firstName
-    student {
       email
-    }
-    staff {
-      email
-    }
     counselor {
-      email
+      scheduleId
+      CounselorSession {
+        days
+        timeFrom
+        timeTo
+        hour
+        firstName
+        lastName
+        email
+      }
     }
   }
 }
@@ -43,8 +48,8 @@ query me {
     lastName
     accountStatus
     role
+    email
     student {
-      email
       user {
         id
         mobile
@@ -53,7 +58,6 @@ query me {
       }
     }
     staff {
-      email
       user {
         mobile
         accountStatus
@@ -61,7 +65,6 @@ query me {
       }
     }
     counselor {
-      email
       user {
         mobile
         accountStatus
@@ -77,8 +80,8 @@ query counselor {
     role
     firstName
     lastName
+    email
     counselor {
-      email
       department
       expertise
       Schedule {
@@ -105,29 +108,29 @@ query counselor {
 
 query staff {
   me {
-    id
-    role
+      id
+      role
       firstName
       lastName
-    staff {
       email
-      staffMatrix
-      faculty
-      CounselorSession {
-        id
-        counsellingReason
-        counselor {
+      staff {
+        staffMatrix
+        faculty
+        CounselorSession {
           id
+          counsellingReason
+          counselor {
+            id
+          }
+          student {
+            id
+          }
+          staff {
+            id
+          }
         }
-        student {
-          id
-        }
-        staff {
-          id
-        }
-      }
-      createdAt
-      updatedAt
+        createdAt
+        updatedAt
     }
   }
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { startOfWeek, endOfWeek, getDay, startOfDay, endOfDay, add, format, addHours, getHours, getTime } from 'date-fns'
 import momentTZ from 'moment-timezone';
 import StudentLayout from "src/layouts/Student";
-import { Gender, MaritalStatus, useCreateCounselorSessionMutation } from "schema/generated/graphql";
+import { useCreateCounselorSessionMutation } from "schema/generated/graphql";
 import { withApollo } from "utils/hooks/withApollo";
 import { stat } from "fs";
 
