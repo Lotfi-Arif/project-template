@@ -1,4 +1,4 @@
-FROM node:12 AS base
+FROM node:16 AS base
 
 # Create app directory
 WORKDIR /app
@@ -8,5 +8,5 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+EXPOSE 3005
+CMD ["npm", "run", "dev"]

@@ -9,7 +9,7 @@ spec:
     app: frontend
   type: ClusterIP
   ports:
-    - port: 3000
+    - port: 3005
 ---
 ## DEPLOY
 apiVersion: apps/v1
@@ -30,7 +30,6 @@ spec:
     spec:
       containers:
       - name: fyp-frontend-container
-        image: hakeem99/frontned
-        imagePullPolicy: IfNotPresent
+        image: hakeem99/frontend
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
