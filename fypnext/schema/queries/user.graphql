@@ -29,10 +29,9 @@ query currentUser {
     counselor {
       scheduleId
       CounselorSession {
-        days
+        counsellingDate
         timeFrom
         timeTo
-        hour
         firstName
         lastName
         email

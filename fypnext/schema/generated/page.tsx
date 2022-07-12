@@ -129,6 +129,41 @@ export const ssrFindAllMessages = {
       withPage: withPageFindAllMessages,
       usePage: useFindAllMessages,
     }
+export async function getServerPageFindOneChat
+    (options: Omit<Apollo.QueryOptions<Types.FindOneChatQueryVariables>, 'query'>, ctx: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.FindOneChatQuery>({ ...options, query: Operations.FindOneChatDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useFindOneChat = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindOneChatQuery, Types.FindOneChatQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.FindOneChatDocument, options);
+};
+export type PageFindOneChatComp = React.FC<{data?: Types.FindOneChatQuery, error?: Apollo.ApolloError}>;
+export const withPageFindOneChat = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindOneChatQuery, Types.FindOneChatQueryVariables>) => (WrappedComponent:PageFindOneChatComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.FindOneChatDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrFindOneChat = {
+      getServerPage: getServerPageFindOneChat,
+      withPage: withPageFindOneChat,
+      usePage: useFindOneChat,
+    }
 export async function getServerPageSessions
     (options: Omit<Apollo.QueryOptions<Types.SessionsQueryVariables>, 'query'>, ctx: any ){
         const apolloClient = getApolloClient(ctx);

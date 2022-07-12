@@ -7,6 +7,7 @@ import { DeleteOneCounselorSessionArgs } from '@app/common/generated/index/couns
 import { FindManyCounselorSessionArgs } from '@app/common/generated/index/counselor-session/find-many-counselor-session.args';
 import { FindUniqueCounselorSessionArgs } from '@app/common/generated/index/counselor-session/find-unique-counselor-session.args';
 import { UpdateOneCounselorSessionArgs } from '@app/common/generated/index/counselor-session/update-one-counselor-session.args';
+import { CreateCounselorSessionArguments } from './counselor-session.dto';
 
 @Resolver(() => CounselorSession)
 export class CounselorSessionsResolver {
@@ -48,7 +49,7 @@ export class CounselorSessionsResolver {
 
   @Mutation(() => CounselorSession)
   async createCounselorSession(
-    @Args() counselorSessionCreateArgs: CreateOneCounselorSessionArgs,
+    @Args() counselorSessionCreateArgs: CreateCounselorSessionArguments,
     @Info() info,
   ) {
     try {
@@ -56,6 +57,12 @@ export class CounselorSessionsResolver {
       return this.counselorSessionsService.createCounselorSession({
         ...counselorSessionCreateArgs,
         ...newCounselorSession,
+        data:{
+          ...counselorSessionCreateArgs.data,
+          timeFrom: this.convertEpochTime(counselorSessionCreateArgs.data.timeFrom),
+          timeTo: this.convertEpochTime(counselorSessionCreateArgs.data.timeTo),
+          counsellingDate: this.convertEpochTime(counselorSessionCreateArgs.data.counsellingDate)
+        }
       });
     } catch (error) {
       console.error(error);
@@ -92,5 +99,13 @@ export class CounselorSessionsResolver {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  convertEpochTime(epochDate: number) {
+    const newDate = new Date(0);
+    newDate.setSeconds(epochDate);
+    const monthDateAndYear =
+      newDate.getMonth() + newDate.getDate() + newDate.getFullYear();
+    return monthDateAndYear;
   }
 }

@@ -58,7 +58,7 @@ const Register = () => {
                         mobile: mobile,
                         iCard: iCard,
                         role: role,
-                        accountStatus: AccountStatus.Unverified
+                        accountStatus: AccountStatus.Unverified,
                     },
                 }
             })

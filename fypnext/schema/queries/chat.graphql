@@ -28,3 +28,17 @@ query findAllMessages {
     chatId
   }
 }
+
+query findOneChat($where: ChatWhereUniqueInput!){
+  findOneChat(where: $where) {
+    chatName
+    Message {
+      id
+      Message
+    } 
+    users {
+      id
+    }
+  }
+
+}

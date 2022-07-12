@@ -15,13 +15,18 @@ fragment UserData on User {
   id
   role
   email
+  chatId
+  Chat {
+    id
+  }
   counselor {
-    scheduleId
+    Schedule {
+      id
+    }
     CounselorSession {
-      days
       timeFrom
       timeTo
-      hour
+      counsellingDate
       firstName
       lastName
       email

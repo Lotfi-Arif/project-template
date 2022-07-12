@@ -1,8 +1,85 @@
 import Link from "next/link";
+import { useCreateChatMutation, useFindOneChatQuery, useUsersQuery } from "schema/generated/graphql";
+import { Feedback } from 'src/components/FeedBack';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
 
 const CounselorCard = (counselor) => {
 
-    console.log(counselor.counselor.Schedule)
+    const [chat] = useCreateChatMutation();
+    const [user, setUser] = useState({} as any);
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')))
+    }, [])
+    // const {data} = useFindOneChatQuery({
+    //     variables: {
+    //         where: {
+
+    //         }
+    //     }
+    // }
+    // );
+
+    console.log('here is the stuff user:', user)
+
+    const onSubmit = async (error): Promise<void> => {
+        try {
+            // if (counselor) {
+                
+            // }
+            await chat({
+                variables: {
+                    data: {
+                        chatName: "Chat With a Counselor",
+                        users: {
+                            connect: [
+                                {
+                                    id: counselor?.counselor?.id
+                                },
+                                {
+                                    id: user?.id
+                                }
+                            ]
+                        }
+                    }
+                }
+            })
+        } catch (err: any) {
+            error.preventDefault()
+            if (err) {
+                toast(
+                    <Feedback
+                        title="There's an error!, But we know what it is."
+                        subtitle={err.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? err.graphQLErrors[0]?.message ?? err.message}
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
+                );
+            } else {
+                toast(
+                    <Feedback
+                        title="Something unexpected happened"
+                        subtitle={err.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? err.graphQLErrors[0]?.message ?? err.message}
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
+                );
+            }
+        }
+    }
+
+    
 
     return (
         <>
@@ -16,10 +93,12 @@ const CounselorCard = (counselor) => {
                     <span className="text-sm text-gray-500 dark:text-gray-400">{counselor.counselor.expertise}</span>
                     <div className="flex mt-4 space-x-3 lg:mt-6">
                         <div className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <Link href={`/pages/user/booking/${counselor.counselor.id}?scheduleId=${counselor.counselor.Schedule}`} >Book a Session</Link>
+                            <Link href={`/pages/user/booking/${counselor.counselor.id}?scheduleId=${counselor.counselor.Schedule.id}`} >Book a Session</Link>
                         </div>
                         <div className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">
-                            <Link href="/chat">Message</Link>
+                            <button onClick={(e) => onSubmit(e)}>
+                                <Link href={`/chat/`}>Message</Link>
+                            </button>
                         </div>
                     </div>
                 </div>

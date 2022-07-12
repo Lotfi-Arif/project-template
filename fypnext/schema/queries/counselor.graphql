@@ -15,7 +15,7 @@ query findOneCounselor($where: CounselorWhereUniqueInput!) {
     updatedAt
     CounselorSession {
       id
-      days
+      counsellingDate
     }
   }
 }
@@ -37,7 +37,7 @@ query counselors {
     updatedAt
     CounselorSession {
       id
-      days
+      counsellingDate
     }
   }
 }

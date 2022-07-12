@@ -1,4 +1,4 @@
-mutation createCounselorSession($data: CounselorSessionCreateInput!, ) {
+mutation createCounselorSession($data: CreateCounselorSessionInput!, ) {
   createCounselorSession(data: $data) {
     id
     counsellingReason

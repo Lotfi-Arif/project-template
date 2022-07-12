@@ -15,6 +15,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { SecurityConfig } from '@app/common/configs/config.interface';
 import { Token } from 'model/token.model';
+import { Role } from '@app/common/generated/index/prisma/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -45,27 +46,78 @@ export class AuthService {
       if (isUser) {
         throw new ConflictException(`Email ${email} already used.`);
       }
-      const user = await this.prisma.user.create({
-        data: {
-          mobile,
-          firstName,
-          lastName,
-          accountStatus,
-          email,
-          password: hashedPassword,
-          ...payload,
-          [payload.role.toLowerCase()]: {
-            create: {
-              iCard
+
+      if (payload?.role === Role.COUNSELOR) {
+        const counselor = await this.prisma.user.create({
+          data: {
+            mobile,
+            firstName,
+            lastName,
+            accountStatus,
+            email,
+            password: hashedPassword,
+            ...payload,
+            counselor: {
+              create: {
+                iCard,
+                Schedule: {
+                  create: {
+                    description: "This is the schedule."
+                  }
+                }
+              },
             },
           },
-        },
-      });
-      this.emitter.emit('user.created', user);
+        });
+        return this.generateTokens({
+          userId: counselor.id
+        });
+      }
 
-      return this.generateTokens({
-        userId: user.id
-      });
+      if (payload?.role === Role.STAFF) {
+        const staff = await this.prisma.user.create({
+          data: {
+            mobile,
+            firstName,
+            lastName,
+            accountStatus,
+            email,
+            password: hashedPassword,
+            ...payload,
+            staff: {
+              create: {
+                iCard,
+              },
+            },
+          },
+        });
+
+        return this.generateTokens({
+          userId: staff.id
+        });
+      }
+
+      if (payload?.role === Role.STUDENT) {
+        const student = await this.prisma.user.create({
+          data: {
+            mobile,
+            firstName,
+            lastName,
+            accountStatus,
+            email,
+            password: hashedPassword,
+            ...payload,
+            student: {
+              create: {
+                iCard,
+              },
+            },
+          },
+        });
+        return this.generateTokens({
+          userId: student.id
+        });
+      }
     } catch (e) {
       if (
         e instanceof Prisma.PrismaClientKnownRequestError &&

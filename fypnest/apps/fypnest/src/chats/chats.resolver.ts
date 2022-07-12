@@ -38,7 +38,7 @@ export class ChatsResolver {
     }
   }
 
-  @Mutation(() => Chat)
+  @Query(() => Chat)
   async findOneChat(@Args() chatFindUnique: FindUniqueChatArgs, @Info() info) {
     try {
       const chat = new PrismaSelect(info).value;
@@ -60,12 +60,11 @@ export class ChatsResolver {
         ...chatCreateArgs,
         ...newChat,
       });
-      this.pubSub.publish(`onChats:${user.id}`, {
+      this.pubSub.publish(`onChats:${user?.id}`, {
         onChats: createdChat,
       });
-      return this.chatsService.findOne({
-        where: { id: createdChat.id },
-      });
+      // console.log('chat creation', createdChat?.id)
+      return createdChat;
     } catch (error) {
       console.error(error);
     }

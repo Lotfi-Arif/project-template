@@ -42,6 +42,7 @@ model Schedule {
   CounselorSession CounselorSession[]
   Counselor        Counselor          @relation(fields: [counselorId], references: [id])
   counselorId      String             @unique
+  description      String?
 }
 
 model CounselorSession {
@@ -53,15 +54,13 @@ model CounselorSession {
   user              User?     @relation(fields: [userId], references: [id])
   counselorSchedule Schedule  @relation(fields: [scheduleId], references: [id])
   scheduleId        String
-  days              String?
-  timeFrom          String?
-  timeTo            String?
-  hour              String?
+  timeFrom          DateTime?
+  timeTo            DateTime?
+  counsellingDate   DateTime?
   counselorId       String
   userId            String?   @unique
   studentId         String?
   staffId           String?
-  counsellingDate   String?
   firstName         String?
   lastName          String?
   email             String?
