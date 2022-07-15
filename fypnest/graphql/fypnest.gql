@@ -736,7 +736,6 @@ input CounselorSessionOrderByWithRelationInput {
 
 input CounselorSessionWhereUniqueInput {
   id: String
-  userId: String
 }
 
 enum CounselorSessionScalarFieldEnum {

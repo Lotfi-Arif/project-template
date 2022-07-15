@@ -58,7 +58,7 @@ model CounselorSession {
   timeTo            DateTime?
   counsellingDate   DateTime?
   counselorId       String
-  userId            String?   @unique
+  userId            String?
   studentId         String?
   staffId           String?
   firstName         String?

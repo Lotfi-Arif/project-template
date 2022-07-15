@@ -23,7 +23,7 @@ const CounselorsList = () => {
                             <h2 className="text-2xl leading-normal mb-2 font-bold text-black">Available Counselors</h2>
                         </header>
 
-                        <div className="flex flex-wrap space-x-10 mx-auto my-auto">
+                        <div className="flex flex-wrap mx-auto my-auto">
                             {counselors.map((counselor) => {
 
                                 return (

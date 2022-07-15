@@ -20,6 +20,8 @@ mutation createCounselorSession($data: CreateCounselorSessionInput!, ) {
     lastName
     email
     gender
+    timeFrom
+    timeTo
     maritalStatus     
     address
     race   

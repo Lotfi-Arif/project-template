@@ -5,13 +5,15 @@ import StudentLayout from "src/layouts/Student";
 import { useCreateCounselorSessionMutation } from "schema/generated/graphql";
 import { withApollo } from "utils/hooks/withApollo";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+import { Feedback } from "src/components/FeedBack";
+import { toast } from "react-toastify";
+import { useResultCallback } from "utils/hooks/useResultCallback";
 
 const Counselor = () => {
 
   const router = useRouter();
   const { id, scheduleId } = router.query
-  const [createCounselorSession] = useCreateCounselorSessionMutation();
+  const [createCounselorSession, sessionCreated] = useCreateCounselorSessionMutation();
   const [counsellingDate, setCounsellingDate] = useState(new Date());
   const [counsellingReason, setCounsellingReason] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -32,10 +34,9 @@ const Counselor = () => {
     setUser(JSON.parse(localStorage.getItem('user')))
   }, [])
 
-  console.log('user', user);
+  
 
   const onSubmit = async (error) => {
-    error.preventDefault()
     try {
       await createCounselorSession({
         variables: {
@@ -43,7 +44,7 @@ const Counselor = () => {
           data: {
             timeFrom: timeFrom as any,
             timeTo: timeTo as any,
-            counsellingDate: counsellingDate.getDate as any,
+            counsellingDate: counsellingDate as any,
             counsellingReason: counsellingReason,
             counselor: {
               connect: {
@@ -60,9 +61,9 @@ const Counselor = () => {
             city: city,
             state: state,
             zipCode: zipCode,
-            student: {
+            user: {
               connect: {
-                id: user.id as any
+                id: user.id
               }
             },
             counselorSchedule: {
@@ -71,13 +72,35 @@ const Counselor = () => {
               }
             }
           }
+        },
+        onCompleted(){
+          toast({
+            title: `Counselling Session has been created`,
+            status: 'success',
+          });
+          router.push('/pages/user/myBookings/');
         }
       })
     } catch (error) {
       console.log(error.message)
+      if (error) {
+        toast(
+          <Feedback
+            title="There's an error!"
+            subtitle= {error.graphQLErrors[0]?.extensions?.exception?.meta?.cause ?? error.graphQLErrors[0]?.message ?? error.message}
+            type="error"
+            disableFeedback={true}
+          />,
+          {
+            progress: undefined,
+            toastId: 1,
+            autoClose: 3000,
+          },
+        );
+      }
     }
   }
-  
+
   const epoch = (date) => {
     return Date.parse(date)
   }
@@ -90,7 +113,7 @@ const Counselor = () => {
     setTimeFrom(epoch(timeFrom) as any);
   }
   const handleTimeToChange = (timeTo) => {
-    console.log('timeto is here!', epoch(timeTo) );
+    console.log('timeto is here!', epoch(timeTo));
     setTimeTo(epoch(timeTo) as any);
   }
 

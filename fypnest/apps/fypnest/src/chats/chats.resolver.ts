@@ -51,7 +51,6 @@ export class ChatsResolver {
   @Mutation(() => Chat)
   async createChat(
     @Args() chatCreateArgs: CreateOneChatArgs,
-    @CurrentUser() user: User,
     @Info() info,
   ) {
     try {
@@ -60,10 +59,9 @@ export class ChatsResolver {
         ...chatCreateArgs,
         ...newChat,
       });
-      this.pubSub.publish(`onChats:${user?.id}`, {
+      this.pubSub.publish(`onChats:${(await newChat).chatId}`, {
         onChats: createdChat,
       });
-      // console.log('chat creation', createdChat?.id)
       return createdChat;
     } catch (error) {
       console.error(error);

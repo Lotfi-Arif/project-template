@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link';
-import { useCookies } from "react-cookie"
+import { Cookies, useCookies } from "react-cookie"
 import { useState } from 'react';
-import { LoginInput, Role, useLoginUserMutation } from 'schema/generated/graphql';
+import { AccountStatus, LoginInput, Role, useLoginUserMutation } from 'schema/generated/graphql';
 import { withApollo } from 'utils/hooks/withApollo';
 import { useRouter } from 'next/router';
 import { Feedback } from 'src/components/FeedBack';
@@ -15,6 +15,12 @@ const LoginStudent = () => {
     const [password, setPassword] = useState('')
     const [message, setError] = useState('')
     const router = useRouter()
+    const cookies = new Cookies();
+    const deleteUserFromCookie = () => {
+        if (cookies.get('user')) {
+          cookies.remove('user');
+        }
+      }
     const [signIn] = useLoginUserMutation({
         onCompleted(data?) {
 
@@ -28,12 +34,46 @@ const LoginStudent = () => {
             if (data.loginUser.user.role === Role.Admin){
                 router.push('/pages/admin')
             }
-            if (data.loginUser.user.role === Role.Counselor){
+            if (data.loginUser.user.role === Role.Counselor && data.loginUser.user.accountStatus === AccountStatus.Approved){
                 router.push('/pages/counselor')
+            }else {
+                toast(
+                    <Feedback
+                        title="You have not been approved by the system!"
+                        subtitle=""
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
+                );
+                localStorage.clear();
+                deleteUserFromCookie
+                router.push('/')
             }
-            if (data.loginUser.user.role === Role.Student || Role.Staff){
+            if (data.loginUser.user.role === Role.Student && data.loginUser.user.accountStatus === AccountStatus.Approved){
                 router.push('/pages/user')
+            }else {
+                toast(
+                    <Feedback
+                        title="You have not been approved!"
+                        subtitle=""
+                        type="error"
+                        disableFeedback={true}
+                    />,
+                    {
+                        progress: undefined,
+                        toastId: 1,
+                        autoClose: 3000,
+                    },
+                );
+                localStorage.clear();
+                router.push('/');
             }
+        
 
             localStorage.setItem('user', JSON.stringify(data.loginUser.user));
         },

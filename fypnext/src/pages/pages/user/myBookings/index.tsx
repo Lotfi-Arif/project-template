@@ -23,7 +23,7 @@ const MyBookings = () => {
                             <h2 className="text-2xl leading-normal mb-2 font-bold text-black">My Bookings</h2>
                         </header>
 
-                        <div className="flex flex-wrap space-x-10 mx-auto my-auto">
+                        <div className="flex flex-wrap m-4 mx-auto my-auto">
                             {counselorSessions.map((session) => {
 
                                 return (

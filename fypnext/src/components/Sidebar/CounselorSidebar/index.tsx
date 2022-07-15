@@ -127,34 +127,6 @@ export default function CounselorSidebar() {
                   </a>
                 </Link>
               </li>
-
-              <li className="items-center">
-                <Link href="/pages/counselor/bookings">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/counselor/bookings") !== -1
-                        ? "text-white hover:text-lightBlue-600"
-                        : "text-white hover:text-blueGray-500")
-                    }
-                  >
-                    <TicketIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Bookings
-                  </a>
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link href="/profile">
-                  <a
-                    href="#pablo"
-                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2" />
-                    Profile Page
-                  </a>
-                </Link>
-              </li>
             </ul>
 
             {/* Divider */}

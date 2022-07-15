@@ -16,6 +16,7 @@ fragment UserData on User {
   role
   email
   chatId
+  accountStatus
   Chat {
     id
   }

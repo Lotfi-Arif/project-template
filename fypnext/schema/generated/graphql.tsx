@@ -1186,7 +1186,6 @@ export type CounselorSessionWhereInput = {
 
 export type CounselorSessionWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
-  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type CounselorUpdateInput = {
@@ -3340,18 +3339,18 @@ export type LoginUserMutationVariables = Exact<{
 }>;
 
 
-export type LoginUserMutation = { __typename?: 'Mutation', loginUser: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } } };
+export type LoginUserMutation = { __typename?: 'Mutation', loginUser: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, accountStatus: AccountStatus, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } } };
 
 export type SignupMutationVariables = Exact<{
   data: SignupInput;
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } } };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, accountStatus: AccountStatus, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } } };
 
-export type UserDataFragment = { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined };
+export type UserDataFragment = { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, accountStatus: AccountStatus, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined };
 
-export type AuthTokensFragment = { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } };
+export type AuthTokensFragment = { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, role: Role, email: string, chatId?: string | null | undefined, accountStatus: AccountStatus, Chat?: { __typename?: 'Chat', id: string } | null | undefined, counselor?: { __typename?: 'Counselor', Schedule?: { __typename?: 'Schedule', id: string } | null | undefined, CounselorSession?: Array<{ __typename?: 'CounselorSession', timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined }> | null | undefined } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined } };
 
 export type CreateChatMutationVariables = Exact<{
   data: ChatCreateInput;
@@ -3365,7 +3364,7 @@ export type CreateCounselorSessionMutationVariables = Exact<{
 }>;
 
 
-export type CreateCounselorSessionMutation = { __typename?: 'Mutation', createCounselorSession: { __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: any | null | undefined, counselor: { __typename?: 'Counselor', id: string }, user?: { __typename?: 'User', id: string, firstName: string, lastName: string } | null | undefined, counselorSchedule: { __typename?: 'Schedule', id: string, Counselor: { __typename?: 'Counselor', id: string } } } };
+export type CreateCounselorSessionMutation = { __typename?: 'Mutation', createCounselorSession: { __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, timeFrom?: any | null | undefined, timeTo?: any | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: any | null | undefined, counselor: { __typename?: 'Counselor', id: string }, user?: { __typename?: 'User', id: string, firstName: string, lastName: string } | null | undefined, counselorSchedule: { __typename?: 'Schedule', id: string, Counselor: { __typename?: 'Counselor', id: string } } } };
 
 export type CreateEventMutationVariables = Exact<{
   data: EventCreateInput;
@@ -3490,7 +3489,7 @@ export type FindOneChatQuery = { __typename?: 'Query', findOneChat: { __typename
 export type SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SessionsQuery = { __typename?: 'Query', findAllCounselorSessions: Array<{ __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: any | null | undefined, counselor: { __typename?: 'Counselor', id: string, user: { __typename?: 'User', firstName: string, lastName: string } }, student?: { __typename?: 'Student', id: string } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined }> };
+export type SessionsQuery = { __typename?: 'Query', findAllCounselorSessions: Array<{ __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: any | null | undefined, timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counselor: { __typename?: 'Counselor', id: string, user: { __typename?: 'User', firstName: string, lastName: string } }, student?: { __typename?: 'Student', id: string } | null | undefined, staff?: { __typename?: 'Staff', id: string } | null | undefined }> };
 
 export type FindOneCounselorQueryVariables = Exact<{
   where: CounselorWhereUniqueInput;
@@ -3538,7 +3537,7 @@ export type ScheduleQueryVariables = Exact<{
 }>;
 
 
-export type ScheduleQuery = { __typename?: 'Query', findOneSchedule: { __typename?: 'Schedule', id: string, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, counsellingDate?: any | null | undefined, user?: { __typename?: 'User', id: string, firstName: string, lastName: string } | null | undefined, counselor: { __typename?: 'Counselor', id: string } }> | null | undefined, Counselor: { __typename?: 'Counselor', id: string } } };
+export type ScheduleQuery = { __typename?: 'Query', findOneSchedule: { __typename?: 'Schedule', id: string, CounselorSession?: Array<{ __typename?: 'CounselorSession', id: string, counsellingReason?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, gender?: string | null | undefined, maritalStatus?: string | null | undefined, address?: string | null | undefined, race?: string | null | undefined, city?: string | null | undefined, state?: string | null | undefined, zipCode?: string | null | undefined, timeFrom?: any | null | undefined, timeTo?: any | null | undefined, counsellingDate?: any | null | undefined, user?: { __typename?: 'User', id: string, firstName: string, lastName: string } | null | undefined, counselor: { __typename?: 'Counselor', id: string } }> | null | undefined, Counselor: { __typename?: 'Counselor', id: string } } };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3571,6 +3570,7 @@ export const UserDataFragmentDoc = gql`
   role
   email
   chatId
+  accountStatus
   Chat {
     id
   }
@@ -3733,6 +3733,8 @@ export const CreateCounselorSessionDocument = gql`
     lastName
     email
     gender
+    timeFrom
+    timeTo
     maritalStatus
     address
     race
@@ -4434,6 +4436,8 @@ export const SessionsDocument = gql`
     state
     zipCode
     counsellingDate
+    timeFrom
+    timeTo
   }
 }
     `;
@@ -4769,6 +4773,8 @@ export const ScheduleDocument = gql`
       city
       state
       zipCode
+      timeFrom
+      timeTo
       counsellingDate
       user {
         id

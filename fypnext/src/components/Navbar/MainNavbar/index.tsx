@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Cookies from 'universal-cookie';
 import { useCookies } from 'react-cookie'
+import router from 'next/router'
 
 const navigation = [
   { name: 'Overview', href: '/', current: true },
@@ -17,6 +18,19 @@ function classNames(...classes: string[]) {
 }
 
 const Navbar = () => {
+
+  const deleteUserFromCookie = () => {
+    if (cookies.get('user')) {
+      cookies.remove('user');
+    }
+  }
+
+  const handleLogout = (e, href) => {
+    e.preventDefault()
+    deleteUserFromCookie()
+    localStorage.clear()
+    router.push(href)
+  }
 
   const [cookie] = useCookies(["user"]);
   const cookies = new Cookies();
@@ -169,10 +183,7 @@ const Navbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                onClick={() => {
-                                  cookies.remove('user', { path: '/' });
-                                  localStorage.removeItem('user');
-                                }}
+                                onClick={(e) => {handleLogout(e, '/')}}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
                                 Sign out

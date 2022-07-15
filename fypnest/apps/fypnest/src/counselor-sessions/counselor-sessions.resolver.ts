@@ -102,10 +102,7 @@ export class CounselorSessionsResolver {
   }
 
   convertEpochTime(epochDate: number) {
-    const newDate = new Date(0);
-    newDate.setSeconds(epochDate);
-    const monthDateAndYear =
-      newDate.getMonth() + newDate.getDate() + newDate.getFullYear();
-    return monthDateAndYear;
+    const newDate = new Date(epochDate).toISOString();
+    return newDate;
   }
 }

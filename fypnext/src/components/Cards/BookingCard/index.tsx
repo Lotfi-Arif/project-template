@@ -6,7 +6,7 @@ const BookingCard = (session) => {
 
     return (
         <>
-            <div className="w-full lg:w-6/12 xl:w-3/12 px-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full lg:w-6/12 xl:w-3/12 px-4 m-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <div className="flex justify-end px-4 pt-4">
 
                 </div>

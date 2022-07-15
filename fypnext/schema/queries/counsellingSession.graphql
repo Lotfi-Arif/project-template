@@ -26,5 +26,7 @@ query sessions {
     state  
     zipCode
     counsellingDate
+    timeFrom
+    timeTo
   }
 }

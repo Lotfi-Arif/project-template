@@ -14,6 +14,8 @@ query schedule($where: ScheduleWhereUniqueInput!) {
                 city   
                 state  
                 zipCode
+                timeFrom
+                timeTo
                 counsellingDate
                 user {
                     id
