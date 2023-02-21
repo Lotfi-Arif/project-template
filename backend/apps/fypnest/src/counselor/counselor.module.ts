@@ -3,6 +3,6 @@ import { CounselorService } from './counselor.service';
 import { CounselorResolver } from './counselor.resolver';
 
 @Module({
-  providers: [CounselorService, CounselorResolver]
+  providers: [CounselorService, CounselorResolver],
 })
 export class CounselorModule {}

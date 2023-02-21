@@ -4,7 +4,7 @@ import { PrismaService } from 'nestjs-prisma';
 
 @Injectable()
 export class CounselorService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(counselorFindManyArgs: Prisma.CounselorFindManyArgs) {
     return this.prisma.counselor.findMany(counselorFindManyArgs);

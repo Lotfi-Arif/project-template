@@ -5,7 +5,6 @@ import { PostsService } from './posts.service';
 import { CreateOnePostArgs } from '@app/common/generated/index/post/create-one-post.args';
 import { DeleteOnePostArgs } from '@app/common/generated/index/post/delete-one-post.args';
 import { FindManyPostArgs } from '@app/common/generated/index/post/find-many-post.args';
-import { FindUniquePostArgs } from '@app/common/generated/index/post/find-unique-post.args';
 import { UpdateOnePostArgs } from '@app/common/generated/index/post/update-one-post.args';
 
 @Resolver(() => Post)
@@ -23,10 +22,10 @@ export class PostsResolver {
   }
 
   @Query(() => Post)
-  async findOnePost(@Args('id') id: string, @Info() info ) {
+  async findOnePost(@Args('id') id: string, @Info() info) {
     try {
       const post = new PrismaSelect(info).value;
-      return this.postService.findOne({ where: {id: id}, ...post });
+      return this.postService.findOne({ where: { id: id }, ...post });
     } catch (error) {
       console.error(error);
     }

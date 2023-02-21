@@ -3,6 +3,6 @@ import { FAQsService } from './faq.service';
 import { FaqsResolver } from './faq.resolver';
 
 @Module({
-  providers: [FAQsService, FaqsResolver]
+  providers: [FAQsService, FaqsResolver],
 })
 export class FaqModule {}
