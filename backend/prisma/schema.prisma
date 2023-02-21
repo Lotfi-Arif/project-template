@@ -1,0 +1,218 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/ecs_test?schema=public"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../libs/common/src/generated/index"
+}
+
+model User {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  password          String
+  firstName         String
+  lastName          String
+  mobile            String?            @unique
+  gender            Gender?
+  accountStatus     AccountStatus      @default(UNVERIFIED)
+  role              Role
+  student           Student?
+  staff             Staff?
+  counselor         Counselor?
+  admin             Admin?
+  counselingSession CounselorSession[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  Message           Message[]
+  Chat              Chat?              @relation(fields: [chatId], references: [id])
+  chatId            String?
+}
+
+model Schedule {
+  id               String             @id @default(uuid())
+  CounselorSession CounselorSession[]
+  Counselor        Counselor          @relation(fields: [counselorId], references: [id])
+  counselorId      String             @unique
+  description      String?
+}
+
+model CounselorSession {
+  id                String    @id @default(uuid())
+  counsellingReason String?
+  counselor         Counselor @relation(fields: [counselorId], references: [id])
+  student           Student?  @relation(fields: [studentId], references: [id])
+  staff             Staff?    @relation(fields: [staffId], references: [id])
+  user              User?     @relation(fields: [userId], references: [id])
+  counselorSchedule Schedule  @relation(fields: [scheduleId], references: [id])
+  scheduleId        String
+  timeFrom          DateTime?
+  timeTo            DateTime?
+  counsellingDate   DateTime?
+  counselorId       String
+  userId            String?
+  studentId         String?
+  staffId           String?
+  firstName         String?
+  lastName          String?
+  email             String?
+  gender            String?
+  maritalStatus     String?
+  address           String?
+  race              String?
+  city              String?
+  state             String?
+  zipCode           String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Student {
+  id               String             @id @default(uuid())
+  iCard            String
+  matrix           String?            @unique
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty          String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  iCard     String
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Staff {
+  id               String             @id @default(uuid())
+  staffMatrix      String?            @unique
+  iCard            String
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  faculty          String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
+}
+
+model Counselor {
+  id               String             @id @default(uuid())
+  department       String?
+  iCard            String
+  user             User               @relation(fields: [id], references: [id], onDelete: Cascade)
+  expertise        String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  CounselorSession CounselorSession[]
+  scheduleId       String?
+  Schedule         Schedule?
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  body      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chat {
+  id        String    @id @default(uuid())
+  chatName  String
+  Message   Message[]
+  users     User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  sender    User     @relation(fields: [userId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  Message   String
+  userId    String
+  chatId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id            String   @id @default(uuid())
+  title         String
+  eventImageURL String?
+  eventDetails  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  title     String
+  answer    String
+  icon      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Asset {
+  id             String          @id @default(uuid())
+  originalName   String?
+  fileName       String?
+  fileType       FileType        @default(IMAGE)
+  url            String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  uploadingState UploadingState? @default(uploaded)
+  // eventImageAsset Event?          @relation("ImageEventAsset")
+}
+
+enum FileType {
+  VIDEO
+  PDF
+  IMAGE
+  ZIP
+  OTHER
+}
+
+enum UploadingState {
+  uploading
+  uploaded
+}
+
+enum AccountStatus {
+  VERIFIED
+  UNVERIFIED
+  APPROVED
+  REJECTED
+}
+
+enum Role {
+  ADMIN
+  USER
+  STUDENT
+  COUNSELOR
+  STAFF
+}
+
+enum Gender {
+  M
+  F
+  OTHERS
+}
+
+enum MaritalStatus {
+  Married
+  Single
+  Widowed
+}

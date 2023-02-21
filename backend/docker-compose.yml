@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  nest-api:
+    container_name: nest-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - ./node_modules:/app/node_modules/
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  postgres:
+    name: nest-db
+networks:
+  backend:
+    driver: "bridge"

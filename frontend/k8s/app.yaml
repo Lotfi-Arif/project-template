@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    service: frontend
+spec:
+  selector:
+    app: frontend
+  type: ClusterIP
+  ports:
+    - port: 3005
+---
+## DEPLOY
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: fyp-frontend-container
+        image: hakeem99/frontend
+        ports:
+        - containerPort: 3005
