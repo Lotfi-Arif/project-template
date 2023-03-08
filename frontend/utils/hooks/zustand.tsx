@@ -1,9 +1,9 @@
-import create from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { ZustandStore } from "../types/Store";
 
-export const useStore = create<ZustandStore>(
+export const useStore = create<ZustandStore>()(
   persist(
     (set): ZustandStore => ({
       auth: undefined,
@@ -21,6 +21,6 @@ export const useStore = create<ZustandStore>(
     {
       name: "auth", // unique name
       getStorage: () => localStorage, // (optional) by default, 'localStorage' is used
-    },
-  ),
+    }
+  )
 );

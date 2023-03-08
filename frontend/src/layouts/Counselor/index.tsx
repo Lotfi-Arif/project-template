@@ -3,13 +3,19 @@ import React from "react";
 // components
 
 import AdminNavbar from "src/components/Navbar/AdminNavbar";
-import Sidebar from "src/components/Sidebar/CounselorSidebar"
+import Sidebar from "src/components/Sidebar/CounselorSidebar";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
-import { InformationCircleIcon, LoginIcon, PhotographIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon, UsersIcon, ViewGridAddIcon } from "@heroicons/react/outline";
+import {
+  HiOutlineArrowCircleRight,
+  HiOutlinePhotograph,
+  HiOutlineTicket,
+  HiOutlineUserCircle,
+  HiUserCircle,
+} from "react-icons/hi";
 
 export function UserSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -17,7 +23,6 @@ export function UserSidebar() {
 
   return (
     <>
-
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#18344D] flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
@@ -34,8 +39,7 @@ export function UserSidebar() {
               href="#pablo"
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
-               Dashboard
-
+              Dashboard
             </a>
           </Link>
           {/* User */}
@@ -63,7 +67,7 @@ export function UserSidebar() {
                       href="#pablo"
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
-                       Dashboard
+                      Dashboard
                     </a>
                   </Link>
                 </div>
@@ -88,7 +92,7 @@ export function UserSidebar() {
                 />
               </div>
             </form>
-            
+
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -103,7 +107,7 @@ export function UserSidebar() {
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <TemplateIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlinePhotograph className="items-center inline-flex h-5 w-5 m-2" />
                     Overview
                   </a>
                 </Link>
@@ -120,7 +124,7 @@ export function UserSidebar() {
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <TicketIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineTicket className="items-center inline-flex h-5 w-5 m-2" />
                     Bookings
                   </a>
                 </Link>
@@ -132,7 +136,7 @@ export function UserSidebar() {
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <UserCircleIcon className="items-center inline-flex h-5 w-5 m-2"/>
+                    <HiOutlineUserCircle className="items-center inline-flex h-5 w-5 m-2" />
                     Profile Page
                   </a>
                 </Link>
@@ -154,7 +158,7 @@ export function UserSidebar() {
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <LoginIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineArrowCircleRight className="items-center inline-flex h-5 w-5 m-2" />
                     Login
                   </a>
                 </Link>
@@ -166,7 +170,7 @@ export function UserSidebar() {
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiUserCircle className="items-center inline-flex h-5 w-5 m-2" />
                     Register
                   </a>
                 </Link>
@@ -183,8 +187,7 @@ export function UserSidebar() {
                 </Link>
               </li>
             </ul>
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-            </ul>
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"></ul>
           </div>
         </div>
       </nav>
@@ -202,12 +205,10 @@ const CounselorLayout = ({ children }) => {
         <AdminNavbar />
         {/* Header */}
         <HeaderStats />
-        <div className="px-4 md:px-10 mx-auto w-full -m-24">
-          {children}
-        </div>
+        <div className="px-4 md:px-10 mx-auto w-full -m-24">{children}</div>
       </div>
     </>
   );
-}
+};
 
 export default CounselorLayout;

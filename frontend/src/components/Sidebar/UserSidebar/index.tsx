@@ -4,17 +4,22 @@ import { useRouter } from "next/router";
 
 import NotificationDropdown from "src/components/Dropdowns/NotificationsDropdown";
 import UserDropdown from "src/components/Dropdowns/Userdropdown";
-import { BackspaceIcon, LoginIcon, TemplateIcon, TicketIcon, UserCircleIcon, UserIcon } from "@heroicons/react/outline";
+import {
+  HiOutlineBackspace,
+  HiOutlineLogin,
+  HiOutlineViewGrid,
+  HiOutlineChat,
+  HiOutlineUserCircle,
+} from "react-icons/hi";
 import { useCookies } from "react-cookie";
 
 export default function UserSidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
-  const [cookie] = useCookies(["user"])
+  const [cookie] = useCookies(["user"]);
   const router = useRouter();
 
   return (
     <>
-
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#18344D] flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
@@ -32,7 +37,6 @@ export default function UserSidebar() {
               className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               Dashboard
-
             </a>
           </Link>
           {/* User */}
@@ -100,7 +104,7 @@ export default function UserSidebar() {
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <TemplateIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineViewGrid className="items-center inline-flex h-5 w-5 m-2" />
                     Overview
                   </a>
                 </Link>
@@ -112,12 +116,13 @@ export default function UserSidebar() {
                     href="#pablo"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/pages/user/counslorsList") !== -1
+                      (router.pathname.indexOf("/pages/user/counslorsList") !==
+                      -1
                         ? "text-white hover:text-lightBlue-600"
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineUserCircle className="items-center inline-flex h-5 w-5 m-2" />
                     Bookings
                   </a>
                 </Link>
@@ -133,7 +138,7 @@ export default function UserSidebar() {
                         : "text-white hover:text-blueGray-500")
                     }
                   >
-                    <TicketIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineChat className="items-center inline-flex h-5 w-5 m-2" />
                     My Bookings
                   </a>
                 </Link>
@@ -142,35 +147,35 @@ export default function UserSidebar() {
 
             {/* Navigation */}
 
+            {cookie.user ? (
+              <div> </div>
+            ) : (
+              <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                <li className="items-center">
+                  <Link href="/login">
+                    <a
+                      href="#pablo"
+                      className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                    >
+                      <HiOutlineLogin className="items-center inline-flex h-5 w-5 m-2" />
+                      Login
+                    </a>
+                  </Link>
+                </li>
 
-            {
-              cookie.user ?
-                <div> </div> :
-                <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-                  <li className="items-center">
-                    <Link href="/login">
-                      <a
-                        href="#pablo"
-                        className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                      >
-                        <LoginIcon className="items-center inline-flex h-5 w-5 m-2" />
-                        Login
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li className="items-center">
-                    <Link href="/register">
-                      <a
-                        href="#pablo"
-                        className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                      >
-                        <UserIcon className="items-center inline-flex h-5 w-5 m-2" />
-                        Register
-                      </a>
-                    </Link>
-                  </li>
-                </ul>}
+                <li className="items-center">
+                  <Link href="/register">
+                    <a
+                      href="#pablo"
+                      className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                    >
+                      <HiOutlineUserCircle className="items-center inline-flex h-5 w-5 m-2" />
+                      Register
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            )}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
@@ -179,14 +184,13 @@ export default function UserSidebar() {
                     href="#pablo"
                     className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <BackspaceIcon className="items-center inline-flex h-5 w-5 m-2" />
+                    <HiOutlineBackspace className="items-center inline-flex h-5 w-5 m-2" />
                     Return to Landing Page
                   </a>
                 </Link>
               </li>
             </ul>
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-            </ul>
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"></ul>
           </div>
         </div>
       </nav>
