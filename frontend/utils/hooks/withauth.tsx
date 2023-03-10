@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { useStore } from "./zustand";
 
 const withAuthenticated = <T,>(
-  Component: React.ComponentType<T>,
+  Component: React.ComponentType<T>
 ): React.ComponentType<T> => {
   const WithAuthenticated: React.FC<T> = (props) => {
     const router = useRouter();
@@ -29,16 +29,13 @@ const withAuthenticated = <T,>(
           router.push(`/auth/login`);
         }
       }
-      if (
-        !allowed ||
-        !user ||
-        !user.role
-      ) {
+      if (!allowed || !user || !user.role) {
         allowed = false;
       }
+
       // If all checks pass, means they are allowed
       setIsAllowed(allowed);
-    }, [router, accessToken, user, isAllowed, setIsAllowed]);
+    }, [router, accessToken, user, isAllowed, setIsAllowed, logout]);
 
     return (
       <>

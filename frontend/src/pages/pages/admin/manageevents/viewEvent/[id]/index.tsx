@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEventQuery } from "schema/generated/graphql";
 import Navbar from "src/components/Navbar/MainNavbar";
@@ -21,7 +22,7 @@ const ViewEvent = () => {
         <div className=" px-10 py-6 mx-auto">
           {/* <!--author--> */}
           <div className="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
-            <a
+            <Link
               href="#_"
               className="block transition duration-200 ease-out transform hover:scale-110"
             >
@@ -30,25 +31,25 @@ const ViewEvent = () => {
                 src={event?.eventImageURL}
                 alt="here"
               />
-            </a>
+            </Link>
 
             {/* <!--post categories--> */}
             <div className="flex items-center justify-start mt-4 mb-4">
-              <a
+              <Link
                 href="#"
                 className="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500"
               >
                 web development
-              </a>
+              </Link>
             </div>
             <div className="mt-2">
               {/* <!--post heading--> */}
-              <a
+              <Link
                 href="#"
                 className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline"
               >
                 {event?.title}
-              </a>
+              </Link>
 
               {/* <!--post views--> */}
               <div className="flex justify-start items-center mt-2">
@@ -60,7 +61,7 @@ const ViewEvent = () => {
 
               {/* <!--author avator--> */}
               <div className="font-light text-gray-600">
-                <a href="#" className="flex items-center mt-6 mb-6">
+                <Link href="#" className="flex items-center mt-6 mb-6">
                   <img
                     src="https://avatars.githubusercontent.com/u/71964085?v=4"
                     alt="avatar"
@@ -69,7 +70,7 @@ const ViewEvent = () => {
                   <h1 className="font-bold text-gray-700 hover:underline">
                     By James Amos
                   </h1>
-                </a>
+                </Link>
               </div>
             </div>
 

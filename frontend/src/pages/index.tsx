@@ -82,9 +82,9 @@ const Landing = () => {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor.
                     </div>
                     <div className="mt-4 text-cyan-400 text-base">
-                        <a href="#">
+                        <Link href="#">
                             Read More {">"}
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

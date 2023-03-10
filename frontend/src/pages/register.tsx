@@ -10,6 +10,7 @@ import { withApollo } from "utils/hooks/withApollo";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import { Feedback } from "src/components/FeedBack";
+import Link from "next/link";
 
 const Register = () => {
   const [cookie, setCookie] = useCookies(["user"]);
@@ -63,6 +64,7 @@ const Register = () => {
         },
       });
     } catch (e: any) {
+      console.log(e.message);
       if (e.graphQLErrors[0].message.includes("ConflictException")) {
         toast(
           <Feedback
@@ -294,20 +296,21 @@ const Register = () => {
                 </div>
                 <hr className="mb-6 border-t" />
                 <div className="text-center">
-                  <a
+                  <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                     href="#"
                   >
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
                 <div className="text-center">
-                  <a
+                  <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                     onClick={handleLogin}
+                    href="#"
                   >
                     Already have an account? Login!
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>

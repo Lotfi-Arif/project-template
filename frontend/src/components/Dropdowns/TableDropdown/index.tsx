@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const NotificationDropdown = () => {
@@ -12,7 +13,7 @@ const NotificationDropdown = () => {
 
   return (
     <>
-      <a
+      <Link
         className="text-blueGray-500 py-1 px-3"
         href="#pablo"
         onClick={(e) => {
@@ -21,14 +22,14 @@ const NotificationDropdown = () => {
         }}
       >
         <i className="fas fa-ellipsis-v"></i>
-      </a>
+      </Link>
       <div
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <a
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -36,8 +37,8 @@ const NotificationDropdown = () => {
           onClick={(e) => e.preventDefault()}
         >
           Action
-        </a>
-        <a
+        </Link>
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -45,8 +46,8 @@ const NotificationDropdown = () => {
           onClick={(e) => e.preventDefault()}
         >
           Another action
-        </a>
-        <a
+        </Link>
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -54,7 +55,7 @@ const NotificationDropdown = () => {
           onClick={(e) => e.preventDefault()}
         >
           Something else here
-        </a>
+        </Link>
       </div>
     </>
   );

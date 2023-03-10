@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const AdminNavigation = () => {
   return (
     <aside className="p-6" aria-label="Sidebar">
       <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
-        <a href="#" className="flex items-center pl-2.5 mb-28">
+        <Link href="#" className="flex items-center pl-2.5 mb-28">
           <Image
             alt="dashboard"
             src="/dashboard.svg"
@@ -16,10 +17,10 @@ export const AdminNavigation = () => {
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             ECS Dashboard
           </span>
-        </a>
+        </Link>
         <ul className="space-y-2">
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -33,10 +34,10 @@ export const AdminNavigation = () => {
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
               <span className="ml-3">Overview</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -49,10 +50,10 @@ export const AdminNavigation = () => {
                 <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">My Schedule</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -69,10 +70,10 @@ export const AdminNavigation = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">ECS Events</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -91,10 +92,10 @@ export const AdminNavigation = () => {
               <span className="flex-1 ml-3 whitespace-nowrap">
                 Back to Landing page
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -111,10 +112,10 @@ export const AdminNavigation = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -131,7 +132,7 @@ export const AdminNavigation = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

@@ -8,11 +8,11 @@ export function useResultCallback<
   ResultDataInner extends ResultData[Exclude<keyof ResultData, "__typename">],
   ResultError extends NonNullable<
     Result[Exclude<keyof Result, Exclude<keyof Result, "error">>]
-  >,
+  >
 >(
   result: Result,
   callbackData: (data: ResultDataInner) => void,
-  callbackError: (data: ResultError) => void,
+  callbackError: (data: ResultError) => void
 ) {
   const obj = result as any;
   React.useEffect(() => {
@@ -24,5 +24,5 @@ export function useResultCallback<
       }
     }
     if (obj.error) callbackError(obj.error);
-  }, [obj.data, obj.error]);
+  }, [callbackData, callbackError, obj.data, obj.error]);
 }

@@ -32,12 +32,9 @@ export default function UserSidebar() {
           </button>
           {/* Brand */}
           <Link href="/pages/user/">
-            <a
-              href="#pablo"
-              className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            >
+            <i className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
               Dashboard
-            </a>
+            </i>
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -60,12 +57,9 @@ export default function UserSidebar() {
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link href="/pages/user/">
-                    <a
-                      href="#pablo"
-                      className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    >
+                    <i className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
                       Dashboard
-                    </a>
+                    </i>
                   </Link>
                 </div>
                 <div className="w-6/12 flex justify-end">
@@ -95,8 +89,7 @@ export default function UserSidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link href="/pages/user/">
-                  <a
-                    href="#pablo"
+                  <i
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/pages/user") !== -1
@@ -106,14 +99,13 @@ export default function UserSidebar() {
                   >
                     <HiOutlineViewGrid className="items-center inline-flex h-5 w-5 m-2" />
                     Overview
-                  </a>
+                  </i>
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link href="/pages/user/counslorsList">
-                  <a
-                    href="#pablo"
+                  <i
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/pages/user/counslorsList") !==
@@ -124,13 +116,12 @@ export default function UserSidebar() {
                   >
                     <HiOutlineUserCircle className="items-center inline-flex h-5 w-5 m-2" />
                     Bookings
-                  </a>
+                  </i>
                 </Link>
               </li>
               <li className="items-center">
                 <Link href="/pages/user/myBookings">
-                  <a
-                    href="#pablo"
+                  <i
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/pages/user/myBookings") !== -1
@@ -140,7 +131,7 @@ export default function UserSidebar() {
                   >
                     <HiOutlineChat className="items-center inline-flex h-5 w-5 m-2" />
                     My Bookings
-                  </a>
+                  </i>
                 </Link>
               </li>
             </ul>
@@ -153,25 +144,19 @@ export default function UserSidebar() {
               <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
                 <li className="items-center">
                   <Link href="/login">
-                    <a
-                      href="#pablo"
-                      className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                    >
+                    <i className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                       <HiOutlineLogin className="items-center inline-flex h-5 w-5 m-2" />
                       Login
-                    </a>
+                    </i>
                   </Link>
                 </li>
 
                 <li className="items-center">
                   <Link href="/register">
-                    <a
-                      href="#pablo"
-                      className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                    >
+                    <i className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                       <HiOutlineUserCircle className="items-center inline-flex h-5 w-5 m-2" />
                       Register
-                    </a>
+                    </i>
                   </Link>
                 </li>
               </ul>
@@ -180,13 +165,10 @@ export default function UserSidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link href="/">
-                  <a
-                    href="#pablo"
-                    className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
+                  <i className="text-white hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                     <HiOutlineBackspace className="items-center inline-flex h-5 w-5 m-2" />
                     Return to Landing Page
-                  </a>
+                  </i>
                 </Link>
               </li>
             </ul>

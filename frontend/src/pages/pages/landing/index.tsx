@@ -103,7 +103,7 @@ const Landing = () => {
             porttitor.
           </div>
           <div className="mt-4 text-cyan-400 text-base">
-            <a href="#">Read More {">"}</a>
+            <Link href="#">Read More {">"}</Link>
           </div>
         </div>
       </div>
