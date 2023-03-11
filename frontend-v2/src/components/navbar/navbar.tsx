@@ -39,7 +39,7 @@ export const Nav = () => {
         <Navbar.Toggle aria-label="toggle navigation" showIn="xs" />
         <Logo />
         <Text b color="inherit" hideIn="xs">
-          ACME
+          ELearning Platform
         </Text>
         <Navbar.Content
           hideIn="sm"
@@ -64,7 +64,7 @@ export const Nav = () => {
               </Dropdown.Button>
             </Navbar.Item>
             <Dropdown.Menu
-              aria-label="ACME features"
+              aria-label="ELearning Platform features"
               css={{
                 $$dropdownMenuWidth: "340px",
                 $$dropdownItemHeight: "70px",
@@ -84,7 +84,7 @@ export const Nav = () => {
               <Dropdown.Item
                 key="autoscaling"
                 showFullDescription
-                description="ACME scales apps to meet user demand, automagically, based on load."
+                description="ELearning Platform scales apps to meet user demand, automagically, based on load."
                 icon={icons.scale}
               >
                 Autoscaling
@@ -100,7 +100,7 @@ export const Nav = () => {
               <Dropdown.Item
                 key="production_ready"
                 showFullDescription
-                description="ACME runs on ACME, join us and others serving requests at web scale."
+                description="ELearning Platform runs on ELearning Platform, join us and others serving requests at web scale."
                 icon={icons.flash}
               >
                 Production Ready
