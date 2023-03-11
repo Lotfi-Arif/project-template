@@ -1,0 +1,42 @@
+mutation createSchedule($data: ScheduleCreateInput!) {
+  createSchedule(data: $data) {
+    id
+    CounselorSession {
+        id
+        user {
+            id
+        }
+        counselor {
+            id
+        }
+
+    }
+    Counselor {
+        id
+    }
+  }
+}
+
+mutation updateSchedule($data: ScheduleUpdateInput!, $where: ScheduleWhereUniqueInput!) {
+  updateSchedule(data: $data, where: $where) {
+    id
+    CounselorSession {
+        id
+    }
+    Counselor {
+        id
+    }
+  }
+}
+
+mutation deleteSchedule($where: ScheduleWhereUniqueInput!) {
+  deleteSchedule(where: $where) {
+    id
+    CounselorSession {
+        id
+    }
+    Counselor {
+        id
+    }
+  }
+}

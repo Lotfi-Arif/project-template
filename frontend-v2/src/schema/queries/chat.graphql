@@ -1,0 +1,44 @@
+subscription onChatMessage($id: String!) {
+  onChatMessage(id: $id) {
+    Message
+    id
+    sender {
+      id
+    }
+    chatId
+  }
+}
+query findChatMessages($id: String!) {
+  findChatMessages(id: $id) {
+    Message
+    id
+    sender {
+      id
+    }
+    chatId
+  }
+}
+
+query findAllMessages {
+  findAllMessages {
+    Message
+    sender {
+      id
+    }
+    chatId
+  }
+}
+
+query findOneChat($where: ChatWhereUniqueInput!){
+  findOneChat(where: $where) {
+    chatName
+    Message {
+      id
+      Message
+    } 
+    users {
+      id
+    }
+  }
+
+}

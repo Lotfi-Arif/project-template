@@ -1,0 +1,47 @@
+mutation loginUser($data: LoginInput!) {
+  loginUser(data: $data) {
+    ...AuthTokens
+  }
+}
+
+mutation signup($data: SignupInput!) {
+  signup(data: $data) {
+    ...AuthTokens
+  }
+}
+
+
+fragment UserData on User {
+  id
+  role
+  email
+  chatId
+  accountStatus
+  Chat {
+    id
+  }
+  counselor {
+    Schedule {
+      id
+    }
+    CounselorSession {
+      timeFrom
+      timeTo
+      counsellingDate
+      firstName
+      lastName
+      email
+      }
+  }
+  staff {
+    id
+  }
+}
+
+fragment AuthTokens on Auth {
+  accessToken
+  refreshToken
+  user {
+    ...UserData
+  }
+}

@@ -1,0 +1,43 @@
+query findOneCounselor($where: CounselorWhereUniqueInput!) {
+  findOneCounselor(where: $where) {
+    id
+    department
+    expertise
+    Schedule {
+      id
+    }
+    user{
+      firstName
+      lastName
+      email
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+      counsellingDate
+    }
+  }
+}
+
+query counselors {
+  findAllCounselors {
+    id
+    department
+    expertise
+    Schedule {
+      id
+    }
+    user{
+      firstName
+      lastName
+      email
+    }
+    createdAt
+    updatedAt
+    CounselorSession {
+      id
+      counsellingDate
+    }
+  }
+}

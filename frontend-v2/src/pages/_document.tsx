@@ -8,7 +8,6 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 import { CssBaseline } from "@nextui-org/react";
-import { globalStyles } from "../styles/global.stitches";
 
 class MyDocument extends Document {
   static async getInitialProps(

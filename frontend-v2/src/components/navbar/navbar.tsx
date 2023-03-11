@@ -152,7 +152,7 @@ export const Nav = () => {
               minWidth: "100%",
             }}
             target="_blank"
-            href="https://github.com/Siumauricio/landing-template-nextui"
+            href="#"
           >
             <GithubIcon />
           </Link>
@@ -179,7 +179,7 @@ export const Nav = () => {
               minWidth: "100%",
             }}
             target="_blank"
-            href="https://github.com/Siumauricio/landing-template-nextui"
+            href="#"
           >
             <GithubIcon />
           </Link>
