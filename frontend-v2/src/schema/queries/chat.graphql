@@ -29,16 +29,15 @@ query findAllMessages {
   }
 }
 
-query findOneChat($where: ChatWhereUniqueInput!){
+query findOneChat($where: ChatWhereUniqueInput!) {
   findOneChat(where: $where) {
     chatName
     Message {
       id
       Message
-    } 
+    }
     users {
       id
     }
   }
-
 }

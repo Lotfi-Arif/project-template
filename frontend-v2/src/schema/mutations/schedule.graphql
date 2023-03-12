@@ -2,29 +2,31 @@ mutation createSchedule($data: ScheduleCreateInput!) {
   createSchedule(data: $data) {
     id
     CounselorSession {
+      id
+      user {
         id
-        user {
-            id
-        }
-        counselor {
-            id
-        }
-
+      }
+      counselor {
+        id
+      }
     }
     Counselor {
-        id
+      id
     }
   }
 }
 
-mutation updateSchedule($data: ScheduleUpdateInput!, $where: ScheduleWhereUniqueInput!) {
+mutation updateSchedule(
+  $data: ScheduleUpdateInput!
+  $where: ScheduleWhereUniqueInput!
+) {
   updateSchedule(data: $data, where: $where) {
     id
     CounselorSession {
-        id
+      id
     }
     Counselor {
-        id
+      id
     }
   }
 }
@@ -33,10 +35,10 @@ mutation deleteSchedule($where: ScheduleWhereUniqueInput!) {
   deleteSchedule(where: $where) {
     id
     CounselorSession {
-        id
+      id
     }
     Counselor {
-        id
+      id
     }
   }
 }

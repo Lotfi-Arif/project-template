@@ -1,30 +1,30 @@
-import { Button, Divider, Text } from "@nextui-org/react";
-import React from "react";
-import { BoxIcon } from "../icons/BoxIcon";
-import { Flex } from "../styles/flex";
+import { Divider, Text } from '@nextui-org/react'
+import React from 'react'
+import { BoxIcon } from '../icons/BoxIcon'
+import { Flex } from '../styles/flex'
 
 export const Faq = () => {
   return (
     <>
       <Flex
         css={{
-          py: "$20",
-          gap: "$18",
-          px: "$6",
+          py: '$20',
+          gap: '$18',
+          px: '$6',
         }}
-        direction={"column"}
+        direction={'column'}
       >
-        <Flex align={"center"} direction={"column"}>
-          <Text span css={{ color: "$blue600" }}>
+        <Flex align={'center'} direction={'column'}>
+          <Text span css={{ color: '$blue600' }}>
             FAQ
           </Text>
           <Text h2>You Have Questions?</Text>
           <Text
             span
             css={{
-              maxWidth: "700px",
-              color: "$accents8",
-              textAlign: "center",
+              maxWidth: '700px',
+              color: '$accents8',
+              textAlign: 'center',
             }}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -34,23 +34,23 @@ export const Faq = () => {
 
         <Flex
           css={{
-            gap: "$10",
-            "@lg": {
-              px: "$64",
+            gap: '$10',
+            '@lg': {
+              px: '$64',
             },
           }}
-          direction={"column"}
+          direction={'column'}
         >
-          <Flex css={{ gap: "$5" }} justify={"center"}>
+          <Flex css={{ gap: '$5' }} justify={'center'}>
             <BoxIcon />
-            <Flex direction={"column"} css={{ gap: "$3" }}>
+            <Flex direction={'column'} css={{ gap: '$3' }}>
               <Text h3>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </Text>
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -65,7 +65,7 @@ export const Faq = () => {
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 elit. Sed condimentum, nisl ut aliquam lacinia, nisl nisl
@@ -77,16 +77,16 @@ export const Faq = () => {
             </Flex>
           </Flex>
 
-          <Flex css={{ gap: "$5" }} justify={"center"}>
+          <Flex css={{ gap: '$5' }} justify={'center'}>
             <BoxIcon />
-            <Flex direction={"column"} css={{ gap: "$3" }}>
+            <Flex direction={'column'} css={{ gap: '$3' }}>
               <Text h3>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </Text>
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -100,7 +100,7 @@ export const Faq = () => {
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 elit. Sed condimentum, nisl ut aliquam lacinia, nisl nisl
@@ -110,16 +110,16 @@ export const Faq = () => {
             </Flex>
           </Flex>
 
-          <Flex css={{ gap: "$5" }} justify={"center"}>
+          <Flex css={{ gap: '$5' }} justify={'center'}>
             <BoxIcon />
-            <Flex direction={"column"} css={{ gap: "$3" }}>
+            <Flex direction={'column'} css={{ gap: '$3' }}>
               <Text h3>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </Text>
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -128,7 +128,7 @@ export const Faq = () => {
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 elit. Sed condimentum, nisl ut aliquam lacinia, nisl nisl
@@ -139,16 +139,16 @@ export const Faq = () => {
             </Flex>
           </Flex>
 
-          <Flex css={{ gap: "$5" }} justify={"center"}>
+          <Flex css={{ gap: '$5' }} justify={'center'}>
             <BoxIcon />
-            <Flex direction={"column"} css={{ gap: "$3" }}>
+            <Flex direction={'column'} css={{ gap: '$3' }}>
               <Text h3>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </Text>
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -158,7 +158,7 @@ export const Faq = () => {
               <Text
                 span
                 css={{
-                  color: "$accents8",
+                  color: '$accents8',
                 }}
               >
                 elit. Sed condimentum, nisl ut aliquam lacinia, nisl nisl
@@ -173,8 +173,8 @@ export const Faq = () => {
       </Flex>
 
       <Divider
-        css={{ position: "absolute", inset: "0p", left: "0", mt: "$5" }}
+        css={{ position: 'absolute', inset: '0p', left: '0', mt: '$5' }}
       />
     </>
-  );
-};
+  )
+}

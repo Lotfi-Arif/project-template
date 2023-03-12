@@ -10,7 +10,6 @@ mutation signup($data: SignupInput!) {
   }
 }
 
-
 fragment UserData on User {
   id
   role
@@ -31,7 +30,7 @@ fragment UserData on User {
       firstName
       lastName
       email
-      }
+    }
   }
   staff {
     id

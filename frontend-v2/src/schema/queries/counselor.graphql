@@ -6,7 +6,7 @@ query findOneCounselor($where: CounselorWhereUniqueInput!) {
     Schedule {
       id
     }
-    user{
+    user {
       firstName
       lastName
       email
@@ -28,7 +28,7 @@ query counselors {
     Schedule {
       id
     }
-    user{
+    user {
       firstName
       lastName
       email

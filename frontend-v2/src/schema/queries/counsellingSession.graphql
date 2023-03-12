@@ -15,15 +15,15 @@ query sessions {
     staff {
       id
     }
-    firstName        
+    firstName
     lastName
     email
     gender
-    maritalStatus     
+    maritalStatus
     address
-    race   
-    city   
-    state  
+    race
+    city
+    state
     zipCode
     counsellingDate
     timeFrom

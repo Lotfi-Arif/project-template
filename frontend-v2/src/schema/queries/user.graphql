@@ -21,11 +21,11 @@ query users {
 
 query currentUser {
   currentUser {
-      id
-      lastName
-      role
-      firstName
-      email
+    id
+    lastName
+    role
+    firstName
+    email
     counselor {
       scheduleId
       CounselorSession {
@@ -107,29 +107,29 @@ query counselor {
 
 query staff {
   me {
-      id
-      role
-      firstName
-      lastName
-      email
-      staff {
-        staffMatrix
-        faculty
-        CounselorSession {
+    id
+    role
+    firstName
+    lastName
+    email
+    staff {
+      staffMatrix
+      faculty
+      CounselorSession {
+        id
+        counsellingReason
+        counselor {
           id
-          counsellingReason
-          counselor {
-            id
-          }
-          student {
-            id
-          }
-          staff {
-            id
-          }
         }
-        createdAt
-        updatedAt
+        student {
+          id
+        }
+        staff {
+          id
+        }
+      }
+      createdAt
+      updatedAt
     }
   }
 }
