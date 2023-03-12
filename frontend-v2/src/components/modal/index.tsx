@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ReactElement } from 'react';
 import {
   Modal,
   Input,
@@ -7,14 +7,16 @@ import {
   Button,
   Text,
   Navbar,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 
-export const ModalLogin = () => {
+export const ModalLogin = (): ReactElement => {
   const [visible, setVisible] = React.useState(false);
-  const handler = () => setVisible(true);
-  const closeHandler = () => {
+  const handler = (): void => {
+    setVisible(true);
+  };
+  const closeHandler = (): void => {
     setVisible(false);
-    console.log("closed");
+    console.log('closed');
   };
   return (
     <div>
@@ -22,12 +24,12 @@ export const ModalLogin = () => {
       <Modal
         closeButton
         blur
-        aria-labelledby="modal-title"
+        aria-labelledby='modal-title'
         open={visible}
         onClose={closeHandler}
       >
         <Modal.Header>
-          <Text id="modal-title" size={18}>
+          <Text id='modal-title' size={18}>
             Welcome to
             <Text b size={18}>
               NextUI
@@ -39,21 +41,21 @@ export const ModalLogin = () => {
             clearable
             bordered
             fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Email"
+            color='primary'
+            size='lg'
+            placeholder='Email'
             //   contentLeft={<Mail fill="currentColor" />}
           />
           <Input
             clearable
             bordered
             fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Password"
+            color='primary'
+            size='lg'
+            placeholder='Password'
             //   contentLeft={<Password fill="currentColor" />}
           />
-          <Row justify="space-between">
+          <Row justify='space-between'>
             <Checkbox>
               <Text size={14}>Remember me</Text>
             </Checkbox>
@@ -61,7 +63,7 @@ export const ModalLogin = () => {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onClick={closeHandler}>
+          <Button auto flat color='error' onClick={closeHandler}>
             Close
           </Button>
           <Button auto onClick={closeHandler}>

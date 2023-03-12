@@ -1,40 +1,40 @@
-import { Divider, Grid, Text } from "@nextui-org/react";
-import React from "react";
-import { BoxIcon } from "../icons/BoxIcon";
-import { FeatureIcon } from "../icons/FeatureIcon";
-import { Flex } from "../styles/flex";
+import { Divider, Text } from '@nextui-org/react';
+import React, { type ReactElement } from 'react';
+import { BoxIcon } from '../icons/BoxIcon';
+import { FeatureIcon } from '../icons/FeatureIcon';
+import { Flex } from '../styles/flex';
 
-export const Features1 = () => {
+export const Features1 = (): ReactElement => {
   return (
     <>
       <Flex
-        direction={"column"}
+        direction={'column'}
         css={{
-          gap: "1rem",
-          pt: "$20",
-          justifyContent: "center",
-          alignItems: "center",
-          px: "$6",
-          "@sm": {
-            justifyContent: "space-around",
-            px: "$32",
-            flexDirection: "row",
+          gap: '1rem',
+          pt: '$20',
+          justifyContent: 'center',
+          alignItems: 'center',
+          px: '$6',
+          '@sm': {
+            justifyContent: 'space-around',
+            px: '$32',
+            flexDirection: 'row',
           },
-          "@md": {
-            px: "$64",
+          '@md': {
+            px: '$64',
           },
         }}
       >
-        <Flex direction="column">
-          <Text span css={{ color: "$blue600" }}>
+        <Flex direction='column'>
+          <Text span css={{ color: '$blue600' }}>
             Awesome Feature
           </Text>
           <Text h3>Your title here</Text>
           <Text
             span
             css={{
-              maxWidth: "400px",
-              color: "$accents8",
+              maxWidth: '400px',
+              color: '$accents8',
             }}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -44,20 +44,20 @@ export const Features1 = () => {
 
           <Flex
             css={{
-              py: "$10",
-              gap: "$5",
+              py: '$10',
+              gap: '$5',
             }}
           >
             <BoxIcon />
-            <Flex direction={"column"}>
-              <Text h4 weight={"medium"}>
+            <Flex direction={'column'}>
+              <Text h4 weight={'medium'}>
                 Your title here
               </Text>
               <Text
                 span
                 css={{
-                  maxWidth: "400px",
-                  color: "$accents8",
+                  maxWidth: '400px',
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -67,20 +67,20 @@ export const Features1 = () => {
           </Flex>
           <Flex
             css={{
-              py: "$10",
-              gap: "$5",
+              py: '$10',
+              gap: '$5',
             }}
           >
             <BoxIcon />
-            <Flex direction={"column"}>
-              <Text h4 weight={"medium"}>
+            <Flex direction={'column'}>
+              <Text h4 weight={'medium'}>
                 Your title here
               </Text>
               <Text
                 span
                 css={{
-                  maxWidth: "400px",
-                  color: "$accents8",
+                  maxWidth: '400px',
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -90,20 +90,20 @@ export const Features1 = () => {
           </Flex>
           <Flex
             css={{
-              py: "$10",
-              gap: "$5",
+              py: '$10',
+              gap: '$5',
             }}
           >
             <BoxIcon />
-            <Flex direction={"column"}>
-              <Text h4 weight={"medium"}>
+            <Flex direction={'column'}>
+              <Text h4 weight={'medium'}>
                 Your title here
               </Text>
               <Text
                 span
                 css={{
-                  maxWidth: "400px",
-                  color: "$accents8",
+                  maxWidth: '400px',
+                  color: '$accents8',
                 }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -112,12 +112,12 @@ export const Features1 = () => {
             </Flex>
           </Flex>
         </Flex>
-        <Flex align={"center"}>
+        <Flex align={'center'}>
           <FeatureIcon />
         </Flex>
       </Flex>
       <Divider
-        css={{ position: "absolute", inset: "0p", left: "0", mt: "$5" }}
+        css={{ position: 'absolute', inset: '0p', left: '0', mt: '$5' }}
       />
     </>
   );

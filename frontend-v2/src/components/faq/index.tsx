@@ -1,9 +1,9 @@
-import { Divider, Text } from '@nextui-org/react'
-import React from 'react'
-import { BoxIcon } from '../icons/BoxIcon'
-import { Flex } from '../styles/flex'
+import { Divider, Text } from '@nextui-org/react';
+import React, { type ReactElement } from 'react';
+import { BoxIcon } from '../icons/BoxIcon';
+import { Flex } from '../styles/flex';
 
-export const Faq = () => {
+export const Faq = (): ReactElement => {
   return (
     <>
       <Flex
@@ -176,5 +176,5 @@ export const Faq = () => {
         css={{ position: 'absolute', inset: '0p', left: '0', mt: '$5' }}
       />
     </>
-  )
-}
+  );
+};

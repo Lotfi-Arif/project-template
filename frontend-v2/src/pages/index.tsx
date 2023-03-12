@@ -1,3 +1,4 @@
+import React from "react";
 import type { NextPage } from "next";
 import { useSSR } from "@nextui-org/react";
 import { Nav } from "../components/navbar/navbar";

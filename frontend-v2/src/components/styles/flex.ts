@@ -1,56 +1,56 @@
-import { styled } from "@nextui-org/react";
+import { styled } from '@nextui-org/react';
 
-export const Flex = styled("div", {
-  boxSizing: "border-box",
-  display: "flex",
-  flexDirection: "row",
+export const Flex = styled('div', {
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'row',
 
   variants: {
     direction: {
       column: {
-        flexDirection: "column",
+        flexDirection: 'column',
       },
       row: {
-        flexDirection: "row",
+        flexDirection: 'row',
       },
     },
     justify: {
       center: {
-        justifyContent: "center",
+        justifyContent: 'center',
       },
       start: {
-        justifyContent: "flex-start",
+        justifyContent: 'flex-start',
       },
       end: {
-        justifyContent: "flex-end",
+        justifyContent: 'flex-end',
       },
       between: {
-        justifyContent: "space-between",
+        justifyContent: 'space-between',
       },
       around: {
-        justifyContent: "space-around",
+        justifyContent: 'space-around',
       },
     },
     align: {
       center: {
-        alignItems: "center",
+        alignItems: 'center',
       },
       start: {
-        alignItems: "flex-start",
+        alignItems: 'flex-start',
       },
       end: {
-        alignItems: "flex-end",
+        alignItems: 'flex-end',
       },
       stretch: {
-        alignItems: "stretch",
+        alignItems: 'stretch',
       },
     },
     wrap: {
       wrap: {
-        flexWrap: "wrap",
+        flexWrap: 'wrap',
       },
       nowrap: {
-        flexWrap: "nowrap",
+        flexWrap: 'nowrap',
       },
     },
   },

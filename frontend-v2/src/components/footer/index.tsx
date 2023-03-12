@@ -1,170 +1,170 @@
-import { Divider, Text } from "@nextui-org/react";
-import React from "react";
-import { Logo } from "../navbar/logo";
-import { Box } from "../styles/box";
-import { Flex } from "../styles/flex";
+import { Divider, Text } from '@nextui-org/react';
+import React, { type ReactElement } from 'react';
+import { Logo } from '../navbar/logo';
+import { Box } from '../styles/box';
+import { Flex } from '../styles/flex';
 
-export const Footer = () => {
+export const Footer = (): ReactElement => {
   return (
     <Flex
       css={{
-        py: "$20",
-        px: "$6",
+        py: '$20',
+        px: '$6',
       }}
     >
-      <Box as={"footer"} css={{ width: "100%" }}>
+      <Box as={'footer'} css={{ width: '100%' }}>
         <Flex
-          justify={"center"}
-          wrap={"wrap"}
-          align={"center"}
+          justify={'center'}
+          wrap={'wrap'}
+          align={'center'}
           css={{
-            gap: "$10",
-            "&  ul": {
+            gap: '$10',
+            '&  ul': {
               margin: 0,
             },
-            "@sm": {},
+            '@sm': {},
           }}
         >
           <Flex
-            css={{ gap: "$5", w: "250px" }}
-            direction={"column"}
-            align={"center"}
+            css={{ gap: '$5', w: '250px' }}
+            direction={'column'}
+            align={'center'}
           >
             <Logo />
-            <Box as={"ul"} css={{ gap: "$5", listStyle: "none" }}>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+            <Box as={'ul'} css={{ gap: '$5', listStyle: 'none' }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   First Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Second Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Third Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Forth Link
                 </Text>
               </Box>
             </Box>
           </Flex>
           <Flex
-            css={{ gap: "$5", w: "250px" }}
-            direction={"column"}
-            align={"center"}
+            css={{ gap: '$5', w: '250px' }}
+            direction={'column'}
+            align={'center'}
           >
             <Text h5>Resources</Text>
-            <Box as={"ul"} css={{ gap: "$5", listStyle: "none" }}>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+            <Box as={'ul'} css={{ gap: '$5', listStyle: 'none' }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   First Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Second Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Third Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Forth Link
                 </Text>
               </Box>
             </Box>
           </Flex>
           <Flex
-            css={{ gap: "$5", w: "250px" }}
-            direction={"column"}
-            align={"center"}
+            css={{ gap: '$5', w: '250px' }}
+            direction={'column'}
+            align={'center'}
           >
             <Text h5>Contact</Text>
-            <Box as={"ul"} css={{ gap: "$5", listStyle: "none" }}>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+            <Box as={'ul'} css={{ gap: '$5', listStyle: 'none' }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   First Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Second Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Third Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Forth Link
                 </Text>
               </Box>
             </Box>
           </Flex>
           <Flex
-            css={{ gap: "$5", w: "250px" }}
-            direction={"column"}
-            align={"center"}
+            css={{ gap: '$5', w: '250px' }}
+            direction={'column'}
+            align={'center'}
           >
             <Text h5>Legal</Text>
-            <Box as={"ul"} css={{ gap: "$5", listStyle: "none" }}>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+            <Box as={'ul'} css={{ gap: '$5', listStyle: 'none' }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   First Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Second Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Third Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Forth Link
                 </Text>
               </Box>
             </Box>
           </Flex>
           <Flex
-            css={{ gap: "$5", w: "250px" }}
-            direction={"column"}
-            align={"center"}
+            css={{ gap: '$5', w: '250px' }}
+            direction={'column'}
+            align={'center'}
           >
             <Text h5>Press</Text>
-            <Box as={"ul"} css={{ gap: "$5", listStyle: "none" }}>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+            <Box as={'ul'} css={{ gap: '$5', listStyle: 'none' }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   First Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Second Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Third Link
                 </Text>
               </Box>
-              <Box as={"li"}>
-                <Text span css={{ color: "$accents8" }}>
+              <Box as={'li'}>
+                <Text span css={{ color: '$accents8' }}>
                   Forth Link
                 </Text>
               </Box>
@@ -173,37 +173,37 @@ export const Footer = () => {
         </Flex>
         <Box
           css={{
-            px: "$10",
-            "@md": {
-              px: "$56",
+            px: '$10',
+            '@md': {
+              px: '$56',
             },
           }}
         >
           <Divider
             css={{
-              mt: "$14",
-              display: "flex",
-              justifyContent: "center",
+              mt: '$14',
+              display: 'flex',
+              justifyContent: 'center',
             }}
           />
           <Flex
             //   justify={'between'}
-            align={"center"}
-            wrap={"wrap"}
+            align={'center'}
+            wrap={'wrap'}
             css={{
-              pt: "$8",
-              gap: "$10",
-              justifyContent: "center",
-              "@md": {
-                justifyContent: "space-between",
+              pt: '$8',
+              gap: '$10',
+              justifyContent: 'center',
+              '@md': {
+                justifyContent: 'space-between',
               },
             }}
           >
             <Flex
               css={{
-                gap: "$10",
+                gap: '$10',
               }}
-              wrap={"wrap"}
+              wrap={'wrap'}
             >
               <Logo />
               <Logo />
@@ -212,22 +212,22 @@ export const Footer = () => {
             </Flex>
             <Flex
               css={{
-                gap: "$6",
+                gap: '$6',
               }}
             >
-              <Text span css={{ color: "$accents8" }}>
+              <Text span css={{ color: '$accents8' }}>
                 Terms of Service
               </Text>
-              <Text span css={{ color: "$accents8" }}>
+              <Text span css={{ color: '$accents8' }}>
                 Privacy Policy
               </Text>
             </Flex>
             <Flex
               css={{
-                gap: "$6",
+                gap: '$6',
               }}
             >
-              <Text span css={{ color: "$accents8" }}>
+              <Text span css={{ color: '$accents8' }}>
                 © Copyright 2021 Acme Inc.
               </Text>
             </Flex>

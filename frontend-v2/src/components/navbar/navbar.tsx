@@ -5,47 +5,47 @@ import {
   Navbar,
   Switch,
   Text,
-} from "@nextui-org/react";
-import React from "react";
-import { ModalLogin } from "../modal";
-import { icons } from "./icons";
-import { Logo } from "./logo";
-import { useTheme as useNextTheme } from "next-themes";
-import { useTheme } from "@nextui-org/react";
-import { GithubIcon } from "../icons/GithubIcon";
-import { ModalRegister } from "../modal/register";
+  useTheme,
+} from '@nextui-org/react';
+import React, { type ReactElement } from 'react';
+import { ModalLogin } from '../modal';
+import { icons } from './icons';
+import { Logo } from './logo';
+import { useTheme as useNextTheme } from 'next-themes';
+import { GithubIcon } from '../icons/GithubIcon';
+import { ModalRegister } from '../modal/register';
 
-export const Nav = () => {
+export const Nav = (): ReactElement => {
   const { setTheme } = useNextTheme();
-  const { isDark, type } = useTheme();
+  const { isDark } = useTheme();
   const collapseItems = [
-    "Features",
-    "Customers",
-    "Pricing",
-    "Company",
-    "Legal",
+    'Features',
+    'Customers',
+    'Pricing',
+    'Company',
+    'Legal',
   ];
   return (
     <Navbar
       isBordered
       css={{
-        overflow: "hidden",
-        "& .nextui-navbar-container": {
-          background: "$background",
-          borderBottom: "none",
+        overflow: 'hidden',
+        '& .nextui-navbar-container': {
+          background: '$background',
+          borderBottom: 'none',
         },
       }}
     >
       <Navbar.Brand>
-        <Navbar.Toggle aria-label="toggle navigation" showIn="xs" />
+        <Navbar.Toggle aria-label='toggle navigation' showIn='xs' />
         <Logo />
-        <Text b color="inherit" hideIn="xs">
+        <Text b color='inherit' hideIn='xs'>
           ELearning Platform
         </Text>
         <Navbar.Content
-          hideIn="sm"
+          hideIn='sm'
           css={{
-            pl: "6rem",
+            pl: '6rem',
           }}
         >
           <Dropdown isBordered>
@@ -55,8 +55,8 @@ export const Nav = () => {
                 light
                 css={{
                   px: 0,
-                  dflex: "center",
-                  svg: { pe: "none" },
+                  dflex: 'center',
+                  svg: { pe: 'none' },
                 }}
                 iconRight={icons.chevron}
                 ripple={false}
@@ -65,70 +65,70 @@ export const Nav = () => {
               </Dropdown.Button>
             </Navbar.Item>
             <Dropdown.Menu
-              aria-label="ELearning Platform features"
+              aria-label='ELearning Platform features'
               css={{
-                $$dropdownMenuWidth: "340px",
-                $$dropdownItemHeight: "70px",
-                "& .nextui-dropdown-item": {
-                  py: "$4",
+                $$dropdownMenuWidth: '340px',
+                $$dropdownItemHeight: '70px',
+                '& .nextui-dropdown-item': {
+                  py: '$4',
                   svg: {
-                    color: "$secondary",
-                    mr: "$4",
+                    color: '$secondary',
+                    mr: '$4',
                   },
-                  "& .nextui-dropdown-item-content": {
-                    w: "100%",
-                    fontWeight: "$semibold",
+                  '& .nextui-dropdown-item-content': {
+                    w: '100%',
+                    fontWeight: '$semibold',
                   },
                 },
               }}
             >
               <Dropdown.Item
-                key="autoscaling"
+                key='autoscaling'
                 showFullDescription
-                description="ELearning Platform scales apps to meet user demand, automagically, based on load."
+                description='ELearning Platform scales apps to meet user demand, automagically, based on load.'
                 icon={icons.scale}
               >
                 Autoscaling
               </Dropdown.Item>
               <Dropdown.Item
-                key="usage_metrics"
+                key='usage_metrics'
                 showFullDescription
-                description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
+                description='Real-time metrics to debug issues. Slow query added? We’ll show you exactly where.'
                 icon={icons.activity}
               >
                 Usage Metrics
               </Dropdown.Item>
               <Dropdown.Item
-                key="production_ready"
+                key='production_ready'
                 showFullDescription
-                description="ELearning Platform runs on ELearning Platform, join us and others serving requests at web scale."
+                description='ELearning Platform runs on ELearning Platform, join us and others serving requests at web scale.'
                 icon={icons.flash}
               >
                 Production Ready
               </Dropdown.Item>
               <Dropdown.Item
-                key="99_uptime"
+                key='99_uptime'
                 showFullDescription
-                description="Applications stay on the grid with high availability and high uptime guarantees."
+                description='Applications stay on the grid with high availability and high uptime guarantees.'
                 icon={icons.server}
               >
                 +99% Uptime
               </Dropdown.Item>
               <Dropdown.Item
-                key="supreme_support"
+                key='supreme_support'
                 showFullDescription
-                description="Overcome any challenge with a supporting team ready to respond."
+                description='Overcome any challenge with a supporting team ready to respond.'
                 icon={icons.user}
               >
                 +Supreme Support
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Navbar.Link isActive href="#">
+          <Navbar.Link isActive href='#'>
             Customers
           </Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Company</Navbar.Link>
+          <Navbar.Link href='#'>Pricing</Navbar.Link>
+          <Navbar.Link href='#'>Company</Navbar.Link>
         </Navbar.Content>
       </Navbar.Brand>
 
@@ -136,11 +136,11 @@ export const Nav = () => {
         {collapseItems.map((item, index) => (
           <Navbar.CollapseItem key={item}>
             <Link
-              color="inherit"
+              color='inherit'
               css={{
-                minWidth: "100%",
+                minWidth: '100%',
               }}
-              href="#"
+              href='#'
             >
               {item}
             </Link>
@@ -148,12 +148,12 @@ export const Nav = () => {
         ))}
         <Navbar.CollapseItem>
           <Link
-            color="inherit"
+            color='inherit'
             css={{
-              minWidth: "100%",
+              minWidth: '100%',
             }}
-            target="_blank"
-            href="#"
+            target='_blank'
+            href='#'
           >
             <GithubIcon />
           </Link>
@@ -161,7 +161,9 @@ export const Nav = () => {
         <Navbar.CollapseItem>
           <Switch
             checked={isDark}
-            onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+            onChange={(e) => {
+              setTheme(e.target.checked ? 'dark' : 'light');
+            }}
           />
         </Navbar.CollapseItem>
       </Navbar.Collapse>
@@ -171,26 +173,28 @@ export const Nav = () => {
         <ModalRegister />
 
         <Navbar.Item>
-          <Button auto flat href="#">
+          <Button auto flat href='#'>
             Start free trial
           </Button>
         </Navbar.Item>
-        <Navbar.Item hideIn={"xs"}>
+        <Navbar.Item hideIn={'xs'}>
           <Link
-            color="inherit"
+            color='inherit'
             css={{
-              minWidth: "100%",
+              minWidth: '100%',
             }}
-            target="_blank"
-            href="#"
+            target='_blank'
+            href='#'
           >
             <GithubIcon />
           </Link>
         </Navbar.Item>
-        <Navbar.Item hideIn={"xs"}>
+        <Navbar.Item hideIn={'xs'}>
           <Switch
             checked={isDark}
-            onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+            onChange={(e) => {
+              setTheme(e.target.checked ? 'dark' : 'light');
+            }}
           />
         </Navbar.Item>
       </Navbar.Content>
