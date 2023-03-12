@@ -134,7 +134,7 @@ export const Nav = (): ReactElement => {
 
       <Navbar.Collapse>
         {collapseItems.map((item, index) => (
-          <Navbar.CollapseItem key={item}>
+          <Navbar.CollapseItem key={index}>
             <Link
               color='inherit'
               css={{

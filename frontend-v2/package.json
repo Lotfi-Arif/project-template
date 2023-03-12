@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "eslint": "eslint ."
+    "eslint": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx",
+    "eslint:fix": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx --fix",
+    "prettier": "prettier --write src/**/*.{ts,tsx}"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.12",
@@ -20,9 +22,10 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "*"
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.2.4",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint-config-prettier": "^8.7.0",
