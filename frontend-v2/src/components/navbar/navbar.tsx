@@ -13,6 +13,7 @@ import { Logo } from "./logo";
 import { useTheme as useNextTheme } from "next-themes";
 import { useTheme } from "@nextui-org/react";
 import { GithubIcon } from "../icons/GithubIcon";
+import { ModalRegister } from "../modal/register";
 
 export const Nav = () => {
   const { setTheme } = useNextTheme();
@@ -166,6 +167,8 @@ export const Nav = () => {
       </Navbar.Collapse>
       <Navbar.Content>
         <ModalLogin />
+
+        <ModalRegister />
 
         <Navbar.Item>
           <Button auto flat href="#">
