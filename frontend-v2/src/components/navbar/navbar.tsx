@@ -173,6 +173,11 @@ export const Nav = (): ReactElement => {
         <ModalRegister />
 
         <Navbar.Item>
+          <Link color='inherit' href='/admin'>
+            Admin
+          </Link>
+        </Navbar.Item>
+        <Navbar.Item>
           <Button auto flat href='#'>
             Start free trial
           </Button>
