@@ -4,7 +4,6 @@ import { Box } from '@/components/styles/box';
 import dynamic from 'next/dynamic';
 import { Flex } from '@/components/styles/flex';
 import { TableWrapper } from '../table/table';
-import NextLink from 'next/link';
 import { CardBalance1 } from './card-balance1';
 import { CardBalance2 } from './card-balance2';
 import { CardBalance3 } from './card-balance3';

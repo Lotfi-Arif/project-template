@@ -17,6 +17,8 @@ export const Layout = ({ children }: Props) => {
     setLocked(!sidebarOpen);
   };
 
+  console.log('sidebarOpen', sidebarOpen, _);
+
   return (
     <SidebarContext.Provider
       value={{
