@@ -1,0 +1,11 @@
+mutation rejectUser($id: String!) {
+  rejectUser(id: $id) {
+    id
+  }
+}
+
+mutation approveUser($id: String!) {
+  approveUser(id: $id) {
+    id
+  }
+}

@@ -13,7 +13,10 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService, private eventEmitter: EventEmitter2,) { }
+  constructor(
+    private readonly usersService: UsersService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   @Query(() => [User])
   async findAllUsers(@Args() userFindManyArgs: FindManyUserArgs, @Info() info) {

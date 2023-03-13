@@ -8,7 +8,6 @@ import { DeleteOneScheduleArgs } from '@app/common/generated/index/schedule/dele
 import { UpdateOneScheduleArgs } from '@app/common/generated/index/schedule/update-one-schedule.args';
 import { FindUniqueScheduleArgs } from '@app/common/generated/index/schedule/find-unique-schedule.args';
 
-
 @Resolver(() => Schedule)
 export class SchedulesResolver {
   constructor(private readonly schedulesService: SchedulesService) {}

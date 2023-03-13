@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const BookingCard = (session) => {
 
     console.log(session.session)

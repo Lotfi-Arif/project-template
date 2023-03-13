@@ -1,5 +1,5 @@
+import Link from "next/link";
 import React from "react";
-import { createPopper } from "@popperjs/core";
 
 const NotificationDropdown = () => {
   // dropdown props
@@ -7,28 +7,25 @@ const NotificationDropdown = () => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
-    // createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-    //   placement: "bottom-start",
-    // });
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  
-return (
+
+  return (
     <>
-      <a
+      <Link
         className="text-blueGray-500 block py-1 px-3"
         href="#pablo"
-        ref={btnDropdownRef as React.RefObject< HTMLAnchorElement>}
+        ref={btnDropdownRef as React.RefObject<HTMLAnchorElement>}
         onClick={(e) => {
           e.preventDefault();
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
         <i className="fas fa-bell"></i>
-      </a>
+      </Link>
       <div
         ref={popoverDropdownRef as React.RefObject<HTMLDivElement>}
         className={
@@ -36,7 +33,7 @@ return (
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <a
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -44,8 +41,8 @@ return (
           onClick={(e) => e.preventDefault()}
         >
           Action
-        </a>
-        <a
+        </Link>
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -53,8 +50,8 @@ return (
           onClick={(e) => e.preventDefault()}
         >
           Another action
-        </a>
-        <a
+        </Link>
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -62,9 +59,9 @@ return (
           onClick={(e) => e.preventDefault()}
         >
           Something else here
-        </a>
+        </Link>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
-        <a
+        <Link
           href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -72,7 +69,7 @@ return (
           onClick={(e) => e.preventDefault()}
         >
           Seprated link
-        </a>
+        </Link>
       </div>
     </>
   );

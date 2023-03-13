@@ -98,7 +98,7 @@ export const httpLink = new HttpLink({
 
 
 export const wsLink = isBrowser ? new SubscriptionClient(
-  process.env.NODE_ENV === 'production' ? `ws://${process.env.NEXT_PUBLIC_URL}` : `ws://localhost:3001/graphql`,
+  process.env.NODE_ENV === 'production' ? `ws://localhost:3001/graphql` : `ws://localhost:3001/graphql`,
   {
     reconnect: true,
     // connectionParams: {
@@ -107,6 +107,8 @@ export const wsLink = isBrowser ? new SubscriptionClient(
   }) : null;
 
 export const getApolloClient = (initialState?: NormalizedCacheObject): ApolloClient<any> => {
+
+  console.log('getApolloClient', initialState)
 
   const cache = new InMemoryCache().restore(initialState || {});
 

@@ -14,10 +14,9 @@ import { CreateOneChatArgs } from '@app/common/generated/index/chat/create-one-c
 import { DeleteOneChatArgs } from '@app/common/generated/index/chat/delete-one-chat.args';
 import { UpdateOneChatArgs } from '@app/common/generated/index/chat/update-one-chat.args';
 import { FindUniqueChatArgs } from '@app/common/generated/index/chat/find-unique-chat.args';
-import { CurrentUser, GqlAuthGuard } from '../auth/guards/graph-auth.guard';
+import { CurrentUser } from '../auth/guards/graph-auth.guard';
 import { User } from '@app/common/generated/index/user/user.model';
 import { PubSub } from 'graphql-subscriptions';
-import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => Chat)
 export class ChatsResolver {
@@ -49,10 +48,7 @@ export class ChatsResolver {
   }
 
   @Mutation(() => Chat)
-  async createChat(
-    @Args() chatCreateArgs: CreateOneChatArgs,
-    @Info() info,
-  ) {
+  async createChat(@Args() chatCreateArgs: CreateOneChatArgs, @Info() info) {
     try {
       const newChat = new PrismaSelect(info).value;
       const createdChat = await this.chatsService.createChat({

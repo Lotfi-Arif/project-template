@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
     <ChakraProvider>
       <CookiesProvider>
         <StyledEngineProvider injectFirst>
-          <Component {...pageProps} />
+          <Component { ...pageProps} />
         </StyledEngineProvider>
         <FeedbackContainer />
       </CookiesProvider>

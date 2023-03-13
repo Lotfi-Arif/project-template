@@ -6,7 +6,6 @@ import { FindManyEventArgs } from '@app/common/generated/index/event/find-many-e
 import { CreateOneEventArgs } from '@app/common/generated/index/event/create-one-event.args';
 import { DeleteOneEventArgs } from '@app/common/generated/index/event/delete-one-event.args';
 import { UpdateOneEventArgs } from '@app/common/generated/index/event/update-one-event.args';
-import { FindUniqueEventArgs } from '@app/common/generated/index/event/find-unique-event.args';
 
 @Resolver(() => Event)
 export class EventsResolver {
@@ -26,12 +25,10 @@ export class EventsResolver {
   }
 
   @Query(() => Event)
-  async findOneEvent(
-    @Args('id') id: string, @Info() info 
-  ) {
+  async findOneEvent(@Args('id') id: string, @Info() info) {
     try {
       const event = new PrismaSelect(info).value;
-      return this.eventsService.findOne({ where: {id: id}, ...event });
+      return this.eventsService.findOne({ where: { id: id }, ...event });
     } catch (error) {
       console.error(error);
     }

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'nestjs-prisma'
+import { PrismaService } from 'nestjs-prisma';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AssetsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(assetFindManyArgs: Prisma.AssetFindManyArgs) {
     return this.prisma.asset.findMany(assetFindManyArgs);

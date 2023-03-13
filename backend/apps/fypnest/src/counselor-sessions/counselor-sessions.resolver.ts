@@ -2,7 +2,6 @@ import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { CounselorSession } from '@app/common/generated/index/counselor-session/counselor-session.model';
 import { CounselorSessionsService } from './counselor-sessions.service';
-import { CreateOneCounselorSessionArgs } from '@app/common/generated/index/counselor-session/create-one-counselor-session.args';
 import { DeleteOneCounselorSessionArgs } from '@app/common/generated/index/counselor-session/delete-one-counselor-session.args';
 import { FindManyCounselorSessionArgs } from '@app/common/generated/index/counselor-session/find-many-counselor-session.args';
 import { FindUniqueCounselorSessionArgs } from '@app/common/generated/index/counselor-session/find-unique-counselor-session.args';
@@ -57,12 +56,16 @@ export class CounselorSessionsResolver {
       return this.counselorSessionsService.createCounselorSession({
         ...counselorSessionCreateArgs,
         ...newCounselorSession,
-        data:{
+        data: {
           ...counselorSessionCreateArgs.data,
-          timeFrom: this.convertEpochTime(counselorSessionCreateArgs.data.timeFrom),
+          timeFrom: this.convertEpochTime(
+            counselorSessionCreateArgs.data.timeFrom,
+          ),
           timeTo: this.convertEpochTime(counselorSessionCreateArgs.data.timeTo),
-          counsellingDate: this.convertEpochTime(counselorSessionCreateArgs.data.counsellingDate)
-        }
+          counsellingDate: this.convertEpochTime(
+            counselorSessionCreateArgs.data.counsellingDate,
+          ),
+        },
       });
     } catch (error) {
       console.error(error);
