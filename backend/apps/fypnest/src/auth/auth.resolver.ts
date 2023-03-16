@@ -1,51 +1,41 @@
-import { User } from '@app/common/generated/index/user/user.model';
-import { UseGuards } from '@nestjs/common';
-import { Resolver, Mutation, Args, Query, ResolveField, Parent, Info } from '@nestjs/graphql';
-import { Auth } from 'model/auth.model';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { CurrentUser, GqlAuthGuard } from './guards/graph-auth.guard';
-import { LoginInput } from './dto/login.input';
-import { SignupInput } from './dto/signup.input';
-import { PrismaSelect } from '@paljs/plugins';
+import { Logger } from '@nestjs/common';
+import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
 
-@Resolver(() => Auth)
+@Resolver(() => User)
 export class AuthResolver {
+  private readonly logger = new Logger(AuthResolver.name);
+
   constructor(private authService: AuthService) {}
 
-  @Mutation(() => Auth)
-  async loginUser(@Args('data') { email, password }: LoginInput) {
-    const { accessToken, refreshToken } = await this.authService.loginUser(
-      email.toLowerCase(),
-      password
-    );
-
-    return {
-      accessToken,
-      refreshToken,
-    };
+  @Mutation(() => User)
+  async register(
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ): Promise<User> {
+    try {
+      this.logger.log('Registering a new user');
+      const user = await this.authService.register(email, password);
+      return user;
+    } catch (error) {
+      this.logger.error(`Failed to register user: ${error.message}`);
+      throw new Error(error.message);
+    }
   }
 
-  @ResolveField('user', () => User)
-  async user(@Parent() auth: Auth, @Info() info) {
-    const select = new PrismaSelect(info).value;
-    return await this.authService.getUserFromToken(auth.accessToken, select);
-  }
-
-  @Mutation(() => Auth)
-  async signup(@Args('data') data: SignupInput) {
-    data.email = data.email.toLowerCase();
-    const { accessToken, refreshToken } = await this.authService.createUser(
-      data,
-    );
-    return {
-      accessToken,
-      refreshToken,
-    };
-  }
-
-  @Query(() => User)
-  // @UseGuards(GqlAuthGuard)
-  async currentUser(@CurrentUser() user: User) {
-    return user;
+  @Mutation(() => User)
+  async login(
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ): Promise<string> {
+    try {
+      this.logger.log('Logging in a user');
+      const { access_token } = await this.authService.login(email, password);
+      return access_token;
+    } catch (error) {
+      this.logger.error(`Failed to log in user: ${error.message}`);
+      throw new Error(error.message);
+    }
   }
 }

@@ -20,6 +20,7 @@ import config from '@app/common/configs/config';
 import { ApolloDriver } from '@nestjs/apollo';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CounselorModule } from './counselor/counselor.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { CounselorModule } from './counselor/counselor.module';
     CounselorSessionsModule,
     AuthModule,
     CounselorModule,
+    TeacherModule,
   ],
   providers: [PrismaService, UsersService],
   exports: [PrismaService],

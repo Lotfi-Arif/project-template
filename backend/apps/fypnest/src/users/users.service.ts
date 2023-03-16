@@ -1,41 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { Prisma } from '@prisma/client';
-
+import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(userFindManyArgs: Prisma.UserFindManyArgs) {
-    return this.prisma.user.findMany(userFindManyArgs);
-  }
-  async findOne(userFindOneArgs: Prisma.UserFindUniqueArgs) {
-    return this.prisma.user.findUnique(userFindOneArgs);
+  async createUser(data: Prisma.UserCreateInput): Promise<User> {
+    return this.prisma.user.create({ data });
   }
 
-  getStudents(studentWhereMany: Prisma.StudentFindManyArgs) {
-    return this.prisma.student.findMany(studentWhereMany);
+  async getUserById(id: string): Promise<User | null> {
+    return this.prisma.user.findUnique({ where: { id } });
   }
 
-  getOneStudent(studentWhereUnique: Prisma.StudentFindUniqueArgs) {
-    return this.prisma.student.findUnique(studentWhereUnique);
+  async getUserByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findUnique({ where: { email } });
   }
 
-  getCounselors(counselorWhereMany: Prisma.CounselorFindManyArgs) {
-    return this.prisma.counselor.findMany(counselorWhereMany);
+  async updateUser(params: {
+    id: string;
+    data: Prisma.UserUpdateInput;
+  }): Promise<User> {
+    const { id, data } = params;
+    return this.prisma.user.update({ where: { id }, data });
   }
 
-  getOneCounselor(counselorWhereUnique: Prisma.CounselorFindUniqueArgs) {
-    return this.prisma.counselor.findUnique(counselorWhereUnique);
+  async deleteUser(id: string): Promise<User> {
+    return this.prisma.user.delete({ where: { id } });
   }
 
-  getMe(userId: string, select?: any) {
-    return this.prisma.user.findUnique({ where: { id: userId }, ...select });
-  }
-  async updateUser(userUpdateArgs: Prisma.UserUpdateArgs) {
-    return this.prisma.user.update(userUpdateArgs);
-  }
-  async deleteUser(userDeleteArgs: Prisma.UserDeleteArgs) {
-    return this.prisma.user.delete(userDeleteArgs);
+  async getUsers(params: { skip?: number; take?: number }): Promise<User[]> {
+    const { skip, take } = params;
+    return this.prisma.user.findMany({ skip, take });
   }
 }

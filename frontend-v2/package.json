@@ -9,7 +9,9 @@
     "lint": "next lint",
     "eslint": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx",
     "eslint:fix": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx --fix",
-    "prettier": "prettier --write src/**/*.{ts,tsx}"
+    "prettier": "prettier --write src/**/*.{ts,tsx}",
+    "yarn:verify": "yarn cache clean && yarn autoclean --force && yarn install --force && yarn upgrade --force && yarn dedupe && yarn check --integrity && yarn check --verify-tree",
+    "yarn:cleanNode": "rm -rf node_modules && rm -rf yarn.lock && rm -rf package-lock.json && rm -rf .yarn && rm -rf .yarnrc.yml && rm -rf .yarn-integrity && rm -rf .yarnrc && rm -rf .pnp.*"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.12",
