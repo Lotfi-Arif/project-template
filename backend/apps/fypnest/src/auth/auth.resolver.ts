@@ -1,41 +1,29 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Logger } from '@nestjs/common';
 import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
+import { Prisma } from '@prisma/client';
 
-@Resolver(() => User)
+@Resolver()
 export class AuthResolver {
   private readonly logger = new Logger(AuthResolver.name);
 
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => User)
-  async register(
-    @Args('email') email: string,
-    @Args('password') password: string,
-  ): Promise<User> {
-    try {
-      this.logger.log('Registering a new user');
-      const user = await this.authService.register(email, password);
-      return user;
-    } catch (error) {
-      this.logger.error(`Failed to register user: ${error.message}`);
-      throw new Error(error.message);
-    }
+  async register(@Args('data') data: Prisma.UserCreateInput): Promise<User> {
+    this.logger.log(`Attempting to register user with email: ${data.email}`);
+    const user = await this.authService.register(data);
+    return user;
   }
 
-  @Mutation(() => User)
+  @Mutation(() => String)
   async login(
     @Args('email') email: string,
     @Args('password') password: string,
   ): Promise<string> {
-    try {
-      this.logger.log('Logging in a user');
-      const { access_token } = await this.authService.login(email, password);
-      return access_token;
-    } catch (error) {
-      this.logger.error(`Failed to log in user: ${error.message}`);
-      throw new Error(error.message);
-    }
+    this.logger.log(`Attempting login for email: ${email}`);
+    const { access_token } = await this.authService.login(email, password);
+    return access_token;
   }
 }

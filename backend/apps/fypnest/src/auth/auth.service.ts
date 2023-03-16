@@ -1,57 +1,49 @@
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { Prisma } from '@prisma/client';
 import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
-import * as bcrypt from 'bcrypt';
 
-interface LoginResponse {
-  access_token: string;
-}
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
 
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<User | null> {
-    const user = await this.usersService.getUserByEmail(email);
+  async register(data: Prisma.UserCreateInput): Promise<User> {
+    this.logger.log(`Registering user with email: ${data.email}`);
+    const user = await this.userService.createUser(data);
+    return user;
+  }
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.userService.getUserByEmail(email);
+    if (user && user.password === password) {
+      this.logger.log(`User validation successful for email: ${email}`);
       return user;
     }
-
-    this.logger.error(`Invalid email or password for user ${email}`);
-
+    this.logger.log(`User validation failed for email: ${email}`);
     return null;
   }
 
-  async login(email: string, password: string): Promise<LoginResponse> {
+  async login(
+    email: string,
+    password: string,
+  ): Promise<{ access_token: string }> {
     const user = await this.validateUser(email, password);
 
     if (!user) {
+      this.logger.log(`Login failed for email: ${email}`);
       throw new UnauthorizedException('Invalid email or password');
     }
 
     const payload = { email: user.email, sub: user.id };
+    this.logger.log(`Login successful for email: ${email}`);
     return {
       access_token: this.jwtService.sign(payload),
     };
-  }
-
-  async register(email: string, password: string): Promise<User> {
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await this.usersService.createUser({
-        email,
-        password: hashedPassword,
-      });
-      return user;
-    } catch (error) {
-      this.logger.error(`Failed to register user: ${error.message}`);
-      throw error;
-    }
   }
 }
