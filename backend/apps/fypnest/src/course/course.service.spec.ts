@@ -1,25 +1,37 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CourseService } from './course.service';
 import { PrismaService } from 'nestjs-prisma';
-
-const mockPrismaService = () => ({
-  course: {
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-  },
-});
+import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
+import { Prisma } from '@prisma/client';
 
 describe('CourseService', () => {
   let courseService: CourseService;
   let prismaService: PrismaService;
 
+  const mockCourse: Course = {
+    id: '1',
+    name: 'Test Course',
+    description: 'Test Course Description',
+    teacherId: 'teacher-id',
+  };
+
   beforeEach(async () => {
+    const mockPrismaService = {
+      course: {
+        create: jest.fn().mockResolvedValue(mockCourse),
+        findUnique: jest.fn().mockResolvedValue(mockCourse),
+        update: jest.fn().mockResolvedValue(mockCourse),
+        delete: jest.fn().mockResolvedValue(mockCourse),
+        findMany: jest.fn().mockResolvedValue([mockCourse]),
+      },
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CourseService,
         {
           provide: PrismaService,
-          useFactory: mockPrismaService,
+          useValue: mockPrismaService,
         },
       ],
     }).compile();
@@ -32,43 +44,79 @@ describe('CourseService', () => {
     expect(courseService).toBeDefined();
   });
 
-  describe('getCourses', () => {
-    it('should return an array of courses', async () => {
-      const courses = [
-        {
-          id: '1',
-          name: 'Course 1',
-          description: 'Course 1 description',
-          teacherId: 'teacher-1',
+  describe('createCourse', () => {
+    it('should create a course and return the created course', async () => {
+      const courseData: Prisma.CourseCreateInput = {
+        name: 'Test Course',
+        description: 'Test Course Description',
+        teacher: {
+          connect: { id: 'teacher-id' },
         },
-        {
-          id: '2',
-          name: 'Course 2',
-          description: 'Course 2 description',
-          teacherId: 'teacher-2',
-        },
-      ];
+      };
 
-      // prismaService.course.findMany.mockResolvedValue(courses);
-
-      // const result = await courseService.getCourses();
-      // expect(result).toEqual(courses);
+      const course = await courseService.createCourse(courseData);
+      expect(course).toEqual(mockCourse);
+      expect(prismaService.course.create).toHaveBeenCalledWith({
+        data: courseData,
+      });
     });
   });
 
   describe('getCourseById', () => {
-    it('should return a course by id', async () => {
-      const course = {
-        id: '1',
-        name: 'Course 1',
-        description: 'Course 1 description',
-        teacherId: 'teacher-1',
+    it('should return a course with the given id', async () => {
+      const courseId = '1';
+
+      const course = await courseService.getCourseById(courseId);
+      expect(course).toEqual(mockCourse);
+      expect(prismaService.course.findUnique).toHaveBeenCalledWith({
+        where: { id: courseId },
+      });
+    });
+  });
+
+  describe('updateCourse', () => {
+    it('should update a course and return the updated course', async () => {
+      const courseId = '1';
+      const courseUpdateData: Prisma.CourseUpdateInput = {
+        name: 'Updated Test Course',
+        description: 'Updated Test Course Description',
       };
 
-      // prismaService.course.findUnique.mockResolvedValue(course);
+      const course = await courseService.updateCourse({
+        id: courseId,
+        data: courseUpdateData,
+      });
+      expect(course).toEqual(mockCourse);
+      expect(prismaService.course.update).toHaveBeenCalledWith({
+        where: { id: courseId },
+        data: courseUpdateData,
+      });
+    });
+  });
 
-      const result = await courseService.getCourseById(course.id);
-      expect(result).toEqual(course);
+  describe('deleteCourse', () => {
+    it('should delete a course and return the deleted course', async () => {
+      const courseId = '1';
+
+      const course = await courseService.deleteCourse(courseId);
+      expect(course).toEqual(mockCourse);
+      expect(prismaService.course.delete).toHaveBeenCalledWith({
+        where: { id: courseId },
+      });
+    });
+  });
+
+  describe('getCourses', () => {
+    it('should return a list of courses', async () => {
+      const skip = 0;
+      const take = 10;
+
+      const courses = await courseService.getCourses({ skip, take });
+      expect(courses).toEqual([mockCourse]);
+      expect(prismaService.course.findMany).toHaveBeenCalledWith({
+        skip,
+        take,
+      });
     });
   });
 });

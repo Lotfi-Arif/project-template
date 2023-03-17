@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Logger } from '@nestjs/common';
-import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
+import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Prisma } from '@prisma/client';
 
 @Resolver()
