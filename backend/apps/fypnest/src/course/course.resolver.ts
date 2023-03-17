@@ -2,7 +2,7 @@ import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { CourseService } from './course.service';
 import { Prisma } from '@prisma/client';
 import { Logger } from '@nestjs/common';
-import { Course } from 'libs/prisma/src/generated/nestgraphql/course/course.model';
+import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
 
 @Resolver(() => Course)
 export class CourseResolver {

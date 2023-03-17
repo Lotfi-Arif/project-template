@@ -2,14 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CourseResolver } from './course.resolver';
 import { CourseService } from './course.service';
 
+// Mock the CourseService
 const mockCourseService = () => ({
   getCourses: jest.fn(),
   getCourseById: jest.fn(),
 });
 
 describe('CourseResolver', () => {
-  let courseResolver: CourseResolver;
-  let courseService: CourseService;
+  let resolver: CourseResolver;
+  let courseService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,51 +23,33 @@ describe('CourseResolver', () => {
       ],
     }).compile();
 
-    courseResolver = module.get<CourseResolver>(CourseResolver);
+    resolver = module.get<CourseResolver>(CourseResolver);
     courseService = module.get<CourseService>(CourseService);
   });
 
   it('should be defined', () => {
-    expect(courseResolver).toBeDefined();
+    expect(resolver).toBeDefined();
   });
 
   describe('findAllCourses', () => {
     it('should return an array of courses', async () => {
-      const courses = [
-        {
-          id: '1',
-          name: 'Course 1',
-          description: 'Course 1 description',
-          teacherId: 'teacher-1',
-        },
-        {
-          id: '2',
-          name: 'Course 2',
-          description: 'Course 2 description',
-          teacherId: 'teacher-2',
-        },
-      ];
+      const result = [{ id: '1', name: 'Test Course' }];
+      courseService.getCourses.mockResolvedValue(result);
 
-      courseService.getCourses = jest.fn().mockResolvedValue(courses);
-
-      const result = await courseResolver.getCourses();
-      expect(result).toEqual(courses);
+      const courses = await resolver.getCourses();
+      expect(courses).toEqual(result);
     });
   });
 
   describe('findOneCourse', () => {
-    it('should return a course by id', async () => {
-      const course = {
-        id: '1',
-        name: 'Course 1',
-        description: 'Course 1 description',
-        teacherId: 'teacher-1',
-      };
+    it('should return a course by its id', async () => {
+      const result = { id: '1', name: 'Test Course' };
+      courseService.getCourseById.mockResolvedValue(result);
 
-      courseService.getCourseById = jest.fn().mockResolvedValue(course);
-
-      const result = await courseResolver.getCourseById(course.id);
-      expect(result).toEqual(course);
+      const course = await resolver.getCourseById('1');
+      expect(course).toEqual(result);
     });
   });
+
+  // Add more test cases for other resolver methods if needed
 });

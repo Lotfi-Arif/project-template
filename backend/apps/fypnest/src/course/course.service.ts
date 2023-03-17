@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { Prisma } from '@prisma/client';
-import { Course } from 'libs/prisma/src/generated/nestgraphql/course/course.model';
+import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
 
 @Injectable()
 export class CourseService {
