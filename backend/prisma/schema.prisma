@@ -31,6 +31,8 @@ model User {
   chatsAsUser2 Chat[]             @relation("ChatUser2")
   messages     Message[]
   Course       Course[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
 }
 
 model Course {
@@ -41,26 +43,32 @@ model Course {
   teacher     User               @relation(fields: [teacherId], references: [id])
   enrollments CourseEnrollment[]
   media       Media[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 }
 
 model CourseEnrollment {
-  id       String @id @default(uuid())
-  courseId String
-  userId   String
-  course   Course @relation(fields: [courseId], references: [id])
-  user     User   @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  courseId  String
+  userId    String
+  course    Course   @relation(fields: [courseId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([courseId, userId])
 }
 
 model Media {
-  id       String    @id @default(uuid())
-  type     MediaType
-  url      String
-  courseId String
-  course   Course    @relation(fields: [courseId], references: [id])
-  Chat     Chat?     @relation(fields: [chatId], references: [id])
-  chatId   String?
+  id        String    @id @default(uuid())
+  type      MediaType
+  url       String
+  courseId  String
+  course    Course    @relation(fields: [courseId], references: [id])
+  Chat      Chat?     @relation(fields: [chatId], references: [id])
+  chatId    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 enum MediaType {
@@ -71,22 +79,26 @@ enum MediaType {
 }
 
 model Chat {
-  id       String    @id @default(uuid())
-  userId1  String
-  userId2  String
-  user1    User      @relation(name: "ChatUser1", fields: [userId1], references: [id])
-  user2    User      @relation(name: "ChatUser2", fields: [userId2], references: [id])
-  messages Message[]
-  media    Media[]
+  id        String    @id @default(uuid())
+  userId1   String
+  userId2   String
+  user1     User      @relation(name: "ChatUser1", fields: [userId1], references: [id])
+  user2     User      @relation(name: "ChatUser2", fields: [userId2], references: [id])
+  messages  Message[]
+  media     Media[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   @@unique([userId1, userId2])
 }
 
 model Message {
-  id       String @id @default(uuid())
-  content  String
-  senderId String
-  chatId   String
-  sender   User   @relation(fields: [senderId], references: [id])
-  chat     Chat   @relation(fields: [chatId], references: [id])
+  id        String   @id @default(uuid())
+  content   String
+  senderId  String
+  chatId    String
+  sender    User     @relation(fields: [senderId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
