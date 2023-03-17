@@ -13,6 +13,8 @@ describe('CourseService', () => {
     name: 'Test Course',
     description: 'Test Course Description',
     teacherId: 'teacher-id',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
   beforeEach(async () => {
