@@ -15,6 +15,8 @@ describe('AuthResolver', () => {
     firstName: 'John',
     lastName: 'Doe',
     role: 'STUDENT',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
   beforeEach(async () => {
