@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { Chat } from 'libs/prisma/src/generated/nestgraphql/chat/chat.model';
+import { Chat } from '@app/prisma-generated/generated/nestgraphql/chat/chat.model';
 import { ChatService } from './chat.service';
 import { Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
