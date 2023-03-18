@@ -1,7 +1,7 @@
+// media.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Media } from '@app/prisma-generated/generated/nestgraphql/media/media.model';
-import { MediaType } from '@prisma/client';
+import { Media, MediaType } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -47,20 +47,15 @@ export class MediaService {
   }
 
   private detectMediaType(mimeType: string): MediaType | null {
-    switch (mimeType) {
-      case 'image/jpeg':
-      case 'image/png':
-      case 'image/gif':
-        return MediaType.IMAGE;
-      case 'video/mp4':
-        return MediaType.VIDEO;
-      case 'audio/mpeg':
-        return MediaType.AUDIO;
-      case 'application/pdf':
-        return MediaType.DOCUMENT;
-      default:
-        return null;
-    }
+    const typeMapping: Record<string, MediaType> = {
+      'image/jpeg': MediaType.IMAGE,
+      'image/png': MediaType.IMAGE,
+      'image/gif': MediaType.IMAGE,
+      'video/mp4': MediaType.VIDEO,
+      'audio/mpeg': MediaType.AUDIO,
+      'application/pdf': MediaType.DOCUMENT,
+    };
+    return typeMapping[mimeType] || null;
   }
 
   async getMediaById(id: string): Promise<Media | null> {

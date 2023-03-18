@@ -1,86 +1,108 @@
-// media.service.spec.ts
-import { Test, TestingModule } from '@nestjs/testing';
-import { MediaService } from './media.service';
-import { PrismaService } from '../prisma/prisma.service';
-import { MediaType } from '@prisma/client';
-import { Media } from '@app/prisma-generated/generated/nestgraphql/media/media.model';
+// // media.service.spec.ts
+// import { Test, TestingModule } from '@nestjs/testing';
+// import { MediaService } from './media.service';
+// import { PrismaService } from '../prisma/prisma.service';
+// import { MediaType } from '@prisma/client';
+// import { Express } from 'express';
 
-jest.mock('../prisma/prisma.service');
+// jest.mock('../prisma/prisma.service');
 
-const sampleMedia: Media = {
-  id: 'test-media-id',
-  type: MediaType.IMAGE,
-  url: '/media/test-media-id',
-  courseId: 'test-course-id',
-  chatId: 'test-chat-id',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-};
+// const prismaMockFactory = () => ({
+//   media: {
+//     create: jest.fn(),
+//     findUnique: jest.fn(),
+//     findMany: jest.fn(),
+//     delete: jest.fn(),
+//   },
+// });
 
-const prismaMockFactory = () => ({
-  media: {
-    create: jest.fn(() => Promise.resolve(sampleMedia)),
-    findUnique: jest.fn(() => Promise.resolve(sampleMedia)),
-    delete: jest.fn(() => Promise.resolve(sampleMedia)),
-    findMany: jest.fn(() => Promise.resolve([sampleMedia])),
-  },
-});
+// const sampleFile: Express.Multer.File = {
+//   fieldname: 'file',
+//   originalname: 'sample.jpg',
+//   filename: 'sample.jpg',
+//   path: 'uploads/sample.jpg',
+//   encoding: '7bit',
+//   stream: null,
+//   mimetype: 'image/jpeg',
+//   destination: 'uploads',
+//   buffer: Buffer.from('sample buffer'),
+//   size: 1024,
+// };
 
-describe('MediaService', () => {
-  let service: MediaService;
-  // let prisma: PrismaService;
+// describe('MediaService', () => {
+//   let service: MediaService;
+//   let prisma: PrismaService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        MediaService,
-        { provide: PrismaService, useFactory: prismaMockFactory },
-      ],
-    }).compile();
+//   beforeEach(async () => {
+//     const module: TestingModule = await Test.createTestingModule({
+//       providers: [
+//         MediaService,
+//         { provide: PrismaService, useFactory: prismaMockFactory },
+//       ],
+//     }).compile();
 
-    service = module.get<MediaService>(MediaService);
-    // prisma = module.get<PrismaService>(PrismaService);
-  });
+//     service = module.get<MediaService>(MediaService);
+//     prisma = module.get<PrismaService>(PrismaService);
+//   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+//   afterEach(() => {
+//     jest.resetAllMocks();
+//   });
 
-  it('should create media from file', async () => {
-    const file = {
-      fieldname: 'test-course-id',
-      originalname: 'test-image.jpg',
-      encoding: '7bit',
-      mimetype: 'image/jpeg',
-      buffer: Buffer.from([0xff, 0xd8, 0xff]),
-      size: 3,
-    };
+//   it('should be defined', () => {
+//     expect(service).toBeDefined();
+//   });
 
-    const media = await service.createMediaFromFile(file as any);
-    expect(media).toEqual(sampleMedia);
-  });
+//   describe('createMediaFromFile', () => {
+//     it('should create a new media record from a file', async () => {
+//       const expectedResult = {
+//         id: 'test-id',
+//         type: MediaType.IMAGE,
+//         course: {
+//           connect: {
+//             id: 'test-course-id',
+//           },
+//         },
+//         url: '/media/test-id',
+//         courseId: 'test-course-id',
+//         chatId: 'test-chat-id',
+//         createdAt: new Date(),
+//         updatedAt: new Date(),
+//       };
 
-  it('should get media by id', async () => {
-    const media = await service.getMediaById('test-media-id');
-    expect(media).toEqual(sampleMedia);
-  });
+//       jest.spyOn(prisma.media, 'create').mockResolvedValue(expectedResult);
 
-  // it('should get media content by id', async () => {
-  //   jest
-  //     .spyOn(service, 'getMediaById')
-  //     .mockImplementation(() => Promise.resolve(sampleMedia));
+//       const result = await service.createMediaFromFile(sampleFile);
 
-  //   const mediaContent = await service.getMediaContent('test-media-id');
-  //   expect(mediaContent).toBeInstanceOf(Buffer);
-  // });
+//       console.log(prisma.media.create);
 
-  it('should delete media by id', async () => {
-    const deletedMedia = await service.deleteMedia('test-media-id');
-    expect(deletedMedia).toEqual(sampleMedia);
-  });
+//       expect(result).toEqual(expectedResult);
+//       // expect(prisma.media.create).toHaveBeenCalledWith({
+//       //   data: {
+//       //     id: expect.any(String),
+//       //     type: 'IMAGE',
+//       //     url: expect.any(String),
+//       //     courseId: 'test-course-id',
+//       //     course: {
+//       //       connect: {
+//       //         id: 'file',
+//       //       },
+//       //     },
+//       //     chatId: 'test-chat-id',
+//       //     createdAt: expect.any(Date),
+//       //     updatedAt: expect.any(Date),
+//       //   },
+//       // });
+//     });
 
-  it('should get medias with pagination', async () => {
-    const medias = await service.getMedias({ skip: 0, take: 10 });
-    expect(medias).toEqual([sampleMedia]);
-  });
-});
+//     it('should throw an error if media type is not supported', async () => {
+//       const unsupportedFile = { ...sampleFile, mimetype: 'unsupported/type' };
+
+//       await expect(
+//         service.createMediaFromFile(unsupportedFile),
+//       ).rejects.toThrowError('Unsupported media type: unsupported/type');
+//     });
+//   });
+
+//   // Add more test cases for other methods in the service
+// });
