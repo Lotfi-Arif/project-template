@@ -76,6 +76,7 @@ enum MediaType {
   VIDEO
   AUDIO
   DOCUMENT
+  OTHER
 }
 
 model Chat {

@@ -3,6 +3,6 @@ import { CourseEnrollmentResolver } from './course-enrollment.resolver';
 import { CourseEnrollmentService } from './course-enrollment.service';
 
 @Module({
-  providers: [CourseEnrollmentResolver, CourseEnrollmentService]
+  providers: [CourseEnrollmentResolver, CourseEnrollmentService],
 })
 export class CourseEnrollmentModule {}
