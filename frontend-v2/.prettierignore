@@ -1,0 +1,31 @@
+# Ignore build assets
+build/**
+public/**
+
+# Ignore next.js specific files and folders
+.next/**
+out/**
+now.json
+vercel.json
+vercel/
+node_modules/
+yarn.lock
+package-lock.json
+coverage/
+*.log
+
+# Ignore other common build assets
+coverage/
+dist/
+lib-cov/
+*.pid
+*.seed
+*.css.map
+*.js.map
+*.lcov
+
+# Ignore local environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
