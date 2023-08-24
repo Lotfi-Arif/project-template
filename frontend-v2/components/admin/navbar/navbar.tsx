@@ -1,12 +1,12 @@
-import { Input, Link, Navbar, NavbarContent } from "@nextui-org/react";
-import React from "react";
-import { FeedbackIcon } from "../icons/navbar/feedback-icon";
-import { GithubIcon } from "../icons/navbar/github-icon";
-import { SupportIcon } from "../icons/navbar/support-icon";
-import { SearchIcon } from "../icons/searchicon";
-import { BurguerButton } from "./burguer-button";
-import { NotificationsDropdown } from "./notifications-dropdown";
-import { UserDropdown } from "./user-dropdown";
+import { Input, Link, Navbar, NavbarContent } from '@nextui-org/react';
+import React from 'react';
+import { FeedbackIcon } from '../icons/navbar/feedback-icon';
+import { GithubIcon } from '../icons/navbar/github-icon';
+import { SupportIcon } from '../icons/navbar/support-icon';
+import { SearchIcon } from '../icons/searchicon';
+import { BurguerButton } from './burguer-button';
+import { NotificationsDropdown } from './notifications-dropdown';
+import { UserDropdown } from './user-dropdown';
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const NavbarWrapper = ({ children }: Props) => {
         isBordered
         className="w-full"
         classNames={{
-          wrapper: "w-full max-w-full",
+          wrapper: 'w-full max-w-full',
         }}
       >
         <NavbarContent className="md:hidden">
@@ -31,8 +31,8 @@ export const NavbarWrapper = ({ children }: Props) => {
             isClearable
             className="w-full"
             classNames={{
-              input: "w-full",
-              mainWrapper: "w-full",
+              input: 'w-full',
+              mainWrapper: 'w-full',
             }}
             placeholder="Search..."
           />
@@ -54,7 +54,7 @@ export const NavbarWrapper = ({ children }: Props) => {
 
           <Link
             href="https://github.com/Siumauricio/nextui-dashboard-template"
-            target={"_blank"}
+            target={'_blank'}
           >
             <GithubIcon />
           </Link>

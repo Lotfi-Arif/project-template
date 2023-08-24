@@ -7,8 +7,8 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
-import React from "react";
+} from '@nextui-org/react';
+import React from 'react';
 
 export const AddUser = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

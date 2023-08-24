@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -7,39 +7,39 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
+} from '@nextui-org/navbar';
+import { Button } from '@nextui-org/button';
+import { Kbd } from '@nextui-org/kbd';
+import { Link } from '@nextui-org/link';
+import { Input } from '@nextui-org/input';
 
-import { link as linkStyles } from "@nextui-org/theme";
+import { link as linkStyles } from '@nextui-org/theme';
 
-import { siteConfig } from "@/config/site";
-import NextLink from "next/link";
-import clsx from "clsx";
+import { siteConfig } from '@/config/site';
+import NextLink from 'next/link';
+import clsx from 'clsx';
 
-import { ThemeSwitch } from "@/components/theme-switch";
+import { ThemeSwitch } from '@/components/theme-switch';
 import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
   HeartFilledIcon,
-} from "@/components/icons";
+} from '@/components/icons';
 
-import { Logo } from "@/components/icons";
-import { useDisclosure } from "@nextui-org/react";
-import React from "react";
-import { CustomModal } from "./popUpModal";
+import { Logo } from '@/components/icons';
+import { useDisclosure } from '@nextui-org/react';
+import React from 'react';
+import { CustomModal } from './popUpModal';
 
 export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = React.useState('');
 
   const handleModalSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted with value:", inputValue);
-    setInputValue(""); // reset value
+    console.log('Form submitted with value:', inputValue);
+    setInputValue(''); // reset value
     onClose(); // close modal
   };
 
@@ -57,8 +57,8 @@ export const Navbar = () => {
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  linkStyles({ color: 'foreground' }),
+                  'data-[active=true]:text-primary data-[active=true]:font-medium'
                 )}
                 color="foreground"
                 href={item.href}
@@ -120,10 +120,10 @@ export const Navbar = () => {
               <Link
                 color={
                   index === 2
-                    ? "primary"
+                    ? 'primary'
                     : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                    ? 'danger'
+                    : 'foreground'
                 }
                 href="#"
                 size="lg"

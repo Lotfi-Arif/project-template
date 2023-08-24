@@ -1,6 +1,6 @@
-import { Card, CardBody } from "@nextui-org/react";
-import React from "react";
-import { Community } from "../icons/community";
+import { Card, CardBody } from '@nextui-org/react';
+import React from 'react';
+import { Community } from '../icons/community';
 
 export const CardBalance1 = () => {
   return (
@@ -20,7 +20,7 @@ export const CardBalance1 = () => {
         <div className="flex items-center gap-6">
           <div>
             <div>
-              <span className="font-semibold text-success text-xs">{"↓"}</span>
+              <span className="font-semibold text-success text-xs">{'↓'}</span>
               <span className="text-xs text-white">100,930</span>
             </div>
             <span className="text-white text-xs">USD</span>
@@ -28,7 +28,7 @@ export const CardBalance1 = () => {
 
           <div>
             <div>
-              <span className="font-semibold text-danger text-xs">{"↑"}</span>
+              <span className="font-semibold text-danger text-xs">{'↑'}</span>
               <span className="text-xs text-white">54,120</span>
             </div>
             <span className="text-white text-xs">USD</span>
@@ -36,7 +36,7 @@ export const CardBalance1 = () => {
 
           <div>
             <div>
-              <span className="font-semibold text-danger text-xs">{"⭐"}</span>
+              <span className="font-semibold text-danger text-xs">{'⭐'}</span>
               <span className="text-xs text-white">125</span>
             </div>
             <span className="text-white text-xs">VIP</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Modal,
   ModalContent,
@@ -6,15 +6,15 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 
 type PlacementType =
-  | "auto"
-  | "center"
-  | "top"
-  | "bottom"
-  | "top-center"
-  | "bottom-center";
+  | 'auto'
+  | 'center'
+  | 'top'
+  | 'bottom'
+  | 'top-center'
+  | 'bottom-center';
 
 // Reusable CustomModal Component
 export const CustomModal = ({
