@@ -1,5 +1,7 @@
-kind create cluster fyp
-docker build . -t fyp-backend
-kind load docker-image fyp-backend --name=fyp
-kubectl apply -f k8s/postgres.yaml
-kubectl apply -f k8s/app.yaml
+#!/bin/sh
+echo "migrating"
+yarn migrate:deploy
+echo "seeding"
+yarn seed
+echo "go"
+yarn start

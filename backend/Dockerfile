@@ -1,4 +1,4 @@
-FROM node:16 AS base
+FROM node:16 AS builder
 
 # Create app directory
 WORKDIR /app
@@ -8,11 +8,14 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Install app dependencies
-RUN npm install
-# Generate prisma client, leave out if generating in `postinstall` script
-RUN npx prisma generate
+
+RUN yarn install
 
 COPY . .
 
+
+RUN yarn run build
+
 EXPOSE 3001
-CMD ["npm", "run", "start:dev"]
+
+CMD sh ./deploy.sh
