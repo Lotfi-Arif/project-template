@@ -1,97 +1,67 @@
 // media.service.ts
-import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { Media, MediaType } from '@prisma/client';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { S3 } from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import * as fs from 'fs';
-import * as path from 'path';
-import { Express } from 'express';
 
 @Injectable()
 export class MediaService {
-  private readonly logger = new Logger(MediaService.name);
-  private readonly uploadDir = './uploads';
+  private s3: S3;
 
-  constructor(private prisma: PrismaService) {
-    this.ensureUploadDirectoryExists();
-  }
-
-  private ensureUploadDirectoryExists(): void {
-    if (!fs.existsSync(this.uploadDir)) {
-      fs.mkdirSync(this.uploadDir);
-    }
-  }
-
-  async createMediaFromFile(file: Express.Multer.File): Promise<Media> {
-    this.logger.log(`Creating media from file: ${JSON.stringify(file)}`);
-
-    const mediaType = this.detectMediaType(file.mimetype);
-    if (!mediaType) {
-      throw new Error(`Unsupported media type: ${file.mimetype}`);
-    }
-
-    const fileId = uuidv4();
-    const filePath = path.join(this.uploadDir, fileId);
-    fs.writeFileSync(filePath, file.buffer);
-
-    const media = await this.prisma.media.create({
-      data: {
-        id: fileId,
-        type: mediaType,
-        url: `/media/${fileId}`,
-        course: { connect: { id: file.fieldname } },
-      },
+  constructor(private configService: ConfigService) {
+    this.s3 = new S3({
+      region: this.configService.get('AWS_REGION'),
+      accessKeyId: this.configService.get('AWS_ACCESS_KEY_ID'),
+      secretAccessKey: this.configService.get('AWS_SECRET_ACCESS_KEY'),
     });
-
-    return media;
   }
 
-  private detectMediaType(mimeType: string): MediaType | null {
-    const typeMapping: Record<string, MediaType> = {
-      'image/jpeg': MediaType.IMAGE,
-      'image/png': MediaType.IMAGE,
-      'image/gif': MediaType.IMAGE,
-      'video/mp4': MediaType.VIDEO,
-      'audio/mpeg': MediaType.AUDIO,
-      'application/pdf': MediaType.DOCUMENT,
-    };
-    return typeMapping[mimeType] || null;
+  async uploadFile(dataBuffer: Buffer, filename: string): Promise<string> {
+    const uploadResult = await this.s3
+      .upload({
+        Bucket: this.configService.get('AWS_S3_BUCKET_NAME'),
+        Body: dataBuffer,
+        Key: `${uuidv4()}-${filename}`,
+      })
+      .promise();
+
+    return uploadResult.Location;
   }
 
-  async getMediaById(id: string): Promise<Media | null> {
-    this.logger.log(`Getting media by id: ${id}`);
-    return this.prisma.media.findUnique({ where: { id } });
-  }
+  async getFile(filename: string): Promise<any> {
+    try {
+      const file = await this.s3
+        .getObject({
+          Bucket: this.configService.get('AWS_S3_BUCKET_NAME'),
+          Key: filename,
+        })
+        .promise();
 
-  async getMediaContent(id: string): Promise<Buffer | null> {
-    this.logger.log(`Getting media content by id: ${id}`);
-    const media = await this.getMediaById(id);
-
-    if (media) {
-      const filePath = path.join(this.uploadDir, media.id);
-      if (fs.existsSync(filePath)) {
-        return fs.readFileSync(filePath);
-      }
+      return file.Body;
+    } catch (error) {
+      throw new NotFoundException(`File with name ${filename} not found`);
     }
-
-    return null;
   }
 
-  async deleteMedia(id: string): Promise<Media> {
-    this.logger.log(`Deleting media by id: ${id}`);
-    const media = await this.prisma.media.delete({ where: { id } });
-
-    const filePath = path.join(this.uploadDir, media.id);
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    }
-
-    return media;
+  async deleteFile(filename: string): Promise<void> {
+    await this.s3
+      .deleteObject({
+        Bucket: this.configService.get('AWS_S3_BUCKET_NAME'),
+        Key: filename,
+      })
+      .promise();
   }
 
-  async getMedias(params: { skip?: number; take?: number }): Promise<Media[]> {
-    const { skip, take } = params;
-    this.logger.log(`Getting medias with skip: ${skip}, take: ${take}`);
-    return this.prisma.media.findMany({ skip, take });
+  async listFiles(): Promise<string[]> {
+    const { Contents } = await this.s3
+      .listObjects({
+        Bucket: this.configService.get('AWS_S3_BUCKET_NAME'),
+      })
+      .promise();
+
+    if (!Contents) return [];
+
+    return Contents.map((file) => file.Key as string);
   }
 }
