@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '../prisma/prisma.service';
 import { CourseEnrollmentService } from './course-enrollment.service';
-import { Prisma } from '@prisma/client';
+import { CourseEnrollmentCreateInput } from '@app/prisma-generated/generated/nestgraphql/course-enrollment/course-enrollment-create.input';
+import { CourseEnrollmentUpdateInput } from '@app/prisma-generated/generated/nestgraphql/course-enrollment/course-enrollment-update.input';
 
 describe('CourseEnrollmentService', () => {
   let service: CourseEnrollmentService;
@@ -22,7 +23,7 @@ describe('CourseEnrollmentService', () => {
 
   describe('createCourseEnrollment', () => {
     it('should create a course enrollment', async () => {
-      const courseEnrollmentCreateInput: Prisma.CourseEnrollmentCreateInput = {
+      const courseEnrollmentCreateInput: CourseEnrollmentCreateInput = {
         course: {
           connect: { id: 'course-id' },
         },
@@ -122,7 +123,7 @@ describe('CourseEnrollmentService', () => {
   describe('updateCourseEnrollment', () => {
     it('should update a course enrollment', async () => {
       const enrollmentId = 'enrollment-id';
-      const courseEnrollmentUpdateInput: Prisma.CourseEnrollmentUpdateInput = {
+      const courseEnrollmentUpdateInput: CourseEnrollmentUpdateInput = {
         course: {
           connect: { id: 'new-course-id' },
         },

@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Chat } from '@app/prisma-generated/generated/nestgraphql/chat/chat.model';
 import { ChatService } from './chat.service';
 import { Logger } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { ChatCreateInput } from '@app/prisma-generated/generated/nestgraphql/chat/chat-create.input';
 
 @Resolver(() => Chat)
 export class ChatResolver {
@@ -26,7 +26,7 @@ export class ChatResolver {
   }
 
   @Mutation(() => Chat)
-  async createChat(@Args('data') data: Prisma.ChatCreateInput): Promise<Chat> {
+  async createChat(@Args('data') data: ChatCreateInput): Promise<Chat> {
     this.logger.log(`Creating chat: ${JSON.stringify(data)}`);
     return this.chatService.createChat(data);
   }

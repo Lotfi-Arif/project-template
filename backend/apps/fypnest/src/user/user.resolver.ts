@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
-import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
-import { Prisma } from '@prisma/client';
+import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Logger } from '@nestjs/common';
+import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -37,7 +37,7 @@ export class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Args('id') id: string,
-    @Args('data') data: Prisma.UserUpdateInput,
+    @Args('data') data: UserUpdateInput,
   ) {
     this.logger.log(`Updating user with ID: ${id}`);
     const updatedUser = await this.userService.updateUser({ id, data });

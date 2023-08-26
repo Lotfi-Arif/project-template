@@ -2,7 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CourseResolver } from './course.resolver';
 import { CourseService } from './course.service';
 import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
-import { Prisma } from '@prisma/client';
+import { CourseCreateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-create.input';
+import { CourseUpdateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-update.input';
 
 describe('CourseResolver', () => {
   let courseResolver: CourseResolver;
@@ -46,7 +47,7 @@ describe('CourseResolver', () => {
 
   describe('createCourse', () => {
     it('should create a course and return the created course', async () => {
-      const courseData: Prisma.CourseCreateInput = {
+      const courseData: CourseCreateInput = {
         name: 'Test Course',
         description: 'Test Course Description',
         teacher: {
@@ -73,9 +74,9 @@ describe('CourseResolver', () => {
   describe('updateCourse', () => {
     it('should update a course and return the updated course', async () => {
       const courseId = '1';
-      const courseUpdateData: Prisma.CourseUpdateInput = {
-        name: 'Updated Test Course',
-        description: 'Updated Test Course Description',
+      const courseUpdateData: CourseUpdateInput = {
+        name: { set: 'Updated Test Course' },
+        description: { set: 'Updated Test Course Description' },
       };
 
       const course = await courseResolver.updateCourse(

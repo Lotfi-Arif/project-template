@@ -1,8 +1,9 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { CourseEnrollmentService } from './course-enrollment.service';
 import { CourseEnrollment } from '@app/prisma-generated/generated/nestgraphql/course-enrollment/course-enrollment.model';
-import { Prisma } from '@prisma/client';
 import { Logger } from '@nestjs/common';
+import { CourseEnrollmentCreateInput } from '@app/prisma-generated/generated/nestgraphql/course-enrollment/course-enrollment-create.input';
+import { CourseEnrollmentUpdateInput } from '@app/prisma-generated/generated/nestgraphql/course-enrollment/course-enrollment-update.input';
 
 @Resolver(() => CourseEnrollment)
 export class CourseEnrollmentResolver {
@@ -33,7 +34,7 @@ export class CourseEnrollmentResolver {
 
   @Mutation(() => CourseEnrollment)
   async createCourseEnrollment(
-    @Args('data') data: Prisma.CourseEnrollmentCreateInput,
+    @Args('data') data: CourseEnrollmentCreateInput,
   ): Promise<CourseEnrollment> {
     this.logger.log(`Creating course enrollment: ${JSON.stringify(data)}`);
     return this.courseEnrollmentService.createCourseEnrollment(data);
@@ -42,7 +43,7 @@ export class CourseEnrollmentResolver {
   @Mutation(() => CourseEnrollment)
   async updateCourseEnrollment(
     @Args('id') id: string,
-    @Args('data') data: Prisma.CourseEnrollmentUpdateInput,
+    @Args('data') data: CourseEnrollmentUpdateInput,
   ): Promise<CourseEnrollment> {
     this.logger.log(`Updating course enrollment with id: ${id}`);
     return this.courseEnrollmentService.updateCourseEnrollment({ id, data });

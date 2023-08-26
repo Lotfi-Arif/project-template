@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ChatResolver } from './chat.resolver';
 import { ChatService } from './chat.service';
 import { Chat } from '@app/prisma-generated/generated/nestgraphql/chat/chat.model';
-import { Prisma } from '@prisma/client';
+import { ChatCreateInput } from '@app/prisma-generated/generated/nestgraphql/chat/chat-create.input';
 
 describe('ChatResolver', () => {
   let chatResolver: ChatResolver;
@@ -87,7 +87,7 @@ describe('ChatResolver', () => {
 
   describe('createChat', () => {
     it('should create a chat and return the created chat', async () => {
-      const chatData: Prisma.ChatCreateInput = {
+      const chatData: ChatCreateInput = {
         user1: {
           connect: {
             id: 'user-id-1',

@@ -1,8 +1,9 @@
 import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { CourseService } from './course.service';
-import { Prisma } from '@prisma/client';
 import { Logger } from '@nestjs/common';
 import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
+import { CourseCreateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-create.input';
+import { CourseUpdateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-update.input';
 
 @Resolver(() => Course)
 export class CourseResolver {
@@ -11,9 +12,7 @@ export class CourseResolver {
   constructor(private readonly courseService: CourseService) {}
 
   @Mutation(() => Course)
-  async createCourse(
-    @Args('data') data: Prisma.CourseCreateInput,
-  ): Promise<Course> {
+  async createCourse(@Args('data') data: CourseCreateInput): Promise<Course> {
     this.logger.log('createCourse');
     return this.courseService.createCourse(data);
   }
@@ -27,7 +26,7 @@ export class CourseResolver {
   @Mutation(() => Course)
   async updateCourse(
     @Args('id') id: string,
-    @Args('data') data: Prisma.CourseUpdateInput,
+    @Args('data') data: CourseUpdateInput,
   ): Promise<Course> {
     this.logger.log('updateCourse');
     return this.courseService.updateCourse({ id, data });

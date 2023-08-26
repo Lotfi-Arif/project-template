@@ -1,0 +1,1837 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Chat {
+  _count: ChatCount!
+  createdAt: DateTime!
+  id: ID!
+  media: [Media!]
+  messages: [Message!]
+  updatedAt: DateTime!
+  user1: User!
+  user2: User!
+  userId1: String!
+  userId2: String!
+}
+
+type ChatCount {
+  media: Int!
+  messages: Int!
+}
+
+input ChatCreateInput {
+  createdAt: DateTime
+  id: String
+  media: MediaCreateNestedManyWithoutChatInput
+  messages: MessageCreateNestedManyWithoutChatInput
+  updatedAt: DateTime
+  user1: UserCreateNestedOneWithoutChatsAsUser1Input!
+  user2: UserCreateNestedOneWithoutChatsAsUser2Input!
+}
+
+input ChatCreateManyUser1Input {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  userId2: String!
+}
+
+input ChatCreateManyUser1InputEnvelope {
+  data: [ChatCreateManyUser1Input!]!
+  skipDuplicates: Boolean
+}
+
+input ChatCreateManyUser2Input {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  userId1: String!
+}
+
+input ChatCreateManyUser2InputEnvelope {
+  data: [ChatCreateManyUser2Input!]!
+  skipDuplicates: Boolean
+}
+
+input ChatCreateNestedManyWithoutUser1Input {
+  connect: [ChatWhereUniqueInput!]
+  connectOrCreate: [ChatCreateOrConnectWithoutUser1Input!]
+  create: [ChatCreateWithoutUser1Input!]
+  createMany: ChatCreateManyUser1InputEnvelope
+}
+
+input ChatCreateNestedManyWithoutUser2Input {
+  connect: [ChatWhereUniqueInput!]
+  connectOrCreate: [ChatCreateOrConnectWithoutUser2Input!]
+  create: [ChatCreateWithoutUser2Input!]
+  createMany: ChatCreateManyUser2InputEnvelope
+}
+
+input ChatCreateNestedOneWithoutMediaInput {
+  connect: ChatWhereUniqueInput
+  connectOrCreate: ChatCreateOrConnectWithoutMediaInput
+  create: ChatCreateWithoutMediaInput
+}
+
+input ChatCreateNestedOneWithoutMessagesInput {
+  connect: ChatWhereUniqueInput
+  connectOrCreate: ChatCreateOrConnectWithoutMessagesInput
+  create: ChatCreateWithoutMessagesInput
+}
+
+input ChatCreateOrConnectWithoutMediaInput {
+  create: ChatCreateWithoutMediaInput!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatCreateOrConnectWithoutMessagesInput {
+  create: ChatCreateWithoutMessagesInput!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatCreateOrConnectWithoutUser1Input {
+  create: ChatCreateWithoutUser1Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatCreateOrConnectWithoutUser2Input {
+  create: ChatCreateWithoutUser2Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatCreateWithoutMediaInput {
+  createdAt: DateTime
+  id: String
+  messages: MessageCreateNestedManyWithoutChatInput
+  updatedAt: DateTime
+  user1: UserCreateNestedOneWithoutChatsAsUser1Input!
+  user2: UserCreateNestedOneWithoutChatsAsUser2Input!
+}
+
+input ChatCreateWithoutMessagesInput {
+  createdAt: DateTime
+  id: String
+  media: MediaCreateNestedManyWithoutChatInput
+  updatedAt: DateTime
+  user1: UserCreateNestedOneWithoutChatsAsUser1Input!
+  user2: UserCreateNestedOneWithoutChatsAsUser2Input!
+}
+
+input ChatCreateWithoutUser1Input {
+  createdAt: DateTime
+  id: String
+  media: MediaCreateNestedManyWithoutChatInput
+  messages: MessageCreateNestedManyWithoutChatInput
+  updatedAt: DateTime
+  user2: UserCreateNestedOneWithoutChatsAsUser2Input!
+}
+
+input ChatCreateWithoutUser2Input {
+  createdAt: DateTime
+  id: String
+  media: MediaCreateNestedManyWithoutChatInput
+  messages: MessageCreateNestedManyWithoutChatInput
+  updatedAt: DateTime
+  user1: UserCreateNestedOneWithoutChatsAsUser1Input!
+}
+
+input ChatListRelationFilter {
+  every: ChatWhereInput
+  none: ChatWhereInput
+  some: ChatWhereInput
+}
+
+input ChatNullableRelationFilter {
+  is: ChatWhereInput
+  isNot: ChatWhereInput
+}
+
+input ChatRelationFilter {
+  is: ChatWhereInput
+  isNot: ChatWhereInput
+}
+
+input ChatScalarWhereInput {
+  AND: [ChatScalarWhereInput!]
+  NOT: [ChatScalarWhereInput!]
+  OR: [ChatScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  updatedAt: DateTimeFilter
+  userId1: StringFilter
+  userId2: StringFilter
+}
+
+input ChatUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ChatUpdateManyWithWhereWithoutUser1Input {
+  data: ChatUpdateManyMutationInput!
+  where: ChatScalarWhereInput!
+}
+
+input ChatUpdateManyWithWhereWithoutUser2Input {
+  data: ChatUpdateManyMutationInput!
+  where: ChatScalarWhereInput!
+}
+
+input ChatUpdateManyWithoutUser1NestedInput {
+  connect: [ChatWhereUniqueInput!]
+  connectOrCreate: [ChatCreateOrConnectWithoutUser1Input!]
+  create: [ChatCreateWithoutUser1Input!]
+  createMany: ChatCreateManyUser1InputEnvelope
+  delete: [ChatWhereUniqueInput!]
+  deleteMany: [ChatScalarWhereInput!]
+  disconnect: [ChatWhereUniqueInput!]
+  set: [ChatWhereUniqueInput!]
+  update: [ChatUpdateWithWhereUniqueWithoutUser1Input!]
+  updateMany: [ChatUpdateManyWithWhereWithoutUser1Input!]
+  upsert: [ChatUpsertWithWhereUniqueWithoutUser1Input!]
+}
+
+input ChatUpdateManyWithoutUser2NestedInput {
+  connect: [ChatWhereUniqueInput!]
+  connectOrCreate: [ChatCreateOrConnectWithoutUser2Input!]
+  create: [ChatCreateWithoutUser2Input!]
+  createMany: ChatCreateManyUser2InputEnvelope
+  delete: [ChatWhereUniqueInput!]
+  deleteMany: [ChatScalarWhereInput!]
+  disconnect: [ChatWhereUniqueInput!]
+  set: [ChatWhereUniqueInput!]
+  update: [ChatUpdateWithWhereUniqueWithoutUser2Input!]
+  updateMany: [ChatUpdateManyWithWhereWithoutUser2Input!]
+  upsert: [ChatUpsertWithWhereUniqueWithoutUser2Input!]
+}
+
+input ChatUpdateOneRequiredWithoutMessagesNestedInput {
+  connect: ChatWhereUniqueInput
+  connectOrCreate: ChatCreateOrConnectWithoutMessagesInput
+  create: ChatCreateWithoutMessagesInput
+  update: ChatUpdateToOneWithWhereWithoutMessagesInput
+  upsert: ChatUpsertWithoutMessagesInput
+}
+
+input ChatUpdateOneWithoutMediaNestedInput {
+  connect: ChatWhereUniqueInput
+  connectOrCreate: ChatCreateOrConnectWithoutMediaInput
+  create: ChatCreateWithoutMediaInput
+  delete: ChatWhereInput
+  disconnect: ChatWhereInput
+  update: ChatUpdateToOneWithWhereWithoutMediaInput
+  upsert: ChatUpsertWithoutMediaInput
+}
+
+input ChatUpdateToOneWithWhereWithoutMediaInput {
+  data: ChatUpdateWithoutMediaInput!
+  where: ChatWhereInput
+}
+
+input ChatUpdateToOneWithWhereWithoutMessagesInput {
+  data: ChatUpdateWithoutMessagesInput!
+  where: ChatWhereInput
+}
+
+input ChatUpdateWithWhereUniqueWithoutUser1Input {
+  data: ChatUpdateWithoutUser1Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatUpdateWithWhereUniqueWithoutUser2Input {
+  data: ChatUpdateWithoutUser2Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatUpdateWithoutMediaInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutChatNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user1: UserUpdateOneRequiredWithoutChatsAsUser1NestedInput
+  user2: UserUpdateOneRequiredWithoutChatsAsUser2NestedInput
+}
+
+input ChatUpdateWithoutMessagesInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutChatNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user1: UserUpdateOneRequiredWithoutChatsAsUser1NestedInput
+  user2: UserUpdateOneRequiredWithoutChatsAsUser2NestedInput
+}
+
+input ChatUpdateWithoutUser1Input {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutChatNestedInput
+  messages: MessageUpdateManyWithoutChatNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user2: UserUpdateOneRequiredWithoutChatsAsUser2NestedInput
+}
+
+input ChatUpdateWithoutUser2Input {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutChatNestedInput
+  messages: MessageUpdateManyWithoutChatNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user1: UserUpdateOneRequiredWithoutChatsAsUser1NestedInput
+}
+
+input ChatUpsertWithWhereUniqueWithoutUser1Input {
+  create: ChatCreateWithoutUser1Input!
+  update: ChatUpdateWithoutUser1Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatUpsertWithWhereUniqueWithoutUser2Input {
+  create: ChatCreateWithoutUser2Input!
+  update: ChatUpdateWithoutUser2Input!
+  where: ChatWhereUniqueInput!
+}
+
+input ChatUpsertWithoutMediaInput {
+  create: ChatCreateWithoutMediaInput!
+  update: ChatUpdateWithoutMediaInput!
+  where: ChatWhereInput
+}
+
+input ChatUpsertWithoutMessagesInput {
+  create: ChatCreateWithoutMessagesInput!
+  update: ChatUpdateWithoutMessagesInput!
+  where: ChatWhereInput
+}
+
+input ChatUserId1UserId2CompoundUniqueInput {
+  userId1: String!
+  userId2: String!
+}
+
+input ChatWhereInput {
+  AND: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  media: MediaListRelationFilter
+  messages: MessageListRelationFilter
+  updatedAt: DateTimeFilter
+  user1: UserRelationFilter
+  user2: UserRelationFilter
+  userId1: StringFilter
+  userId2: StringFilter
+}
+
+input ChatWhereUniqueInput {
+  AND: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  createdAt: DateTimeFilter
+  id: String
+  media: MediaListRelationFilter
+  messages: MessageListRelationFilter
+  updatedAt: DateTimeFilter
+  user1: UserRelationFilter
+  user2: UserRelationFilter
+  userId1: StringFilter
+  userId1_userId2: ChatUserId1UserId2CompoundUniqueInput
+  userId2: StringFilter
+}
+
+type Course {
+  _count: CourseCount!
+  createdAt: DateTime!
+  description: String!
+  enrollments: [CourseEnrollment!]
+  id: ID!
+  media: [Media!]
+  name: String!
+  teacher: User!
+  teacherId: String!
+  updatedAt: DateTime!
+}
+
+type CourseCount {
+  enrollments: Int!
+  media: Int!
+}
+
+input CourseCreateInput {
+  createdAt: DateTime
+  description: String!
+  enrollments: CourseEnrollmentCreateNestedManyWithoutCourseInput
+  id: String
+  media: MediaCreateNestedManyWithoutCourseInput
+  name: String!
+  teacher: UserCreateNestedOneWithoutCourseInput!
+  updatedAt: DateTime
+}
+
+input CourseCreateManyTeacherInput {
+  createdAt: DateTime
+  description: String!
+  id: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input CourseCreateManyTeacherInputEnvelope {
+  data: [CourseCreateManyTeacherInput!]!
+  skipDuplicates: Boolean
+}
+
+input CourseCreateNestedManyWithoutTeacherInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutTeacherInput!]
+  create: [CourseCreateWithoutTeacherInput!]
+  createMany: CourseCreateManyTeacherInputEnvelope
+}
+
+input CourseCreateNestedOneWithoutEnrollmentsInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutEnrollmentsInput
+  create: CourseCreateWithoutEnrollmentsInput
+}
+
+input CourseCreateNestedOneWithoutMediaInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutMediaInput
+  create: CourseCreateWithoutMediaInput
+}
+
+input CourseCreateOrConnectWithoutEnrollmentsInput {
+  create: CourseCreateWithoutEnrollmentsInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutMediaInput {
+  create: CourseCreateWithoutMediaInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutTeacherInput {
+  create: CourseCreateWithoutTeacherInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateWithoutEnrollmentsInput {
+  createdAt: DateTime
+  description: String!
+  id: String
+  media: MediaCreateNestedManyWithoutCourseInput
+  name: String!
+  teacher: UserCreateNestedOneWithoutCourseInput!
+  updatedAt: DateTime
+}
+
+input CourseCreateWithoutMediaInput {
+  createdAt: DateTime
+  description: String!
+  enrollments: CourseEnrollmentCreateNestedManyWithoutCourseInput
+  id: String
+  name: String!
+  teacher: UserCreateNestedOneWithoutCourseInput!
+  updatedAt: DateTime
+}
+
+input CourseCreateWithoutTeacherInput {
+  createdAt: DateTime
+  description: String!
+  enrollments: CourseEnrollmentCreateNestedManyWithoutCourseInput
+  id: String
+  media: MediaCreateNestedManyWithoutCourseInput
+  name: String!
+  updatedAt: DateTime
+}
+
+type CourseEnrollment {
+  course: Course!
+  courseId: String!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+input CourseEnrollmentCourseIdUserIdCompoundUniqueInput {
+  courseId: String!
+  userId: String!
+}
+
+input CourseEnrollmentCreateInput {
+  course: CourseCreateNestedOneWithoutEnrollmentsInput!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutCoursesInput!
+}
+
+input CourseEnrollmentCreateManyCourseInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input CourseEnrollmentCreateManyCourseInputEnvelope {
+  data: [CourseEnrollmentCreateManyCourseInput!]!
+  skipDuplicates: Boolean
+}
+
+input CourseEnrollmentCreateManyUserInput {
+  courseId: String!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+}
+
+input CourseEnrollmentCreateManyUserInputEnvelope {
+  data: [CourseEnrollmentCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input CourseEnrollmentCreateNestedManyWithoutCourseInput {
+  connect: [CourseEnrollmentWhereUniqueInput!]
+  connectOrCreate: [CourseEnrollmentCreateOrConnectWithoutCourseInput!]
+  create: [CourseEnrollmentCreateWithoutCourseInput!]
+  createMany: CourseEnrollmentCreateManyCourseInputEnvelope
+}
+
+input CourseEnrollmentCreateNestedManyWithoutUserInput {
+  connect: [CourseEnrollmentWhereUniqueInput!]
+  connectOrCreate: [CourseEnrollmentCreateOrConnectWithoutUserInput!]
+  create: [CourseEnrollmentCreateWithoutUserInput!]
+  createMany: CourseEnrollmentCreateManyUserInputEnvelope
+}
+
+input CourseEnrollmentCreateOrConnectWithoutCourseInput {
+  create: CourseEnrollmentCreateWithoutCourseInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentCreateOrConnectWithoutUserInput {
+  create: CourseEnrollmentCreateWithoutUserInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentCreateWithoutCourseInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutCoursesInput!
+}
+
+input CourseEnrollmentCreateWithoutUserInput {
+  course: CourseCreateNestedOneWithoutEnrollmentsInput!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+}
+
+input CourseEnrollmentListRelationFilter {
+  every: CourseEnrollmentWhereInput
+  none: CourseEnrollmentWhereInput
+  some: CourseEnrollmentWhereInput
+}
+
+input CourseEnrollmentScalarWhereInput {
+  AND: [CourseEnrollmentScalarWhereInput!]
+  NOT: [CourseEnrollmentScalarWhereInput!]
+  OR: [CourseEnrollmentScalarWhereInput!]
+  courseId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input CourseEnrollmentUpdateInput {
+  course: CourseUpdateOneRequiredWithoutEnrollmentsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCoursesNestedInput
+}
+
+input CourseEnrollmentUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseEnrollmentUpdateManyWithWhereWithoutCourseInput {
+  data: CourseEnrollmentUpdateManyMutationInput!
+  where: CourseEnrollmentScalarWhereInput!
+}
+
+input CourseEnrollmentUpdateManyWithWhereWithoutUserInput {
+  data: CourseEnrollmentUpdateManyMutationInput!
+  where: CourseEnrollmentScalarWhereInput!
+}
+
+input CourseEnrollmentUpdateManyWithoutCourseNestedInput {
+  connect: [CourseEnrollmentWhereUniqueInput!]
+  connectOrCreate: [CourseEnrollmentCreateOrConnectWithoutCourseInput!]
+  create: [CourseEnrollmentCreateWithoutCourseInput!]
+  createMany: CourseEnrollmentCreateManyCourseInputEnvelope
+  delete: [CourseEnrollmentWhereUniqueInput!]
+  deleteMany: [CourseEnrollmentScalarWhereInput!]
+  disconnect: [CourseEnrollmentWhereUniqueInput!]
+  set: [CourseEnrollmentWhereUniqueInput!]
+  update: [CourseEnrollmentUpdateWithWhereUniqueWithoutCourseInput!]
+  updateMany: [CourseEnrollmentUpdateManyWithWhereWithoutCourseInput!]
+  upsert: [CourseEnrollmentUpsertWithWhereUniqueWithoutCourseInput!]
+}
+
+input CourseEnrollmentUpdateManyWithoutUserNestedInput {
+  connect: [CourseEnrollmentWhereUniqueInput!]
+  connectOrCreate: [CourseEnrollmentCreateOrConnectWithoutUserInput!]
+  create: [CourseEnrollmentCreateWithoutUserInput!]
+  createMany: CourseEnrollmentCreateManyUserInputEnvelope
+  delete: [CourseEnrollmentWhereUniqueInput!]
+  deleteMany: [CourseEnrollmentScalarWhereInput!]
+  disconnect: [CourseEnrollmentWhereUniqueInput!]
+  set: [CourseEnrollmentWhereUniqueInput!]
+  update: [CourseEnrollmentUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CourseEnrollmentUpdateManyWithWhereWithoutUserInput!]
+  upsert: [CourseEnrollmentUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CourseEnrollmentUpdateWithWhereUniqueWithoutCourseInput {
+  data: CourseEnrollmentUpdateWithoutCourseInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentUpdateWithWhereUniqueWithoutUserInput {
+  data: CourseEnrollmentUpdateWithoutUserInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentUpdateWithoutCourseInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCoursesNestedInput
+}
+
+input CourseEnrollmentUpdateWithoutUserInput {
+  course: CourseUpdateOneRequiredWithoutEnrollmentsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseEnrollmentUpsertWithWhereUniqueWithoutCourseInput {
+  create: CourseEnrollmentCreateWithoutCourseInput!
+  update: CourseEnrollmentUpdateWithoutCourseInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentUpsertWithWhereUniqueWithoutUserInput {
+  create: CourseEnrollmentCreateWithoutUserInput!
+  update: CourseEnrollmentUpdateWithoutUserInput!
+  where: CourseEnrollmentWhereUniqueInput!
+}
+
+input CourseEnrollmentWhereInput {
+  AND: [CourseEnrollmentWhereInput!]
+  NOT: [CourseEnrollmentWhereInput!]
+  OR: [CourseEnrollmentWhereInput!]
+  course: CourseRelationFilter
+  courseId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  updatedAt: DateTimeFilter
+  user: UserRelationFilter
+  userId: StringFilter
+}
+
+input CourseEnrollmentWhereUniqueInput {
+  AND: [CourseEnrollmentWhereInput!]
+  NOT: [CourseEnrollmentWhereInput!]
+  OR: [CourseEnrollmentWhereInput!]
+  course: CourseRelationFilter
+  courseId: StringFilter
+  courseId_userId: CourseEnrollmentCourseIdUserIdCompoundUniqueInput
+  createdAt: DateTimeFilter
+  id: String
+  updatedAt: DateTimeFilter
+  user: UserRelationFilter
+  userId: StringFilter
+}
+
+input CourseListRelationFilter {
+  every: CourseWhereInput
+  none: CourseWhereInput
+  some: CourseWhereInput
+}
+
+input CourseRelationFilter {
+  is: CourseWhereInput
+  isNot: CourseWhereInput
+}
+
+input CourseScalarWhereInput {
+  AND: [CourseScalarWhereInput!]
+  NOT: [CourseScalarWhereInput!]
+  OR: [CourseScalarWhereInput!]
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  name: StringFilter
+  teacherId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input CourseUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  enrollments: CourseEnrollmentUpdateManyWithoutCourseNestedInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutCourseNestedInput
+  name: StringFieldUpdateOperationsInput
+  teacher: UserUpdateOneRequiredWithoutCourseNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseUpdateManyWithWhereWithoutTeacherInput {
+  data: CourseUpdateManyMutationInput!
+  where: CourseScalarWhereInput!
+}
+
+input CourseUpdateManyWithoutTeacherNestedInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutTeacherInput!]
+  create: [CourseCreateWithoutTeacherInput!]
+  createMany: CourseCreateManyTeacherInputEnvelope
+  delete: [CourseWhereUniqueInput!]
+  deleteMany: [CourseScalarWhereInput!]
+  disconnect: [CourseWhereUniqueInput!]
+  set: [CourseWhereUniqueInput!]
+  update: [CourseUpdateWithWhereUniqueWithoutTeacherInput!]
+  updateMany: [CourseUpdateManyWithWhereWithoutTeacherInput!]
+  upsert: [CourseUpsertWithWhereUniqueWithoutTeacherInput!]
+}
+
+input CourseUpdateOneRequiredWithoutEnrollmentsNestedInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutEnrollmentsInput
+  create: CourseCreateWithoutEnrollmentsInput
+  update: CourseUpdateToOneWithWhereWithoutEnrollmentsInput
+  upsert: CourseUpsertWithoutEnrollmentsInput
+}
+
+input CourseUpdateOneRequiredWithoutMediaNestedInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutMediaInput
+  create: CourseCreateWithoutMediaInput
+  update: CourseUpdateToOneWithWhereWithoutMediaInput
+  upsert: CourseUpsertWithoutMediaInput
+}
+
+input CourseUpdateToOneWithWhereWithoutEnrollmentsInput {
+  data: CourseUpdateWithoutEnrollmentsInput!
+  where: CourseWhereInput
+}
+
+input CourseUpdateToOneWithWhereWithoutMediaInput {
+  data: CourseUpdateWithoutMediaInput!
+  where: CourseWhereInput
+}
+
+input CourseUpdateWithWhereUniqueWithoutTeacherInput {
+  data: CourseUpdateWithoutTeacherInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpdateWithoutEnrollmentsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutCourseNestedInput
+  name: StringFieldUpdateOperationsInput
+  teacher: UserUpdateOneRequiredWithoutCourseNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutMediaInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  enrollments: CourseEnrollmentUpdateManyWithoutCourseNestedInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  teacher: UserUpdateOneRequiredWithoutCourseNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutTeacherInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  enrollments: CourseEnrollmentUpdateManyWithoutCourseNestedInput
+  id: StringFieldUpdateOperationsInput
+  media: MediaUpdateManyWithoutCourseNestedInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CourseUpsertWithWhereUniqueWithoutTeacherInput {
+  create: CourseCreateWithoutTeacherInput!
+  update: CourseUpdateWithoutTeacherInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpsertWithoutEnrollmentsInput {
+  create: CourseCreateWithoutEnrollmentsInput!
+  update: CourseUpdateWithoutEnrollmentsInput!
+  where: CourseWhereInput
+}
+
+input CourseUpsertWithoutMediaInput {
+  create: CourseCreateWithoutMediaInput!
+  update: CourseUpdateWithoutMediaInput!
+  where: CourseWhereInput
+}
+
+input CourseWhereInput {
+  AND: [CourseWhereInput!]
+  NOT: [CourseWhereInput!]
+  OR: [CourseWhereInput!]
+  createdAt: DateTimeFilter
+  description: StringFilter
+  enrollments: CourseEnrollmentListRelationFilter
+  id: StringFilter
+  media: MediaListRelationFilter
+  name: StringFilter
+  teacher: UserRelationFilter
+  teacherId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input CourseWhereUniqueInput {
+  AND: [CourseWhereInput!]
+  NOT: [CourseWhereInput!]
+  OR: [CourseWhereInput!]
+  createdAt: DateTimeFilter
+  description: StringFilter
+  enrollments: CourseEnrollmentListRelationFilter
+  id: String
+  media: MediaListRelationFilter
+  name: StringFilter
+  teacher: UserRelationFilter
+  teacherId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input EnumMediaTypeFieldUpdateOperationsInput {
+  set: MediaType
+}
+
+input EnumMediaTypeFilter {
+  equals: MediaType
+  in: [MediaType!]
+  not: NestedEnumMediaTypeFilter
+  notIn: [MediaType!]
+}
+
+input EnumUserRoleFieldUpdateOperationsInput {
+  set: UserRole
+}
+
+input EnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  not: NestedEnumUserRoleFilter
+  notIn: [UserRole!]
+}
+
+type Media {
+  Chat: Chat
+  chatId: String
+  course: Course!
+  courseId: String!
+  createdAt: DateTime!
+  id: ID!
+  type: MediaType!
+  updatedAt: DateTime!
+  url: String!
+}
+
+input MediaCreateManyChatInput {
+  courseId: String!
+  createdAt: DateTime
+  id: String
+  type: MediaType!
+  updatedAt: DateTime
+  url: String!
+}
+
+input MediaCreateManyChatInputEnvelope {
+  data: [MediaCreateManyChatInput!]!
+  skipDuplicates: Boolean
+}
+
+input MediaCreateManyCourseInput {
+  chatId: String
+  createdAt: DateTime
+  id: String
+  type: MediaType!
+  updatedAt: DateTime
+  url: String!
+}
+
+input MediaCreateManyCourseInputEnvelope {
+  data: [MediaCreateManyCourseInput!]!
+  skipDuplicates: Boolean
+}
+
+input MediaCreateNestedManyWithoutChatInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutChatInput!]
+  create: [MediaCreateWithoutChatInput!]
+  createMany: MediaCreateManyChatInputEnvelope
+}
+
+input MediaCreateNestedManyWithoutCourseInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseInput!]
+  create: [MediaCreateWithoutCourseInput!]
+  createMany: MediaCreateManyCourseInputEnvelope
+}
+
+input MediaCreateOrConnectWithoutChatInput {
+  create: MediaCreateWithoutChatInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutCourseInput {
+  create: MediaCreateWithoutCourseInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateWithoutChatInput {
+  course: CourseCreateNestedOneWithoutMediaInput!
+  createdAt: DateTime
+  id: String
+  type: MediaType!
+  updatedAt: DateTime
+  url: String!
+}
+
+input MediaCreateWithoutCourseInput {
+  Chat: ChatCreateNestedOneWithoutMediaInput
+  createdAt: DateTime
+  id: String
+  type: MediaType!
+  updatedAt: DateTime
+  url: String!
+}
+
+input MediaListRelationFilter {
+  every: MediaWhereInput
+  none: MediaWhereInput
+  some: MediaWhereInput
+}
+
+input MediaScalarWhereInput {
+  AND: [MediaScalarWhereInput!]
+  NOT: [MediaScalarWhereInput!]
+  OR: [MediaScalarWhereInput!]
+  chatId: StringNullableFilter
+  courseId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  type: EnumMediaTypeFilter
+  updatedAt: DateTimeFilter
+  url: StringFilter
+}
+
+enum MediaType {
+  AUDIO
+  DOCUMENT
+  IMAGE
+  OTHER
+  VIDEO
+}
+
+input MediaUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  type: EnumMediaTypeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+}
+
+input MediaUpdateManyWithWhereWithoutChatInput {
+  data: MediaUpdateManyMutationInput!
+  where: MediaScalarWhereInput!
+}
+
+input MediaUpdateManyWithWhereWithoutCourseInput {
+  data: MediaUpdateManyMutationInput!
+  where: MediaScalarWhereInput!
+}
+
+input MediaUpdateManyWithoutChatNestedInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutChatInput!]
+  create: [MediaCreateWithoutChatInput!]
+  createMany: MediaCreateManyChatInputEnvelope
+  delete: [MediaWhereUniqueInput!]
+  deleteMany: [MediaScalarWhereInput!]
+  disconnect: [MediaWhereUniqueInput!]
+  set: [MediaWhereUniqueInput!]
+  update: [MediaUpdateWithWhereUniqueWithoutChatInput!]
+  updateMany: [MediaUpdateManyWithWhereWithoutChatInput!]
+  upsert: [MediaUpsertWithWhereUniqueWithoutChatInput!]
+}
+
+input MediaUpdateManyWithoutCourseNestedInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseInput!]
+  create: [MediaCreateWithoutCourseInput!]
+  createMany: MediaCreateManyCourseInputEnvelope
+  delete: [MediaWhereUniqueInput!]
+  deleteMany: [MediaScalarWhereInput!]
+  disconnect: [MediaWhereUniqueInput!]
+  set: [MediaWhereUniqueInput!]
+  update: [MediaUpdateWithWhereUniqueWithoutCourseInput!]
+  updateMany: [MediaUpdateManyWithWhereWithoutCourseInput!]
+  upsert: [MediaUpsertWithWhereUniqueWithoutCourseInput!]
+}
+
+input MediaUpdateWithWhereUniqueWithoutChatInput {
+  data: MediaUpdateWithoutChatInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpdateWithWhereUniqueWithoutCourseInput {
+  data: MediaUpdateWithoutCourseInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpdateWithoutChatInput {
+  course: CourseUpdateOneRequiredWithoutMediaNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  type: EnumMediaTypeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+}
+
+input MediaUpdateWithoutCourseInput {
+  Chat: ChatUpdateOneWithoutMediaNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  type: EnumMediaTypeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+}
+
+input MediaUpsertWithWhereUniqueWithoutChatInput {
+  create: MediaCreateWithoutChatInput!
+  update: MediaUpdateWithoutChatInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpsertWithWhereUniqueWithoutCourseInput {
+  create: MediaCreateWithoutCourseInput!
+  update: MediaUpdateWithoutCourseInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaWhereInput {
+  AND: [MediaWhereInput!]
+  Chat: ChatNullableRelationFilter
+  NOT: [MediaWhereInput!]
+  OR: [MediaWhereInput!]
+  chatId: StringNullableFilter
+  course: CourseRelationFilter
+  courseId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  type: EnumMediaTypeFilter
+  updatedAt: DateTimeFilter
+  url: StringFilter
+}
+
+input MediaWhereUniqueInput {
+  AND: [MediaWhereInput!]
+  Chat: ChatNullableRelationFilter
+  NOT: [MediaWhereInput!]
+  OR: [MediaWhereInput!]
+  chatId: StringNullableFilter
+  course: CourseRelationFilter
+  courseId: StringFilter
+  createdAt: DateTimeFilter
+  id: String
+  type: EnumMediaTypeFilter
+  updatedAt: DateTimeFilter
+  url: StringFilter
+}
+
+type Message {
+  chat: Chat!
+  chatId: String!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  sender: User!
+  senderId: String!
+  updatedAt: DateTime!
+}
+
+input MessageCreateManyChatInput {
+  content: String!
+  createdAt: DateTime
+  id: String
+  senderId: String!
+  updatedAt: DateTime
+}
+
+input MessageCreateManyChatInputEnvelope {
+  data: [MessageCreateManyChatInput!]!
+  skipDuplicates: Boolean
+}
+
+input MessageCreateManySenderInput {
+  chatId: String!
+  content: String!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+}
+
+input MessageCreateManySenderInputEnvelope {
+  data: [MessageCreateManySenderInput!]!
+  skipDuplicates: Boolean
+}
+
+input MessageCreateNestedManyWithoutChatInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutChatInput!]
+  create: [MessageCreateWithoutChatInput!]
+  createMany: MessageCreateManyChatInputEnvelope
+}
+
+input MessageCreateNestedManyWithoutSenderInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  create: [MessageCreateWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+}
+
+input MessageCreateOrConnectWithoutChatInput {
+  create: MessageCreateWithoutChatInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageCreateOrConnectWithoutSenderInput {
+  create: MessageCreateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageCreateWithoutChatInput {
+  content: String!
+  createdAt: DateTime
+  id: String
+  sender: UserCreateNestedOneWithoutMessagesInput!
+  updatedAt: DateTime
+}
+
+input MessageCreateWithoutSenderInput {
+  chat: ChatCreateNestedOneWithoutMessagesInput!
+  content: String!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+}
+
+input MessageListRelationFilter {
+  every: MessageWhereInput
+  none: MessageWhereInput
+  some: MessageWhereInput
+}
+
+input MessageScalarWhereInput {
+  AND: [MessageScalarWhereInput!]
+  NOT: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  chatId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  senderId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input MessageUpdateManyMutationInput {
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateManyWithWhereWithoutChatInput {
+  data: MessageUpdateManyMutationInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateManyWithWhereWithoutSenderInput {
+  data: MessageUpdateManyMutationInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateManyWithoutChatNestedInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutChatInput!]
+  create: [MessageCreateWithoutChatInput!]
+  createMany: MessageCreateManyChatInputEnvelope
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutChatInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutChatInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutChatInput!]
+}
+
+input MessageUpdateManyWithoutSenderNestedInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  create: [MessageCreateWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutSenderInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input MessageUpdateWithWhereUniqueWithoutChatInput {
+  data: MessageUpdateWithoutChatInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpdateWithWhereUniqueWithoutSenderInput {
+  data: MessageUpdateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpdateWithoutChatInput {
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutMessagesNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateWithoutSenderInput {
+  chat: ChatUpdateOneRequiredWithoutMessagesNestedInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpsertWithWhereUniqueWithoutChatInput {
+  create: MessageCreateWithoutChatInput!
+  update: MessageUpdateWithoutChatInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutSenderInput {
+  create: MessageCreateWithoutSenderInput!
+  update: MessageUpdateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageWhereInput {
+  AND: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  chat: ChatRelationFilter
+  chatId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  sender: UserRelationFilter
+  senderId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input MessageWhereUniqueInput {
+  AND: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  chat: ChatRelationFilter
+  chatId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: String
+  sender: UserRelationFilter
+  senderId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+type Mutation {
+  createChat(data: ChatCreateInput!): Chat!
+  createCourse(data: CourseCreateInput!): Course!
+  createCourseEnrollment(data: CourseEnrollmentCreateInput!): CourseEnrollment!
+  createUser(email: String!, password: String!): User!
+  deleteChat(id: String!): Chat!
+  deleteCourse(id: String!): Course!
+  deleteCourseEnrollment(id: String!): CourseEnrollment!
+  deleteUser(id: String!): User!
+  login(email: String!, password: String!): String!
+  register(data: UserCreateInput!): User!
+  updateCourse(data: CourseUpdateInput!, id: String!): Course!
+  updateCourseEnrollment(data: CourseEnrollmentUpdateInput!, id: String!): CourseEnrollment!
+  updateUser(data: UserUpdateInput!, id: String!): User!
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedEnumMediaTypeFilter {
+  equals: MediaType
+  in: [MediaType!]
+  not: NestedEnumMediaTypeFilter
+  notIn: [MediaType!]
+}
+
+input NestedEnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  not: NestedEnumUserRoleFilter
+  notIn: [UserRole!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+type Query {
+  chat(id: String!): Chat!
+  chats(skip: Int!, take: Int!): [Chat!]!
+  courseEnrollment(id: String!): CourseEnrollment
+  courseEnrollments(skip: Int, take: Int): [CourseEnrollment!]!
+  getCourseById(id: String!): Course
+  getCourses(skip: Int, take: Int): [Course!]!
+  user(id: String!): User
+  users(skip: Int!, take: Int!): [User!]!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type User {
+  Course: [Course!]
+  _count: UserCount!
+  chatsAsUser1: [Chat!]
+  chatsAsUser2: [Chat!]
+  courses: [CourseEnrollment!]
+  createdAt: DateTime!
+  email: String!
+  firstName: String
+  id: ID!
+  lastName: String
+  messages: [Message!]
+  password: String!
+  role: UserRole!
+  updatedAt: DateTime!
+}
+
+type UserCount {
+  Course: Int!
+  chatsAsUser1: Int!
+  chatsAsUser2: Int!
+  courses: Int!
+  messages: Int!
+}
+
+input UserCreateInput {
+  Course: CourseCreateNestedManyWithoutTeacherInput
+  chatsAsUser1: ChatCreateNestedManyWithoutUser1Input
+  chatsAsUser2: ChatCreateNestedManyWithoutUser2Input
+  courses: CourseEnrollmentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserCreateNestedOneWithoutChatsAsUser1Input {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutChatsAsUser1Input
+  create: UserCreateWithoutChatsAsUser1Input
+}
+
+input UserCreateNestedOneWithoutChatsAsUser2Input {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutChatsAsUser2Input
+  create: UserCreateWithoutChatsAsUser2Input
+}
+
+input UserCreateNestedOneWithoutCourseInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCourseInput
+  create: UserCreateWithoutCourseInput
+}
+
+input UserCreateNestedOneWithoutCoursesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCoursesInput
+  create: UserCreateWithoutCoursesInput
+}
+
+input UserCreateNestedOneWithoutMessagesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutMessagesInput
+  create: UserCreateWithoutMessagesInput
+}
+
+input UserCreateOrConnectWithoutChatsAsUser1Input {
+  create: UserCreateWithoutChatsAsUser1Input!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutChatsAsUser2Input {
+  create: UserCreateWithoutChatsAsUser2Input!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutCourseInput {
+  create: UserCreateWithoutCourseInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutCoursesInput {
+  create: UserCreateWithoutCoursesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutMessagesInput {
+  create: UserCreateWithoutMessagesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutChatsAsUser1Input {
+  Course: CourseCreateNestedManyWithoutTeacherInput
+  chatsAsUser2: ChatCreateNestedManyWithoutUser2Input
+  courses: CourseEnrollmentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutChatsAsUser2Input {
+  Course: CourseCreateNestedManyWithoutTeacherInput
+  chatsAsUser1: ChatCreateNestedManyWithoutUser1Input
+  courses: CourseEnrollmentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutCourseInput {
+  chatsAsUser1: ChatCreateNestedManyWithoutUser1Input
+  chatsAsUser2: ChatCreateNestedManyWithoutUser2Input
+  courses: CourseEnrollmentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutCoursesInput {
+  Course: CourseCreateNestedManyWithoutTeacherInput
+  chatsAsUser1: ChatCreateNestedManyWithoutUser1Input
+  chatsAsUser2: ChatCreateNestedManyWithoutUser2Input
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutMessagesInput {
+  Course: CourseCreateNestedManyWithoutTeacherInput
+  chatsAsUser1: ChatCreateNestedManyWithoutUser1Input
+  chatsAsUser2: ChatCreateNestedManyWithoutUser2Input
+  courses: CourseEnrollmentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstName: String
+  id: String
+  lastName: String
+  password: String!
+  role: UserRole
+  updatedAt: DateTime
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+enum UserRole {
+  ADMIN
+  STUDENT
+  TEACHER
+}
+
+input UserUpdateInput {
+  Course: CourseUpdateManyWithoutTeacherNestedInput
+  chatsAsUser1: ChatUpdateManyWithoutUser1NestedInput
+  chatsAsUser2: ChatUpdateManyWithoutUser2NestedInput
+  courses: CourseEnrollmentUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderNestedInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutChatsAsUser1NestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutChatsAsUser1Input
+  create: UserCreateWithoutChatsAsUser1Input
+  update: UserUpdateToOneWithWhereWithoutChatsAsUser1Input
+  upsert: UserUpsertWithoutChatsAsUser1Input
+}
+
+input UserUpdateOneRequiredWithoutChatsAsUser2NestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutChatsAsUser2Input
+  create: UserCreateWithoutChatsAsUser2Input
+  update: UserUpdateToOneWithWhereWithoutChatsAsUser2Input
+  upsert: UserUpsertWithoutChatsAsUser2Input
+}
+
+input UserUpdateOneRequiredWithoutCourseNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCourseInput
+  create: UserCreateWithoutCourseInput
+  update: UserUpdateToOneWithWhereWithoutCourseInput
+  upsert: UserUpsertWithoutCourseInput
+}
+
+input UserUpdateOneRequiredWithoutCoursesNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCoursesInput
+  create: UserCreateWithoutCoursesInput
+  update: UserUpdateToOneWithWhereWithoutCoursesInput
+  upsert: UserUpsertWithoutCoursesInput
+}
+
+input UserUpdateOneRequiredWithoutMessagesNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutMessagesInput
+  create: UserCreateWithoutMessagesInput
+  update: UserUpdateToOneWithWhereWithoutMessagesInput
+  upsert: UserUpsertWithoutMessagesInput
+}
+
+input UserUpdateToOneWithWhereWithoutChatsAsUser1Input {
+  data: UserUpdateWithoutChatsAsUser1Input!
+  where: UserWhereInput
+}
+
+input UserUpdateToOneWithWhereWithoutChatsAsUser2Input {
+  data: UserUpdateWithoutChatsAsUser2Input!
+  where: UserWhereInput
+}
+
+input UserUpdateToOneWithWhereWithoutCourseInput {
+  data: UserUpdateWithoutCourseInput!
+  where: UserWhereInput
+}
+
+input UserUpdateToOneWithWhereWithoutCoursesInput {
+  data: UserUpdateWithoutCoursesInput!
+  where: UserWhereInput
+}
+
+input UserUpdateToOneWithWhereWithoutMessagesInput {
+  data: UserUpdateWithoutMessagesInput!
+  where: UserWhereInput
+}
+
+input UserUpdateWithoutChatsAsUser1Input {
+  Course: CourseUpdateManyWithoutTeacherNestedInput
+  chatsAsUser2: ChatUpdateManyWithoutUser2NestedInput
+  courses: CourseEnrollmentUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderNestedInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutChatsAsUser2Input {
+  Course: CourseUpdateManyWithoutTeacherNestedInput
+  chatsAsUser1: ChatUpdateManyWithoutUser1NestedInput
+  courses: CourseEnrollmentUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderNestedInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutCourseInput {
+  chatsAsUser1: ChatUpdateManyWithoutUser1NestedInput
+  chatsAsUser2: ChatUpdateManyWithoutUser2NestedInput
+  courses: CourseEnrollmentUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderNestedInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutCoursesInput {
+  Course: CourseUpdateManyWithoutTeacherNestedInput
+  chatsAsUser1: ChatUpdateManyWithoutUser1NestedInput
+  chatsAsUser2: ChatUpdateManyWithoutUser2NestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderNestedInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutMessagesInput {
+  Course: CourseUpdateManyWithoutTeacherNestedInput
+  chatsAsUser1: ChatUpdateManyWithoutUser1NestedInput
+  chatsAsUser2: ChatUpdateManyWithoutUser2NestedInput
+  courses: CourseEnrollmentUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutChatsAsUser1Input {
+  create: UserCreateWithoutChatsAsUser1Input!
+  update: UserUpdateWithoutChatsAsUser1Input!
+  where: UserWhereInput
+}
+
+input UserUpsertWithoutChatsAsUser2Input {
+  create: UserCreateWithoutChatsAsUser2Input!
+  update: UserUpdateWithoutChatsAsUser2Input!
+  where: UserWhereInput
+}
+
+input UserUpsertWithoutCourseInput {
+  create: UserCreateWithoutCourseInput!
+  update: UserUpdateWithoutCourseInput!
+  where: UserWhereInput
+}
+
+input UserUpsertWithoutCoursesInput {
+  create: UserCreateWithoutCoursesInput!
+  update: UserUpdateWithoutCoursesInput!
+  where: UserWhereInput
+}
+
+input UserUpsertWithoutMessagesInput {
+  create: UserCreateWithoutMessagesInput!
+  update: UserUpdateWithoutMessagesInput!
+  where: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  Course: CourseListRelationFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  chatsAsUser1: ChatListRelationFilter
+  chatsAsUser2: ChatListRelationFilter
+  courses: CourseEnrollmentListRelationFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  messages: MessageListRelationFilter
+  password: StringFilter
+  role: EnumUserRoleFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserWhereUniqueInput {
+  AND: [UserWhereInput!]
+  Course: CourseListRelationFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  chatsAsUser1: ChatListRelationFilter
+  chatsAsUser2: ChatListRelationFilter
+  courses: CourseEnrollmentListRelationFilter
+  createdAt: DateTimeFilter
+  email: String
+  firstName: StringNullableFilter
+  id: String
+  lastName: StringNullableFilter
+  messages: MessageListRelationFilter
+  password: StringFilter
+  role: EnumUserRoleFilter
+  updatedAt: DateTimeFilter
+}

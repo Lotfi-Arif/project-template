@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma } from '@prisma/client';
 import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
+import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(data: Prisma.UserCreateInput): Promise<User> {
+  async register(data: UserCreateInput): Promise<User> {
     this.logger.log(`Registering user with email: ${data.email}`);
     const user = await this.userService.createUser(data);
     return user;

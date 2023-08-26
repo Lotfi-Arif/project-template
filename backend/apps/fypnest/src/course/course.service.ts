@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { Prisma } from '@prisma/client';
 import { Course } from '@app/prisma-generated/generated/nestgraphql/course/course.model';
+import { CourseCreateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-create.input';
+import { CourseUpdateInput } from '@app/prisma-generated/generated/nestgraphql/course/course-update.input';
 
 @Injectable()
 export class CourseService {
@@ -9,7 +10,7 @@ export class CourseService {
 
   constructor(private prisma: PrismaService) {}
 
-  async createCourse(data: Prisma.CourseCreateInput): Promise<Course> {
+  async createCourse(data: CourseCreateInput): Promise<Course> {
     this.logger.log('createCourse');
     return this.prisma.course.create({ data });
   }
@@ -21,7 +22,7 @@ export class CourseService {
 
   async updateCourse(params: {
     id: string;
-    data: Prisma.CourseUpdateInput;
+    data: CourseUpdateInput;
   }): Promise<Course> {
     this.logger.log('updateCourse');
     const { id, data } = params;

@@ -1,8 +1,9 @@
 // user.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
 import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
+import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
+import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,7 @@ export class UserService {
 
   constructor(private prisma: PrismaService) {}
 
-  async createUser(data: Prisma.UserCreateInput): Promise<User> {
+  async createUser(data: UserCreateInput): Promise<User> {
     this.logger.log('Creating a new user');
     return this.prisma.user.create({ data });
   }
@@ -27,7 +28,7 @@ export class UserService {
 
   async updateUser(params: {
     id: string;
-    data: Prisma.UserUpdateInput;
+    data: UserUpdateInput;
   }): Promise<User> {
     const { id, data } = params;
     this.logger.log(`Updating user with id: ${id}`);

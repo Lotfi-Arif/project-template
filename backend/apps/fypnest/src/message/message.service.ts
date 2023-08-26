@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { Message as MessageModel } from '@app/prisma-generated/generated/nestgraphql/message/message.model';
+import { Message as MessageModel } from 'libs/prisma/src/generated/nestgraphql/message/message.model';
 
 @Injectable()
 export class MessageService {

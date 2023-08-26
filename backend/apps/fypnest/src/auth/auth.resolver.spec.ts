@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
-import { Prisma } from '@prisma/client';
+import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 
 describe('AuthResolver', () => {
   let authResolver: AuthResolver;
@@ -45,7 +45,7 @@ describe('AuthResolver', () => {
 
   describe('register', () => {
     it('should register a user and return the registered user', async () => {
-      const userData: Prisma.UserCreateInput = {
+      const userData: UserCreateInput = {
         email: 'test@example.com',
         password: 'password',
         firstName: 'John',

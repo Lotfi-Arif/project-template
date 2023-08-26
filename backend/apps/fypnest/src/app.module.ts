@@ -5,18 +5,19 @@ import { UserService } from './user/user.service';
 import { ProvidersModule } from '@app/providers';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma';
-import { join } from 'path';
 import { ChatModule } from './chat/chat.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import config from '@app/common/configs/config';
-import { ApolloDriver } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { TeacherModule } from './teacher/teacher.module';
 import { MessageModule } from './message/message.module';
 import { CourseModule } from './course/course.module';
 import { CourseEnrollmentModule } from './course-enrollment/course-enrollment.module';
 import { MediaModule } from './media/media.module';
+import { GqlConfigService } from './graphql/gql-config-service';
+import { TestingModule } from '@nestjs/testing';
 
 @Module({
   imports: [
@@ -26,12 +27,9 @@ import { MediaModule } from './media/media.module';
     EventEmitterModule.forRoot({
       wildcard: true,
     }),
-    GraphQLModule.forRoot({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      cors: false,
-      installSubscriptionHandlers: true,
-      autoSchemaFile: join(process.cwd(), './graphql/fypnest.gql'),
-      include: [UserModule, AuthModule, ChatModule],
+      useClass: GqlConfigService,
     }),
     PrismaModule.forRoot({
       isGlobal: true,
@@ -41,6 +39,8 @@ import { MediaModule } from './media/media.module';
     TeacherModule,
     MessageModule,
     CourseModule,
+    PrismaModule,
+    TestingModule,
     CourseEnrollmentModule,
     MediaModule,
   ],

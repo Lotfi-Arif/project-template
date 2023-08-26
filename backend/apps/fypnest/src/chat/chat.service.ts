@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
 import { Chat } from '@app/prisma-generated/generated/nestgraphql/chat/chat.model';
+import { ChatCreateInput } from '@app/prisma-generated/generated/nestgraphql/chat/chat-create.input';
 
 @Injectable()
 export class ChatService {
@@ -9,7 +9,7 @@ export class ChatService {
 
   constructor(private prisma: PrismaService) {}
 
-  async createChat(data: Prisma.ChatCreateInput): Promise<Chat> {
+  async createChat(data: ChatCreateInput): Promise<Chat> {
     this.logger.log(`Creating chat: ${JSON.stringify(data)}`);
     return this.prisma.chat.create({ data });
   }

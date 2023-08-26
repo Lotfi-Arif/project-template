@@ -1,35 +1,24 @@
 overwrite: true
 schema: 'http://localhost:3001/graphql'
-documents: './schema/**/*.graphql'
+documents: 'graphql/**/*.gql'
 generates:
-  schema/generated/graphql.tsx:
+  graphql/generated.tsx:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
-      - 'fragment-matcher'
-      - 'named-operations-object'
     config:
-      reactApolloVersion: 3
-      withHooks: true
-      withMutationFn: true
-      exportFragmentSpreadSubTypes: true
-      documentMode: graphQLTag
-  schema/generated/graphql.schema.json:
+      maybeValue: 'T | undefined | null'
+      avoidOptionals: true
+      namingConvention:
+        enumValues: keep
+        typeNames: change-case#pascalCase
+        transformUnderscore: true
+  src/graphql/introspection.json:
     plugins:
       - 'introspection'
-  schema/generated/page.tsx:
     config:
-      documentMode: external
-      importDocumentNodeExternallyFrom: ./graphql
-      reactApolloVersion: 3
-      withHooks: true
-      contextType: 'any'
-      contextTypeRequired: true
-      apolloClientInstanceImport: './utils/hooks/withApollo.tsx'
-    preset: import-types
-    presetConfig:
-      typesPath: ./graphql
+      schemaDescription: true
+  src/graphql/apollo-helpers.ts:
     plugins:
-      - 'graphql-codegen-apollo-next-ssr' # replace by - graphql-codegen-apollo-next-ssr
-
+      - typescript-apollo-client-helpers
