@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const GET_USER = gql`
-  query GetUser($id: String!) {
-    user(id: $id) {
+export const GET_TEACHER = gql`
+  query GetTeacher($id: String!) {
+    teacher(id: $id) {
       id
       email
       firstName
@@ -14,9 +14,9 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_USERS = gql`
-  query GetUsers($skip: Int, $take: Int) {
-    users(skip: $skip, take: $take) {
+export const GET_TEACHERS = gql`
+  query GetTeachers($skip: Int, $take: Int) {
+    teachers(skip: $skip, take: $take) {
       id
       email
       firstName
