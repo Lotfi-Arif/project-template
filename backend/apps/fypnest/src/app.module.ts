@@ -18,6 +18,7 @@ import { CourseEnrollmentModule } from './course-enrollment/course-enrollment.mo
 import { MediaModule } from './media/media.module';
 import { GqlConfigService } from './graphql/gql-config-service';
 import { TestingModule } from '@nestjs/testing';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { TestingModule } from '@nestjs/testing';
     TestingModule,
     CourseEnrollmentModule,
     MediaModule,
+    StudentModule,
   ],
   providers: [PrismaService, UserService],
   exports: [PrismaService],

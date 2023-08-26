@@ -17,6 +17,7 @@ enum UserRole {
   ADMIN
   TEACHER
   STUDENT
+  USER
 }
 
 model User {
@@ -25,7 +26,7 @@ model User {
   password     String
   firstName    String?
   lastName     String?
-  role         UserRole           @default(STUDENT)
+  role         UserRole           @default(USER)
   courses      CourseEnrollment[]
   chatsAsUser1 Chat[]             @relation("ChatUser1")
   chatsAsUser2 Chat[]             @relation("ChatUser2")
