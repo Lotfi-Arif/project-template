@@ -19,6 +19,15 @@ export class MessageService {
     return messages;
   }
 
+  async getMessageById(id: string): Promise<MessageModel | null> {
+    this.logger.log(`Retrieving message with ID: ${id}`);
+    const message = await this.prisma.message.findUnique({
+      where: { id },
+    });
+    this.logger.debug(`Found message: ${JSON.stringify(message)}`);
+    return message;
+  }
+
   async createMessage(
     content: string,
     senderId: string,
