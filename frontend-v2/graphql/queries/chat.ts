@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CHATS = gql`
-  query chats($skip: Int, $take: Int) {
+  query chats($skip: Int!, $take: Int!) {
     chats(skip: $skip, take: $take) {
       id
       userId1

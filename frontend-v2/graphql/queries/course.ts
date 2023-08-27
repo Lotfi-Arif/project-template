@@ -14,7 +14,7 @@ export const GET_COURSE_BY_ID = gql`
 `;
 
 export const GET_COURSES = gql`
-  query getCourses($skip: Int, $take: Int) {
+  query getCourses($skip: Int!, $take: Int!) {
     getCourses(skip: $skip, take: $take) {
       id
       name

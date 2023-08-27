@@ -15,7 +15,7 @@ export const GET_USER = gql`
 `;
 
 export const GET_USERS = gql`
-  query GetUsers($skip: Int, $take: Int) {
+  query GetUsers($skip: Int!, $take: Int!) {
     users(skip: $skip, take: $take) {
       id
       email

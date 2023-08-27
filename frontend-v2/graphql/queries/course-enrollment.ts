@@ -1,12 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const GET_COURSE_ENROLLMENTS = gql`
-  query courseEnrollments($skip: Int, $take: Int) {
+  query courseEnrollments($skip: Int!, $take: Int!) {
     courseEnrollments(skip: $skip, take: $take) {
       id
       courseId
-      studentId
-      enrollmentDate
+      userId
+      createdAt
     }
   }
 `;
@@ -16,8 +16,8 @@ export const GET_COURSE_ENROLLMENT_BY_ID = gql`
     courseEnrollment(id: $id) {
       id
       courseId
-      studentId
-      enrollmentDate
+      userId
+      createdAt
     }
   }
 `;

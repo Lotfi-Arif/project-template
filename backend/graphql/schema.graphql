@@ -1311,15 +1311,24 @@ type Mutation {
   createChat(data: ChatCreateInput!): Chat!
   createCourse(data: CourseCreateInput!): Course!
   createCourseEnrollment(data: CourseEnrollmentCreateInput!): CourseEnrollment!
+  createMessage(chatId: String!, content: String!, senderId: String!): Message!
+  createStudent(email: String!, firstName: String!, lastName: String!, password: String!): User!
+  createTeacher(email: String!, firstName: String!, lastName: String!, password: String!): User!
   createUser(email: String!, password: String!): User!
   deleteChat(id: String!): Chat!
   deleteCourse(id: String!): Course!
   deleteCourseEnrollment(id: String!): CourseEnrollment!
+  deleteMessage(id: String!): Message!
+  deleteStudent(id: String!): User!
+  deleteTeacher(id: String!): User!
   deleteUser(id: String!): User!
   login(email: String!, password: String!): String!
   register(data: UserCreateInput!): User!
   updateCourse(data: CourseUpdateInput!, id: String!): Course!
   updateCourseEnrollment(data: CourseEnrollmentUpdateInput!, id: String!): CourseEnrollment!
+  updateMessage(content: String!, id: String!): Message!
+  updateStudent(data: UserUpdateInput!, id: String!): User!
+  updateTeacher(data: UserUpdateInput!, id: String!): User!
   updateUser(data: UserUpdateInput!, id: String!): User!
 }
 
@@ -1387,6 +1396,12 @@ type Query {
   courseEnrollments(skip: Int, take: Int): [CourseEnrollment!]!
   getCourseById(id: String!): Course
   getCourses(skip: Int, take: Int): [Course!]!
+  message(id: String!): Message!
+  messages: [Message!]!
+  student(id: String!): User
+  students(skip: Int!, take: Int!): [User!]!
+  teacher(id: String!): User
+  teachers(skip: Int!, take: Int!): [User!]!
   user(id: String!): User
   users(skip: Int!, take: Int!): [User!]!
 }
@@ -1610,6 +1625,7 @@ enum UserRole {
   ADMIN
   STUDENT
   TEACHER
+  USER
 }
 
 input UserUpdateInput {

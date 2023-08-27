@@ -68,23 +68,32 @@ export type MessageFieldPolicy = {
 	senderId?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createChat' | 'createCourse' | 'createCourseEnrollment' | 'createUser' | 'deleteChat' | 'deleteCourse' | 'deleteCourseEnrollment' | 'deleteUser' | 'login' | 'register' | 'updateCourse' | 'updateCourseEnrollment' | 'updateUser' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('createChat' | 'createCourse' | 'createCourseEnrollment' | 'createMessage' | 'createStudent' | 'createTeacher' | 'createUser' | 'deleteChat' | 'deleteCourse' | 'deleteCourseEnrollment' | 'deleteMessage' | 'deleteStudent' | 'deleteTeacher' | 'deleteUser' | 'login' | 'register' | 'updateCourse' | 'updateCourseEnrollment' | 'updateMessage' | 'updateStudent' | 'updateTeacher' | 'updateUser' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	createChat?: FieldPolicy<any> | FieldReadFunction<any>,
 	createCourse?: FieldPolicy<any> | FieldReadFunction<any>,
 	createCourseEnrollment?: FieldPolicy<any> | FieldReadFunction<any>,
+	createMessage?: FieldPolicy<any> | FieldReadFunction<any>,
+	createStudent?: FieldPolicy<any> | FieldReadFunction<any>,
+	createTeacher?: FieldPolicy<any> | FieldReadFunction<any>,
 	createUser?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteChat?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteCourse?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteCourseEnrollment?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteMessage?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteStudent?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteTeacher?: FieldPolicy<any> | FieldReadFunction<any>,
 	deleteUser?: FieldPolicy<any> | FieldReadFunction<any>,
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	register?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateCourse?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateCourseEnrollment?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateMessage?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateStudent?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateTeacher?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateUser?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('chat' | 'chats' | 'courseEnrollment' | 'courseEnrollments' | 'getCourseById' | 'getCourses' | 'user' | 'users' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('chat' | 'chats' | 'courseEnrollment' | 'courseEnrollments' | 'getCourseById' | 'getCourses' | 'message' | 'messages' | 'student' | 'students' | 'teacher' | 'teachers' | 'user' | 'users' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	chat?: FieldPolicy<any> | FieldReadFunction<any>,
 	chats?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -92,6 +101,12 @@ export type QueryFieldPolicy = {
 	courseEnrollments?: FieldPolicy<any> | FieldReadFunction<any>,
 	getCourseById?: FieldPolicy<any> | FieldReadFunction<any>,
 	getCourses?: FieldPolicy<any> | FieldReadFunction<any>,
+	message?: FieldPolicy<any> | FieldReadFunction<any>,
+	messages?: FieldPolicy<any> | FieldReadFunction<any>,
+	student?: FieldPolicy<any> | FieldReadFunction<any>,
+	students?: FieldPolicy<any> | FieldReadFunction<any>,
+	teacher?: FieldPolicy<any> | FieldReadFunction<any>,
+	teachers?: FieldPolicy<any> | FieldReadFunction<any>,
 	user?: FieldPolicy<any> | FieldReadFunction<any>,
 	users?: FieldPolicy<any> | FieldReadFunction<any>
 };

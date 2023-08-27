@@ -4,8 +4,8 @@ export const CREATE_TEACHER = gql`
   mutation CreateTeacher(
     $email: String!
     $password: String!
-    $firstName: String
-    $lastName: String
+    $firstName: String!
+    $lastName: String!
   ) {
     createTeacher(
       email: $email
@@ -23,7 +23,7 @@ export const CREATE_TEACHER = gql`
 `;
 
 export const UPDATE_TEACHER = gql`
-  mutation UpdateTeacher($id: String!, $data: UserUpdateInput) {
+  mutation UpdateTeacher($id: String!, $data: UserUpdateInput!) {
     updateTeacher(id: $id, data: $data) {
       id
       email

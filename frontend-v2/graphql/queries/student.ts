@@ -15,7 +15,7 @@ export const STUDENT_QUERIES = gql`
   }
 
   # Fetch multiple students with optional pagination
-  query students($skip: Int, $take: Int) {
+  query students($skip: Int!, $take: Int!) {
     students(skip: $skip, take: $take) {
       id
       email

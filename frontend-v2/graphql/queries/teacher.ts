@@ -15,7 +15,7 @@ export const GET_TEACHER = gql`
 `;
 
 export const GET_TEACHERS = gql`
-  query GetTeachers($skip: Int, $take: Int) {
+  query GetTeachers($skip: Int!, $take: Int!) {
     teachers(skip: $skip, take: $take) {
       id
       email

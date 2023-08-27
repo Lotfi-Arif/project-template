@@ -5,8 +5,8 @@ export const CREATE_COURSE_ENROLLMENT = gql`
     createCourseEnrollment(data: $data) {
       id
       courseId
-      studentId
-      enrollmentDate
+      userId
+      createdAt
     }
   }
 `;
@@ -19,8 +19,8 @@ export const UPDATE_COURSE_ENROLLMENT = gql`
     updateCourseEnrollment(id: $id, data: $data) {
       id
       courseId
-      studentId
-      enrollmentDate
+      userId
+      createdAt
     }
   }
 `;
@@ -30,8 +30,8 @@ export const DELETE_COURSE_ENROLLMENT = gql`
     deleteCourseEnrollment(id: $id) {
       id
       courseId
-      studentId
-      enrollmentDate
+      userId
+      createdAt
     }
   }
 `;
