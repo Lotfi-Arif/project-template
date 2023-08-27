@@ -17,15 +17,6 @@
         "tsConfigPath": "apps/fypnest/tsconfig.app.json"
       }
     },
-    "mailing": {
-      "type": "application",
-      "root": "apps/mailing",
-      "entryFile": "main",
-      "sourceRoot": "apps/mailing/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/mailing/tsconfig.app.json"
-      }
-    },
     "common": {
       "type": "library",
       "root": "libs/common",

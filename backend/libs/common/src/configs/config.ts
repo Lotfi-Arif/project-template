@@ -6,6 +6,12 @@ const config: Config = {
     refreshIn: '7d',
     bcryptSaltOrRound: 10,
   },
+  graphql: {
+    playgroundEnabled: true,
+    debug: true,
+    schemaDestination: './graphql/schema.graphql',
+    sortSchema: true,
+  },
 };
 
 export default (): Config => config;
