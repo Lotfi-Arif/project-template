@@ -15,59 +15,64 @@ generator nestgraphql {
 
 enum UserRole {
   ADMIN
-  TEACHER
-  STUDENT
   USER
 }
 
 model User {
-  id           String             @id @default(uuid())
-  email        String             @unique
-  password     String
-  firstName    String?
-  lastName     String?
-  role         UserRole           @default(USER)
-  courses      CourseEnrollment[]
-  chatsAsUser1 Chat[]             @relation("ChatUser1")
-  chatsAsUser2 Chat[]             @relation("ChatUser2")
-  messages     Message[]
-  Course       Course[]
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-}
-
-model Course {
-  id          String             @id @default(uuid())
-  name        String
-  description String
-  teacherId   String
-  teacher     User               @relation(fields: [teacherId], references: [id])
-  enrollments CourseEnrollment[]
-  media       Media[]
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-}
-
-model CourseEnrollment {
   id        String   @id @default(uuid())
-  courseId  String
-  userId    String
-  course    Course   @relation(fields: [courseId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      UserRole @default(USER)
+  orders    Order[]
+  reviews   Review[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
-  @@unique([courseId, userId])
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  SKU         String   @unique
+  media       Media[]
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Order       Order?   @relation(fields: [orderId], references: [id])
+  orderId     String?
+}
+
+model Order {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  products    Product[]
+  totalAmount Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  productId String
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  rating    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Media {
   id        String    @id @default(uuid())
   type      MediaType
   url       String
-  courseId  String
-  course    Course    @relation(fields: [courseId], references: [id])
-  Chat      Chat?     @relation(fields: [chatId], references: [id])
-  chatId    String?
+  productId String?
+  product   Product?  @relation(fields: [productId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -75,32 +80,5 @@ model Media {
 enum MediaType {
   IMAGE
   VIDEO
-  AUDIO
-  DOCUMENT
   OTHER
-}
-
-model Chat {
-  id        String    @id @default(uuid())
-  userId1   String
-  userId2   String
-  user1     User      @relation(name: "ChatUser1", fields: [userId1], references: [id])
-  user2     User      @relation(name: "ChatUser2", fields: [userId2], references: [id])
-  messages  Message[]
-  media     Media[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
-  @@unique([userId1, userId2])
-}
-
-model Message {
-  id        String   @id @default(uuid())
-  content   String
-  senderId  String
-  chatId    String
-  sender    User     @relation(fields: [senderId], references: [id])
-  chat      Chat     @relation(fields: [chatId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
