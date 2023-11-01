@@ -68,13 +68,15 @@ model Review {
 }
 
 model Media {
-  id        String    @id @default(uuid())
-  type      MediaType
-  url       String
-  productId String?
-  product   Product?  @relation(fields: [productId], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String    @id @default(uuid())
+  type        MediaType
+  filename    String    // Name of the file in the S3 bucket
+  contentType String    // MIME type of the file, e.g., 'image/jpeg'
+  url         String    // S3 URL for the media
+  productId   String?   
+  product     Product?  @relation(fields: [productId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 enum MediaType {

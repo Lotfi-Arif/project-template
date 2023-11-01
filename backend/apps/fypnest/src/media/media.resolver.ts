@@ -1,45 +1,37 @@
-// media.resolver.ts
-
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { MediaService } from './media.service';
+import { Media } from '@app/prisma-generated/generated/nestgraphql/media/media.model';
+import { Logger, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
-@Resolver()
+@Resolver(() => Media)
 export class MediaResolver {
+  private readonly logger = new Logger(MediaResolver.name);
+
   constructor(private readonly mediaService: MediaService) {}
 
-  @Mutation(() => String)
-  async uploadFile(
-    @Args({ name: 'file' })
-    file,
-  ): Promise<string> {
-    const { createReadStream, filename } = await file;
-    const stream = createReadStream();
-    const buffer = await streamToBuffer(stream);
-    return this.mediaService.uploadFile(buffer, filename);
+  @Query(() => [Media])
+  async media() {
+    this.logger.log('Fetching all media records');
+    return this.mediaService.getAllMedia();
   }
 
-  @Query(() => String)
-  async getFile(@Args('filename') filename: string): Promise<string> {
-    return this.mediaService.getFile(filename);
+  @Query(() => Buffer, { nullable: true })
+  async mediaContent(@Args('id') id: string) {
+    this.logger.log(`Fetching media content with ID: ${id}`);
+    return this.mediaService.getMediaById(id);
   }
 
-  @Mutation(() => Boolean)
-  async deleteFile(@Args('filename') filename: string): Promise<boolean> {
-    await this.mediaService.deleteFile(filename);
-    return true;
+  @Mutation(() => Media)
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadMedia(@UploadedFile() file: Express.Multer.File) {
+    this.logger.log('Uploading a new media');
+    return this.mediaService.createMedia(file);
   }
 
-  @Query(() => [String])
-  async listFiles(): Promise<string[]> {
-    return this.mediaService.listFiles();
+  @Mutation(() => Media)
+  async deleteMedia(@Args('id') id: string) {
+    this.logger.log(`Deleting media with ID: ${id}`);
+    return this.mediaService.deleteMedia(id);
   }
-}
-
-function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const chunks: any[] = [];
-    stream.on('data', (chunk) => chunks.push(chunk));
-    stream.on('error', reject);
-    stream.on('end', () => resolve(Buffer.concat(chunks)));
-  });
 }

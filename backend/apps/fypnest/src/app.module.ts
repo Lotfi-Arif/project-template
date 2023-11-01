@@ -12,6 +12,9 @@ import config from '@app/common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MediaModule } from './media/media.module';
+import { OrderModule } from './order/order.module';
+import { ProductModule } from './product/product.module';
+import { ReviewModule } from './review/review.module';
 import { GqlConfigService } from './graphql/gql-config-service';
 import { TestingModule } from '@nestjs/testing';
 
@@ -35,6 +38,9 @@ import { TestingModule } from '@nestjs/testing';
     PrismaModule,
     TestingModule,
     MediaModule,
+    OrderModule,
+    ProductModule,
+    ReviewModule,
   ],
   providers: [PrismaService, UserService],
   exports: [PrismaService],
