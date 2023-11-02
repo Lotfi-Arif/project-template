@@ -1,49 +1,69 @@
-import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
-import { UserService } from '../user/user.service';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { Auth } from 'libs/prisma/src/generated/nestgraphql/auth/auth.model';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'libs/prisma/src/generated/nestgraphql/user/user.model';
-import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
 
   constructor(
-    private userService: UserService,
+    private prisma: PrismaService,
     private jwtService: JwtService,
   ) {}
 
-  async register(data: UserCreateInput): Promise<User> {
-    this.logger.log(`Registering user with email: ${data.email}`);
-    const user = await this.userService.createUser(data);
-    return user;
-  }
-
-  async validateUser(email: string, password: string): Promise<User | null> {
-    const user = await this.userService.getUserByEmail(email);
-    if (user && user.password === password) {
-      this.logger.log(`User validation successful for email: ${email}`);
-      return user;
-    }
-    this.logger.log(`User validation failed for email: ${email}`);
-    return null;
-  }
-
-  async login(
-    email: string,
+  /**
+   * Registers a user.
+   * @returns Auth object with details of the created user.
+   */
+  async register(
+    username: string,
     password: string,
-  ): Promise<{ access_token: string }> {
-    const user = await this.validateUser(email, password);
+    email: string,
+  ): Promise<Auth> {
+    this.logger.log('Registering a new user');
 
-    if (!user) {
-      this.logger.log(`Login failed for email: ${email}`);
-      throw new UnauthorizedException('Invalid email or password');
+    // Check if the user already exists
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    if (existingUser) {
+      throw new UnauthorizedException('User already exists');
     }
 
-    const payload = { email: user.email, sub: user.id };
-    this.logger.log(`Login successful for email: ${email}`);
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    const user = await this.prisma.user.create({
+      data: {
+        email,
+        password,
+        auth: {
+          create: {
+            username,
+            password, // TODO: Encrypt this password before saving
+          },
+        },
+      },
+      include: {
+        auth: true,
+      },
+    });
+
+    return user.auth;
+  }
+
+  /**
+   * Authenticates a user.
+   * @returns JWT token string if successful, throws an error otherwise.
+   */
+  async login(username: string, password: string): Promise<string> {
+    this.logger.log(`Authenticating user with username: ${username}`);
+
+    const auth = await this.prisma.auth.findUnique({ where: { username } });
+    if (!auth || auth.password !== password) {
+      // TODO: Use encrypted password check here
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    const payload = { username: auth.username, userId: auth.userId };
+    return this.jwtService.sign(payload);
   }
 }

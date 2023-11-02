@@ -1,9 +1,10 @@
 // prisma/seed.ts
-import { PrismaClient, UserRole, MediaType } from '@prisma/client';
+import { PrismaClient, UserRole } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  // Create an admin user
   const admin = await prisma.user.create({
     data: {
       email: 'admin@example.com',
@@ -14,74 +15,87 @@ async function main() {
     },
   });
 
-  const teacher = await prisma.user.create({
+  // Create an Auth for the admin user
+  const adminAuth = await prisma.auth.create({
     data: {
-      email: 'teacher@example.com',
-      password: 'teacher123',
+      username: 'admin',
+      password: 'admin123',
+      user: { connect: { id: admin.id } },
+    },
+  });
+
+  // Create a regular user
+  const regularUser = await prisma.user.create({
+    data: {
+      email: 'user@example.com',
+      password: 'user123',
       firstName: 'John',
       lastName: 'Doe',
-      role: UserRole.TEACHER,
+      role: UserRole.USER,
     },
   });
 
-  const student = await prisma.user.create({
+  // Create an Auth for the regular user
+  const userAuth = await prisma.auth.create({
     data: {
-      email: 'student@example.com',
-      password: 'student123',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      role: UserRole.STUDENT,
+      username: 'john',
+      password: 'user123',
+      user: { connect: { id: regularUser.id } },
     },
   });
 
-  const course = await prisma.course.create({
+  const product = await prisma.product.create({
     data: {
-      name: 'Introduction to Programming',
-      description: 'Learn the basics of programming.',
-      teacher: { connect: { id: teacher.id } },
+      stock: 1,
+      name: 'sdasd',
+      description: 'asdasd',
+      price: 123,
+      SKU: 'some-unique-sku',
+      media: {
+        connectOrCreate: {
+          create: {
+            contentType: '',
+            filename: '',
+            type: 'IMAGE',
+            url: '',
+          },
+          where: {
+            id: '',
+          },
+        },
+      },
     },
   });
 
-  const courseEnrollment = await prisma.courseEnrollment.create({
+  // Create an order for the regular user
+  const order = await prisma.order.create({
     data: {
-      course: { connect: { id: course.id } },
-      user: { connect: { id: student.id } },
+      totalAmount: 2,
+      user: { connect: { id: regularUser.id } },
     },
   });
 
-  const chat = await prisma.chat.create({
+  // Create a review for the regular user
+  const review = await prisma.review.create({
     data: {
-      user1: { connect: { id: teacher.id } },
-      user2: { connect: { id: student.id } },
-    },
-  });
-
-  const message = await prisma.message.create({
-    data: {
-      content: 'Hello, student!',
-      sender: { connect: { id: teacher.id } },
-      chat: { connect: { id: chat.id } },
-    },
-  });
-
-  const media = await prisma.media.create({
-    data: {
-      type: MediaType.IMAGE,
-      url: '/media/sample-image.jpg',
-      course: { connect: { id: course.id } },
-      Chat: { connect: { id: chat.id } },
+      content: 'somethign',
+      rating: 5,
+      product: {
+        connect: {
+          id: product.id,
+        },
+      },
+      user: { connect: { id: regularUser.id } },
     },
   });
 
   console.log('Seed data created:', {
     admin,
-    teacher,
-    student,
-    course,
-    courseEnrollment,
-    chat,
-    message,
-    media,
+    adminAuth,
+    regularUser,
+    userAuth,
+    order,
+    review,
   });
 }
 

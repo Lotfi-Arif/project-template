@@ -13,56 +13,111 @@ generator nestgraphql {
   packageVersion = "1.0.0"
 }
 
+model Auth {
+  id       String @id @default(uuid())
+  username String @unique
+  password String
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id])
+}
+
 enum UserRole {
   ADMIN
   USER
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String     @id @default(uuid())
+  email     String     @unique
   password  String
   firstName String?
   lastName  String?
-  role      UserRole @default(USER)
+  role      UserRole   @default(USER)
   orders    Order[]
   reviews   Review[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  auth      Auth?
+  cartItems CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Cart      Cart[]
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   name        String
   description String
   price       Float
-  SKU         String   @unique
-  media       Media[]
+  stock       Int
+  SKU         String     @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   reviews     Review[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  Order       Order?   @relation(fields: [orderId], references: [id])
-  orderId     String?
+  media       Media[]
+  cartItems   CartItem[]
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  cartItems CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String  @id @default(uuid())
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float   @default(0)
+  orderId   String?
+  order     Order?  @relation(name: "OrderItems", fields: [orderId], references: [id])
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id])
+  paymentMethod String
+  amount        Float
+  status        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
 
 model Order {
-  id          String    @id @default(uuid())
+  id          String      @id @default(uuid())
   userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  products    Product[]
+  user        User        @relation(fields: [userId], references: [id])
   totalAmount Float
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  status      OrderStatus @default(PENDING)
+  items       CartItem[]  @relation(name: "OrderItems")
+  payments    Payment[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
 model Review {
   id        String   @id @default(uuid())
-  productId String
-  userId    String
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-  rating    Int
   content   String
+  rating    Int
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -70,10 +125,10 @@ model Review {
 model Media {
   id          String    @id @default(uuid())
   type        MediaType
-  filename    String    // Name of the file in the S3 bucket
-  contentType String    // MIME type of the file, e.g., 'image/jpeg'
-  url         String    // S3 URL for the media
-  productId   String?   
+  filename    String // Name of the file in the S3 bucket
+  contentType String // MIME type of the file, e.g., 'image/jpeg'
+  url         String // S3 URL for the media
+  productId   String?
   product     Product?  @relation(fields: [productId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

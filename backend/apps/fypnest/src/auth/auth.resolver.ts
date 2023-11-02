@@ -1,8 +1,6 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Logger } from '@nestjs/common';
-import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
-import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 
 @Resolver()
 export class AuthResolver {
@@ -10,20 +8,23 @@ export class AuthResolver {
 
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => User)
-  async register(@Args('data') data: UserCreateInput): Promise<User> {
-    this.logger.log(`Attempting to register user with email: ${data.email}`);
-    const user = await this.authService.register(data);
-    return user;
+  @Mutation(() => String)
+  async register(
+    @Args('username') username: string,
+    @Args('password') password: string,
+    @Args('email') email: string,
+  ): Promise<string> {
+    this.logger.log(`Registering user with email: ${email}`);
+    const auth = await this.authService.register(username, password, email);
+    return `Registered successfully with ID: ${auth.id}`;
   }
 
   @Mutation(() => String)
   async login(
-    @Args('email') email: string,
+    @Args('username') username: string,
     @Args('password') password: string,
   ): Promise<string> {
-    this.logger.log(`Attempting login for email: ${email}`);
-    const { access_token } = await this.authService.login(email, password);
-    return access_token;
+    this.logger.log(`User login attempt with username: ${username}`);
+    return this.authService.login(username, password);
   }
 }
