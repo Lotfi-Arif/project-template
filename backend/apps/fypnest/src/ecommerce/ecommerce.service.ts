@@ -238,4 +238,101 @@ export class ECommerceService {
     // Return the updated order object after the status has been updated
     return updatedOrder;
   }
+
+  // /**
+  //  * Updates the quantity of a product in a user's cart.
+  //  * If the new quantity is 0, the item is removed from the cart.
+  //  */
+  // async updateCartItemQuantity(
+  //   cartItemId: string,
+  //   newQuantity: number,
+  // ): Promise<void> {
+  //   if (newQuantity <= 0) {
+  //     // If the quantity is zero or less, remove the item instead of updating
+  //     return this.removeCartItem(cartItemId);
+  //   }
+
+  //   // Update the cart item with the new quantity
+  //   const updateResult = await this.databaseService.updateCartItem(
+  //     cartItemId,
+  //     newQuantity,
+  //   );
+  //   if (!updateResult) {
+  //     throw new NotFoundException(`Cart item with ID ${cartItemId} not found.`);
+  //   }
+  // }
+
+  // /**
+  //  * Removes a product from the user's cart.
+  //  */
+  // async removeCartItem(cartItemId: string): Promise<void> {
+  //   const deleteResult = await this.databaseService.deleteCartItem(cartItemId);
+  //   if (!deleteResult) {
+  //     throw new NotFoundException(`Cart item with ID ${cartItemId} not found.`);
+  //   }
+  // }
+
+  // /**
+  //  * Processes the user's checkout, creating an order and initiating a payment transaction.
+  //  */
+  // async processCheckout(userId: string): Promise<Payment> {
+  //   // Check the user's cart and calculate total cost
+  //   const cartItems = await this.databaseService.getCartItemsForUser(userId);
+  //   if (cartItems.length === 0) {
+  //     throw new NotFoundException(
+  //       `No items in the cart for user ID ${userId}.`,
+  //     );
+  //   }
+
+  //   const totalCost = cartItems.reduce(
+  //     (sum, item) => sum + item.product.price * item.quantity,
+  //     0,
+  //   );
+
+  //   // Create an order in the database
+  //   const order = await this.databaseService.createOrder(
+  //     userId,
+  //     cartItems,
+  //     totalCost,
+  //   );
+
+  //   // Process payment (in a real-world scenario, integrate with a payment provider)
+  //   const payment = await this.databaseService.processPayment(
+  //     order.id,
+  //     totalCost,
+  //   );
+
+  //   return payment;
+  // }
+
+  // /**
+  //  * Records a payment for an order into the system.
+  //  */
+  // async recordPayment(
+  //   orderId: string,
+  //   paymentMethod: string,
+  //   amount: number,
+  // ): Promise<Payment> {
+  //   // Check if the order exists
+  //   const order = await this.databaseService.getOrderById(orderId);
+  //   if (!order) {
+  //     throw new NotFoundException(`Order with ID ${orderId} not found.`);
+  //   }
+
+  //   // Check if the payment amount matches the order's total
+  //   if (order.total !== amount) {
+  //     throw new Error(
+  //       `Payment amount ${amount} does not match order total ${order.total}.`,
+  //     );
+  //   }
+
+  //   // Record the payment into the database
+  //   const payment = await this.databaseService.createPaymentRecord(
+  //     orderId,
+  //     paymentMethod,
+  //     amount,
+  //   );
+
+  //   return payment;
+  // }
 }

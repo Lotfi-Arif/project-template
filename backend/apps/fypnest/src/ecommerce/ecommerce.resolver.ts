@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ECommerceService } from './ecommerce.service';
 import { Product } from '@app/prisma-generated/generated/nestgraphql/product/product.model';
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
+// import { Payment } from '@app/prisma-generated/generated/nestgraphql/payment/payment.model';
 
 @Resolver()
 export class ECommerceResolver {
@@ -32,9 +33,6 @@ export class ECommerceResolver {
     return true;
   }
 
-  // Additional resolvers such as placeOrder, removeFromCart, updateQuantity,
-  // checkout, and payment will be similar in structure to the above examples.
-
   /**
    * Processes a user's order based on their current cart.
    * @param userId - The unique identifier of the user placing the order.
@@ -45,5 +43,55 @@ export class ECommerceResolver {
     return this.eCommerceService.placeOrder(userId);
   }
 
-  // ...more resolvers for other operations like updateCart, checkout, etc.
+  // /**
+  //  * Updates the quantity of a product in the user's cart.
+  //  * @param cartItemId - The unique identifier of the cart item to update.
+  //  * @param newQuantity - The new quantity to set for the cart item.
+  //  */
+  // @Mutation(() => Boolean)
+  // async updateCart(
+  //   @Args('cartItemId') cartItemId: string,
+  //   @Args('newQuantity') newQuantity: number,
+  // ): Promise<boolean> {
+  //   await this.eCommerceService.updateCartItemQuantity(cartItemId, newQuantity);
+  //   return true;
+  // }
+
+  // /**
+  //  * Removes a product from the user's cart.
+  //  * @param cartItemId - The unique identifier of the cart item to remove.
+  //  */
+  // @Mutation(() => Boolean)
+  // async removeFromCart(
+  //   @Args('cartItemId') cartItemId: string,
+  // ): Promise<boolean> {
+  //   await this.eCommerceService.removeCartItem(cartItemId);
+  //   return true;
+  // }
+
+  // /**
+  //  * Finalizes the user's order and processes payment.
+  //  * @param userId - The unique identifier of the user checking out.
+  //  * @returns A Payment model representing the transaction.
+  //  */
+  // @Mutation(() => Payment)
+  // async checkout(@Args('userId') userId: string): Promise<Payment> {
+  //   return this.eCommerceService.processCheckout(userId);
+  // }
+
+  // /**
+  //  * Records a payment for an order.
+  //  * @param orderId - The unique identifier of the order being paid for.
+  //  * @param paymentMethod - The payment method used.
+  //  * @param amount - The amount paid.
+  //  * @returns A Payment model representing the completed payment.
+  //  */
+  // @Mutation(() => Payment)
+  // async makePayment(
+  //   @Args('orderId') orderId: string,
+  //   @Args('paymentMethod') paymentMethod: string,
+  //   @Args('amount') amount: number,
+  // ): Promise<Payment> {
+  //   return this.eCommerceService.recordPayment(orderId, paymentMethod, amount);
+  // }
 }

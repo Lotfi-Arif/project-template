@@ -17,6 +17,9 @@ import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
 import { GqlConfigService } from './graphql/gql-config-service';
 import { TestingModule } from '@nestjs/testing';
+import { PaymentModule } from './payment/payment.module';
+import { CartItemModule } from './cart-item/cart-item.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -41,6 +44,9 @@ import { TestingModule } from '@nestjs/testing';
     OrderModule,
     ProductModule,
     ReviewModule,
+    PaymentModule,
+    CartItemModule,
+    CartModule,
   ],
   providers: [PrismaService, UserService],
   exports: [PrismaService],
