@@ -13,33 +13,67 @@ generator nestgraphql {
   packageVersion = "1.0.0"
 }
 
-model Auth {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  userId   String @unique
-  user     User   @relation(fields: [userId], references: [id])
-}
-
 enum UserRole {
   ADMIN
   USER
+  MANAGER
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  OTHER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
-  password  String
+  id        String    @id @default(uuid())
   firstName String?
   lastName  String?
-  role      UserRole   @default(USER)
+  role      UserRole  @default(USER)
   orders    Order[]
   reviews   Review[]
-  auth      Auth?
-  cartItems CartItem[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Cart      Cart[]
+  cart      Cart?
+  address   Address[]
+  auth      Auth? // One-to-one relation with Auth
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Auth {
+  id                   String    @id @default(uuid())
+  userId               String    @unique
+  user                 User      @relation(fields: [userId], references: [id])
+  email                String    @unique
+  password             String // Hashed password
+  refreshToken         String // Store the refresh token (hashed for security)
+  passwordResetToken   String?   @unique
+  passwordResetExpires DateTime?
+  //TODO: add fields for token expiry, created IP, and user agent when needed.
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model Address {
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String? // Should not be unique if one address can belong to one user only
+  line1     String
+  line2     String?
+  city      String
+  state     String
+  zip       String
+  country   String
+  orders    Order[] // If an address can be associated with multiple orders
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -49,6 +83,7 @@ model Product {
   price       Float
   stock       Int
   SKU         String     @unique
+  categories  Category[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   reviews     Review[]
@@ -56,9 +91,15 @@ model Product {
   cartItems   CartItem[]
 }
 
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  products Product[]
+}
+
 model Cart {
   id        String     @id @default(uuid())
-  userId    String
+  userId    String     @unique
   user      User       @relation(fields: [userId], references: [id])
   cartItems CartItem[]
   createdAt DateTime   @default(now())
@@ -66,17 +107,31 @@ model Cart {
 }
 
 model CartItem {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   cartId    String
-  cart      Cart    @relation(fields: [cartId], references: [id])
+  cart      Cart     @relation(fields: [cartId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
   quantity  Int
-  price     Float   @default(0)
+  price     Float    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   orderId   String?
-  order     Order?  @relation(name: "OrderItems", fields: [orderId], references: [id])
-  User      User?   @relation(fields: [userId], references: [id])
-  userId    String?
+  order     Order?   @relation(fields: [orderId], references: [id], name: "OrderToCartItem") // Use the same name as in Order
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  totalAmount Float
+  status      OrderStatus @default(PENDING)
+  items       CartItem[]  @relation(name: "OrderToCartItem") // Match this name with CartItem's relation name
+  payments    Payment[]
+  addressId   String?
+  address     Address?    @relation(fields: [addressId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
 model Payment {
@@ -88,26 +143,6 @@ model Payment {
   status        String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-}
-
-enum OrderStatus {
-  PENDING
-  CONFIRMED
-  SHIPPED
-  DELIVERED
-  CANCELLED
-}
-
-model Order {
-  id          String      @id @default(uuid())
-  userId      String
-  user        User        @relation(fields: [userId], references: [id])
-  totalAmount Float
-  status      OrderStatus @default(PENDING)
-  items       CartItem[]  @relation(name: "OrderItems")
-  payments    Payment[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
 }
 
 model Review {
@@ -132,10 +167,4 @@ model Media {
   product     Product?  @relation(fields: [productId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-}
-
-enum MediaType {
-  IMAGE
-  VIDEO
-  OTHER
 }

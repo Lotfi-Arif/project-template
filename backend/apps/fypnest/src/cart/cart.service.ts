@@ -2,7 +2,6 @@
 
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Cart } from '@app/prisma-generated/generated/nestgraphql/cart/cart.model';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
 
 @Injectable()
