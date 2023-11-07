@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthCreateInput } from '@app/prisma-generated/generated/nestgraphql/auth/auth-create.input';
 import { Auth } from '@app/prisma-generated/generated/nestgraphql/auth/auth.model';
 import { v4 as uuid } from 'uuid';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   /**
@@ -112,26 +114,29 @@ export class AuthService {
   /**
    * Generates a new JWT and refresh token for a user.
    * @param userId - The user's unique identifier.
+   * @param email - The user's email.
    * @returns An object containing both the JWT and refresh token.
    */
   async generateTokens(userId: string, email: string) {
-    const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(
-        {
-          userId,
-          email,
-        },
-        {
-          expiresIn: '15m', // Expires in 15 minutes, for example
-        },
-      ),
-      uuid(), // Use UUID or any other strategy for refresh tokens
-    ]);
+    const accessToken = await this.jwtService.signAsync(
+      { userId, email },
+      { expiresIn: '15m' }, // Access token expires in 15 minutes
+    );
 
-    // Save the refresh token with the user's auth record
+    const refreshToken = await this.jwtService.signAsync(
+      { userId, email },
+      {
+        secret: this.configService.get('JWT_REFRESH_SECRET'), // Secret for refresh token
+        expiresIn: '7d', // Refresh token expires in 7 days
+      },
+    );
+
+    // Store the hashed version of the JWT refresh token for added security
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+
     await this.prisma.auth.update({
       where: { userId },
-      data: { refreshToken },
+      data: { refreshToken: hashedRefreshToken },
     });
 
     return { accessToken, refreshToken };
@@ -140,26 +145,25 @@ export class AuthService {
   /**
    * Refreshes the access token.
    * @param userId - The user's unique identifier.
-   * @param refreshToken - The refresh token.
+   * @param token - The refresh token.
    * @returns A new JWT token.
    */
-  async refreshToken(userId: string, refreshToken: string): Promise<string> {
-    // Validate the refresh token
+  async refreshToken(userId: string, token: string): Promise<string> {
     const auth = await this.prisma.auth.findUnique({ where: { userId } });
 
-    if (!auth || auth.refreshToken !== refreshToken) {
+    if (!auth) {
+      throw new UnauthorizedException('Authentication record not found');
+    }
+
+    const refreshTokenValid = await bcrypt.compare(token, auth.refreshToken);
+    if (!refreshTokenValid) {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    // Generate a new access token
+    // If the refresh token is valid, generate a new access token
     const accessToken = await this.jwtService.signAsync(
-      {
-        userId,
-        email: auth.email,
-      },
-      {
-        expiresIn: '15m',
-      },
+      { userId, email: auth.email },
+      { expiresIn: '15m' },
     );
 
     return accessToken;

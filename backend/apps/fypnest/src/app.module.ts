@@ -5,7 +5,6 @@ import { UserService } from './user/user.service';
 import { ProvidersModule } from '@app/providers';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma';
-import { ChatModule } from './chat/chat.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import config from '@app/common/configs/config';
@@ -23,7 +22,11 @@ import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+      envFilePath: '../../../.env',
+    }),
     UserModule,
     ProvidersModule,
     EventEmitterModule.forRoot({
@@ -36,7 +39,6 @@ import { CartModule } from './cart/cart.module';
     PrismaModule.forRoot({
       isGlobal: true,
     }),
-    ChatModule,
     AuthModule,
     PrismaModule,
     TestingModule,

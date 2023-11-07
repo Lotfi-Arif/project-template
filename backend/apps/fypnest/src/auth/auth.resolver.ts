@@ -1,19 +1,27 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, ObjectType, Field, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Logger } from '@nestjs/common';
 import { AuthCreateInput } from '@app/prisma-generated/generated/nestgraphql/auth/auth-create.input';
 import { Auth } from '@app/prisma-generated/generated/nestgraphql/auth/auth.model';
 
+@ObjectType()
 export class TokenType {
+  @Field()
   accessToken: string;
+
+  @Field()
   refreshToken: string;
 }
 
+@ObjectType()
 export class PasswordResetInitiateResponseType {
+  @Field()
   passwordResetToken: string;
 }
 
+@ObjectType()
 export class PasswordResetCompleteResponseType {
+  @Field()
   message: string;
 }
 
@@ -68,8 +76,12 @@ export class AuthResolver {
   async completePasswordReset(
     @Args('token') token: string,
     @Args('newPassword') newPassword: string,
-  ): Promise<string> {
+  ): Promise<PasswordResetCompleteResponseType> {
     this.logger.log(`Completing password reset for token: ${token}`);
-    return this.authService.completePasswordReset(token, newPassword);
+    const message = await this.authService.completePasswordReset(
+      token,
+      newPassword,
+    );
+    return { message }; // Wrap the message in the appropriate GraphQL object type
   }
 }
