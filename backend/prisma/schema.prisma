@@ -98,12 +98,38 @@ model Category {
 }
 
 model Cart {
-  id        String     @id @default(uuid())
-  userId    String     @unique
-  user      User       @relation(fields: [userId], references: [id])
-  cartItems CartItem[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id         String     @id @default(uuid())
+  userId     String     @unique
+  user       User       @relation(fields: [userId], references: [id])
+  cartItems  CartItem[]
+  discount   Discount?  @relation(fields: [discountId], references: [id])
+  discountId String?
+  coupon     Coupon?    @relation(fields: [couponId], references: [id])
+  couponId   String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Discount {
+  id          String   @id @default(uuid())
+  percentage  Float? // Represents percentage-based discount, e.g., 10 for 10%
+  flatAmount  Float? // Represents flat amount discount, e.g., 5 for $5 off
+  description String?
+  carts       Cart[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Coupon {
+  id         String    @id @default(uuid())
+  code       String    @unique
+  percentage Float? // Represents percentage-based discount, e.g., 15 for 15%
+  flatAmount Float? // Represents flat amount discount, e.g., 20 for $20 off
+  oneTimeUse Boolean   @default(true)
+  expiration DateTime?
+  carts      Cart[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model CartItem {
@@ -117,7 +143,7 @@ model CartItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orderId   String?
-  order     Order?   @relation(fields: [orderId], references: [id], name: "OrderToCartItem") // Use the same name as in Order
+  order     Order?   @relation(fields: [orderId], references: [id], name: "OrderToCartItem")
 }
 
 model Order {
