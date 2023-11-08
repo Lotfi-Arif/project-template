@@ -53,7 +53,8 @@ model Auth {
   user                 User      @relation(fields: [userId], references: [id])
   email                String    @unique
   password             String // Hashed password
-  refreshToken         String // Store the refresh token (hashed for security)
+  refreshToken         String? // Store the refresh token (hashed for security)
+  accessToken          String?
   passwordResetToken   String?   @unique
   passwordResetExpires DateTime?
   //TODO: add fields for token expiry, created IP, and user agent when needed.

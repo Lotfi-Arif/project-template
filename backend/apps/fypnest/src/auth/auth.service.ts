@@ -5,6 +5,7 @@ import {
   UnauthorizedException,
   InternalServerErrorException,
   BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
@@ -31,11 +32,10 @@ export class AuthService {
    */
   async register(
     authCreateInput: Prisma.AuthCreateArgs,
-  ): Promise<{ user: Auth; refreshToken: string }> {
+  ): Promise<{ accessToken: string; refreshToken: string; user: Auth }> {
     try {
       this.logger.log('Registering a new user');
 
-      // Check if the user already exists
       const existingAuth = await this.prisma.auth.findUnique({
         where: { email: authCreateInput.data.email },
       });
@@ -43,43 +43,43 @@ export class AuthService {
         throw new ConflictException('Email already in use');
       }
 
-      // Hash the password before saving
       const hashedPassword = await bcrypt.hash(
         authCreateInput.data.password,
         10,
       );
 
-      // Generate a new refresh token
-      const refreshToken = uuid(); // Generate the actual refresh token to send to the client
-
-      // Hash the refresh token for security before saving
-      const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
-
-      // Create the user and auth records with the hashed refresh token
-      const user = await this.prisma.user.create({
+      const userCreationResult = await this.prisma.user.create({
         data: {
+          // ... other user details
           auth: {
             create: {
               email: authCreateInput.data.email,
               password: hashedPassword,
-              refreshToken: hashedRefreshToken, // Store the hashed refresh token
             },
           },
         },
         include: {
-          auth: true,
+          auth: true, // Include the auth object
         },
       });
 
-      // Prepare the response object with the unhashed refresh token
-      const response = {
-        user: user.auth,
-        refreshToken, // Send the actual refresh token (not hashed)
-      };
+      // Now that the user is created, generate tokens
+      const tokens = await this.generateTokens(
+        userCreationResult.id,
+        authCreateInput.data.email,
+      );
 
-      // Return the response object, which includes the actual refresh token
-      return response;
+      return {
+        user: userCreationResult.auth, // Ensure this matches the Auth type structure
+        ...tokens,
+      };
     } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Email already in use');
+      }
       this.logger.error(
         `Failed to register user with email: ${authCreateInput.data.email}`,
         error.stack,
@@ -94,41 +94,64 @@ export class AuthService {
    * @param password - User's password.
    * @returns JWT token string if successful.
    */
-  async login(email: string, password: string): Promise<string> {
+  /**
+   * Authenticates a user.
+   * @param email - User's email.
+   * @param password - User's password.
+   * @returns JWT token string if successful.
+   */
+  async login(
+    email: string,
+    password: string,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
     try {
       this.logger.log(`Authenticating user with email: ${email}`);
 
-      // Find the authentication record that matches the email
       const auth = await this.prisma.auth.findUnique({
         where: { email },
       });
 
-      // If no authentication record is found, or the password does not match, throw an error
       if (!auth || !(await bcrypt.compare(password, auth.password))) {
         throw new UnauthorizedException('Invalid credentials');
       }
 
-      // If a valid auth record is found, get the user associated with this auth
       const user = await this.prisma.user.findUnique({
         where: { id: auth.userId },
       });
 
-      // If no user is associated with the auth record, throw an error (should not happen in a consistent database)
       if (!user) {
-        throw new UnauthorizedException('User not found');
+        this.logger.error(`User not found for auth ID: ${auth.id}`);
+        throw new NotFoundException('User not found');
       }
 
-      // Create the JWT payload using the user's email and id
-      const payload = { email: auth.email, userId: user.id };
+      // Use generateTokens method to create both access and refresh tokens.
+      const { accessToken, refreshToken } = await this.generateTokens(
+        user.id,
+        auth.email,
+      );
 
-      // Sign the JWT token and return it
-      return this.jwtService.sign(payload);
+      // No need to update the Auth entry with the access token, so we only update the refresh token.
+      await this.prisma.auth.update({
+        where: { id: auth.id },
+        data: { refreshToken: await bcrypt.hash(refreshToken, 10) },
+      });
+
+      return {
+        accessToken,
+        refreshToken, // Assuming this is the plain refresh token, not hashed
+      };
     } catch (error) {
+      if (
+        error instanceof UnauthorizedException ||
+        error instanceof NotFoundException
+      ) {
+        throw error;
+      }
       this.logger.error(
         `Failed to authenticate user with email: ${email}`,
         error.stack,
       );
-      throw new InternalServerErrorException('Login failed');
+      throw new InternalServerErrorException('Authentication failed');
     }
   }
 
@@ -281,9 +304,8 @@ export class AuthService {
       });
 
       if (!auth) {
-        throw new UnauthorizedException(
-          'Invalid or expired password reset token',
-        );
+        this.logger.warn(`Invalid or expired password reset token: ${token}`);
+        throw new NotFoundException('Invalid or expired password reset token');
       }
 
       // Hash the new password
@@ -301,11 +323,8 @@ export class AuthService {
 
       return 'Password has been reset successfully';
     } catch (error) {
-      if (
-        error instanceof UnauthorizedException ||
-        error instanceof ConflictException
-      ) {
-        throw error;
+      if (error instanceof NotFoundException) {
+        throw error; // This is already a domain-meaningful exception
       }
       this.logger.error('Failed to complete password reset', error.stack);
       throw new InternalServerErrorException(
