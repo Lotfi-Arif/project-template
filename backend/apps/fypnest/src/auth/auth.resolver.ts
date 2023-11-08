@@ -1,8 +1,8 @@
 import { Args, Mutation, ObjectType, Field, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { Logger } from '@nestjs/common';
-import { AuthCreateInput } from '@app/prisma-generated/generated/nestgraphql/auth/auth-create.input';
 import { Auth } from '@app/prisma-generated/generated/nestgraphql/auth/auth.model';
+import { CreateOneAuthArgs } from '@app/prisma-generated/generated/nestgraphql/auth/create-one-auth.args';
 
 @ObjectType()
 export class TokenType {
@@ -31,13 +31,15 @@ export class AuthResolver {
 
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => AuthCreateInput)
+  @Mutation(() => CreateOneAuthArgs)
   async register(
-    @Args('authCreateInput') authCreateInput: AuthCreateInput,
+    @Args('authCreateInput') createOneAuthArgs: CreateOneAuthArgs,
   ): Promise<{ user: Auth; refreshToken: string }> {
-    this.logger.log(`Registering user with email: ${authCreateInput.email}`);
+    this.logger.log(
+      `Registering user with email: ${createOneAuthArgs.data.email}`,
+    );
     const { user, refreshToken } =
-      await this.authService.register(authCreateInput);
+      await this.authService.register(createOneAuthArgs);
     return {
       user, // This would typically be a User object
       refreshToken, // You may want to return a Token object or a custom GraphQL type instead

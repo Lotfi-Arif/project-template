@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Review } from '@app/prisma-generated/generated/nestgraphql/review/review.model';
 import { ReviewCreateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-create.input';
-import { ReviewUpdateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-update.input';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ReviewService {
@@ -56,7 +56,7 @@ export class ReviewService {
    */
   async updateReview(params: {
     id: string;
-    data: ReviewUpdateInput;
+    data: Prisma.ReviewUpdateInput;
   }): Promise<Review> {
     const { id, data } = params;
     this.logger.log(`Updating review with id: ${id}`);

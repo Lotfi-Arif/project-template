@@ -2,8 +2,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CartItemService } from './cart-item.service';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
 import { Logger } from '@nestjs/common';
-import { CartItemCreateInput } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item-create.input';
-import { CartItemUpdateInput } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item-update.input';
+import { CreateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/create-one-cart-item.args';
+import { UpdateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/update-one-cart-item.args';
 
 @Resolver(() => CartItem)
 export class CartItemResolver {
@@ -19,19 +19,21 @@ export class CartItemResolver {
 
   @Mutation(() => CartItem)
   async addCartItem(
-    @Args('data') data: CartItemCreateInput,
+    @Args('data') createOneCartItemArgs: CreateOneCartItemArgs,
   ): Promise<CartItem> {
     this.logger.log('Resolving add new cart item');
-    return this.cartItemService.createCartItem(data);
+    return this.cartItemService.createCartItem({
+      data: createOneCartItemArgs.data,
+    });
   }
 
   @Mutation(() => CartItem)
   async updateCartItem(
     @Args('id') id: string,
-    @Args('data') data: CartItemUpdateInput,
+    @Args('data') updateOneCartItemArgs: UpdateOneCartItemArgs,
   ): Promise<CartItem> {
     this.logger.log(`Resolving update for cart item with ID: ${id}`);
-    return this.cartItemService.updateCartItem(id, data);
+    return this.cartItemService.updateCartItem(id, updateOneCartItemArgs);
   }
 
   @Mutation(() => CartItem)

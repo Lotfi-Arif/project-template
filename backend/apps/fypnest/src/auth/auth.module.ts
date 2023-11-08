@@ -5,7 +5,7 @@ import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtStrategy } from './jwt.strategy'; // If you have a strategy like this
+import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
   imports: [
@@ -20,9 +20,8 @@ import { JwtStrategy } from './jwt.strategy'; // If you have a strategy like thi
       }),
       inject: [ConfigService], // Inject the ConfigService
     }),
-    // ... other modules as required
   ],
-  providers: [AuthService, AuthResolver, JwtStrategy],
+  providers: [AuthService, AuthResolver, PrismaService],
   exports: [AuthService], // Export AuthService if it will be used outside of this module
 })
 export class AuthModule {}

@@ -11,7 +11,7 @@ import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/
 import { Cart } from '@app/prisma-generated/generated/nestgraphql/cart/cart.model';
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
 import { Coupon } from '@app/prisma-generated/generated/nestgraphql/coupon/coupon.model';
-import { DiscountCreateInput } from '@app/prisma-generated/generated/nestgraphql/discount/discount-create.input';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CartService {
@@ -318,15 +318,17 @@ export class CartService {
       const discountValue = this.calculateDiscount(cart, coupon);
 
       // Create a new discount record with the calculated discount value
-      const discountData: DiscountCreateInput = {
-        description: `Coupon ${coupon.code} applied`,
+      const discountData: Prisma.DiscountCreateArgs = {
+        data: {
+          description: '',
+        },
       };
 
       // Determine the type of discount and assign the value to the correct field
       if (coupon.percentage) {
-        discountData.percentage = coupon.percentage;
+        discountData.data.percentage = coupon.percentage;
       } else if (coupon.flatAmount) {
-        discountData.flatAmount = discountValue; // Use the calculated flat amount discount value
+        discountData.data.flatAmount = discountValue; // Use the calculated flat amount discount value
       }
 
       const discount = await prisma.discount.create({

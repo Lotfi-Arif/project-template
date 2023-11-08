@@ -7,10 +7,10 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { AuthCreateInput } from '@app/prisma-generated/generated/nestgraphql/auth/auth-create.input';
 import { Auth } from '@app/prisma-generated/generated/nestgraphql/auth/auth.model';
 import { v4 as uuid } from 'uuid';
 import { ConfigService } from '@nestjs/config';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -28,20 +28,20 @@ export class AuthService {
    * @returns The Auth object with details of the created user.
    */
   async register(
-    authCreateInput: AuthCreateInput,
+    authCreateInput: Prisma.AuthCreateArgs,
   ): Promise<{ user: Auth; refreshToken: string }> {
     this.logger.log('Registering a new user');
 
     // Check if the user already exists
     const existingAuth = await this.prisma.auth.findUnique({
-      where: { email: authCreateInput.email },
+      where: { email: authCreateInput.data.email },
     });
     if (existingAuth) {
       throw new ConflictException('Email already in use');
     }
 
     // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(authCreateInput.password, 10);
+    const hashedPassword = await bcrypt.hash(authCreateInput.data.password, 10);
 
     // Generate a new refresh token
     const refreshToken = uuid(); // Generate the actual refresh token to send to the client
@@ -54,7 +54,7 @@ export class AuthService {
       data: {
         auth: {
           create: {
-            email: authCreateInput.email,
+            email: authCreateInput.data.email,
             password: hashedPassword,
             refreshToken: hashedRefreshToken, // Store the hashed refresh token
           },

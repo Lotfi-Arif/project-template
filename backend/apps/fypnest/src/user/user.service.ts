@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
-import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
@@ -56,11 +56,15 @@ export class UserService {
    */
   async updateUser(params: {
     id: string;
-    data: UserUpdateInput;
+    data: Prisma.UserUpdateInput;
   }): Promise<User> {
     const { id, data } = params;
     this.logger.log(`Updating user with id: ${id}`);
-    return this.prisma.user.update({ where: { id }, data });
+    // Use type assertion to avoid deep type comparison
+    return this.prisma.user.update({
+      where: { id },
+      data,
+    });
   }
 
   /**

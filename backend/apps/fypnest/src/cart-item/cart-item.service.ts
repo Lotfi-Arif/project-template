@@ -1,8 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
-import { CartItemCreateInput } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item-create.input';
-import { CartItemUpdateInput } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item-update.input';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CartItemService {
@@ -15,10 +14,14 @@ export class CartItemService {
    * @param data - Data for creating a cart item.
    * @returns The newly created cart item.
    */
-  async createCartItem(data: CartItemCreateInput): Promise<CartItem> {
+  async createCartItem(
+    cartItemCreateArgs: Prisma.CartItemCreateArgs,
+  ): Promise<CartItem> {
     this.logger.log('Adding a new item to the cart');
     try {
-      const cartItem = await this.prisma.cartItem.create({ data });
+      const cartItem = await this.prisma.cartItem.create({
+        data: cartItemCreateArgs.data,
+      });
       return cartItem;
     } catch (error) {
       this.logger.error('Failed to add an item to the cart', error.stack);
@@ -51,13 +54,13 @@ export class CartItemService {
    */
   async updateCartItem(
     id: string,
-    data: CartItemUpdateInput,
+    cartUpdateArgs: Prisma.CartUpdateArgs,
   ): Promise<CartItem> {
     this.logger.log(`Updating cart item with ID: ${id}`);
     try {
       const updatedCartItem = await this.prisma.cartItem.update({
         where: { id },
-        data,
+        data: cartUpdateArgs.data,
       });
       return updatedCartItem;
     } catch (error) {

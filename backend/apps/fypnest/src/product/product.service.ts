@@ -1,8 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Product } from '@app/prisma-generated/generated/nestgraphql/product/product.model';
-import { ProductCreateInput } from '@app/prisma-generated/generated/nestgraphql/product/product-create.input';
-import { ProductUpdateInput } from '@app/prisma-generated/generated/nestgraphql/product/product-update.input';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ProductService {
@@ -15,7 +14,7 @@ export class ProductService {
    * @param data - Product data for creation.
    * @returns The created product.
    */
-  async createProduct(data: ProductCreateInput): Promise<Product> {
+  async createProduct(data: Prisma.ProductCreateInput): Promise<Product> {
     this.logger.log('Creating a new product');
     return this.prisma.product.create({ data });
   }
@@ -43,7 +42,7 @@ export class ProductService {
    */
   async updateProduct(params: {
     id: string;
-    data: ProductUpdateInput;
+    data: Prisma.ProductUpdateInput;
   }): Promise<Product> {
     const { id, data } = params;
     this.logger.log(`Updating product with id: ${id}`);

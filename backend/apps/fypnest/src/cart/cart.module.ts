@@ -2,10 +2,10 @@
 import { Module } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CartResolver } from './cart.resolver';
-import { PrismaModule } from '../prisma/prisma.module';
+import { PrismaService } from '../prisma/prisma.service';
+
 @Module({
-  imports: [PrismaModule],
-  providers: [CartService, CartResolver],
+  providers: [CartService, CartResolver, PrismaService],
   exports: [CartService],
 })
 export class CartModule {}
