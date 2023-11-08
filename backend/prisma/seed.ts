@@ -1,88 +1,150 @@
 // prisma/seed.ts
-import { PrismaClient, UserRole, MediaType } from '@prisma/client';
+import { PrismaClient, UserRole, MediaType, OrderStatus } from '@prisma/client';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const admin = await prisma.user.create({
+  const hashedPasswordAdmin = await hash('admin123', 10);
+  const adminRefreshToken = await hash('admin-refresh-token', 10);
+  const hashedPasswordUser = await hash('user123', 10);
+  const userRefreshToken = await hash('user-refresh-token', 10);
+
+  // Create an admin user with related Auth
+  await prisma.user.create({
     data: {
-      email: 'admin@example.com',
-      password: 'admin123',
       firstName: 'Admin',
       lastName: 'User',
       role: UserRole.ADMIN,
+      auth: {
+        create: {
+          email: 'admin@example.com',
+          password: hashedPasswordAdmin,
+          refreshToken: adminRefreshToken,
+        },
+      },
     },
   });
 
-  const teacher = await prisma.user.create({
+  // Create a regular user with related Auth and Address
+  const regularUser = await prisma.user.create({
     data: {
-      email: 'teacher@example.com',
-      password: 'teacher123',
       firstName: 'John',
       lastName: 'Doe',
-      role: UserRole.TEACHER,
+      role: UserRole.USER,
+      auth: {
+        create: {
+          email: 'user@example.com',
+          password: hashedPasswordUser,
+          refreshToken: userRefreshToken,
+        },
+      },
+      address: {
+        createMany: {
+          data: [
+            {
+              line1: '123 Main St',
+              line2: 'Apt 4',
+              city: 'Anytown',
+              state: 'CA',
+              zip: '12345',
+              country: 'USA',
+            },
+          ],
+        },
+      },
+    },
+    include: {
+      address: true, // Make sure to include the address field after creation
     },
   });
 
-  const student = await prisma.user.create({
+  // Ensure that the address has been created
+  if (!regularUser.address || regularUser.address.length === 0) {
+    throw new Error('No address found for the user.');
+  }
+
+  // Create a product with media
+  const product = await prisma.product.create({
     data: {
-      email: 'student@example.com',
-      password: 'student123',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      role: UserRole.STUDENT,
+      name: 'Sample Product',
+      description: 'This is a sample product description.',
+      price: 29.99,
+      stock: 100,
+      SKU: 'unique-sku-12345',
+      media: {
+        create: {
+          type: MediaType.IMAGE,
+          filename: 'sample-product.jpg',
+          contentType: 'image/jpeg',
+          url: 'http://example.com/sample-product.jpg',
+        },
+      },
+      categories: {
+        create: {
+          name: 'Sample Category',
+        },
+      },
     },
   });
 
-  const course = await prisma.course.create({
+  // Create a cart for the regular user
+  await prisma.cart.create({
     data: {
-      name: 'Introduction to Programming',
-      description: 'Learn the basics of programming.',
-      teacher: { connect: { id: teacher.id } },
+      user: {
+        connect: { id: regularUser.id },
+      },
+      cartItems: {
+        create: {
+          product: {
+            connect: { id: product.id },
+          },
+          quantity: 1,
+          price: product.price,
+        },
+      },
     },
   });
 
-  const courseEnrollment = await prisma.courseEnrollment.create({
+  // Create an order for the regular user with related payment
+  await prisma.order.create({
     data: {
-      course: { connect: { id: course.id } },
-      user: { connect: { id: student.id } },
+      totalAmount: product.price,
+      status: OrderStatus.PENDING,
+      user: {
+        connect: { id: regularUser.id },
+      },
+      // Since 'items' is a relation to CartItem, we need to use 'CartItem' fields
+      payments: {
+        create: {
+          paymentMethod: 'Credit Card',
+          amount: product.price,
+          status: 'Completed',
+        },
+      },
+      address: {
+        connect: {
+          id: regularUser.address[0].id, // Make sure the address is already created and linked to the user.
+        },
+      },
     },
   });
 
-  const chat = await prisma.chat.create({
+  // Create a review for the product
+  await prisma.review.create({
     data: {
-      user1: { connect: { id: teacher.id } },
-      user2: { connect: { id: student.id } },
+      content: 'Great product!',
+      rating: 5,
+      product: {
+        connect: { id: product.id },
+      },
+      user: {
+        connect: { id: regularUser.id },
+      },
     },
   });
 
-  const message = await prisma.message.create({
-    data: {
-      content: 'Hello, student!',
-      sender: { connect: { id: teacher.id } },
-      chat: { connect: { id: chat.id } },
-    },
-  });
-
-  const media = await prisma.media.create({
-    data: {
-      type: MediaType.IMAGE,
-      url: '/media/sample-image.jpg',
-      course: { connect: { id: course.id } },
-      Chat: { connect: { id: chat.id } },
-    },
-  });
-
-  console.log('Seed data created:', {
-    admin,
-    teacher,
-    student,
-    course,
-    courseEnrollment,
-    chat,
-    message,
-    media,
-  });
+  console.log('Seed data created.');
 }
 
 main()

@@ -5,24 +5,28 @@ import { UserService } from './user/user.service';
 import { ProvidersModule } from '@app/providers';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule } from 'nestjs-prisma';
-import { ChatModule } from './chat/chat.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import config from '@app/common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { TeacherModule } from './teacher/teacher.module';
-import { MessageModule } from './message/message.module';
-import { CourseModule } from './course/course.module';
-import { CourseEnrollmentModule } from './course-enrollment/course-enrollment.module';
 import { MediaModule } from './media/media.module';
+import { OrderModule } from './order/order.module';
+import { ProductModule } from './product/product.module';
+import { ReviewModule } from './review/review.module';
 import { GqlConfigService } from './graphql/gql-config-service';
 import { TestingModule } from '@nestjs/testing';
-import { StudentModule } from './student/student.module';
+import { PaymentModule } from './payment/payment.module';
+import { CartItemModule } from './cart-item/cart-item.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+      envFilePath: '../../../.env',
+    }),
     UserModule,
     ProvidersModule,
     EventEmitterModule.forRoot({
@@ -35,16 +39,16 @@ import { StudentModule } from './student/student.module';
     PrismaModule.forRoot({
       isGlobal: true,
     }),
-    ChatModule,
     AuthModule,
-    TeacherModule,
-    MessageModule,
-    CourseModule,
     PrismaModule,
     TestingModule,
-    CourseEnrollmentModule,
     MediaModule,
-    StudentModule,
+    OrderModule,
+    ProductModule,
+    ReviewModule,
+    PaymentModule,
+    CartItemModule,
+    CartModule,
   ],
   providers: [PrismaService, UserService],
   exports: [PrismaService],
