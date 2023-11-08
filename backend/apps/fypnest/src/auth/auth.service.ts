@@ -3,6 +3,8 @@ import {
   Logger,
   ConflictException,
   UnauthorizedException,
+  InternalServerErrorException,
+  BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
@@ -30,49 +32,60 @@ export class AuthService {
   async register(
     authCreateInput: Prisma.AuthCreateArgs,
   ): Promise<{ user: Auth; refreshToken: string }> {
-    this.logger.log('Registering a new user');
+    try {
+      this.logger.log('Registering a new user');
 
-    // Check if the user already exists
-    const existingAuth = await this.prisma.auth.findUnique({
-      where: { email: authCreateInput.data.email },
-    });
-    if (existingAuth) {
-      throw new ConflictException('Email already in use');
-    }
+      // Check if the user already exists
+      const existingAuth = await this.prisma.auth.findUnique({
+        where: { email: authCreateInput.data.email },
+      });
+      if (existingAuth) {
+        throw new ConflictException('Email already in use');
+      }
 
-    // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(authCreateInput.data.password, 10);
+      // Hash the password before saving
+      const hashedPassword = await bcrypt.hash(
+        authCreateInput.data.password,
+        10,
+      );
 
-    // Generate a new refresh token
-    const refreshToken = uuid(); // Generate the actual refresh token to send to the client
+      // Generate a new refresh token
+      const refreshToken = uuid(); // Generate the actual refresh token to send to the client
 
-    // Hash the refresh token for security before saving
-    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+      // Hash the refresh token for security before saving
+      const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
 
-    // Create the user and auth records with the hashed refresh token
-    const user = await this.prisma.user.create({
-      data: {
-        auth: {
-          create: {
-            email: authCreateInput.data.email,
-            password: hashedPassword,
-            refreshToken: hashedRefreshToken, // Store the hashed refresh token
+      // Create the user and auth records with the hashed refresh token
+      const user = await this.prisma.user.create({
+        data: {
+          auth: {
+            create: {
+              email: authCreateInput.data.email,
+              password: hashedPassword,
+              refreshToken: hashedRefreshToken, // Store the hashed refresh token
+            },
           },
         },
-      },
-      include: {
-        auth: true,
-      },
-    });
+        include: {
+          auth: true,
+        },
+      });
 
-    // Prepare the response object with the unhashed refresh token
-    const response = {
-      user: user.auth,
-      refreshToken, // Send the actual refresh token (not hashed)
-    };
+      // Prepare the response object with the unhashed refresh token
+      const response = {
+        user: user.auth,
+        refreshToken, // Send the actual refresh token (not hashed)
+      };
 
-    // Return the response object, which includes the actual refresh token
-    return response;
+      // Return the response object, which includes the actual refresh token
+      return response;
+    } catch (error) {
+      this.logger.error(
+        `Failed to register user with email: ${authCreateInput.data.email}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException('Registration failed');
+    }
   }
 
   /**
@@ -82,33 +95,41 @@ export class AuthService {
    * @returns JWT token string if successful.
    */
   async login(email: string, password: string): Promise<string> {
-    this.logger.log(`Authenticating user with email: ${email}`);
+    try {
+      this.logger.log(`Authenticating user with email: ${email}`);
 
-    // Find the authentication record that matches the email
-    const auth = await this.prisma.auth.findUnique({
-      where: { email },
-    });
+      // Find the authentication record that matches the email
+      const auth = await this.prisma.auth.findUnique({
+        where: { email },
+      });
 
-    // If no authentication record is found, or the password does not match, throw an error
-    if (!auth || !(await bcrypt.compare(password, auth.password))) {
-      throw new UnauthorizedException('Invalid credentials');
+      // If no authentication record is found, or the password does not match, throw an error
+      if (!auth || !(await bcrypt.compare(password, auth.password))) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      // If a valid auth record is found, get the user associated with this auth
+      const user = await this.prisma.user.findUnique({
+        where: { id: auth.userId },
+      });
+
+      // If no user is associated with the auth record, throw an error (should not happen in a consistent database)
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+
+      // Create the JWT payload using the user's email and id
+      const payload = { email: auth.email, userId: user.id };
+
+      // Sign the JWT token and return it
+      return this.jwtService.sign(payload);
+    } catch (error) {
+      this.logger.error(
+        `Failed to authenticate user with email: ${email}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException('Login failed');
     }
-
-    // If a valid auth record is found, get the user associated with this auth
-    const user = await this.prisma.user.findUnique({
-      where: { id: auth.userId },
-    });
-
-    // If no user is associated with the auth record, throw an error (should not happen in a consistent database)
-    if (!user) {
-      throw new UnauthorizedException('User not found');
-    }
-
-    // Create the JWT payload using the user's email and id
-    const payload = { email: auth.email, userId: user.id };
-
-    // Sign the JWT token and return it
-    return this.jwtService.sign(payload);
   }
 
   /**
@@ -118,28 +139,39 @@ export class AuthService {
    * @returns An object containing both the JWT and refresh token.
    */
   async generateTokens(userId: string, email: string) {
-    const accessToken = await this.jwtService.signAsync(
-      { userId, email },
-      { expiresIn: '15m' }, // Access token expires in 15 minutes
-    );
+    try {
+      const accessToken = await this.jwtService.signAsync(
+        { userId, email },
+        { expiresIn: '15m' }, // Access token expires in 15 minutes
+      );
 
-    const refreshToken = await this.jwtService.signAsync(
-      { userId, email },
-      {
-        secret: this.configService.get('JWT_REFRESH_SECRET'), // Secret for refresh token
-        expiresIn: '7d', // Refresh token expires in 7 days
-      },
-    );
+      const refreshToken = await this.jwtService.signAsync(
+        { userId, email },
+        {
+          secret: this.configService.get('JWT_REFRESH_SECRET'), // Secret for refresh token
+          expiresIn: '7d', // Refresh token expires in 7 days
+        },
+      );
 
-    // Store the hashed version of the JWT refresh token for added security
-    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+      // Store the hashed version of the JWT refresh token for added security
+      const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
 
-    await this.prisma.auth.update({
-      where: { userId },
-      data: { refreshToken: hashedRefreshToken },
-    });
+      await this.prisma.auth.update({
+        where: { userId },
+        data: { refreshToken: hashedRefreshToken },
+      });
 
-    return { accessToken, refreshToken };
+      return { accessToken, refreshToken };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+      this.logger.error(
+        `Failed to generate tokens for user ID: ${userId}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException('Token generation failed');
+    }
   }
 
   /**
@@ -149,24 +181,35 @@ export class AuthService {
    * @returns A new JWT token.
    */
   async refreshToken(userId: string, token: string): Promise<string> {
-    const auth = await this.prisma.auth.findUnique({ where: { userId } });
+    try {
+      const auth = await this.prisma.auth.findUnique({ where: { userId } });
 
-    if (!auth) {
-      throw new UnauthorizedException('Authentication record not found');
+      if (!auth) {
+        throw new UnauthorizedException('Authentication record not found');
+      }
+
+      const refreshTokenValid = await bcrypt.compare(token, auth.refreshToken);
+      if (!refreshTokenValid) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      // If the refresh token is valid, generate a new access token
+      const accessToken = await this.jwtService.signAsync(
+        { userId, email: auth.email },
+        { expiresIn: '15m' },
+      );
+
+      return accessToken;
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      this.logger.error(
+        `Failed to refresh token for user ID: ${userId}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException('Token refresh failed');
     }
-
-    const refreshTokenValid = await bcrypt.compare(token, auth.refreshToken);
-    if (!refreshTokenValid) {
-      throw new UnauthorizedException('Invalid refresh token');
-    }
-
-    // If the refresh token is valid, generate a new access token
-    const accessToken = await this.jwtService.signAsync(
-      { userId, email: auth.email },
-      { expiresIn: '15m' },
-    );
-
-    return accessToken;
   }
 
   /**
@@ -175,29 +218,45 @@ export class AuthService {
    * @returns A unique password reset token.
    */
   async initiatePasswordReset(email: string): Promise<string> {
-    // Find the user by email
-    const auth = await this.prisma.auth.findUnique({ where: { email } });
+    try {
+      // Find the user by email
+      const auth = await this.prisma.auth.findUnique({ where: { email } });
 
-    if (!auth) {
-      throw new UnauthorizedException('Email does not exist');
+      if (!auth) {
+        throw new UnauthorizedException('Email does not exist');
+      }
+
+      // Generate a password reset token
+      const passwordResetToken = uuid();
+
+      // Update the Prisma record
+      await this.prisma.auth.update({
+        where: { email },
+        data: {
+          passwordResetToken,
+          passwordResetExpires: new Date(Date.now() + 3600000), // 1 hour from now
+        },
+      });
+
+      // TODO: Integrate with an email service to send the token
+      // Send the password reset token to the user's email
+
+      return passwordResetToken;
+    } catch (error) {
+      if (
+        error instanceof UnauthorizedException ||
+        error instanceof ConflictException
+      ) {
+        throw error;
+      }
+      this.logger.error(
+        `Failed to initiate password reset for email: ${email}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException(
+        'Failed to initiate password reset',
+      );
     }
-
-    // Generate a password reset token (could be UUID or any other secure token)
-    const passwordResetToken = uuid();
-
-    // Update the Prisma record
-    await this.prisma.auth.update({
-      where: { email },
-      data: {
-        passwordResetToken,
-        passwordResetExpires: new Date(Date.now() + 3600000), // 1 hour from now
-      },
-    });
-
-    // TODO: should integrate with an email service to send the token
-    // Send the password reset token to the user's email
-
-    return passwordResetToken;
   }
 
   /**
@@ -210,35 +269,48 @@ export class AuthService {
     token: string,
     newPassword: string,
   ): Promise<string> {
-    // Find the user by password reset token
-    const auth = await this.prisma.auth.findFirst({
-      where: {
-        passwordResetToken: token,
-        passwordResetExpires: {
-          gt: new Date(),
+    try {
+      // Find the user by password reset token
+      const auth = await this.prisma.auth.findFirst({
+        where: {
+          passwordResetToken: token,
+          passwordResetExpires: {
+            gt: new Date(),
+          },
         },
-      },
-    });
+      });
 
-    if (!auth) {
-      throw new UnauthorizedException(
-        'Invalid or expired password reset token',
+      if (!auth) {
+        throw new UnauthorizedException(
+          'Invalid or expired password reset token',
+        );
+      }
+
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update the user's password, clear the reset token and expiry
+      await this.prisma.auth.update({
+        where: { id: auth.id },
+        data: {
+          password: hashedPassword,
+          passwordResetToken: null,
+          passwordResetExpires: null,
+        },
+      });
+
+      return 'Password has been reset successfully';
+    } catch (error) {
+      if (
+        error instanceof UnauthorizedException ||
+        error instanceof ConflictException
+      ) {
+        throw error;
+      }
+      this.logger.error('Failed to complete password reset', error.stack);
+      throw new InternalServerErrorException(
+        'Failed to complete password reset',
       );
     }
-
-    // Hash the new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    // Update the user's password, clear the reset token and expiry
-    await this.prisma.auth.update({
-      where: { id: auth.id },
-      data: {
-        password: hashedPassword,
-        passwordResetToken: null,
-        passwordResetExpires: null,
-      },
-    });
-
-    return 'Password has been reset successfully';
   }
 }
