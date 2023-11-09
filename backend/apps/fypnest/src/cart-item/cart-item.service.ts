@@ -1,4 +1,9 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
 import { Prisma } from '@prisma/client';
@@ -19,13 +24,12 @@ export class CartItemService {
   ): Promise<CartItem> {
     this.logger.log('Adding a new item to the cart');
     try {
-      const cartItem = await this.prisma.cartItem.create({
+      return await this.prisma.cartItem.create({
         data: cartItemCreateArgs.data,
       });
-      return cartItem;
     } catch (error) {
       this.logger.error('Failed to add an item to the cart', error.stack);
-      throw error;
+      throw new InternalServerErrorException('Could not add item to cart.');
     }
   }
 
@@ -37,12 +41,19 @@ export class CartItemService {
    */
   async getCartItemById(id: string): Promise<CartItem | null> {
     this.logger.log(`Retrieving cart item by ID: ${id}`);
-    const cartItem = await this.prisma.cartItem.findUnique({ where: { id } });
-    if (!cartItem) {
-      this.logger.warn(`Cart item with ID ${id} not found`);
-      throw new NotFoundException('Cart item not found');
+    try {
+      const cartItem = await this.prisma.cartItem.findUnique({ where: { id } });
+      if (!cartItem) {
+        throw new NotFoundException(`Cart item with ID ${id} not found.`);
+      }
+      return cartItem;
+    } catch (error) {
+      this.logger.error(
+        `Failed to retrieve cart item by ID: ${id}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException('Error retrieving cart item.');
     }
-    return cartItem;
   }
 
   /**
@@ -58,17 +69,24 @@ export class CartItemService {
   ): Promise<CartItem> {
     this.logger.log(`Updating cart item with ID: ${id}`);
     try {
-      const updatedCartItem = await this.prisma.cartItem.update({
+      return await this.prisma.cartItem.update({
         where: { id },
         data: cartUpdateArgs.data,
       });
-      return updatedCartItem;
     } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException(
+          `Cart item with ID ${id} not found to update.`,
+        );
+      }
       this.logger.error(
         `Failed to update cart item with ID: ${id}`,
         error.stack,
       );
-      throw new NotFoundException('Cart item not found');
+      throw new InternalServerErrorException('Error updating cart item.');
     }
   }
 
@@ -81,16 +99,23 @@ export class CartItemService {
   async deleteCartItem(id: string): Promise<CartItem> {
     this.logger.log(`Removing cart item with ID: ${id}`);
     try {
-      const deletedCartItem = await this.prisma.cartItem.delete({
+      return await this.prisma.cartItem.delete({
         where: { id },
       });
-      return deletedCartItem;
     } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException(
+          `Cart item with ID ${id} not found to delete.`,
+        );
+      }
       this.logger.error(
         `Failed to remove cart item with ID: ${id}`,
         error.stack,
       );
-      throw new NotFoundException('Cart item not found');
+      throw new InternalServerErrorException('Error removing cart item.');
     }
   }
 }
