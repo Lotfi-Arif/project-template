@@ -16,8 +16,10 @@ export class CartResolver {
   // Query to get a cart by user ID
   @Query(() => Cart)
   async getCartByUserId(@Args('userId') userId: string): Promise<Cart> {
-    this.logger.log(`Retrieving cart for user with ID ${userId}`);
-    return this.cartService.getCartByUserId(userId);
+    try {
+      this.logger.log(`Retrieving cart for user with ID ${userId}`);
+      return this.cartService.getCartByUserId(userId);
+    } catch (error) {}
   }
 
   // Mutation to create a new cart for a user
