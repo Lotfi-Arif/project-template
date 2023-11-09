@@ -9,6 +9,33 @@ import {
 import { Prisma } from '@prisma/client';
 import { GraphQLError } from 'graphql';
 
+// Error mapping interface
+interface IErrorMapping {
+  [key: number]: string;
+}
+
+// Default error messages based on status code
+const defaultMessages: IErrorMapping = {
+  400: 'Bad request.',
+  401: 'Authentication failed.',
+  403: 'Access forbidden.',
+  404: 'The requested resource was not found.',
+  409: 'Conflict occurred with the current state of the target resource.',
+  422: 'Unprocessable entity. The server understands the content type and syntax of the request but was unable to process the contained instructions.',
+  500: 'Internal server error. An unexpected condition was encountered.',
+};
+
+// Error to HTTP status code mapping
+const ERROR_TO_STATUS_CODE: { [key: string]: number } = {
+  BadRequestException: 400,
+  UnauthorizedException: 401,
+  ForbiddenException: 403,
+  NotFoundException: 404,
+  ConflictException: 409,
+  UnprocessableEntityException: 422,
+  InternalServerErrorException: 500,
+};
+
 /**
  * Logs detailed information about the provided data using the `util.inspect` method.
  * @param data - The data to log.
@@ -94,49 +121,20 @@ export function handlePrismaError(error: unknown): never {
  * @param detail - Additional details about the error.
  * @returns {GraphQLError} - A GraphQLError with a formatted message and extensions including the HTTP status code.
  */
-export function handleHttpError(statusCode: number, detail = ''): GraphQLError {
-  let message: string;
-  switch (statusCode) {
-    case 400:
-      message = 'Bad request.';
-      break;
-    case 401:
-      message = 'Authentication failed.';
-      break;
-    case 403:
-      message = 'Access forbidden.';
-      break;
-    case 404:
-      message = 'The requested resource was not found.';
-      break;
-    case 409:
-      message =
-        'Conflict occurred with the current state of the target resource.';
-      break;
-    case 422:
-      message =
-        'Unprocessable entity. The server understands the content type and syntax of the request but was unable to process the contained instructions.';
-      break;
-    case 500:
-      message =
-        'Internal server error. An unexpected condition was encountered.';
-      break;
-    default:
-      message = 'An error occurred.';
-      break;
-  }
-
-  // Append additional details if provided.
-  if (detail) {
-    message += ` ${detail}`;
-  }
+export function handleHttpError(error: Error): GraphQLError {
+  const errorName = error.constructor.name;
+  const statusCode = ERROR_TO_STATUS_CODE[errorName] || 500;
+  const message =
+    error.message ||
+    defaultMessages[statusCode] ||
+    'An unexpected error occurred.';
 
   // Return a GraphQLError with the message and extensions that include the status code.
   return new GraphQLError(message, {
     extensions: {
       code: `HTTP_${statusCode}`,
       statusCode,
-      detail,
+      detail: error.stack,
     },
   });
 }

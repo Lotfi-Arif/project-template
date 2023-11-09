@@ -4,6 +4,7 @@ import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/
 import { Logger } from '@nestjs/common';
 import { CreateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/create-one-cart-item.args';
 import { UpdateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/update-one-cart-item.args';
+import { handleHttpError } from '@app/common/utils';
 
 @Resolver(() => CartItem)
 export class CartItemResolver {
@@ -13,18 +14,26 @@ export class CartItemResolver {
 
   @Query(() => CartItem, { nullable: true })
   async cartItem(@Args('id') id: string): Promise<CartItem | null> {
-    this.logger.log(`Resolving cart item with ID: ${id}`);
-    return this.cartItemService.getCartItemById(id);
+    try {
+      this.logger.log(`Resolving cart item with ID: ${id}`);
+      return await this.cartItemService.getCartItemById(id);
+    } catch (error) {
+      throw handleHttpError(error);
+    }
   }
 
   @Mutation(() => CartItem)
   async addCartItem(
     @Args('data') createOneCartItemArgs: CreateOneCartItemArgs,
   ): Promise<CartItem> {
-    this.logger.log('Resolving add new cart item');
-    return this.cartItemService.createCartItem({
-      data: createOneCartItemArgs.data,
-    });
+    try {
+      this.logger.log('Resolving add new cart item');
+      return await this.cartItemService.createCartItem({
+        data: createOneCartItemArgs.data,
+      });
+    } catch (error) {
+      throw handleHttpError(error);
+    }
   }
 
   @Mutation(() => CartItem)
@@ -32,13 +41,24 @@ export class CartItemResolver {
     @Args('id') id: string,
     @Args('data') updateOneCartItemArgs: UpdateOneCartItemArgs,
   ): Promise<CartItem> {
-    this.logger.log(`Resolving update for cart item with ID: ${id}`);
-    return this.cartItemService.updateCartItem(id, updateOneCartItemArgs);
+    try {
+      this.logger.log(`Resolving update for cart item with ID: ${id}`);
+      return await this.cartItemService.updateCartItem(
+        id,
+        updateOneCartItemArgs,
+      );
+    } catch (error) {
+      throw handleHttpError(error);
+    }
   }
 
   @Mutation(() => CartItem)
   async removeCartItem(@Args('id') id: string): Promise<CartItem> {
-    this.logger.log(`Resolving remove cart item with ID: ${id}`);
-    return this.cartItemService.deleteCartItem(id);
+    try {
+      this.logger.log(`Resolving remove cart item with ID: ${id}`);
+      return await this.cartItemService.deleteCartItem(id);
+    } catch (error) {
+      throw handleHttpError(error);
+    }
   }
 }
