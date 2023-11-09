@@ -18,7 +18,10 @@ export class CartItemResolver {
       this.logger.log(`Resolving cart item with ID: ${id}`);
       return await this.cartItemService.getCartItemById(id);
     } catch (error) {
-      throw handleHttpError(error);
+      this.logger.error(`Failed to resolve cart item with ID: ${id}`, {
+        error,
+      });
+      handleHttpError(error, 'Failed to resolve cart item');
     }
   }
 
@@ -32,7 +35,8 @@ export class CartItemResolver {
         data: createOneCartItemArgs.data,
       });
     } catch (error) {
-      throw handleHttpError(error);
+      this.logger.error('Failed to add new cart item', { error });
+      handleHttpError(error, 'Failed to add new cart item');
     }
   }
 
@@ -48,7 +52,10 @@ export class CartItemResolver {
         updateOneCartItemArgs,
       );
     } catch (error) {
-      throw handleHttpError(error);
+      this.logger.error(`Failed to resolve cart item with ID: ${id}`, {
+        error,
+      });
+      handleHttpError(error, 'Failed to resolve cart item');
     }
   }
 
@@ -58,7 +65,8 @@ export class CartItemResolver {
       this.logger.log(`Resolving remove cart item with ID: ${id}`);
       return await this.cartItemService.deleteCartItem(id);
     } catch (error) {
-      throw handleHttpError(error);
+      this.logger.error('Failed to remove cart item', { error });
+      handleHttpError(error, 'Failed to remove cart item');
     }
   }
 }

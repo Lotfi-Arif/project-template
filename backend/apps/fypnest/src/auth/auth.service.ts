@@ -82,12 +82,7 @@ export class AuthService {
         `Failed to register user with email: ${authCreateInput.data.email}`,
         error.stack,
       );
-      handlePrismaError(
-        error ||
-          error.message ||
-          error.stack ||
-          'Failed to register user with email provided',
-      );
+      handlePrismaError(error, 'Failed to register user with email provided');
     }
   }
 
@@ -148,9 +143,7 @@ export class AuthService {
         `Failed to authenticate user with email: ${email}`,
         error.stack,
       );
-      handlePrismaError(
-        error || error.message || error.stack || 'Authenticating user failed',
-      );
+      handlePrismaError(error, 'Authenticating user failed');
     }
   }
 
@@ -186,12 +179,7 @@ export class AuthService {
       return { accessToken, refreshToken };
     } catch (error) {
       this.logger.error(`Failed to generate tokens for user ID: ${userId}`);
-      handlePrismaError(
-        error ||
-          error.message ||
-          error.stack ||
-          'Failed to generate tokens for user',
-      );
+      handlePrismaError(error, 'Failed to generate tokens for user');
     }
   }
 
@@ -223,12 +211,7 @@ export class AuthService {
       return accessToken;
     } catch (error) {
       this.logger.error(`Failed to refresh token for user ID: ${userId}`);
-      handlePrismaError(
-        error ||
-          error.message ||
-          error.stack ||
-          'Failed to refresh token for user',
-      );
+      handlePrismaError(error, 'Failed to refresh token for user');
     }
   }
 
@@ -266,12 +249,7 @@ export class AuthService {
         `Failed to initiate password reset for email: ${email}`,
         error.stack,
       );
-      handlePrismaError(
-        error ||
-          error.message ||
-          error.stack ||
-          'Failed to initiate password reset',
-      );
+      handlePrismaError(error, 'Failed to initiate password reset');
     }
   }
 
@@ -317,12 +295,7 @@ export class AuthService {
       return 'Password has been reset successfully';
     } catch (error) {
       this.logger.error(`Failed to complete password reset`, error.stack);
-      handlePrismaError(
-        error ||
-          error.message ||
-          error.stack ||
-          'Failed to complete password reset',
-      );
+      handlePrismaError(error, 'Failed to complete password reset');
     }
   }
 }
