@@ -36,6 +36,15 @@ const ERROR_TO_STATUS_CODE: { [key: string]: number } = {
   InternalServerErrorException: 500,
 };
 
+const PRISMA_ERROR_TO_HTTP_EXCEPTION = {
+  P2002: BadRequestException,
+  P2025: NotFoundException,
+  P2003: ForbiddenException,
+  P2000: UnprocessableEntityException,
+  P2021: NotFoundException,
+  P2022: NotFoundException,
+};
+
 /**
  * Logs detailed information about the provided data using the `util.inspect` method.
  * @param data - The data to log.
@@ -58,60 +67,18 @@ export function lowerFirstLetter(string) {
  * @param error - The error to handle.
  * @throws {HttpException} - The corresponding HTTP exception based on the Prisma error code.
  */
-export function handlePrismaError(error: unknown): never {
-  // Check if the error is an instance of PrismaClientKnownRequestError
+export function handlePrismaError(error: unknown) {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    // Log the error in detail for debugging purposes.
-    detailedLog(error);
-    // Format the error message with the stack for more detailed feedback.
-    const errorMessage = `${error.message}\nStack: ${error.stack}`;
-
-    // Switch between known Prisma error codes to throw corresponding exceptions.
-    switch (error.code) {
-      // Unique constraint failed
-      case 'P2002':
-        throw new BadRequestException(
-          `Unique constraint failed. ${errorMessage}`,
-        );
-      // Record not found
-      case 'P2025':
-        throw new NotFoundException(`Record not found. ${errorMessage}`);
-      // Foreign key constraint failed
-      case 'P2003':
-        throw new ForbiddenException(
-          `Foreign key constraint failed on the field. ${errorMessage}`,
-        );
-      // Value too long for column
-      case 'P2000':
-        throw new UnprocessableEntityException(
-          `The provided value for the column is too long. ${errorMessage}`,
-        );
-      // No such table
-      case 'P2021':
-        throw new NotFoundException(
-          `The table does not exist. ${errorMessage}`,
-        );
-      // No such column
-      case 'P2022':
-        throw new NotFoundException(
-          `The column does not exist. ${errorMessage}`,
-        );
-      // Handle all other Prisma errors as internal server errors
-      default:
-        throw new InternalServerErrorException(
-          `An internal server error occurred. ${errorMessage}`,
-        );
-    }
+    const HttpException =
+      PRISMA_ERROR_TO_HTTP_EXCEPTION[error.code] ||
+      InternalServerErrorException;
+    throw new HttpException(`Prisma error: ${error.message}`);
+  } else if (error instanceof Error) {
+    throw new InternalServerErrorException(
+      `An unexpected error occurred: ${error.message}`,
+    );
   } else {
-    // If the error is not a Prisma error, log it and throw a generic internal server error.
-    detailedLog(error);
-    if (error instanceof Error) {
-      throw new InternalServerErrorException(
-        `An unexpected error occurred. Message: ${error.message}, Stack: ${error.stack}`,
-      );
-    } else {
-      throw new InternalServerErrorException('An unexpected error occurred.');
-    }
+    throw new InternalServerErrorException('An unexpected error occurred.');
   }
 }
 
