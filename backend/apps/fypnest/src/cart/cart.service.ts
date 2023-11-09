@@ -1,9 +1,6 @@
-// cart.service.ts
-
 import {
   BadRequestException,
   Injectable,
-  InternalServerErrorException,
   Logger,
   NotFoundException,
 } from '@nestjs/common';
@@ -13,6 +10,7 @@ import { Cart } from '@app/prisma-generated/generated/nestgraphql/cart/cart.mode
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
 import { Coupon } from '@app/prisma-generated/generated/nestgraphql/coupon/coupon.model';
 import { Prisma } from '@prisma/client';
+import { handlePrismaError } from '@app/common/utils';
 
 @Injectable()
 export class CartService {
@@ -42,7 +40,7 @@ export class CartService {
         { userId },
         error.stack,
       );
-      throw error;
+      handlePrismaError(error, 'Failed to find cart');
     }
   }
 
@@ -59,7 +57,7 @@ export class CartService {
       });
     } catch (error) {
       this.logger.error('Error creating a new cart', { userId }, error.stack);
-      throw new InternalServerErrorException('Error creating cart');
+      handlePrismaError(error, 'Error creating a new cart');
     }
   }
 
@@ -91,7 +89,7 @@ export class CartService {
         }
       } catch (error) {
         this.logger.error('Failed to find or create a cart', error.stack);
-        throw new NotFoundException('Failed to find or create cart');
+        handlePrismaError(error, 'Failed to find or create a cart');
       }
 
       let product;
@@ -104,7 +102,7 @@ export class CartService {
         }
       } catch (error) {
         this.logger.error('Product not found', error.stack);
-        throw error;
+        handlePrismaError(error, 'Product not found');
       }
 
       // TODO: Stock check logic would go here (not implemented)
@@ -126,7 +124,7 @@ export class CartService {
         }
       } catch (error) {
         this.logger.error('Failed to add item to cart', error.stack);
-        throw new InternalServerErrorException('Failed to add item to cart');
+        handlePrismaError(error, 'Failed to add item to cart');
       }
     });
   }
@@ -174,7 +172,7 @@ export class CartService {
         { cartItemId, quantity },
         error.stack,
       );
-      throw error;
+      handlePrismaError(error, 'Error updating cart item');
     }
   }
 
@@ -195,7 +193,7 @@ export class CartService {
         { cartItemId },
         error.stack,
       );
-      throw error;
+      handlePrismaError(error, 'Error removing cart item');
     }
   }
 
@@ -221,7 +219,7 @@ export class CartService {
       });
     } catch (error) {
       this.logger.error('Error clearing cart', { userId }, error.stack);
-      throw new InternalServerErrorException('Could not clear cart');
+      handlePrismaError(error, 'Failed to find cart');
     }
   }
 
@@ -290,16 +288,7 @@ export class CartService {
         `Checkout failed for user ${userId}: ${error.message}`,
         error.stack,
       );
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
-      ) {
-        throw new NotFoundException(
-          'One of the items in the cart was not found.',
-        );
-      } else {
-        throw new InternalServerErrorException('Checkout process failed.');
-      }
+      handlePrismaError(error, 'Checkout failed');
     }
   }
 
@@ -431,14 +420,7 @@ export class CartService {
         `Failed to apply coupon for user ${userId}: ${error.message}`,
         error.stack,
       );
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
-      ) {
-        throw new NotFoundException('The coupon or cart was not found.');
-      } else {
-        throw new InternalServerErrorException('Applying the coupon failed.');
-      }
+      handlePrismaError(error, 'Failed to apply coupon');
     }
   }
 
