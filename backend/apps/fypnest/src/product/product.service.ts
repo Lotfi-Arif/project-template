@@ -15,10 +15,10 @@ export class ProductService {
    * @param data - Product data for creation.
    * @returns The created product.
    */
-  async createProduct(data: Prisma.ProductCreateInput): Promise<Product> {
+  async createProduct(data: Prisma.ProductCreateArgs): Promise<Product> {
     try {
       this.logger.log('Creating a new product');
-      return this.prisma.product.create({ data });
+      return this.prisma.product.create(data);
     } catch (error) {
       this.logger.error('Failed to create product', error.stack);
       handlePrismaError(error, 'Failed to create product');
@@ -56,12 +56,15 @@ export class ProductService {
    */
   async updateProduct(params: {
     id: string;
-    data: Prisma.ProductUpdateInput;
+    productUpdateArgs: Prisma.ProductUpdateArgs;
   }): Promise<Product> {
     try {
-      const { id, data } = params;
+      const { id, productUpdateArgs } = params;
       this.logger.log(`Updating product with id: ${id}`);
-      return this.prisma.product.update({ where: { id }, data });
+      return this.prisma.product.update({
+        where: { id },
+        data: productUpdateArgs,
+      });
     } catch (error) {
       this.logger.error(
         `Failed to update product with id: ${params.id}`,

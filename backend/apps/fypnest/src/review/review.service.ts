@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Review } from '@app/prisma-generated/generated/nestgraphql/review/review.model';
-import { ReviewCreateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-create.input';
 import { Prisma } from '@prisma/client';
 import { handlePrismaError } from '@app/common/utils';
 
@@ -16,10 +15,12 @@ export class ReviewService {
    * @param data - Data to create the review with.
    * @returns The created review.
    */
-  async createReview(data: ReviewCreateInput): Promise<Review> {
+  async createReview(
+    reviewCreateArgs: Prisma.ReviewCreateArgs,
+  ): Promise<Review> {
     try {
       this.logger.log('Creating a new review');
-      return this.prisma.review.create({ data });
+      return this.prisma.review.create(reviewCreateArgs);
     } catch (error) {
       this.logger.error('Failed to create review', error.stack);
       handlePrismaError(error, 'Failed to create review');
@@ -72,12 +73,15 @@ export class ReviewService {
    */
   async updateReview(params: {
     id: string;
-    data: Prisma.ReviewUpdateInput;
+    reviewUpdateArgs: Prisma.ReviewUpdateArgs;
   }): Promise<Review> {
     try {
-      const { id, data } = params;
+      const { id, reviewUpdateArgs } = params;
       this.logger.log(`Updating review with id: ${id}`);
-      return this.prisma.review.update({ where: { id }, data });
+      return this.prisma.review.update({
+        where: { id },
+        data: { ...reviewUpdateArgs.data },
+      });
     } catch (error) {
       this.logger.error(
         `Failed to update review with ID ${params.id}`,

@@ -10,10 +10,10 @@ export class OrderService {
 
   constructor(private readonly prisma: PrismaService) {}
 
-  async createOrder(data: Prisma.OrderCreateArgs): Promise<Order> {
+  async createOrder(orderCreateArgs: Prisma.OrderCreateArgs): Promise<Order> {
     this.logger.log('Creating a new order');
     try {
-      const order = await this.prisma.order.create(data);
+      const order = await this.prisma.order.create(orderCreateArgs);
       this.logger.log(`Order created with ID: ${order.id}`);
       return order;
     } catch (error) {
@@ -55,11 +55,11 @@ export class OrderService {
     }
   }
 
-  async updateOrder(data: Prisma.OrderUpdateArgs): Promise<Order> {
-    const orderId = data.where.id;
+  async updateOrder(orderUpdateArgs: Prisma.OrderUpdateArgs): Promise<Order> {
+    const orderId = orderUpdateArgs.where.id;
     this.logger.log(`Updating order with id: ${orderId}`);
     try {
-      const updatedOrder = await this.prisma.order.update(data);
+      const updatedOrder = await this.prisma.order.update(orderUpdateArgs);
       this.logger.log(`Order with ID ${orderId} updated`);
       return updatedOrder;
     } catch (error) {

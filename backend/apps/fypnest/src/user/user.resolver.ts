@@ -2,9 +2,9 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
-import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 import { handleHttpError } from '@app/common/utils';
+import { CreateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/create-one-user.args';
+import { UpdateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/update-one-user.args';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -39,7 +39,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(@Args('data') data: UserCreateInput) {
+  async createUser(@Args('data') data: CreateOneUserArgs) {
     try {
       this.logger.log('Creating a new user');
       return this.userService.createUser(data);
@@ -52,7 +52,7 @@ export class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Args('id') id: string,
-    @Args('data') data: UserUpdateInput,
+    @Args('data') data: UpdateOneUserArgs,
   ) {
     try {
       this.logger.log(`Updating user with ID: ${id}`);

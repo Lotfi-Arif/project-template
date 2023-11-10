@@ -2,8 +2,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ProductService } from './product.service';
 import { Product } from '@app/prisma-generated/generated/nestgraphql/product/product.model';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { ProductUpdateInput } from '@app/prisma-generated/generated/nestgraphql/product/product-update.input';
 import { handleHttpError } from '@app/common/utils';
+import { UpdateOneProductArgs } from '@app/prisma-generated/generated/nestgraphql/product/update-one-product.args';
 
 @Resolver(() => Product)
 export class ProductResolver {
@@ -50,13 +50,13 @@ export class ProductResolver {
   @Mutation(() => Product)
   async updateProduct(
     @Args('id') id: string,
-    @Args('data') data: ProductUpdateInput,
+    @Args('data') data: UpdateOneProductArgs,
   ) {
     try {
       this.logger.log(`Updating product with ID: ${id}`);
       const updatedProduct = await this.productService.updateProduct({
         id,
-        data,
+        productUpdateArgs: data,
       });
       return updatedProduct;
     } catch (error) {

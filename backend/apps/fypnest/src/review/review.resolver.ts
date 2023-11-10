@@ -2,9 +2,9 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ReviewService } from './review.service';
 import { Review } from '@app/prisma-generated/generated/nestgraphql/review/review.model';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { ReviewUpdateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-update.input';
-import { ReviewCreateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-create.input';
 import { handleHttpError } from '@app/common/utils';
+import { UpdateOneReviewArgs } from '@app/prisma-generated/generated/nestgraphql/review/update-one-review.args';
+import { CreateOneReviewArgs } from '@app/prisma-generated/generated/nestgraphql/review/create-one-review.args';
 
 @Resolver(() => Review)
 export class ReviewResolver {
@@ -39,7 +39,7 @@ export class ReviewResolver {
   }
 
   @Mutation(() => Review)
-  async createReview(@Args('data') data: ReviewCreateInput) {
+  async createReview(@Args('data') data: CreateOneReviewArgs) {
     try {
       this.logger.log('Creating a new review');
       return this.reviewService.createReview(data);
@@ -52,11 +52,11 @@ export class ReviewResolver {
   @Mutation(() => Review)
   async updateReview(
     @Args('id') id: string,
-    @Args('data') data: ReviewUpdateInput,
+    @Args('data') data: UpdateOneReviewArgs,
   ) {
     try {
       this.logger.log(`Updating review with ID: ${id}`);
-      return this.reviewService.updateReview({ id, data });
+      return this.reviewService.updateReview({ id, reviewUpdateArgs: data });
     } catch (error) {
       this.logger.error(`Failed to update review with ID: ${id}`, { error });
       throw handleHttpError(error, 'Failed to update review');

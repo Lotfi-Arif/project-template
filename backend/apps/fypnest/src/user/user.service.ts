@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
-import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 import { Prisma } from '@prisma/client';
 import { handlePrismaError } from '@app/common/utils';
 
@@ -16,7 +15,7 @@ export class UserService {
    * @param data - Data to create the user with.
    * @returns The created user.
    */
-  async createUser(data: UserCreateInput): Promise<User> {
+  async createUser(data: Prisma.UserCreateArgs): Promise<User> {
     try {
       this.logger.log('Creating a new user');
       return this.prisma.user.create({ data });
@@ -72,7 +71,7 @@ export class UserService {
    */
   async updateUser(params: {
     id: string;
-    data: Prisma.UserUpdateInput;
+    data: Prisma.UserUpdateArgs;
   }): Promise<User> {
     try {
       const { id, data } = params;
