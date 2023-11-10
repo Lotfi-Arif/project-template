@@ -25,9 +25,9 @@ export class ECommerceResolver {
    */
   @Mutation(() => Boolean)
   async addToUserCart(
-    @Args('userId') userId: string,
-    @Args('productId') productId: string,
-    @Args('quantity') quantity: number,
+    @Args() userId: string,
+    @Args() productId: string,
+    @Args() quantity: number,
   ): Promise<boolean> {
     await this.eCommerceService.addToCart(userId, productId, quantity);
     return true;
@@ -39,7 +39,7 @@ export class ECommerceResolver {
    * @returns An Order model representing the placed order.
    */
   @Mutation(() => Order)
-  async placeUserOrder(@Args('userId') userId: string): Promise<Order> {
+  async placeUserOrder(@Args() userId: string): Promise<Order> {
     return this.eCommerceService.placeOrder(userId);
   }
 

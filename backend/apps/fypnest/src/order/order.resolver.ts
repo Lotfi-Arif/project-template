@@ -52,7 +52,7 @@ export class OrderResolver {
    * @returns The newly created order entity.
    */
   @Mutation(() => Order)
-  async createOrder(@Args('data') data: CreateOneOrderArgs) {
+  async createOrder(@Args() data: CreateOneOrderArgs) {
     try {
       this.logger.log('Creating a new order');
       return await this.orderService.createOrder(data);
@@ -68,7 +68,7 @@ export class OrderResolver {
    * @returns The updated order entity.
    */
   @Mutation(() => Order)
-  async updateOrder(@Args('data') updateOneOrderArgs: UpdateOneOrderArgs) {
+  async updateOrder(@Args() updateOneOrderArgs: UpdateOneOrderArgs) {
     try {
       this.logger.log(`Updating order with ID: ${updateOneOrderArgs.where.id}`);
       return await this.orderService.updateOrder(updateOneOrderArgs);

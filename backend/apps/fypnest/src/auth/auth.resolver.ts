@@ -46,7 +46,7 @@ export class AuthResolver {
 
   @Mutation(() => RegisterResponseType)
   async register(
-    @Args('createOneAuthArgs') createOneAuthArgs: CreateOneAuthArgs,
+    @Args() createOneAuthArgs: CreateOneAuthArgs,
   ): Promise<RegisterResponseType> {
     try {
       this.logger.debug('Registering a new user');

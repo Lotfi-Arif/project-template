@@ -64,17 +64,16 @@ export class CartItemService {
    * @throws NotFoundException if the cart item to update is not found.
    */
   async updateCartItem(
-    id: string,
-    cartUpdateArgs: Prisma.CartUpdateArgs,
+    cartUpdateArgs: Prisma.CartItemUpdateArgs,
   ): Promise<CartItem> {
-    this.logger.log(`Updating cart item with ID: ${id}`);
+    this.logger.log(`Updating cart item with ID: ${cartUpdateArgs.where.id}`);
     try {
-      return await this.prisma.cartItem.update({
-        where: { id },
-        data: cartUpdateArgs.data,
-      });
+      return await this.prisma.cartItem.update(cartUpdateArgs);
     } catch (error) {
-      this.logger.error(`Failed to update cart item with ID: ${id}`, { error });
+      this.logger.error(
+        `Failed to update cart item with ID: ${cartUpdateArgs.where.id}`,
+        { error },
+      );
       handlePrismaError(error);
     }
   }

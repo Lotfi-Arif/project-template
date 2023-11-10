@@ -1,10 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CartItemService } from './cart-item.service';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
 import { Logger } from '@nestjs/common';
 import { CreateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/create-one-cart-item.args';
 import { UpdateOneCartItemArgs } from '@app/prisma-generated/generated/nestgraphql/cart-item/update-one-cart-item.args';
 import { handleHttpError } from '@app/common/utils';
+import { PrismaSelect } from '@paljs/plugins';
 
 @Resolver(() => CartItem)
 export class CartItemResolver {
@@ -27,7 +28,7 @@ export class CartItemResolver {
 
   @Mutation(() => CartItem)
   async addCartItem(
-    @Args('data') createOneCartItemArgs: CreateOneCartItemArgs,
+    @Args() createOneCartItemArgs: CreateOneCartItemArgs,
   ): Promise<CartItem> {
     try {
       this.logger.log('Resolving add new cart item');
@@ -42,19 +43,25 @@ export class CartItemResolver {
 
   @Mutation(() => CartItem)
   async updateCartItem(
-    @Args('id') id: string,
-    @Args('data') updateOneCartItemArgs: UpdateOneCartItemArgs,
+    @Args() updateOneCartItemArgs: UpdateOneCartItemArgs,
+    @Info() info,
   ): Promise<CartItem> {
     try {
-      this.logger.log(`Resolving update for cart item with ID: ${id}`);
-      return await this.cartItemService.updateCartItem(
-        id,
-        updateOneCartItemArgs,
+      this.logger.log(
+        `Resolving update for cart item with ID: ${updateOneCartItemArgs.where.id}`,
       );
-    } catch (error) {
-      this.logger.error(`Failed to resolve cart item with ID: ${id}`, {
-        error,
+      const select = new PrismaSelect(info).value;
+      return await this.cartItemService.updateCartItem({
+        ...updateOneCartItemArgs,
+        ...select,
       });
+    } catch (error) {
+      this.logger.error(
+        `Failed to resolve cart item with ID: ${updateOneCartItemArgs.where.id}`,
+        {
+          error,
+        },
+      );
       throw handleHttpError(error, 'Failed to resolve cart item');
     }
   }

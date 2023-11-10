@@ -50,7 +50,7 @@ export class ProductResolver {
 
   @Mutation(() => Product)
   async createProduct(
-    @Args('createOneProductArgs') createOneProductArgs: CreateOneProductArgs,
+    @Args() createOneProductArgs: CreateOneProductArgs,
     @Info() info,
   ) {
     try {
@@ -68,7 +68,7 @@ export class ProductResolver {
   }
 
   @Mutation(() => Product)
-  async updateProduct(@Args('data') data: UpdateOneProductArgs, @Info() info) {
+  async updateProduct(@Args() data: UpdateOneProductArgs, @Info() info) {
     try {
       this.logger.log(`Updating product with ID: ${data.where.id}`);
       const update = new PrismaSelect(info).value;
@@ -87,7 +87,7 @@ export class ProductResolver {
 
   @Mutation(() => Product)
   async deleteProduct(
-    @Args('productDeleteArgs') productDeleteArgs: DeleteOneProductArgs,
+    @Args() productDeleteArgs: DeleteOneProductArgs,
     @Info() info,
   ) {
     try {

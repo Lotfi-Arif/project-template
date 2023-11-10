@@ -1,9 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PaymentService } from './payment.service';
 import { Payment } from '@app/prisma-generated/generated/nestgraphql/payment/payment.model';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { PaymentCreateInput } from '@app/prisma-generated/generated/nestgraphql/payment/payment-create.input';
 import { handleHttpError } from '@app/common/utils';
+import { CreateOnePaymentArgs } from '@app/prisma-generated/generated/nestgraphql/payment/create-one-payment.args';
+import { UpdateOnePaymentArgs } from '@app/prisma-generated/generated/nestgraphql/payment/update-one-payment.args';
+import { PrismaSelect } from '@paljs/plugins';
 
 @Resolver(() => Payment)
 export class PaymentResolver {
@@ -36,9 +38,7 @@ export class PaymentResolver {
   }
 
   @Mutation(() => Payment)
-  async createPayment(
-    @Args('data') data: PaymentCreateInput,
-  ): Promise<Payment> {
+  async createPayment(@Args() data: CreateOnePaymentArgs): Promise<Payment> {
     try {
       this.logger.log('Recording a new payment');
       return await this.paymentService.createPayment(data);
@@ -50,16 +50,25 @@ export class PaymentResolver {
 
   @Mutation(() => Payment)
   async updatePayment(
-    @Args('id') id: string,
-    @Args('data') data: PaymentCreateInput,
+    @Args() updateOnePaymentArgs: UpdateOnePaymentArgs,
+    @Info() info,
   ): Promise<Payment> {
     try {
-      this.logger.log(`Updating payment with ID: ${id}`);
-      const payment = await this.paymentService.updatePaymentById(id, data);
+      this.logger.log(
+        `Updating payment with ID: ${updateOnePaymentArgs.where.id}`,
+      );
+      const select = new PrismaSelect(info).value;
+      const payment = await this.paymentService.updatePaymentById({
+        ...updateOnePaymentArgs,
+        ...select,
+      });
       if (!payment) throw new NotFoundException('Payment not found');
       return payment;
     } catch (error) {
-      this.logger.error(`Failed to update payment with ID: ${id}`, { error });
+      this.logger.error(
+        `Failed to update payment with ID: ${updateOnePaymentArgs.where.id}`,
+        { error },
+      );
       throw handleHttpError(error, 'Failed to update payment');
     }
   }

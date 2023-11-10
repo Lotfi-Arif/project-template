@@ -22,11 +22,12 @@ export class MediaResolver {
     }
   }
 
-  @Query(() => Buffer, { nullable: true })
-  async mediaContent(@Args('id') id: string) {
+  @Query(() => String, { nullable: true })
+  async getMediaById(@Args('id') id: string) {
     this.logger.log(`Fetching media content with ID: ${id}`);
     try {
-      return await this.mediaService.getMediaById(id);
+      const buffer = await this.mediaService.getMediaById(id);
+      return buffer.toString('base64');
     } catch (error) {
       this.logger.error(`Failed to retrieve media content with ID: ${id}`, {
         error,

@@ -40,7 +40,7 @@ export class ReviewResolver {
   }
 
   @Mutation(() => Review)
-  async createReview(@Args('data') data: CreateOneReviewArgs) {
+  async createReview(@Args() data: CreateOneReviewArgs) {
     try {
       this.logger.log('Creating a new review');
       return this.reviewService.createReview(data);
@@ -51,7 +51,7 @@ export class ReviewResolver {
   }
 
   @Mutation(() => Review)
-  async updateReview(@Args('data') data: UpdateOneReviewArgs, @Info() info) {
+  async updateReview(@Args() data: UpdateOneReviewArgs, @Info() info) {
     try {
       this.logger.log(`Updating review with ID: ${data.where.id}`);
       const update = new PrismaSelect(info).value;

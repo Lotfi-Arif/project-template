@@ -40,10 +40,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(
-    @Args('createOneUserArgs') createOneUserArgs: CreateOneUserArgs,
-    @Info() info,
-  ) {
+  async createUser(@Args() createOneUserArgs: CreateOneUserArgs, @Info() info) {
     try {
       this.logger.log('Creating a new user');
       const user = new PrismaSelect(info).value;
@@ -58,7 +55,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async updateUser(@Args('data') data: UpdateOneUserArgs, @Info() info) {
+  async updateUser(@Args() data: UpdateOneUserArgs, @Info() info) {
     try {
       this.logger.log(`Updating user with ID: ${data.where.id}`);
       const update = new PrismaSelect(info).value;

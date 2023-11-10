@@ -1,8 +1,8 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Payment } from '@app/prisma-generated/generated/nestgraphql/payment/payment.model';
-import { PaymentCreateInput } from '@app/prisma-generated/generated/nestgraphql/payment/payment-create.input';
 import { handlePrismaError } from '@app/common/utils';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PaymentService {
@@ -15,10 +15,12 @@ export class PaymentService {
    * @param data - Payment data for creation.
    * @returns The recorded payment.
    */
-  async createPayment(data: PaymentCreateInput): Promise<Payment> {
+  async createPayment(
+    paymentCreateArgs: Prisma.PaymentCreateArgs,
+  ): Promise<Payment> {
     this.logger.log('Attempting to record a new payment');
     try {
-      return this.prisma.payment.create({ data });
+      return this.prisma.payment.create(paymentCreateArgs);
     } catch (error) {
       this.logger.error('Failed to record payment', error.stack);
       handlePrismaError(error, 'Failed to record payment');
@@ -69,20 +71,25 @@ export class PaymentService {
    * @returns The updated payment.
    */
   async updatePaymentById(
-    id: string,
-    data: Partial<PaymentCreateInput>,
+    paymentUpdate: Prisma.PaymentUpdateArgs,
   ): Promise<Payment> {
     try {
-      this.logger.log(`Updating payment with id: ${id}`);
-      const payment = await this.prisma.payment.update({ where: { id }, data });
+      this.logger.log(`Updating payment with id: ${paymentUpdate.where.id}`);
+      const payment = await this.prisma.payment.update(paymentUpdate);
       if (!payment) {
-        this.logger.warn(`Payment with id ${id} not found`);
+        this.logger.warn(`Payment with id ${paymentUpdate.where.id} not found`);
         throw new NotFoundException('Payment not found');
       }
       return payment;
     } catch (error) {
-      this.logger.error(`Failed to update payment with id: ${id}`, error.stack);
-      handlePrismaError(error, `Failed to update payment with id: ${id}`);
+      this.logger.error(
+        `Failed to update payment with id: ${paymentUpdate.where.id}`,
+        error.stack,
+      );
+      handlePrismaError(
+        error,
+        `Failed to update payment with id: ${paymentUpdate.where.id}`,
+      );
     }
   }
 

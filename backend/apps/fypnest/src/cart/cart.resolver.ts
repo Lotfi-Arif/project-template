@@ -1,10 +1,12 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CartService } from './cart.service';
 import { Cart } from '@app/prisma-generated/generated/nestgraphql/cart/cart.model';
 import { CartItem } from '@app/prisma-generated/generated/nestgraphql/cart-item/cart-item.model';
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
 import { Logger } from '@nestjs/common';
 import { handleHttpError } from '@app/common/utils';
+import { CreateOneCartArgs } from '@app/prisma-generated/generated/nestgraphql/cart/create-one-cart.args';
+import { PrismaSelect } from '@paljs/plugins';
 
 @Resolver(() => Cart)
 export class CartResolver {
@@ -28,13 +30,22 @@ export class CartResolver {
 
   // Mutation to create a new cart for a user
   @Mutation(() => Cart)
-  async createCart(@Args('userId') userId: string): Promise<Cart> {
+  async createCart(
+    @Args() createCart: CreateOneCartArgs,
+    @Info() info,
+  ): Promise<Cart> {
     try {
-      this.logger.log(`Creating a new cart for user with ID ${userId}`);
-      return this.cartService.createCart(userId);
+      this.logger.log(
+        `Creating a new cart for user with ID ${createCart.data.user.connect.id}`,
+      );
+      const cart = new PrismaSelect(info).value;
+      return this.cartService.createCart({
+        ...createCart,
+        ...cart,
+      });
     } catch (error) {
       this.logger.error(
-        `Failed to create a new cart for user with ID ${userId}`,
+        `Failed to create a new cart for user with ID ${createCart.data.user.connect.id}`,
         { error },
       );
       throw handleHttpError(error, 'Failed to create a new cart');
