@@ -70,9 +70,8 @@ export class OrderResolver {
   @Mutation(() => Order)
   async updateOrder(@Args('data') updateOneOrderArgs: UpdateOneOrderArgs) {
     try {
-      const { where, data } = updateOneOrderArgs;
-      this.logger.log(`Updating order with ID: ${where.id}`);
-      return await this.orderService.updateOrder({ data, where });
+      this.logger.log(`Updating order with ID: ${updateOneOrderArgs.where.id}`);
+      return await this.orderService.updateOrder(updateOneOrderArgs);
     } catch (error) {
       this.logger.error(
         `Failed to update order with ID: ${updateOneOrderArgs}`,

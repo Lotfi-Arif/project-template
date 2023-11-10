@@ -1,10 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { handleHttpError } from '@app/common/utils';
 import { CreateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/create-one-user.args';
 import { UpdateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/update-one-user.args';
+import { PrismaSelect } from '@paljs/plugins';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -39,10 +40,17 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(@Args('data') data: CreateOneUserArgs) {
+  async createUser(
+    @Args('createOneUserArgs') createOneUserArgs: CreateOneUserArgs,
+    @Info() info,
+  ) {
     try {
       this.logger.log('Creating a new user');
-      return this.userService.createUser(data);
+      const user = new PrismaSelect(info).value;
+      return this.userService.createUser({
+        ...createOneUserArgs,
+        ...user,
+      });
     } catch (error) {
       this.logger.error('Failed to create a new user', { error });
       throw handleHttpError(error, 'Failed to create a new user');
@@ -50,15 +58,18 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async updateUser(
-    @Args('id') id: string,
-    @Args('data') data: UpdateOneUserArgs,
-  ) {
+  async updateUser(@Args('data') data: UpdateOneUserArgs, @Info() info) {
     try {
-      this.logger.log(`Updating user with ID: ${id}`);
-      return this.userService.updateUser({ id, data });
+      this.logger.log(`Updating user with ID: ${data.where.id}`);
+      const update = new PrismaSelect(info).value;
+      return this.userService.updateUser({
+        ...data,
+        ...update,
+      });
     } catch (error) {
-      this.logger.error(`Failed to update user with ID: ${id}`, { error });
+      this.logger.error(`Failed to update user with ID: ${data.where.id}`, {
+        error,
+      });
       throw handleHttpError(error, 'Failed to update user');
     }
   }

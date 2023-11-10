@@ -71,23 +71,21 @@ export class ReviewService {
    * @param params - Update parameters.
    * @returns The updated review.
    */
-  async updateReview(params: {
-    id: string;
-    reviewUpdateArgs: Prisma.ReviewUpdateArgs;
-  }): Promise<Review> {
+  async updateReview(
+    reviewUpdateArgs: Prisma.ReviewUpdateArgs,
+  ): Promise<Review> {
     try {
-      const { id, reviewUpdateArgs } = params;
-      this.logger.log(`Updating review with id: ${id}`);
-      return this.prisma.review.update({
-        where: { id },
-        data: { ...reviewUpdateArgs.data },
-      });
+      this.logger.log(`Updating review with id: ${reviewUpdateArgs.where.id}`);
+      return this.prisma.review.update(reviewUpdateArgs);
     } catch (error) {
       this.logger.error(
-        `Failed to update review with ID ${params.id}`,
+        `Failed to update review with ID ${reviewUpdateArgs.where.id}`,
         error.stack,
       );
-      handlePrismaError(error, `Failed to update review with ID ${params.id}`);
+      handlePrismaError(
+        error,
+        `Failed to update review with ID ${reviewUpdateArgs.where.id}`,
+      );
     }
   }
 

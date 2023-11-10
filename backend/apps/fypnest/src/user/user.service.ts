@@ -69,24 +69,20 @@ export class UserService {
    * @param params - Update parameters.
    * @returns The updated user.
    */
-  async updateUser(params: {
-    id: string;
-    data: Prisma.UserUpdateArgs;
-  }): Promise<User> {
+  async updateUser(data: Prisma.UserUpdateArgs): Promise<User> {
     try {
-      const { id, data } = params;
-      this.logger.log(`Updating user with id: ${id}`);
+      this.logger.log(`Updating user with id: ${data.where.id}`);
       // Use type assertion to avoid deep type comparison
-      return this.prisma.user.update({
-        where: { id },
-        data,
-      });
+      return this.prisma.user.update(data);
     } catch (error) {
       this.logger.error(
-        `Failed to update user with ID ${params.id}`,
+        `Failed to update user with ID ${data.where.id}`,
         error.stack,
       );
-      handlePrismaError(error, `Failed to update user with ID ${params.id}`);
+      handlePrismaError(
+        error,
+        `Failed to update user with ID ${data.where.id}`,
+      );
     }
   }
 

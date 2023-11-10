@@ -54,25 +54,22 @@ export class ProductService {
    * @param params - Parameters containing the ID and data for updating.
    * @returns The updated product.
    */
-  async updateProduct(params: {
-    id: string;
-    productUpdateArgs: Prisma.ProductUpdateArgs;
-  }): Promise<Product> {
+  async updateProduct(
+    productUpdateArgs: Prisma.ProductUpdateArgs,
+  ): Promise<Product> {
     try {
-      const { id, productUpdateArgs } = params;
-      this.logger.log(`Updating product with id: ${id}`);
-      return this.prisma.product.update({
-        where: { id },
-        data: productUpdateArgs,
-      });
+      this.logger.log(
+        `Updating product with id: ${productUpdateArgs.where.id}`,
+      );
+      return this.prisma.product.update(productUpdateArgs);
     } catch (error) {
       this.logger.error(
-        `Failed to update product with id: ${params.id}`,
+        `Failed to update product with id: ${productUpdateArgs.where.id}`,
         error.stack,
       );
       handlePrismaError(
         error,
-        `Failed to update product with id: ${params.id}`,
+        `Failed to update product with id: ${productUpdateArgs.where.id}`,
       );
     }
   }

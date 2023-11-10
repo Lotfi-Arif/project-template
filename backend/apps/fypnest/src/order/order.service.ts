@@ -59,7 +59,9 @@ export class OrderService {
     const orderId = orderUpdateArgs.where.id;
     this.logger.log(`Updating order with id: ${orderId}`);
     try {
-      const updatedOrder = await this.prisma.order.update(orderUpdateArgs);
+      const updatedOrder = await this.prisma.order.update({
+        ...orderUpdateArgs,
+      });
       this.logger.log(`Order with ID ${orderId} updated`);
       return updatedOrder;
     } catch (error) {

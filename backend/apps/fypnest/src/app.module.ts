@@ -25,7 +25,7 @@ import { CartModule } from './cart/cart.module';
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],
-      envFilePath: '../../../.env',
+      envFilePath: '.env',
     }),
     UserModule,
     ProvidersModule,
