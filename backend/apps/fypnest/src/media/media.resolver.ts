@@ -17,6 +17,7 @@ export class MediaResolver {
     try {
       return await this.mediaService.getAllMedia();
     } catch (error) {
+      this.logger.error('Failed to retrieve media records', { error });
       throw handleHttpError(error);
     }
   }
@@ -27,6 +28,9 @@ export class MediaResolver {
     try {
       return await this.mediaService.getMediaById(id);
     } catch (error) {
+      this.logger.error(`Failed to retrieve media content with ID: ${id}`, {
+        error,
+      });
       throw handleHttpError(error);
     }
   }
@@ -38,6 +42,7 @@ export class MediaResolver {
     try {
       return await this.mediaService.createMedia(file);
     } catch (error) {
+      this.logger.error('Failed to upload media', { error });
       throw handleHttpError(error);
     }
   }
@@ -48,6 +53,7 @@ export class MediaResolver {
     try {
       return await this.mediaService.deleteMedia(id);
     } catch (error) {
+      this.logger.error(`Failed to delete media with ID: ${id}`, { error });
       throw handleHttpError(error);
     }
   }
