@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
 import { Prisma } from '@prisma/client';
+import { handlePrismaError } from '@app/common/utils';
 
 @Injectable()
 export class UserService {
@@ -16,8 +17,13 @@ export class UserService {
    * @returns The created user.
    */
   async createUser(data: UserCreateInput): Promise<User> {
-    this.logger.log('Creating a new user');
-    return this.prisma.user.create({ data });
+    try {
+      this.logger.log('Creating a new user');
+      return this.prisma.user.create({ data });
+    } catch (error) {
+      this.logger.error('Failed to create user', error.stack);
+      handlePrismaError(error, 'Failed to create user');
+    }
   }
 
   /**
@@ -28,11 +34,16 @@ export class UserService {
   async getAllUsers(
     params: { skip?: number; take?: number } = {},
   ): Promise<User[]> {
-    const { skip, take } = params;
-    this.logger.log(
-      `Fetching users with pagination - skip: ${skip}, take: ${take}`,
-    );
-    return this.prisma.user.findMany({ skip, take });
+    try {
+      const { skip, take } = params;
+      this.logger.log(
+        `Fetching users with pagination - skip: ${skip}, take: ${take}`,
+      );
+      return this.prisma.user.findMany({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve users', error.stack);
+      handlePrismaError(error, 'Failed to retrieve users');
+    }
   }
 
   /**
@@ -41,12 +52,17 @@ export class UserService {
    * @returns The user or null if not found.
    */
   async getUserById(id: string): Promise<User | null> {
-    this.logger.log(`Fetching user by id: ${id}`);
-    const user = await this.prisma.user.findUnique({ where: { id } });
-    if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+    try {
+      this.logger.log(`Fetching user by id: ${id}`);
+      const user = await this.prisma.user.findUnique({ where: { id } });
+      if (!user) {
+        throw new NotFoundException(`User with ID ${id} not found`);
+      }
+      return user;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve user with ID ${id}`, error.stack);
+      handlePrismaError(error, `Failed to retrieve user with ID ${id}`);
     }
-    return user;
   }
 
   /**
@@ -58,13 +74,21 @@ export class UserService {
     id: string;
     data: Prisma.UserUpdateInput;
   }): Promise<User> {
-    const { id, data } = params;
-    this.logger.log(`Updating user with id: ${id}`);
-    // Use type assertion to avoid deep type comparison
-    return this.prisma.user.update({
-      where: { id },
-      data,
-    });
+    try {
+      const { id, data } = params;
+      this.logger.log(`Updating user with id: ${id}`);
+      // Use type assertion to avoid deep type comparison
+      return this.prisma.user.update({
+        where: { id },
+        data,
+      });
+    } catch (error) {
+      this.logger.error(
+        `Failed to update user with ID ${params.id}`,
+        error.stack,
+      );
+      handlePrismaError(error, `Failed to update user with ID ${params.id}`);
+    }
   }
 
   /**
@@ -73,7 +97,12 @@ export class UserService {
    * @returns The deleted user.
    */
   async deleteUser(id: string): Promise<User> {
-    this.logger.log(`Deleting user with id: ${id}`);
-    return this.prisma.user.delete({ where: { id } });
+    try {
+      this.logger.log(`Deleting user with id: ${id}`);
+      return this.prisma.user.delete({ where: { id } });
+    } catch (error) {
+      this.logger.error(`Failed to delete user with ID ${id}`, error.stack);
+      handlePrismaError(error, `Failed to delete user with ID ${id}`);
+    }
   }
 }

@@ -4,6 +4,7 @@ import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.mode
 import { Logger, NotFoundException } from '@nestjs/common';
 import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
 import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
+import { handleHttpError } from '@app/common/utils';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -13,24 +14,39 @@ export class UserResolver {
 
   @Query(() => [User])
   async users(@Args('skip') skip?: number, @Args('take') take?: number) {
-    this.logger.log(`Fetching users with skip: ${skip}, take: ${take}`);
-    return this.userService.getAllUsers({ skip, take });
+    try {
+      this.logger.log(`Fetching users with skip: ${skip}, take: ${take}`);
+      return this.userService.getAllUsers({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve users', { error });
+      throw handleHttpError(error, 'Failed to retrieve users');
+    }
   }
 
   @Query(() => User, { nullable: true })
   async user(@Args('id') id: string) {
-    this.logger.log(`Fetching user with ID: ${id}`);
-    const user = await this.userService.getUserById(id);
-    if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+    try {
+      this.logger.log(`Fetching user with ID: ${id}`);
+      const user = await this.userService.getUserById(id);
+      if (!user) {
+        throw new NotFoundException(`User with ID ${id} not found`);
+      }
+      return user;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve user with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to retrieve user');
     }
-    return user;
   }
 
   @Mutation(() => User)
   async createUser(@Args('data') data: UserCreateInput) {
-    this.logger.log('Creating a new user');
-    return this.userService.createUser(data);
+    try {
+      this.logger.log('Creating a new user');
+      return this.userService.createUser(data);
+    } catch (error) {
+      this.logger.error('Failed to create a new user', { error });
+      throw handleHttpError(error, 'Failed to create a new user');
+    }
   }
 
   @Mutation(() => User)
@@ -38,13 +54,23 @@ export class UserResolver {
     @Args('id') id: string,
     @Args('data') data: UserUpdateInput,
   ) {
-    this.logger.log(`Updating user with ID: ${id}`);
-    return this.userService.updateUser({ id, data });
+    try {
+      this.logger.log(`Updating user with ID: ${id}`);
+      return this.userService.updateUser({ id, data });
+    } catch (error) {
+      this.logger.error(`Failed to update user with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to update user');
+    }
   }
 
   @Mutation(() => User)
   async deleteUser(@Args('id') id: string) {
-    this.logger.log(`Deleting user with ID: ${id}`);
-    return this.userService.deleteUser(id);
+    try {
+      this.logger.log(`Deleting user with ID: ${id}`);
+      return this.userService.deleteUser(id);
+    } catch (error) {
+      this.logger.error(`Failed to delete user with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to delete user');
+    }
   }
 }
