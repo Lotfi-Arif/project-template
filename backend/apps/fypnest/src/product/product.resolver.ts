@@ -3,6 +3,7 @@ import { ProductService } from './product.service';
 import { Product } from '@app/prisma-generated/generated/nestgraphql/product/product.model';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { ProductUpdateInput } from '@app/prisma-generated/generated/nestgraphql/product/product-update.input';
+import { handleHttpError } from '@app/common/utils';
 
 @Resolver(() => Product)
 export class ProductResolver {
@@ -12,24 +13,38 @@ export class ProductResolver {
 
   @Query(() => Product, { nullable: true })
   async product(@Args('id') id: string) {
-    this.logger.log(`Fetching product with ID: ${id}`);
-    const product = await this.productService.getProductById(id);
-    if (!product) throw new NotFoundException('Product not found');
-    return product;
+    try {
+      this.logger.log(`Fetching product with ID: ${id}`);
+      const product = await this.productService.getProductById(id);
+      if (!product) throw new NotFoundException('Product not found');
+      return product;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve product with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to retrieve product');
+    }
   }
 
   @Query(() => [Product])
   async products(@Args('skip') skip?: number, @Args('take') take?: number) {
-    this.logger.log(`Fetching products with skip: ${skip}, take: ${take}`);
-    const products = await this.productService.getProducts({ skip, take });
-    return products;
+    try {
+      this.logger.log(`Fetching products with skip: ${skip}, take: ${take}`);
+      return await this.productService.getProducts({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve products', { error });
+      throw handleHttpError(error, 'Failed to retrieve products');
+    }
   }
 
   @Mutation(() => Product)
   async createProduct(@Args('data') data) {
-    this.logger.log('Creating a new product');
-    const newProduct = await this.productService.createProduct(data);
-    return newProduct;
+    try {
+      this.logger.log('Creating a new product');
+      const newProduct = await this.productService.createProduct(data);
+      return newProduct;
+    } catch (error) {
+      this.logger.error('Failed to create a new product', { error });
+      throw handleHttpError(error, 'Failed to create a new product');
+    }
   }
 
   @Mutation(() => Product)
@@ -37,18 +52,28 @@ export class ProductResolver {
     @Args('id') id: string,
     @Args('data') data: ProductUpdateInput,
   ) {
-    this.logger.log(`Updating product with ID: ${id}`);
-    const updatedProduct = await this.productService.updateProduct({
-      id,
-      data,
-    });
-    return updatedProduct;
+    try {
+      this.logger.log(`Updating product with ID: ${id}`);
+      const updatedProduct = await this.productService.updateProduct({
+        id,
+        data,
+      });
+      return updatedProduct;
+    } catch (error) {
+      this.logger.error(`Failed to update product with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to update product');
+    }
   }
 
   @Mutation(() => Product)
   async deleteProduct(@Args('id') id: string) {
-    this.logger.log(`Deleting product with ID: ${id}`);
-    const deletedProduct = await this.productService.deleteProduct(id);
-    return deletedProduct;
+    try {
+      this.logger.log(`Deleting product with ID: ${id}`);
+      const deletedProduct = await this.productService.deleteProduct(id);
+      return deletedProduct;
+    } catch (error) {
+      this.logger.error(`Failed to delete product with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to delete product');
+    }
   }
 }
