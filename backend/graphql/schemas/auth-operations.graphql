@@ -1,0 +1,42 @@
+# Mutation for registering a user
+mutation Register($createOneAuthArgs: CreateOneAuthArgs!) {
+  register(createOneAuthArgs: $createOneAuthArgs) {
+    user {
+      id
+      email
+      # Add other fields of the Auth model as needed
+    }
+    accessToken
+    refreshToken
+  }
+}
+
+# Mutation for user login
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    accessToken
+    refreshToken
+  }
+}
+
+# Mutation for refreshing the token
+mutation RefreshToken($userId: String!, $token: String!) {
+  refreshToken(userId: $userId, token: $token) {
+    accessToken
+    refreshToken
+  }
+}
+
+# Mutation for initiating password reset
+mutation InitiatePasswordReset($email: String!) {
+  initiatePasswordReset(email: $email) {
+    passwordResetToken
+  }
+}
+
+# Mutation for completing password reset
+mutation CompletePasswordReset($token: String!, $newPassword: String!) {
+  completePasswordReset(token: $token, newPassword: $newPassword) {
+    message
+  }
+}

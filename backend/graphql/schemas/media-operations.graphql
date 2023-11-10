@@ -1,0 +1,34 @@
+# Add or adjust the input argument types to match your GraphQL schema.
+
+# Query to get all media records
+query GetAllMedia {
+  media {
+    id
+    url
+    # Add other fields of the Media model as needed
+  }
+}
+
+# Query to get media by ID
+query GetMediaById($id: String!) {
+  getMediaById(id: $id)
+}
+
+# Mutation to upload media
+# Note: Uploading files through GraphQL requires specific handling,
+# usually by sending a multi-part request.
+mutation UploadMedia($file: Upload!) {
+  uploadMedia(file: $file) {
+    id
+    url
+    # Add other fields of the Media model as needed
+  }
+}
+
+# Mutation to delete media
+mutation DeleteMedia($id: String!) {
+  deleteMedia(id: $id) {
+    id
+    # Add other fields of the Media model as needed
+  }
+}
