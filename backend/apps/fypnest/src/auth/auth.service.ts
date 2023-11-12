@@ -33,56 +33,75 @@ export class AuthService {
   async register(
     authCreateInput: Prisma.AuthCreateArgs,
   ): Promise<{ accessToken: string; refreshToken: string; user: Auth }> {
+    let userCreationResult;
     try {
       this.logger.log('Registering a new user');
 
-      const existingAuth = await this.prisma.auth.findUnique({
-        where: { email: authCreateInput.data.email },
-      });
-      if (existingAuth) {
-        throw new ConflictException('Email already in use');
-      }
+      userCreationResult = await this.prisma.$transaction(async (prisma) => {
+        const existingAuth = await prisma.auth.findUnique({
+          where: { email: authCreateInput.data.email },
+        });
+        if (existingAuth) {
+          throw new ConflictException('Email already in use');
+        }
 
-      const hashedPassword = await bcrypt.hash(
-        authCreateInput.data.password,
-        10,
-      );
+        const hashedPassword = await bcrypt.hash(
+          authCreateInput.data.password,
+          10,
+        );
 
-      const userCreationResult = await this.prisma.user.create({
-        data: {
-          auth: {
-            create: {
-              email: authCreateInput.data.email,
-              password: hashedPassword,
+        return await prisma.user.create({
+          data: {
+            firstName: authCreateInput.data.user.create.firstName,
+            lastName: authCreateInput.data.user.create.lastName,
+            role: authCreateInput.data.user.create.role,
+            auth: {
+              create: {
+                email: authCreateInput.data.email,
+                password: hashedPassword,
+              },
+            },
+            cart: {
+              create: {},
             },
           },
-        },
-        include: {
-          auth: true, // Include the auth object
-        },
+          include: {
+            auth: true,
+            cart: true,
+          },
+        });
       });
 
-      // Additional check for user creation result
       if (!userCreationResult || !userCreationResult.auth) {
         throw new InternalServerErrorException('User registration failed');
       }
-
-      // Now that the user is created, generate tokens
-      const tokens = await this.generateTokens(
-        userCreationResult.id,
-        authCreateInput.data.email,
-      );
-
-      return {
-        user: userCreationResult.auth, // Ensure this matches the Auth type structure
-        ...tokens,
-      };
     } catch (error) {
       this.logger.error(
         `Failed to register user with email: ${authCreateInput.data.email}`,
         error.stack,
       );
       handlePrismaError(error, 'Failed to register user with email provided');
+      return; // Exit the function if the transaction failed
+    }
+
+    try {
+      const tokens = await this.generateTokens(
+        userCreationResult.id,
+        userCreationResult.auth.email,
+      );
+
+      return {
+        user: userCreationResult.auth,
+        ...tokens,
+      };
+    } catch (tokenError) {
+      this.logger.error(
+        `Token generation failed for user ID: ${userCreationResult.id}`,
+        tokenError.stack,
+      );
+      throw new InternalServerErrorException(
+        'Failed to generate tokens for user',
+      );
     }
   }
 
@@ -155,25 +174,48 @@ export class AuthService {
    */
   async generateTokens(userId: string, email: string) {
     try {
+      this.logger.log(`Generating tokens for user ID: ${userId}`);
+      const jwtRefreshSecret =
+        this.configService.get<string>('JWT_REFRESH_SECRET');
+
+      this.logger.log(`JWT Refresh Secret: ${jwtRefreshSecret}`);
+      if (!jwtRefreshSecret) {
+        throw new Error('JWT_REFRESH_SECRET is not defined');
+      }
+
       const accessToken = await this.jwtService.signAsync(
         { userId, email },
-        { expiresIn: '15m' }, // Access token expires in 15 minutes
+        { expiresIn: '15m', secret: jwtRefreshSecret }, // Access token expires in 15 minutes
       );
 
       const refreshToken = await this.jwtService.signAsync(
         { userId, email },
         {
-          secret: this.configService.get('JWT_REFRESH_SECRET'), // Secret for refresh token
+          secret: jwtRefreshSecret, // Secret for refresh token
           expiresIn: '7d', // Refresh token expires in 7 days
         },
       );
 
+      const authRecordExists = await this.prisma.auth.findUnique({
+        where: { userId },
+      });
+      if (!authRecordExists) {
+        this.logger.error(`Auth record not found for user ID: ${userId}`);
+        throw new InternalServerErrorException(
+          'Auth record not found for token generation',
+        );
+      }
+
       // Store the hashed version of the JWT refresh token for added security
       const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+      const hashedAccessToken = await bcrypt.hash(accessToken, 10);
 
       await this.prisma.auth.update({
         where: { userId },
-        data: { refreshToken: hashedRefreshToken },
+        data: {
+          refreshToken: hashedRefreshToken,
+          accessToken: hashedAccessToken,
+        },
       });
 
       return { accessToken, refreshToken };
