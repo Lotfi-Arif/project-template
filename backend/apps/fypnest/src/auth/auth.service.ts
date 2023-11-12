@@ -73,7 +73,10 @@ export class AuthService {
       });
 
       if (!userCreationResult || !userCreationResult.auth) {
-        throw new InternalServerErrorException('User registration failed');
+        handlePrismaError(
+          new ConflictException('User creation failed'),
+          'Unable to create User and Auth records',
+        );
       }
     } catch (error) {
       this.logger.error(
@@ -99,9 +102,8 @@ export class AuthService {
         `Token generation failed for user ID: ${userCreationResult.id}`,
         tokenError.stack,
       );
-      throw new InternalServerErrorException(
-        'Failed to generate tokens for user',
-      );
+      handlePrismaError(tokenError, 'Token generation failed');
+      return;
     }
   }
 
@@ -115,55 +117,57 @@ export class AuthService {
     email: string,
     password: string,
   ): Promise<{ accessToken: string; refreshToken: string }> {
-    try {
-      this.logger.log(`Authenticating user with email: ${email}`);
+    return this.prisma.$transaction(async (prisma) => {
+      try {
+        this.logger.log(`Authenticating user with email: ${email}`);
 
-      const auth = await this.prisma.auth.findUnique({
-        where: { email },
-      });
+        const auth = await prisma.auth.findUnique({
+          where: { email },
+        });
 
-      if (!auth || !(await bcrypt.compare(password, auth.password))) {
-        throw new UnauthorizedException('Invalid credentials');
+        if (!auth || !(await bcrypt.compare(password, auth.password))) {
+          throw new UnauthorizedException('Invalid credentials');
+        }
+
+        const user = await prisma.user.findUnique({
+          where: { id: auth.userId },
+        });
+
+        if (!user) {
+          this.logger.error(`User not found for auth ID: ${auth.id}`);
+          throw new NotFoundException('User not found');
+        }
+
+        // Use generateTokens method to create both access and refresh tokens.
+        const { accessToken, refreshToken } = await this.generateTokens(
+          user.id,
+          auth.email,
+        );
+
+        // Check if the refresh token should be hashed or not before saving
+        const refreshTokenHash = this.configService.get<boolean>(
+          'REFRESH_TOKEN_HASHED',
+        )
+          ? await bcrypt.hash(refreshToken, 10)
+          : refreshToken;
+
+        await prisma.auth.update({
+          where: { id: auth.id },
+          data: { refreshToken: refreshTokenHash },
+        });
+
+        // Return the plain refresh token if it is not hashed, otherwise return a message
+        return this.configService.get<boolean>('REFRESH_TOKEN_HASHED')
+          ? { accessToken, refreshToken: 'Refresh token updated successfully.' }
+          : { accessToken, refreshToken };
+      } catch (error) {
+        this.logger.error(
+          `Failed to authenticate user with email: ${email}`,
+          error.stack,
+        );
+        handlePrismaError(error, 'Authenticating user failed');
       }
-
-      const user = await this.prisma.user.findUnique({
-        where: { id: auth.userId },
-      });
-
-      if (!user) {
-        this.logger.error(`User not found for auth ID: ${auth.id}`);
-        throw new NotFoundException('User not found');
-      }
-
-      // Use generateTokens method to create both access and refresh tokens.
-      const { accessToken, refreshToken } = await this.generateTokens(
-        user.id,
-        auth.email,
-      );
-
-      // Check if the refresh token should be hashed or not before saving
-      const refreshTokenHash = this.configService.get<boolean>(
-        'REFRESH_TOKEN_HASHED',
-      )
-        ? await bcrypt.hash(refreshToken, 10)
-        : refreshToken;
-
-      await this.prisma.auth.update({
-        where: { id: auth.id },
-        data: { refreshToken: refreshTokenHash },
-      });
-
-      // Return the plain refresh token if it is not hashed, otherwise return a message
-      return this.configService.get<boolean>('REFRESH_TOKEN_HASHED')
-        ? { accessToken, refreshToken: 'Refresh token updated successfully.' }
-        : { accessToken, refreshToken };
-    } catch (error) {
-      this.logger.error(
-        `Failed to authenticate user with email: ${email}`,
-        error.stack,
-      );
-      handlePrismaError(error, 'Authenticating user failed');
-    }
+    });
   }
 
   /**
@@ -292,6 +296,7 @@ export class AuthService {
         error.stack,
       );
       handlePrismaError(error, 'Failed to initiate password reset');
+      return;
     }
   }
 
@@ -338,6 +343,7 @@ export class AuthService {
     } catch (error) {
       this.logger.error(`Failed to complete password reset`, error.stack);
       handlePrismaError(error, 'Failed to complete password reset');
+      return;
     }
   }
 }

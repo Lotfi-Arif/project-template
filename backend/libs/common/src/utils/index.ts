@@ -5,6 +5,8 @@ import {
   InternalServerErrorException,
   ForbiddenException,
   UnprocessableEntityException,
+  HttpException,
+  ConflictException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { GraphQLError } from 'graphql';
@@ -20,7 +22,7 @@ const defaultMessages: Record<number, string> = {
   500: 'Internal server error. An unexpected condition was encountered.',
 };
 
-// Error to HTTP status code mapping
+// Maps error constructor names to corresponding HTTP status codes
 const ERROR_TO_STATUS_CODE: { [key: string]: number } = {
   BadRequestException: 400,
   UnauthorizedException: 401,
@@ -31,16 +33,74 @@ const ERROR_TO_STATUS_CODE: { [key: string]: number } = {
   InternalServerErrorException: 500,
 };
 
+/**
+ * Creates a GraphQLError with specified status code, message, and error details.
+ * @param statusCode {number} - The HTTP status code associated with the error.
+ * @param message {string} - The message describing the error.
+ * @param error {Error} - The original error object.
+ * @returns {GraphQLError} - The constructed GraphQLError with detailed information.
+ */
+const createGraphQLError = (
+  statusCode: number,
+  message: string,
+  error: Error,
+): GraphQLError => {
+  return new GraphQLError(message, {
+    extensions: {
+      code: `HTTP_${statusCode}`,
+      statusCode,
+      detail: `${error.name} - ${error.message} - ${error.stack}`,
+    },
+  });
+};
+
+/**
+ * Creates an instance of a specified HttpException subclass with a given message.
+ * @param errorClass {new (message: string) => HttpException} - The HttpException subclass constructor.
+ * @param message {string} - The message to be passed to the HttpException.
+ * @returns {HttpException} - The instantiated HttpException object.
+ */
+const createHttpException = (
+  errorClass: new (message: string) => HttpException,
+  message: string,
+): HttpException => {
+  return new errorClass(message);
+};
+
+// Maps Prisma error codes to functions that create corresponding HttpExceptions
 const PRISMA_ERROR_TO_HTTP_EXCEPTION: Record<
   string,
-  typeof InternalServerErrorException
+  (message: string) => HttpException
 > = {
-  P2002: BadRequestException,
-  P2025: NotFoundException,
-  P2003: ForbiddenException,
-  P2000: UnprocessableEntityException,
-  P2021: NotFoundException,
-  P2022: NotFoundException,
+  P2002: (message) => createHttpException(ConflictException, message), // Unique constraint failed
+  P2025: (message) => createHttpException(NotFoundException, message), // Record not found
+  P2003: (message) => createHttpException(ForbiddenException, message), // Foreign key constraint failed
+  P2000: (message) => createHttpException(BadRequestException, message), // Requested record not found
+  P2021: (message) => createHttpException(BadRequestException, message), // Invalid data sent
+  P2022: (message) =>
+    createHttpException(UnprocessableEntityException, message), // Data validation error
+};
+
+// Maps error constructor names to functions that create corresponding GraphQLErrors
+const ERROR_TO_GRAPHQL_ERROR: Record<
+  string,
+  (error: Error, defaultMessage: string) => GraphQLError
+> = {
+  BadRequestException: (error, defaultMessage) =>
+    createGraphQLError(400, defaultMessage || 'Bad request', error),
+  UnauthorizedException: (error, defaultMessage) =>
+    createGraphQLError(401, defaultMessage || 'Unauthorized', error),
+  ForbiddenException: (error, defaultMessage) =>
+    createGraphQLError(403, defaultMessage || 'Forbidden', error),
+  NotFoundException: (error, defaultMessage) =>
+    createGraphQLError(404, defaultMessage || 'Not Found', error),
+  ConflictException: (error, defaultMessage) =>
+    createGraphQLError(409, defaultMessage || 'Conflict', error),
+  UnprocessableEntityException: (error, defaultMessage) =>
+    createGraphQLError(422, defaultMessage || 'Unprocessable Entity', error),
+  InternalServerErrorException: (error, defaultMessage) =>
+    createGraphQLError(500, defaultMessage || 'Internal Server Error', error),
+  // Add more mappings as needed
 };
 
 /**
@@ -53,64 +113,58 @@ export const detailedLog = (data: unknown): void => {
   );
 };
 
-export function capitalizeFirstLetter(string) {
+// Utility functions for manipulating string cases
+export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-export function lowerFirstLetter(string) {
+export function lowerFirstLetter(string: string) {
   return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
 /**
  * Handles known Prisma client errors by throwing appropriate HTTP exceptions.
+ * If the error is a recognized Prisma error, it maps to a specific HTTP exception.
+ * Otherwise, it defaults to throwing an InternalServerErrorException.
  * @param error - The error to handle.
+ * @param contextMessage - A message providing context about where the error occurred.
  * @throws {HttpException} - The corresponding HTTP exception based on the Prisma error code.
  */
 export function handlePrismaError(
   error: unknown,
-  defaultMessage: string = 'An unexpected error occurred.',
+  contextMessage: string = 'An error occurred.',
 ) {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    const HttpException =
+    const createException =
       PRISMA_ERROR_TO_HTTP_EXCEPTION[error.code] ||
-      InternalServerErrorException;
-    throw new HttpException(`${defaultMessage}: ${error.message}`);
+      (() => new InternalServerErrorException(contextMessage));
+    throw createException(`${contextMessage}: ${error.message}`);
   } else if (error instanceof Error) {
     throw new InternalServerErrorException(
-      `${defaultMessage}: ${error.message}`,
+      `${contextMessage}: ${error.message}`,
     );
   } else {
-    throw new InternalServerErrorException(defaultMessage);
+    throw new InternalServerErrorException(contextMessage);
   }
 }
 
 /**
- * Translates HTTP status codes into user-friendly error messages for GraphQL responses.
- * @param statusCode - The HTTP status code.
- * @param detail - Additional details about the error.
- * @returns {GraphQLError} - A GraphQLError with a formatted message and extensions including the HTTP status code.
+ * Translates different error types into user-friendly GraphQL error messages.
+ * If the error type is recognized, it maps to a specific GraphQLError with a status code and detailed message.
+ * Otherwise, it defaults to a GraphQLError with status code 500 (Internal Server Error).
+ * @param error - The error to translate.
+ * @param defaultMessage - A default message to use if none is provided based on the status code.
+ * @returns {GraphQLError} - A GraphQLError with a formatted message and additional details.
  */
 export function handleHttpError(
   error: Error,
   defaultMessage: string = 'An unexpected error occurred.',
 ): GraphQLError {
-  // Get the name of the error's constructor as a string.
   const errorName = error.constructor.name;
-
-  // Map the error name to a status code, defaulting to 500 if not found.
-  const statusCode = ERROR_TO_STATUS_CODE[errorName] || 500;
-
-  // Use the provided defaultMessage or get the default message for the status code.
-  const message =
-    defaultMessage ||
-    defaultMessages[statusCode] ||
-    'An unexpected error occurred.';
-
-  // Return a GraphQLError with the message and extensions that include the status code and details.
-  return new GraphQLError(message, {
-    extensions: {
-      code: `HTTP_${statusCode}`,
-      statusCode,
-      detail: `${error.name} - ${error.message} - ${error.stack}`,
-    },
-  });
+  const createError =
+    ERROR_TO_GRAPHQL_ERROR[errorName] ||
+    ((error, defaultMessage) => createGraphQLError(500, defaultMessage, error));
+  return createError(
+    error,
+    defaultMessage || defaultMessages[ERROR_TO_STATUS_CODE[errorName] || 500],
+  );
 }
