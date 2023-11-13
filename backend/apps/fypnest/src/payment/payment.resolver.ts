@@ -58,7 +58,7 @@ export class PaymentResolver {
         `Updating payment with ID: ${updateOnePaymentArgs.where.id}`,
       );
       const select = new PrismaSelect(info).value;
-      const payment = await this.paymentService.updatePaymentById({
+      const payment = await this.paymentService.updatePayment({
         ...updateOnePaymentArgs,
         ...select,
       });

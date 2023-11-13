@@ -1,18 +1,13 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.2.0",
-  "engines": {
-    "node": ">=18",
-    "pnpm": ">=7"
-  },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
     "lint": "next lint",
     "lint-staged": "lint-staged",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
+    "start": "next start",
     "test": "pnpm lint && pnpm prettier:check"
   },
   "git": {
@@ -22,15 +17,27 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.7",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "clsx": "^2.0.0",
     "geist": "^1.0.0",
+    "graphql": "^16.8.1",
+    "graphql-ws": "^5.14.2",
     "next": "14.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/fragment-matcher": "^5.0.0",
+    "@graphql-codegen/import-types-preset": "^3.0.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^3.0.0",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.0.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "20.8.9",
