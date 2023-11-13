@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Media } from '@app/prisma-generated/generated/nestgraphql/media/media.model';
 import {
@@ -28,8 +28,13 @@ export class MediaService {
 
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * Uploads a media file to AWS S3 and creates a Media record.
+   * @param file - The file to upload.
+   * @returns The created Media record.
+   */
   async createMedia(file: Express.Multer.File): Promise<Media> {
-    this.logger.log('Uploading a new media');
+    this.logger.log('Attempting to upload a new media file');
     try {
       const uploadCommand = new PutObjectCommand({
         Bucket: this.BUCKET_NAME,
@@ -39,7 +44,8 @@ export class MediaService {
       });
       await this.s3Client.send(uploadCommand);
       const mediaType = determineMediaType(file.mimetype);
-      const media = await this.prisma.media.create({
+
+      return await this.prisma.media.create({
         data: {
           filename: file.filename,
           url: `https://${this.BUCKET_NAME}.s3.amazonaws.com/${file.filename}`,
@@ -47,66 +53,85 @@ export class MediaService {
           type: mediaType,
         },
       });
-      return media;
     } catch (error) {
-      handlePrismaError(error, 'Failed to create media');
+      this.logger.error('Error uploading media file', { error });
+      handlePrismaError(error, 'Failed to upload media');
     }
   }
 
+  /**
+   * Fetches all media records.
+   * @returns An array of Media records.
+   */
   async getAllMedia(): Promise<Media[]> {
-    this.logger.log('Fetching all media');
+    this.logger.log('Fetching all media files');
     try {
       return await this.prisma.media.findMany();
     } catch (error) {
+      this.logger.error('Error fetching media files', { error });
       handlePrismaError(error, 'Failed to retrieve media');
     }
   }
 
+  /**
+   * Fetches a media record by its ID and retrieves the file content from S3.
+   * @param id - The ID of the media record.
+   * @returns The media file content as a Buffer.
+   * @throws NotFoundException if the media record is not found.
+   */
   async getMediaById(id: string): Promise<Buffer> {
-    this.logger.log(`Fetching media by id: ${id}`);
+    this.logger.log(`Fetching media with ID: ${id}`);
     try {
       const media = await this.prisma.media.findUnique({ where: { id } });
       if (!media) {
-        handlePrismaError(
-          new Error('Media not found'),
-          'Media with provided ID not found',
-        );
+        this.logger.warn(`Media not found with ID: ${id}`);
+        throw new NotFoundException(`Media not found with ID: ${id}`);
       }
+
       const getCommand = new GetObjectCommand({
         Bucket: this.BUCKET_NAME,
         Key: media.filename,
       });
+
       const { Body } = await this.s3Client.send(getCommand);
       if (Body instanceof Buffer) {
         return Body;
       } else {
-        throw new Error('Error fetching the media content from S3.');
+        throw new Error('Error fetching media content from S3');
       }
     } catch (error) {
+      this.logger.error(`Error fetching media with ID: ${id}`, { error });
       handlePrismaError(error, 'Failed to fetch media by ID');
     }
   }
 
+  /**
+   * Deletes a media record and its corresponding file in S3.
+   * @param id - The ID of the media record to delete.
+   * @returns The deleted Media record.
+   * @throws NotFoundException if the media record is not found.
+   */
   async deleteMedia(id: string): Promise<Media> {
-    this.logger.log(`Deleting media with id: ${id}`);
+    this.logger.log(`Attempting to delete media with ID: ${id}`);
     try {
-      const media = await this.prisma.media.findUnique({ where: { id } });
-      if (!media) {
-        handlePrismaError(
-          new Error('Media not found'),
-          'Media with provided ID not found',
-        );
-      }
-      const deleteCommand = new DeleteObjectCommand({
-        Bucket: this.BUCKET_NAME,
-        Key: media.filename,
+      return await this.prisma.$transaction(async (prisma) => {
+        const media = await prisma.media.findUnique({ where: { id } });
+        if (!media) {
+          this.logger.warn(`Media not found with ID: ${id}`);
+          throw new NotFoundException(`Media not found with ID: ${id}`);
+        }
+
+        const deleteCommand = new DeleteObjectCommand({
+          Bucket: this.BUCKET_NAME,
+          Key: media.filename,
+        });
+        await this.s3Client.send(deleteCommand);
+
+        return await prisma.media.delete({ where: { id } });
       });
-      await this.s3Client.send(deleteCommand);
-      return await this.prisma.media.delete({ where: { id } });
     } catch (error) {
+      this.logger.error(`Error deleting media with ID: ${id}`, { error });
       handlePrismaError(error, 'Failed to delete media');
     }
   }
 }
-
-// Rest of the utilities remains unchanged...

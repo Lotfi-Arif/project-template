@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Prisma } from '@prisma/client';
@@ -18,7 +18,7 @@ export class UserService {
   async createUser(data: Prisma.UserCreateArgs): Promise<User> {
     try {
       this.logger.log('Creating a new user');
-      return this.prisma.user.create({ data });
+      return await this.prisma.user.create({ data });
     } catch (error) {
       this.logger.error('Failed to create user', error.stack);
       handlePrismaError(error, 'Failed to create user');
@@ -38,7 +38,7 @@ export class UserService {
       this.logger.log(
         `Fetching users with pagination - skip: ${skip}, take: ${take}`,
       );
-      return this.prisma.user.findMany({ skip, take });
+      return await this.prisma.user.findMany({ skip, take });
     } catch (error) {
       this.logger.error('Failed to retrieve users', error.stack);
       handlePrismaError(error, 'Failed to retrieve users');
@@ -55,7 +55,8 @@ export class UserService {
       this.logger.log(`Fetching user by id: ${id}`);
       const user = await this.prisma.user.findUnique({ where: { id } });
       if (!user) {
-        throw new NotFoundException(`User with ID ${id} not found`);
+        this.logger.warn(`User with ID ${id} not found`);
+        handlePrismaError({ code: 'P2025' }, `User with ID ${id} not found`);
       }
       return user;
     } catch (error) {
@@ -69,19 +70,18 @@ export class UserService {
    * @param params - Update parameters.
    * @returns The updated user.
    */
-  async updateUser(data: Prisma.UserUpdateArgs): Promise<User> {
+  async updateUser(params: Prisma.UserUpdateArgs): Promise<User> {
     try {
-      this.logger.log(`Updating user with id: ${data.where.id}`);
-      // Use type assertion to avoid deep type comparison
-      return this.prisma.user.update(data);
+      this.logger.log(`Updating user with id: ${params.where.id}`);
+      return await this.prisma.user.update(params);
     } catch (error) {
       this.logger.error(
-        `Failed to update user with ID ${data.where.id}`,
+        `Failed to update user with ID ${params.where.id}`,
         error.stack,
       );
       handlePrismaError(
         error,
-        `Failed to update user with ID ${data.where.id}`,
+        `Failed to update user with ID ${params.where.id}`,
       );
     }
   }
@@ -94,7 +94,7 @@ export class UserService {
   async deleteUser(id: string): Promise<User> {
     try {
       this.logger.log(`Deleting user with id: ${id}`);
-      return this.prisma.user.delete({ where: { id } });
+      return await this.prisma.user.delete({ where: { id } });
     } catch (error) {
       this.logger.error(`Failed to delete user with ID ${id}`, error.stack);
       handlePrismaError(error, `Failed to delete user with ID ${id}`);

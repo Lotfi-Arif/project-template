@@ -18,9 +18,9 @@ export class ProductService {
   async createProduct(data: Prisma.ProductCreateArgs): Promise<Product> {
     try {
       this.logger.log('Creating a new product');
-      return this.prisma.product.create(data);
+      return await this.prisma.product.create(data);
     } catch (error) {
-      this.logger.error('Failed to create product', error.stack);
+      this.logger.error('Failed to create product', { error, data });
       handlePrismaError(error, 'Failed to create product');
     }
   }
@@ -32,8 +32,8 @@ export class ProductService {
    * @throws NotFoundException if the product is not found.
    */
   async getProductById(id: string): Promise<Product | null> {
+    this.logger.log(`Fetching product by id: ${id}`);
     try {
-      this.logger.log(`Fetching product by id: ${id}`);
       const product = await this.prisma.product.findUnique({ where: { id } });
       if (!product) {
         this.logger.warn(`Product with id ${id} not found`);
@@ -41,10 +41,7 @@ export class ProductService {
       }
       return product;
     } catch (error) {
-      this.logger.error(
-        `Failed to retrieve product with id: ${id}`,
-        error.stack,
-      );
+      this.logger.error(`Failed to retrieve product with id: ${id}`, { error });
       handlePrismaError(error, `Failed to retrieve product with id: ${id}`);
     }
   }
@@ -57,19 +54,29 @@ export class ProductService {
   async updateProduct(
     productUpdateArgs: Prisma.ProductUpdateArgs,
   ): Promise<Product> {
+    const productId = productUpdateArgs.where.id;
+    this.logger.log(`Updating product with id: ${productId}`);
     try {
-      this.logger.log(
-        `Updating product with id: ${productUpdateArgs.where.id}`,
-      );
-      return this.prisma.product.update(productUpdateArgs);
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingProduct = await prisma.product.findUnique({
+          where: { id: productId },
+        });
+        if (!existingProduct) {
+          this.logger.warn(`Product with id ${productId} not found for update`);
+          handlePrismaError(
+            { code: 'P2025' },
+            `Product with ID ${productId} not found`,
+          );
+        }
+        return await prisma.product.update(productUpdateArgs);
+      });
     } catch (error) {
-      this.logger.error(
-        `Failed to update product with id: ${productUpdateArgs.where.id}`,
-        error.stack,
-      );
+      this.logger.error(`Failed to update product with id: ${productId}`, {
+        error,
+      });
       handlePrismaError(
         error,
-        `Failed to update product with id: ${productUpdateArgs.where.id}`,
+        `Failed to update product with id: ${productId}`,
       );
     }
   }
@@ -80,11 +87,23 @@ export class ProductService {
    * @returns The deleted product.
    */
   async deleteProduct(id: string): Promise<Product> {
+    this.logger.log(`Deleting product with id: ${id}`);
     try {
-      this.logger.log(`Deleting product with id: ${id}`);
-      return this.prisma.product.delete({ where: { id } });
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingProduct = await prisma.product.findUnique({
+          where: { id },
+        });
+        if (!existingProduct) {
+          this.logger.warn(`Product with id ${id} not found for deletion`);
+          handlePrismaError(
+            { code: 'P2025' },
+            `Product with ID ${id} not found`,
+          );
+        }
+        return await prisma.product.delete({ where: { id } });
+      });
     } catch (error) {
-      this.logger.error(`Failed to delete product with id: ${id}`, error.stack);
+      this.logger.error(`Failed to delete product with id: ${id}`, { error });
       handlePrismaError(error, `Failed to delete product with id: ${id}`);
     }
   }
@@ -94,18 +113,19 @@ export class ProductService {
    * @param params - Optional parameters for pagination.
    * @returns List of products.
    */
+
   async getProducts(params: {
     skip?: number;
     take?: number;
   }): Promise<Product[]> {
+    const { skip, take } = params;
+    this.logger.log(
+      `Fetching products with pagination - skip: ${skip}, take: ${take}`,
+    );
     try {
-      const { skip, take } = params;
-      this.logger.log(
-        `Fetching products with pagination - skip: ${skip}, take: ${take}`,
-      );
-      return this.prisma.product.findMany({ skip, take });
+      return await this.prisma.product.findMany({ skip, take });
     } catch (error) {
-      this.logger.error('Failed to retrieve products', error.stack);
+      this.logger.error('Failed to retrieve products', { error, params });
       handlePrismaError(error, 'Failed to retrieve products');
     }
   }

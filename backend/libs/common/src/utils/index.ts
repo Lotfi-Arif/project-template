@@ -79,6 +79,7 @@ const PRISMA_ERROR_TO_HTTP_EXCEPTION: Record<
   P2021: (message) => createHttpException(BadRequestException, message), // Invalid data sent
   P2022: (message) =>
     createHttpException(UnprocessableEntityException, message), // Data validation error
+  P2016: (message) => createHttpException(ForbiddenException, message), // Record would violate a required constraint
 };
 
 // Maps error constructor names to functions that create corresponding GraphQLErrors
