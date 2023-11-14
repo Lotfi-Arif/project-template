@@ -1,0 +1,53 @@
+# Add or adjust the input argument types to match your GraphQL schema.
+
+# Query to get a single product by ID
+query GetProductById($id: String!) {
+  product(id: $id) {
+    id
+    name
+    price
+    description
+    # Add other fields of the Product model as needed
+  }
+}
+
+# Query to get all products with optional pagination
+query GetAllProducts($skip: Int, $take: Int) {
+  products(skip: $skip, take: $take) {
+    id
+    name
+    price
+    description
+    # Add other fields of the Product model as needed
+  }
+}
+
+# Mutation to create a new product
+mutation CreateProduct($data: CreateOneProductInput!) {
+  createProduct(data: $data) {
+    id
+    name
+    price
+    description
+    # Add other fields of the Product model as needed
+  }
+}
+
+# Mutation to update a product
+mutation UpdateProduct($data: UpdateOneProductInput!) {
+  updateProduct(data: $data) {
+    id
+    name
+    price
+    description
+    # Add other fields of the Product model as needed
+  }
+}
+
+# Mutation to delete a product
+mutation DeleteProduct($id: String!) {
+  deleteProduct(id: $id) {
+    id
+    # Add other fields of the Product model as needed
+  }
+}

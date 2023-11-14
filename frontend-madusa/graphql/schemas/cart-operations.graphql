@@ -1,0 +1,77 @@
+# Add or adjust the input argument types to match your GraphQL schema.
+
+# Query to get a cart by user ID
+query GetCartByUserId($userId: String!) {
+  getCartByUserId(userId: $userId) {
+    id
+    # Add other fields of the Cart model as needed
+    cartItems {
+      id
+      product {
+        id
+        name
+        # Add other product fields as needed
+      }
+      quantity
+    }
+    # Include any other related models or fields as needed
+  }
+}
+
+# Mutation to create a new cart for a user
+mutation CreateCart($data: CreateOneCartArgs!) {
+  createCart(data: $data) {
+    id
+    # Add other fields of the Cart model as needed
+  }
+}
+
+# Mutation to add an item to the cart
+mutation AddItemToCart($userId: String!, $productId: String!, $quantity: Int!) {
+  addItemToCart(userId: $userId, productId: $productId, quantity: $quantity) {
+    id
+    quantity
+    # Add other CartItem fields as needed
+  }
+}
+
+# Mutation to update the quantity of an item in the cart
+mutation UpdateCartItemInCart($cartItemId: String!, $quantity: Int!) {
+  updateCartItem(cartItemId: $cartItemId, quantity: $quantity) {
+    id
+    quantity
+    # Add other CartItem fields as needed
+  }
+}
+
+# Mutation to remove an item from the cart
+mutation RemoveCartItemInCart($cartItemId: String!) {
+  removeCartItem(cartItemId: $cartItemId) {
+    id
+    # Add other CartItem fields as needed
+  }
+}
+
+# Mutation to clear a user's cart
+mutation ClearCart($userId: String!) {
+  clearCart(userId: $userId) {
+    id
+    # Add other fields of the Cart model as needed
+  }
+}
+
+# Mutation to checkout a user's cart
+mutation Checkout($userId: String!) {
+  checkout(userId: $userId) {
+    id
+    # Add other fields of the Order model as needed
+  }
+}
+
+# Mutation to apply a coupon to a user's cart
+mutation ApplyCouponToCart($userId: String!, $couponCode: String!) {
+  applyCouponToCart(userId: $userId, couponCode: $couponCode) {
+    id
+    # Add other fields of the Cart model as needed
+  }
+}
