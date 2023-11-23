@@ -19,8 +19,8 @@ query GetCartByUserId($userId: String!) {
 }
 
 # Mutation to create a new cart for a user
-mutation CreateCart($createCart: CreateOneCartArgs!) {
-  createCart(createCart: $createCart) {
+mutation CreateCart($data: CartCreateInput!) {
+  createCart(data: $data) {
     id
     # Add other fields of the Cart model as needed
   }
@@ -36,8 +36,8 @@ mutation AddItemToCart($userId: String!, $productId: String!, $quantity: Int!) {
 }
 
 # Mutation to update the quantity of an item in the cart
-mutation UpdateCartItem($cartItemId: String!, $quantity: Int!) {
-  updateCartItem(cartItemId: $cartItemId, quantity: $quantity) {
+mutation UpdateCart($cartItemId: String!, $quantity: Int!) {
+  updateCart(cartItemId: $cartItemId, quantity: $quantity) {
     id
     quantity
     # Add other CartItem fields as needed
@@ -45,8 +45,8 @@ mutation UpdateCartItem($cartItemId: String!, $quantity: Int!) {
 }
 
 # Mutation to remove an item from the cart
-mutation RemoveCartItem($cartItemId: String!) {
-  removeCartItem(cartItemId: $cartItemId) {
+mutation RemoveItemFromCart($cartItemId: String!) {
+  removeItemFromCart(cartItemId: $cartItemId) {
     id
     # Add other CartItem fields as needed
   }

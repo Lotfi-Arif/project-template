@@ -1,11 +1,11 @@
 # Add or adjust the input argument types to match your GraphQL schema.
 
 # Query to get a list of orders
-query GetOrders($skip: Int, $take: Int) {
+query Orders($skip: Int!, $take: Int!) {
   orders(skip: $skip, take: $take) {
     id
     status
-    total
+    totalAmount
     # Add other fields of the Order model as needed
   }
 }
@@ -15,27 +15,27 @@ query GetOrderById($id: String!) {
   order(id: $id) {
     id
     status
-    total
+    totalAmount
     # Add other fields of the Order model as needed
   }
 }
 
 # Mutation to create a new order
-mutation CreateOrder($data: CreateOneOrderInput!) {
+mutation CreateOrder($data: OrderCreateInput!) {
   createOrder(data: $data) {
     id
     status
-    total
+    totalAmount
     # Add other fields of the Order model as needed
   }
 }
 
 # Mutation to update an order
-mutation UpdateOrder($data: UpdateOneOrderInput!) {
-  updateOrder(data: $data) {
+mutation UpdateOrder($data: OrderUpdateInput!, $where: OrderWhereUniqueInput!) {
+  updateOrder(data: $data, where: $where) {
     id
     status
-    total
+    totalAmount
     # Add other fields of the Order model as needed
   }
 }

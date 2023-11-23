@@ -17,13 +17,13 @@ query GetMediaById($id: String!) {
 # Mutation to upload media
 # Note: Uploading files through GraphQL requires specific handling,
 # usually by sending a multi-part request.
-mutation UploadMedia($file: Upload!) {
-  uploadMedia(file: $file) {
-    id
-    url
-    # Add other fields of the Media model as needed
-  }
-}
+# mutation UploadMedia() {
+#   uploadMedia() {
+#     id
+#     url
+#     # Add other fields of the Media model as needed
+#   }
+# }
 
 # Mutation to delete media
 mutation DeleteMedia($id: String!) {

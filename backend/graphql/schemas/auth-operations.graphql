@@ -1,6 +1,6 @@
 # Mutation for registering a user
-mutation Register($createOneAuthArgs: CreateOneAuthArgs!) {
-  register(createOneAuthArgs: $createOneAuthArgs) {
+mutation Register($data: AuthCreateInput!) {
+  register(data: $data) {
     user {
       id
       email

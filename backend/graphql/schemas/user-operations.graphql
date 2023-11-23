@@ -1,11 +1,14 @@
 # Add or adjust the input argument types to match your GraphQL schema.
 
 # Query to get all users with optional pagination
-query GetAllUsers($skip: Int, $take: Int) {
+query GetAllUsers($skip: Int!, $take: Int!) {
   users(skip: $skip, take: $take) {
     id
-    name
-    email
+    firstName
+    lastName
+    auth {
+      email
+    }
     # Add other fields of the User model as needed
   }
 }
@@ -14,28 +17,37 @@ query GetAllUsers($skip: Int, $take: Int) {
 query GetUserById($id: String!) {
   user(id: $id) {
     id
-    name
-    email
+    firstName
+    lastName
+    auth {
+      email
+    }
     # Add other fields of the User model as needed
   }
 }
 
 # Mutation to create a new user
-mutation CreateUser($data: CreateOneUserInput!) {
+mutation CreateUser($data: UserCreateInput!) {
   createUser(data: $data) {
     id
-    name
-    email
+    firstName
+    lastName
+    auth {
+      email
+    }
     # Add other fields of the User model as needed
   }
 }
 
 # Mutation to update a user
-mutation UpdateUser($data: UpdateOneUserInput!) {
-  updateUser(data: $data) {
+mutation UpdateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateUser(data: $data, where: $where) {
     id
-    name
-    email
+    firstName
+    lastName
+    auth {
+      email
+    }
     # Add other fields of the User model as needed
   }
 }

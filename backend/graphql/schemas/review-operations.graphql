@@ -1,7 +1,7 @@
 # Add or adjust the input argument types to match your GraphQL schema.
 
 # Query to get all reviews with optional pagination
-query GetAllReviews($skip: Int, $take: Int) {
+query GetAllReviews($skip: Int!, $take: Int!) {
   reviews(skip: $skip, take: $take) {
     id
     content
@@ -25,7 +25,7 @@ query GetReviewById($id: String!) {
 }
 
 # Mutation to create a new review
-mutation CreateReview($data: CreateOneReviewInput!) {
+mutation CreateReview($data: ReviewCreateInput!) {
   createReview(data: $data) {
     id
     content
@@ -37,8 +37,8 @@ mutation CreateReview($data: CreateOneReviewInput!) {
 }
 
 # Mutation to update a review
-mutation UpdateReview($data: UpdateOneReviewInput!) {
-  updateReview(data: $data) {
+mutation UpdateReview($data: ReviewUpdateInput!, $where: ReviewWhereUniqueInput!) {
+  updateReview(data: $data, where: $where) {
     id
     content
     rating

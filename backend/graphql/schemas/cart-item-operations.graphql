@@ -11,8 +11,8 @@ query GetCartItem($id: String!) {
 }
 
 # Mutation to add a new cart item
-mutation AddCartItem($createOneCartItemArgs: CreateOneCartItemArgs!) {
-  addCartItem(createOneCartItemArgs: $createOneCartItemArgs) {
+mutation AddCartItem($data: CartItemCreateInput!) {
+  addCartItem(data: $data) {
     id
     productId
     quantity
@@ -21,8 +21,8 @@ mutation AddCartItem($createOneCartItemArgs: CreateOneCartItemArgs!) {
 }
 
 # Mutation to update a cart item
-mutation UpdateCartItem($updateOneCartItemArgs: UpdateOneCartItemArgs!) {
-  updateCartItem(updateOneCartItemArgs: $updateOneCartItemArgs) {
+mutation UpdateCartItem($data: CartItemUpdateInput!, $where: CartItemWhereUniqueInput!) {
+  updateCartItem(data: $data, where: $where) {
     id
     productId
     quantity
