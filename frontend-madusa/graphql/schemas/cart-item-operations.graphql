@@ -21,8 +21,8 @@ mutation AddCartItem($data: CartItemCreateInput!) {
 }
 
 # Mutation to update a cart item
-mutation UpdateCartItem($updateOneCartItemArgs: CartItemUpdateInput!) {
-  updateCartItem(updateOneCartItemArgs: $updateOneCartItemArgs) {
+mutation UpdateCartItem($data: CartItemUpdateInput!, $where: CartItemWhereUniqueInput!) {
+  updateCartItem(data: $data, where: $where) {
     id
     productId
     quantity

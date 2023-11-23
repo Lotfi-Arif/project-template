@@ -23,7 +23,7 @@ query GetAllProducts($skip: Int, $take: Int) {
 }
 
 # Mutation to create a new product
-mutation CreateProduct($data: CreateOneProductInput!) {
+mutation CreateProduct($data: ProductCreateInput!) {
   createProduct(data: $data) {
     id
     name
@@ -34,8 +34,8 @@ mutation CreateProduct($data: CreateOneProductInput!) {
 }
 
 # Mutation to update a product
-mutation UpdateProduct($data: UpdateOneProductInput!) {
-  updateProduct(data: $data) {
+mutation UpdateProduct($data: ProductUpdateInput!, $where: ProductWhereUniqueInput!) {
+  updateProduct(data: $data, where: $where) {
     id
     name
     price
@@ -45,8 +45,8 @@ mutation UpdateProduct($data: UpdateOneProductInput!) {
 }
 
 # Mutation to delete a product
-mutation DeleteProduct($id: String!) {
-  deleteProduct(id: $id) {
+mutation DeleteProduct($where: ProductWhereUniqueInput!) {
+  deleteProduct(where: $where) {
     id
     # Add other fields of the Product model as needed
   }

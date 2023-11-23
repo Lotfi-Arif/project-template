@@ -75,7 +75,7 @@ export class CartResolver {
 
   // Mutation to update the quantity of an item in the cart
   @Mutation(() => CartItem)
-  async updateCartItem(
+  async updateCart(
     @Args('cartItemId') cartItemId: string,
     @Args('quantity') quantity: number,
   ): Promise<CartItem> {
@@ -83,7 +83,7 @@ export class CartResolver {
       this.logger.log(
         `Updating cart item with ID ${cartItemId} to quantity ${quantity}`,
       );
-      return this.cartService.updateCartItem(cartItemId, quantity);
+      return this.cartService.updateCart(cartItemId, quantity);
     } catch (error) {
       this.logger.error(
         `Failed to update cart item with ID ${cartItemId} to quantity ${quantity}`,
@@ -95,12 +95,12 @@ export class CartResolver {
 
   // Mutation to remove an item from the cart
   @Mutation(() => CartItem)
-  async removeCartItem(
+  async removeItemFromCart(
     @Args('cartItemId') cartItemId: string,
   ): Promise<CartItem> {
     try {
       this.logger.log(`Removing cart item with ID ${cartItemId}`);
-      return this.cartService.removeCartItem(cartItemId);
+      return this.cartService.removeItemFromCart(cartItemId);
     } catch (error) {
       this.logger.error(`Failed to remove cart item with ID ${cartItemId}`, {
         error,

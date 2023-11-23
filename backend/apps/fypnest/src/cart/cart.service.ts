@@ -136,10 +136,7 @@ export class CartService {
    * @throws NotFoundException if the cart item is not found.
    * @throws InternalServerErrorException if there's an error during the update process.
    */
-  async updateCartItem(
-    cartItemId: string,
-    quantity: number,
-  ): Promise<CartItem> {
+  async updateCart(cartItemId: string, quantity: number): Promise<CartItem> {
     this.logger.log(
       `Updating cart item: Cart Item ID: ${cartItemId}, Quantity: ${quantity}`,
     );
@@ -183,7 +180,7 @@ export class CartService {
    * @throws NotFoundException if the cart item is not found.
    * @throws InternalServerErrorException if there's an error during the removal process.
    */
-  async removeCartItem(cartItemId: string): Promise<CartItem> {
+  async removeItemFromCart(cartItemId: string): Promise<CartItem> {
     this.logger.log(`Removing cart item: Cart Item ID: ${cartItemId}`);
     return await this.prisma.$transaction(async (prisma) => {
       try {

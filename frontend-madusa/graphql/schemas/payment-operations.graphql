@@ -6,7 +6,7 @@ query GetPaymentById($id: String!) {
     id
     amount
     status
-    method
+    paymentMethod
     # Add other fields of the Payment model as needed
   }
 }
@@ -17,29 +17,29 @@ query GetAllPayments {
     id
     amount
     status
-    method
+    paymentMethod
     # Add other fields of the Payment model as needed
   }
 }
 
 # Mutation to create a new payment
-mutation CreatePayment($data: CreateOnePaymentInput!) {
+mutation CreatePayment($data: PaymentCreateInput!) {
   createPayment(data: $data) {
     id
     amount
     status
-    method
+    paymentMethod
     # Add other fields of the Payment model as needed
   }
 }
 
 # Mutation to update a payment
-mutation UpdatePayment($data: UpdateOnePaymentInput!) {
-  updatePayment(data: $data) {
+mutation UpdatePayment($data: PaymentUpdateInput!, $where: PaymentWhereUniqueInput!) {
+  updatePayment(data: $data, where: $where) {
     id
     amount
     status
-    method
+    paymentMethod
     # Add other fields of the Payment model as needed
   }
 }

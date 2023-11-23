@@ -599,6 +599,17 @@ input CartItemScalarWhereInput {
   updatedAt: DateTimeFilter
 }
 
+input CartItemUpdateInput {
+  cart: CartUpdateOneRequiredWithoutCartItemsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  order: OrderUpdateOneWithoutItemsNestedInput
+  price: FloatFieldUpdateOperationsInput
+  product: ProductUpdateOneRequiredWithoutCartItemsNestedInput
+  quantity: IntFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
 input CartItemUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -1466,8 +1477,10 @@ type Mutation {
   login(email: String!, password: String!): TokenType!
   refreshToken(token: String!, userId: String!): TokenType!
   register(data: AuthCreateInput!): RegisterResponseType!
-  removeCartItem(cartItemId: String!): CartItem!
-  updateCartItem(cartItemId: String!, quantity: Int!): CartItem!
+  removeCartItem(id: String!): CartItem!
+  removeItemFromCart(cartItemId: String!): CartItem!
+  updateCart(cartItemId: String!, quantity: Int!): CartItem!
+  updateCartItem(data: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem!
   updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order!
   updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment!
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product!
