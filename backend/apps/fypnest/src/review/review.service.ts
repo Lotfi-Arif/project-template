@@ -1,8 +1,8 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Review } from '@app/prisma-generated/generated/nestgraphql/review/review.model';
-import { ReviewCreateInput } from '@app/prisma-generated/generated/nestgraphql/review/review-create.input';
 import { Prisma } from '@prisma/client';
+import { handlePrismaError } from '@app/common/utils';
 
 @Injectable()
 export class ReviewService {
@@ -15,9 +15,16 @@ export class ReviewService {
    * @param data - Data to create the review with.
    * @returns The created review.
    */
-  async createReview(data: ReviewCreateInput): Promise<Review> {
-    this.logger.log('Creating a new review');
-    return this.prisma.review.create({ data });
+  async createReview(
+    reviewCreateArgs: Prisma.ReviewCreateArgs,
+  ): Promise<Review> {
+    try {
+      this.logger.log('Creating a new review');
+      return await this.prisma.review.create(reviewCreateArgs);
+    } catch (error) {
+      this.logger.error('Failed to create review', error.stack);
+      handlePrismaError(error, 'Failed to create review');
+    }
   }
 
   /**
@@ -28,11 +35,16 @@ export class ReviewService {
   async getAllReviews(
     params: { skip?: number; take?: number } = {},
   ): Promise<Review[]> {
-    const { skip, take } = params;
-    this.logger.log(
-      `Fetching reviews with pagination - skip: ${skip}, take: ${take}`,
-    );
-    return this.prisma.review.findMany({ skip, take });
+    try {
+      const { skip, take } = params;
+      this.logger.log(
+        `Fetching reviews with pagination - skip: ${skip}, take: ${take}`,
+      );
+      return await this.prisma.review.findMany({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve reviews', error.stack);
+      handlePrismaError(error, 'Failed to retrieve reviews');
+    }
   }
 
   /**
@@ -41,12 +53,18 @@ export class ReviewService {
    * @returns The review or null if not found.
    */
   async getReviewById(id: string): Promise<Review | null> {
-    this.logger.log(`Fetching review by id: ${id}`);
-    const review = await this.prisma.review.findUnique({ where: { id } });
-    if (!review) {
-      throw new NotFoundException(`Review with ID ${id} not found`);
+    try {
+      this.logger.log(`Fetching review by id: ${id}`);
+      const review = await this.prisma.review.findUnique({ where: { id } });
+      if (!review) {
+        this.logger.warn(`Review with ID ${id} not found`);
+        handlePrismaError({ code: 'P2025' }, `Review with ID ${id} not found`);
+      }
+      return review;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve review with ID ${id}`, error.stack);
+      handlePrismaError(error, `Failed to retrieve review with ID ${id}`);
     }
-    return review;
   }
 
   /**
@@ -54,13 +72,22 @@ export class ReviewService {
    * @param params - Update parameters.
    * @returns The updated review.
    */
-  async updateReview(params: {
-    id: string;
-    data: Prisma.ReviewUpdateInput;
-  }): Promise<Review> {
-    const { id, data } = params;
-    this.logger.log(`Updating review with id: ${id}`);
-    return this.prisma.review.update({ where: { id }, data });
+  async updateReview(
+    reviewUpdateArgs: Prisma.ReviewUpdateArgs,
+  ): Promise<Review> {
+    try {
+      this.logger.log(`Updating review with id: ${reviewUpdateArgs.where.id}`);
+      return await this.prisma.review.update(reviewUpdateArgs);
+    } catch (error) {
+      this.logger.error(
+        `Failed to update review with ID ${reviewUpdateArgs.where.id}`,
+        error.stack,
+      );
+      handlePrismaError(
+        error,
+        `Failed to update review with ID ${reviewUpdateArgs.where.id}`,
+      );
+    }
   }
 
   /**
@@ -69,7 +96,12 @@ export class ReviewService {
    * @returns The deleted review.
    */
   async deleteReview(id: string): Promise<Review> {
-    this.logger.log(`Deleting review with id: ${id}`);
-    return this.prisma.review.delete({ where: { id } });
+    try {
+      this.logger.log(`Deleting review with id: ${id}`);
+      return await this.prisma.review.delete({ where: { id } });
+    } catch (error) {
+      this.logger.error(`Failed to delete review with ID ${id}`, error.stack);
+      handlePrismaError(error, `Failed to delete review with ID ${id}`);
+    }
   }
 }

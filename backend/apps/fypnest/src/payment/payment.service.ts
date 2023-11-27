@@ -1,12 +1,8 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Payment } from '@app/prisma-generated/generated/nestgraphql/payment/payment.model';
-import { PaymentCreateInput } from '@app/prisma-generated/generated/nestgraphql/payment/payment-create.input';
+import { handlePrismaError } from '@app/common/utils';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PaymentService {
@@ -16,16 +12,21 @@ export class PaymentService {
 
   /**
    * Records a new payment.
-   * @param data - Payment data for creation.
+   * @param paymentCreateArgs - Arguments for creating a payment.
    * @returns The recorded payment.
    */
-  async createPayment(data: PaymentCreateInput): Promise<Payment> {
+  async createPayment(
+    paymentCreateArgs: Prisma.PaymentCreateArgs,
+  ): Promise<Payment> {
     this.logger.log('Attempting to record a new payment');
     try {
-      return this.prisma.payment.create({ data });
+      return await this.prisma.payment.create(paymentCreateArgs);
     } catch (error) {
-      this.logger.error('Failed to record payment', error.stack);
-      throw new InternalServerErrorException('Could not record payment');
+      this.logger.error('Failed to record payment', {
+        error,
+        paymentCreateArgs,
+      });
+      handlePrismaError(error, 'Failed to record payment');
     }
   }
 
@@ -36,12 +37,17 @@ export class PaymentService {
    */
   async getPaymentById(id: string): Promise<Payment | null> {
     this.logger.log(`Retrieving payment by id: ${id}`);
-    const payment = await this.prisma.payment.findUnique({ where: { id } });
-    if (!payment) {
-      this.logger.warn(`Payment with id ${id} not found`);
-      throw new NotFoundException('Payment not found');
+    try {
+      const payment = await this.prisma.payment.findUnique({ where: { id } });
+      if (!payment) {
+        this.logger.warn(`Payment with id ${id} not found`);
+        throw new NotFoundException('Payment not found');
+      }
+      return payment;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve payment with id: ${id}`, { error });
+      handlePrismaError(error, `Failed to retrieve payment with id: ${id}`);
     }
-    return payment;
   }
 
   /**
@@ -50,26 +56,47 @@ export class PaymentService {
    */
   async getAllPayments(): Promise<Payment[]> {
     this.logger.log('Retrieving all payments');
-    return this.prisma.payment.findMany();
+    try {
+      return await this.prisma.payment.findMany();
+    } catch (error) {
+      this.logger.error('Failed to retrieve payments', { error });
+      handlePrismaError(error, 'Failed to retrieve payments');
+    }
   }
 
   /**
    * Updates a payment by its ID.
-   * @param id - ID of the payment.
-   * @param data - New payment data.
+   * @param paymentUpdateArgs - Arguments for updating a payment.
    * @returns The updated payment.
    */
-  async updatePaymentById(
-    id: string,
-    data: Partial<PaymentCreateInput>,
+  async updatePayment(
+    paymentUpdateArgs: Prisma.PaymentUpdateArgs,
   ): Promise<Payment> {
-    this.logger.log(`Updating payment with id: ${id}`);
-    const payment = await this.prisma.payment.update({ where: { id }, data });
-    if (!payment) {
-      this.logger.warn(`Payment with id ${id} not found`);
-      throw new NotFoundException('Payment not found');
+    const paymentId = paymentUpdateArgs.where.id;
+    this.logger.log(`Updating payment with id: ${paymentId}`);
+    try {
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingPayment = await prisma.payment.findUnique({
+          where: { id: paymentId },
+        });
+        if (!existingPayment) {
+          this.logger.warn(`Payment with id ${paymentId} not found for update`);
+          handlePrismaError(
+            { code: 'P2025' },
+            `Payment with ID ${paymentId} not found`,
+          );
+        }
+        return await prisma.payment.update(paymentUpdateArgs);
+      });
+    } catch (error) {
+      this.logger.error(`Failed to update payment with id: ${paymentId}`, {
+        error,
+      });
+      handlePrismaError(
+        error,
+        `Failed to update payment with id: ${paymentId}`,
+      );
     }
-    return payment;
   }
 
   /**
@@ -79,11 +106,23 @@ export class PaymentService {
    */
   async deletePaymentById(id: string): Promise<Payment> {
     this.logger.log(`Deleting payment with id: ${id}`);
-    const payment = await this.prisma.payment.delete({ where: { id } });
-    if (!payment) {
-      this.logger.warn(`Payment with id ${id} not found`);
-      throw new NotFoundException('Payment not found');
+    try {
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingPayment = await prisma.payment.findUnique({
+          where: { id },
+        });
+        if (!existingPayment) {
+          this.logger.warn(`Payment with id ${id} not found for deletion`);
+          handlePrismaError(
+            { code: 'P2025' },
+            `Payment with ID ${id} not found`,
+          );
+        }
+        return await prisma.payment.delete({ where: { id } });
+      });
+    } catch (error) {
+      this.logger.error(`Failed to delete payment with id: ${id}`, { error });
+      handlePrismaError(error, `Failed to delete payment with id: ${id}`);
     }
-    return payment;
   }
 }

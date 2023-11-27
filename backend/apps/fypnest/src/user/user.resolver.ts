@@ -1,9 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from '@app/prisma-generated/generated/nestgraphql/user/user.model';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { UserUpdateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-update.input';
-import { UserCreateInput } from '@app/prisma-generated/generated/nestgraphql/user/user-create.input';
+import { handleHttpError } from '@app/common/utils';
+import { CreateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/create-one-user.args';
+import { UpdateOneUserArgs } from '@app/prisma-generated/generated/nestgraphql/user/update-one-user.args';
+import { PrismaSelect } from '@paljs/plugins';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -13,38 +15,70 @@ export class UserResolver {
 
   @Query(() => [User])
   async users(@Args('skip') skip?: number, @Args('take') take?: number) {
-    this.logger.log(`Fetching users with skip: ${skip}, take: ${take}`);
-    return this.userService.getAllUsers({ skip, take });
+    try {
+      this.logger.log(`Fetching users with skip: ${skip}, take: ${take}`);
+      return this.userService.getAllUsers({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve users', { error });
+      throw handleHttpError(error, 'Failed to retrieve users');
+    }
   }
 
   @Query(() => User, { nullable: true })
   async user(@Args('id') id: string) {
-    this.logger.log(`Fetching user with ID: ${id}`);
-    const user = await this.userService.getUserById(id);
-    if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+    try {
+      this.logger.log(`Fetching user with ID: ${id}`);
+      const user = await this.userService.getUserById(id);
+      if (!user) {
+        throw new NotFoundException(`User with ID ${id} not found`);
+      }
+      return user;
+    } catch (error) {
+      this.logger.error(`Failed to retrieve user with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to retrieve user');
     }
-    return user;
   }
 
   @Mutation(() => User)
-  async createUser(@Args('data') data: UserCreateInput) {
-    this.logger.log('Creating a new user');
-    return this.userService.createUser(data);
+  async createUser(@Args() createOneUserArgs: CreateOneUserArgs, @Info() info) {
+    try {
+      this.logger.log('Creating a new user');
+      const user = new PrismaSelect(info).value;
+      return this.userService.createUser({
+        ...createOneUserArgs,
+        ...user,
+      });
+    } catch (error) {
+      this.logger.error('Failed to create a new user', { error });
+      throw handleHttpError(error, 'Failed to create a new user');
+    }
   }
 
   @Mutation(() => User)
-  async updateUser(
-    @Args('id') id: string,
-    @Args('data') data: UserUpdateInput,
-  ) {
-    this.logger.log(`Updating user with ID: ${id}`);
-    return this.userService.updateUser({ id, data });
+  async updateUser(@Args() data: UpdateOneUserArgs, @Info() info) {
+    try {
+      this.logger.log(`Updating user with ID: ${data.where.id}`);
+      const update = new PrismaSelect(info).value;
+      return this.userService.updateUser({
+        ...data,
+        ...update,
+      });
+    } catch (error) {
+      this.logger.error(`Failed to update user with ID: ${data.where.id}`, {
+        error,
+      });
+      throw handleHttpError(error, 'Failed to update user');
+    }
   }
 
   @Mutation(() => User)
   async deleteUser(@Args('id') id: string) {
-    this.logger.log(`Deleting user with ID: ${id}`);
-    return this.userService.deleteUser(id);
+    try {
+      this.logger.log(`Deleting user with ID: ${id}`);
+      return this.userService.deleteUser(id);
+    } catch (error) {
+      this.logger.error(`Failed to delete user with ID: ${id}`, { error });
+      throw handleHttpError(error, 'Failed to delete user');
+    }
   }
 }

@@ -1,10 +1,10 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { OrderService } from './order.service';
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
-import { Logger, NotFoundException } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { UpdateOneOrderArgs } from '@app/prisma-generated/generated/nestgraphql/order/update-one-order.args';
 import { CreateOneOrderArgs } from '@app/prisma-generated/generated/nestgraphql/order/create-one-order.args';
-import { GraphQLError } from 'graphql';
+import { handleHttpError } from '@app/common/utils';
 
 @Resolver(() => Order)
 export class OrderResolver {
@@ -21,8 +21,13 @@ export class OrderResolver {
   @Query(() => [Order])
   async orders(@Args('skip') skip?: number, @Args('take') take?: number) {
     // Log the request and call the service method
-    this.logger.log(`Fetching orders with skip: ${skip}, take: ${take}`);
-    return this.orderService.getAllOrders({ skip, take });
+    try {
+      this.logger.log(`Fetching orders with skip: ${skip}, take: ${take}`);
+      return this.orderService.getAllOrders({ skip, take });
+    } catch (error) {
+      this.logger.error('Failed to retrieve orders', { error });
+      throw handleHttpError(error, 'Failed to retrieve orders');
+    }
   }
 
   /**
@@ -36,18 +41,8 @@ export class OrderResolver {
       this.logger.log(`Fetching order with ID: ${id}`);
       return await this.orderService.getOrderById(id);
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new GraphQLError(
-          'The order you are trying to access does not exist.',
-          {
-            extensions: { code: 'ORDER_NOT_FOUND' },
-          },
-        );
-      } else {
-        throw new GraphQLError('Failed to fetch the order.', {
-          extensions: { code: 'ORDER_FETCH_FAILED' },
-        });
-      }
+      this.logger.error(`Failed to retrieve order with ID: ${id}`, { error });
+      throw handleHttpError(error);
     }
   }
 
@@ -57,14 +52,13 @@ export class OrderResolver {
    * @returns The newly created order entity.
    */
   @Mutation(() => Order)
-  async createOrder(@Args('data') data: CreateOneOrderArgs) {
+  async createOrder(@Args() data: CreateOneOrderArgs) {
     try {
       this.logger.log('Creating a new order');
       return await this.orderService.createOrder(data);
     } catch (error) {
-      throw new GraphQLError('Failed to create a new order.', {
-        extensions: { code: 'ORDER_CREATION_FAILED' },
-      });
+      this.logger.error('Failed to create a new order', { error });
+      throw handleHttpError(error);
     }
   }
 
@@ -74,15 +68,16 @@ export class OrderResolver {
    * @returns The updated order entity.
    */
   @Mutation(() => Order)
-  async updateOrder(@Args('data') updateOneOrderArgs: UpdateOneOrderArgs) {
+  async updateOrder(@Args() updateOneOrderArgs: UpdateOneOrderArgs) {
     try {
-      const { where, data } = updateOneOrderArgs;
-      this.logger.log(`Updating order with ID: ${where.id}`);
-      return await this.orderService.updateOrder({ data, where });
+      this.logger.log(`Updating order with ID: ${updateOneOrderArgs.where.id}`);
+      return await this.orderService.updateOrder(updateOneOrderArgs);
     } catch (error) {
-      throw new GraphQLError('Failed to update the order.', {
-        extensions: { code: 'ORDER_UPDATE_FAILED' },
-      });
+      this.logger.error(
+        `Failed to update order with ID: ${updateOneOrderArgs}`,
+        { error },
+      );
+      throw handleHttpError(error);
     }
   }
 
@@ -97,18 +92,8 @@ export class OrderResolver {
       this.logger.log(`Deleting order with ID: ${id}`);
       return await this.orderService.deleteOrder(id);
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new GraphQLError(
-          'The order you are trying to delete does not exist.',
-          {
-            extensions: { code: 'ORDER_NOT_FOUND' },
-          },
-        );
-      } else {
-        throw new GraphQLError('Failed to delete the order.', {
-          extensions: { code: 'ORDER_DELETION_FAILED' },
-        });
-      }
+      this.logger.error(`Failed to delete order with ID: ${id}`, { error });
+      throw handleHttpError(error);
     }
   }
 }

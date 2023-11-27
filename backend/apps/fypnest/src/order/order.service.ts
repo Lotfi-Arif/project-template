@@ -1,12 +1,8 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Order } from '@app/prisma-generated/generated/nestgraphql/order/order.model';
 import { Prisma } from '@prisma/client';
+import { handlePrismaError } from '@app/common/utils';
 
 @Injectable()
 export class OrderService {
@@ -15,26 +11,26 @@ export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
   /**
-   * Create a new order in the database.
-   * @param data - Data to create the order with.
-   * @returns The created order object.
+   * Creates a new order in the database.
+   * @param orderCreateArgs - The arguments to create an order.
+   * @returns The created order.
    */
-  async createOrder(data: Prisma.OrderCreateArgs): Promise<Order> {
+  async createOrder(orderCreateArgs: Prisma.OrderCreateArgs): Promise<Order> {
     this.logger.log('Creating a new order');
     try {
-      const order = await this.prisma.order.create(data);
+      const order = await this.prisma.order.create(orderCreateArgs);
       this.logger.log(`Order created with ID: ${order.id}`);
       return order;
     } catch (error) {
-      this.logger.error('Failed to create order', error.stack);
-      throw new InternalServerErrorException('Failed to create order');
+      this.logger.error('Failed to create order', { error, orderCreateArgs });
+      handlePrismaError(error, 'Failed to create order');
     }
   }
 
   /**
-   * Retrieve all orders with optional pagination.
-   * @param params - Optional skip and take parameters for pagination.
-   * @returns An array of order objects.
+   * Retrieves a list of orders with optional pagination.
+   * @param params - Pagination parameters.
+   * @returns A list of orders.
    */
   async getAllOrders(
     params: { skip?: number; take?: number } = {},
@@ -46,92 +42,81 @@ export class OrderService {
     try {
       return await this.prisma.order.findMany({ skip, take });
     } catch (error) {
-      this.logger.error('Failed to get orders', error.stack);
-      throw new InternalServerErrorException('Failed to retrieve orders');
+      this.logger.error('Failed to retrieve orders', { error, params });
+      handlePrismaError(error, 'Failed to retrieve orders');
     }
   }
 
   /**
-   * Retrieve an order by its unique identifier.
-   * @param id - Unique identifier of the order to retrieve.
-   * @returns The order object if found, otherwise it throws NotFoundException.
+   * Retrieves an order by its ID.
+   * @param id - The ID of the order.
+   * @returns The found order.
+   * @throws NotFoundException if the order is not found.
    */
   async getOrderById(id: string): Promise<Order> {
     this.logger.log(`Fetching order by id: ${id}`);
     try {
       const order = await this.prisma.order.findUnique({ where: { id } });
       if (!order) {
-        throw new NotFoundException(`Order with ID ${id} not found`);
+        this.logger.warn(`Order with ID ${id} not found`);
+        handlePrismaError({ code: 'P2025' }, `Order with ID ${id} not found`);
       }
       return order;
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      this.logger.error(`Failed to get order with ID ${id}`, error.stack);
-      throw new InternalServerErrorException(
-        `Failed to retrieve order with ID ${id}`,
-      );
+      this.logger.error(`Failed to retrieve order with ID ${id}`, { error });
+      handlePrismaError(error, `Failed to retrieve order with ID ${id}`);
     }
   }
 
   /**
-   * Update an existing order by its ID.
-   * @param params - Update parameters containing 'where' filter and 'data' to update.
-   * @returns The updated order object.
+   * Updates an order by its ID.
+   * @param orderUpdateArgs - The arguments to update an order.
+   * @returns The updated order.
+   * @throws NotFoundException if the order to update is not found.
    */
-  async updateOrder(data: Prisma.OrderUpdateArgs): Promise<Order> {
-    const orderId = data.where.id;
+  async updateOrder(orderUpdateArgs: Prisma.OrderUpdateArgs): Promise<Order> {
+    const orderId = orderUpdateArgs.where.id;
     this.logger.log(`Updating order with id: ${orderId}`);
     try {
-      // Check if the order exists
-      const existingOrder = await this.prisma.order.findUnique({
-        where: { id: orderId },
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingOrder = await prisma.order.findUnique({
+          where: { id: orderId },
+        });
+        if (!existingOrder) {
+          this.logger.warn(`Order with ID ${orderId} not found for update`);
+          handlePrismaError(
+            { code: 'P2025' },
+            `Order with ID ${orderId} not found`,
+          );
+        }
+        return await prisma.order.update(orderUpdateArgs);
       });
-      if (!existingOrder) {
-        throw new NotFoundException(`Order with ID ${orderId} not found`);
-      }
-      // Perform the update
-      const updatedOrder = await this.prisma.order.update(data);
-      this.logger.log(`Order with ID ${orderId} updated`);
-      return updatedOrder;
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      this.logger.error(
-        `Failed to update order with ID ${orderId}`,
-        error.stack,
-      );
-      throw new InternalServerErrorException(
-        `Failed to update order with ID ${orderId}`,
-      );
+      this.logger.error(`Failed to update order with ID ${orderId}`, { error });
+      handlePrismaError(error, `Failed to update order with ID ${orderId}`);
     }
   }
 
   /**
-   * Delete an order from the database by its ID.
-   * @param id - Unique identifier of the order to delete.
-   * @returns The deleted order object.
+   * Deletes an order by its ID.
+   * @param id - The ID of the order to delete.
+   * @returns The deleted order.
+   * @throws NotFoundException if the order to delete is not found.
    */
   async deleteOrder(id: string): Promise<Order> {
     this.logger.log(`Deleting order with id: ${id}`);
     try {
-      const deletedOrder = await this.prisma.order.delete({ where: { id } });
-      this.logger.log(`Order with ID ${id} deleted`);
-      return deletedOrder;
+      return await this.prisma.$transaction(async (prisma) => {
+        const existingOrder = await prisma.order.findUnique({ where: { id } });
+        if (!existingOrder) {
+          this.logger.warn(`Order with ID ${id} not found for deletion`);
+          handlePrismaError({ code: 'P2025' }, `Order with ID ${id} not found`);
+        }
+        return await prisma.order.delete({ where: { id } });
+      });
     } catch (error) {
-      this.logger.error(`Failed to delete order with ID ${id}`, error.stack);
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
-      ) {
-        throw new NotFoundException(`Order with ID ${id} not found`);
-      } else {
-        throw new InternalServerErrorException(
-          `Failed to delete order with ID ${id}`,
-        );
-      }
+      this.logger.error(`Failed to delete order with ID ${id}`, { error });
+      handlePrismaError(error, `Failed to delete order with ID ${id}`);
     }
   }
 }

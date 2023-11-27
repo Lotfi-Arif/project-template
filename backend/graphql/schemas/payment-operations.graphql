@@ -1,0 +1,53 @@
+# Add or adjust the input argument types to match your GraphQL schema.
+
+# Query to get a single payment by ID
+query GetPaymentById($id: String!) {
+  payment(id: $id) {
+    id
+    amount
+    status
+    paymentMethod
+    # Add other fields of the Payment model as needed
+  }
+}
+
+# Query to get all payments
+query GetAllPayments {
+  payments {
+    id
+    amount
+    status
+    paymentMethod
+    # Add other fields of the Payment model as needed
+  }
+}
+
+# Mutation to create a new payment
+mutation CreatePayment($data: PaymentCreateInput!) {
+  createPayment(data: $data) {
+    id
+    amount
+    status
+    paymentMethod
+    # Add other fields of the Payment model as needed
+  }
+}
+
+# Mutation to update a payment
+mutation UpdatePayment($data: PaymentUpdateInput!, $where: PaymentWhereUniqueInput!) {
+  updatePayment(data: $data, where: $where) {
+    id
+    amount
+    status
+    paymentMethod
+    # Add other fields of the Payment model as needed
+  }
+}
+
+# Mutation to delete a payment
+mutation DeletePayment($id: String!) {
+  deletePayment(id: $id) {
+    id
+    # Add other fields of the Payment model as needed
+  }
+}
