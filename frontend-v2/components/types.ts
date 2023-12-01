@@ -19,8 +19,16 @@ export type FetchProduct = {
   images: string[];
 };
 
-export type FetchedProduct = {
+export type SingleProductResponse = {
   product: FetchProduct;
+};
+
+// Define the type for the overall structure
+export type ProductResponse = {
+  products: FetchProduct[];
+  total: number;
+  skip: number;
+  limit: number;
 };
 
 export type ProductWithDiscount = {

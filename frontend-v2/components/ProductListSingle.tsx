@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { SingleProductResponse } from "./types";
 
-function ProductListSingle({ product }) {
+function ProductListSingle({ product }: SingleProductResponse) {
   return (
     <Link
       href="/product"

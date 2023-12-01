@@ -6,10 +6,10 @@ import {
   RiShieldCheckFill,
   RiSubtractFill,
 } from "react-icons/ri";
-import { FetchedProduct } from "./types";
 import Image from "next/image";
+import { SingleProductResponse } from "./types";
 
-function ProductDetailsOverview({ product }: FetchedProduct) {
+function ProductDetailsOverview({ product }: SingleProductResponse) {
   const {
     brand,
     images,
@@ -17,7 +17,6 @@ function ProductDetailsOverview({ product }: FetchedProduct) {
     price,
     rating,
     discountPercentage,
-    thumbnail,
     title,
     stock,
   } = product;
