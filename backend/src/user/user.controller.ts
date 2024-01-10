@@ -1,42 +1,37 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Prisma } from '@prisma/client';
+import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  @TypedRoute.Post()
+  create(@TypedBody() createUserDto: Prisma.UserCreateInput) {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
+  @TypedRoute.Get()
   findAll() {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @TypedRoute.Get(':id')
+  findOne(@TypedParam('id') id: string) {
     return this.userService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @TypedRoute.Patch(':id')
+  update(
+    @TypedParam('id') id: string,
+    @TypedBody() updateUserDto: Prisma.UserUpdateInput,
+  ) {
     return this.userService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @TypedRoute.Delete(':id')
+  remove(@TypedParam('id') id: string) {
     return this.userService.remove(+id);
   }
 }
