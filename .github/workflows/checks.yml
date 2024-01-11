@@ -1,0 +1,48 @@
+name: Simple NestJS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    name: Build and Test
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "20.9.0"
+          cache: "yarn"
+
+      - name: Install Dependencies
+        run: yarn install
+        working-directory: ./backend
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Run Tests
+        run: yarn test
+        working-directory: ./backend
+
+      - name: Build Project
+        run: yarn build
+        working-directory: ./backend
+
+      - name: Lint and Format Checks
+        run: |
+          yarn lint:check
+          yarn format:check
+        working-directory: ./backend
