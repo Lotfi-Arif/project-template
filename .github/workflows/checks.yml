@@ -1,4 +1,4 @@
-name: NestJS CI
+name: Simple NestJS CI
 
 on:
   push:
@@ -7,25 +7,19 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.9.0]
+    name: Build and Test
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "20.9.0"
           cache: "yarn"
-
-      - name: Install Yarn
-        run: npm install -g yarn
 
       - name: Install Dependencies
         run: yarn install
@@ -47,10 +41,8 @@ jobs:
         run: yarn build
         working-directory: ./backend
 
-      - name: Lint Check
-        run: yarn lint:check
-        working-directory: ./backend
-
-      - name: Format Check
-        run: yarn format:check
+      - name: Lint and Format Checks
+        run: |
+          yarn lint:check
+          yarn format:check
         working-directory: ./backend
