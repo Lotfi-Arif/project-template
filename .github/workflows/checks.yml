@@ -27,6 +27,10 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
 
+      - name: Install Dependencies
+        run: yarn install
+        working-directory: ./backend
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -35,17 +39,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies
-        run: yarn install
-
       - name: Run Tests
         run: yarn test
+        working-directory: ./backend
 
       - name: Build Project
         run: yarn build
+        working-directory: ./backend
 
       - name: Lint Check
         run: yarn lint:check
+        working-directory: ./backend
 
       - name: Format Check
         run: yarn format:check
+        working-directory: ./backend
