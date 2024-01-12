@@ -1,0 +1,33 @@
+mutation createCounselorSession($data: CreateCounselorSessionInput!, ) {
+  createCounselorSession(data: $data) {
+    id
+    counsellingReason
+    counselor {
+        id
+    }
+    user {
+        id
+        firstName
+        lastName
+    }
+    counselorSchedule {
+      id
+      Counselor {
+        id
+    }
+    }
+    firstName        
+    lastName
+    email
+    gender
+    timeFrom
+    timeTo
+    maritalStatus     
+    address
+    race   
+    city   
+    state  
+    zipCode
+    counsellingDate
+  }
+}

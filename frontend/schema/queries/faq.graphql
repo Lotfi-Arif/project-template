@@ -1,8 +1,0 @@
-query faqs {
-  findAllFaqs {
-    id
-    title
-    answer
-    icon
-  }
-}

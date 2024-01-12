@@ -1,0 +1,33 @@
+query schedule($where: ScheduleWhereUniqueInput!) {
+    findOneSchedule(where: $where) {
+            id
+            CounselorSession {
+                id
+                counsellingReason      
+                firstName        
+                lastName
+                email
+                gender
+                maritalStatus     
+                address
+                race   
+                city   
+                state  
+                zipCode
+                timeFrom
+                timeTo
+                counsellingDate
+                user {
+                    id
+                    firstName
+                    lastName
+                }
+                counselor {
+                    id
+                }
+        }
+        Counselor {
+            id
+        }
+    }
+}

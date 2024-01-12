@@ -1,0 +1,8 @@
+mutation createFaq($data: FAQCreateInput!) {
+  createFaq(data: $data) {
+    id
+    title
+    answer
+    icon
+  }
+}

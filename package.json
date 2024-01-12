@@ -1,5 +1,14 @@
 {
+  "name": "@trade-trove/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "dependencies": {},
   "devDependencies": {
+    "@nx/js": "17.2.8",
+    "@nx/workspace": "17.2.8",
+    "nx": "17.2.8",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0"
   },
@@ -9,5 +18,4 @@
       "tsc --noEmit"
     ]
   }
-  
 }

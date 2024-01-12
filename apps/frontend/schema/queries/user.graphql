@@ -1,0 +1,135 @@
+query users {
+  findAllUsers {
+    id
+    firstName
+    lastName
+    email
+    counselor {
+      id
+    }
+    student {
+      id
+    }
+    staff {
+      id
+    }
+    mobile
+    accountStatus
+    role
+  }
+}
+
+query currentUser {
+  currentUser {
+      id
+      lastName
+      role
+      firstName
+      email
+    counselor {
+      scheduleId
+      CounselorSession {
+        counsellingDate
+        timeFrom
+        timeTo
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+}
+
+query me {
+  me {
+    id
+    firstName
+    lastName
+    accountStatus
+    role
+    email
+    student {
+      user {
+        id
+        mobile
+        accountStatus
+        role
+      }
+    }
+    staff {
+      user {
+        mobile
+        accountStatus
+        role
+      }
+    }
+    counselor {
+      user {
+        mobile
+        accountStatus
+        role
+      }
+    }
+  }
+}
+
+query counselor {
+  me {
+    id
+    role
+    firstName
+    lastName
+    email
+    counselor {
+      department
+      expertise
+      Schedule {
+        id
+      }
+      createdAt
+      updatedAt
+      CounselorSession {
+        id
+        counsellingReason
+        counselor {
+          id
+        }
+        student {
+          id
+        }
+        staff {
+          id
+        }
+      }
+    }
+  }
+}
+
+query staff {
+  me {
+      id
+      role
+      firstName
+      lastName
+      email
+      staff {
+        staffMatrix
+        faculty
+        CounselorSession {
+          id
+          counsellingReason
+          counselor {
+            id
+          }
+          student {
+            id
+          }
+          staff {
+            id
+          }
+        }
+        createdAt
+        updatedAt
+    }
+  }
+}
