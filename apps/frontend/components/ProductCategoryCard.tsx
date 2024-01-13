@@ -7,7 +7,7 @@ function ProductCategoryCard({
   size,
 }: {
   category: { name: string; image: string };
-  size: string;
+  size?: string;
 }) {
   const { name, image } = category;
   return (

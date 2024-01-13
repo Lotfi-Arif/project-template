@@ -1,4 +1,4 @@
-import { CATEGORY_LINKS } from '@/lib/const/navigation';
+import { CATEGORY_LINKS } from '../lib/const/navigation';
 import Link from 'next/link';
 import React from 'react';
 import { RiMenu2Line } from 'react-icons/ri';

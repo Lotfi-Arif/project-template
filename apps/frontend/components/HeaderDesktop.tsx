@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { RiArrowDownSLine, RiShoppingBasket2Fill } from 'react-icons/ri';
-import { HEADER_NAV } from '@/lib/const/navigation';
+import { HEADER_NAV } from '../lib/const/navigation';
 
 export default function HeaderDesktop() {
   return (
