@@ -9,7 +9,8 @@
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
         "jestConfig": "apps/backend-e2e/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "devServerTarget": "backend:serve"
       }
     },
     "lint": {
