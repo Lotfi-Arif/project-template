@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-sky-50 !important;
+  }
+}
+
+@layer components {
+  .layout-w {
+    @apply max-w-[78rem] mx-auto;
+  }
+  .hover-a {
+    @apply hover:bg-gray-200 active:bg-gray-200 transition-colors;
+  }
+  .menu :where(li:not(.menu-title) > *:not(ul):not(details):not(.menu-title)),
+  .menu :where(li:not(.menu-title) > details > summary:not(.menu-title)) {
+    @apply rounded;
+  }
+  .checkbox {
+    @apply rounded;
+  }
+  .btn:not(.btn-sm):not(.btn-lg):not(.btn-xl) {
+    @apply h-[2.6rem] min-h-max;
+  }
+}

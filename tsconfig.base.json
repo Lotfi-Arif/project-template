@@ -14,7 +14,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
     "plugins": [
       {
         "transform": "@nestia/core/lib/transform",
