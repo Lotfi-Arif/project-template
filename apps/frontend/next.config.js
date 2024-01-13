@@ -13,7 +13,12 @@ const nextConfig = {
     svgr: false,
   },
   images: {
-    domains: ['images.unsplash.com'],
+    remotePatterns: [
+      {
+        hostname: 'images.unsplash.com',
+        protocol: 'https',
+      },
+    ],
   },
 };
 
