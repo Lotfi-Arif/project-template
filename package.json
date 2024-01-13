@@ -73,7 +73,7 @@
     "lint-staged": "^15.2.0",
     "nestia": "^5.1.2",
     "nx": "17.2.8",
-    "nx-cloud": "^17.2.8",
+    "nx-cloud": "^16.5.2",
     "postcss": "^8.3.6",
     "prettier": "^3.0.0",
     "react-refresh": "^0.10.0",
