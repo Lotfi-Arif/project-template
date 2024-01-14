@@ -106,11 +106,20 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      - name: Restore node_modules from cache
+      - name: Restore Cache node_modules and Cypress binary
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-yarn-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-node-modules-and-cypress-${{ hashFiles('yarn.lock') }}
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Verify Cypress Binary
+        run: npx cypress verify
 
       - name: Start Server
         run: npx nx run backend:serve &
