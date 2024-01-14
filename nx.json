@@ -26,5 +26,18 @@
   "affected": {
     "defaultBase": "main"
   },
-  "nxCloudAccessToken": "MTMwYzljYmYtNzRkZi00MTUzLWFkN2ItZTYyNjc5OGZjZGYxfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MTMwYzljYmYtNzRkZi00MTUzLWFkN2ItZTYyNjc5OGZjZGYxfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  }
 }
