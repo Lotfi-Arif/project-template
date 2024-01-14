@@ -11,7 +11,8 @@
         "jestConfig": "apps/backend-e2e/jest.config.ts",
         "passWithNoTests": true,
         "devServerTarget": "backend:serve"
-      }
+      },
+      "dependsOn": ["backend:serve"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
