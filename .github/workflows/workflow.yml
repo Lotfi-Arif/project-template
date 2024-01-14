@@ -14,17 +14,16 @@ jobs:
   setup:
     name: Setup and Install Dependencies 🛠️
     runs-on: ubuntu-latest
-    outputs:
-      cache-key: ${{ steps.cache-node-modules.outputs.cache-key }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-          cache: 'yarn'
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -32,7 +31,11 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: ${{ runner.os }}-node-modules-
+          restore-keys: ${{ runner.os }}-node-modules-yarn-
+
+      - name: Yarn install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: yarn install --prefer-offline --frozen-lockfile
 
   build:
     name: Build 📦
@@ -41,6 +44,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          # fetch-depth gives the complete git history which is needed for nx.
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -63,6 +70,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          # fetch-depth gives the complete git history which is needed for nx.
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -85,6 +96,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          # fetch-depth gives the complete git history which is needed for nx.
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -107,6 +122,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          # fetch-depth gives the complete git history which is needed for nx.
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
