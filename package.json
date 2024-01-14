@@ -4,11 +4,29 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint --ext .js,.ts --max-warnings=0 --fix",
+    "nx": "nx",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx workspace-lint && nx lint",
+    "e2e": "nx e2e",
+    "affected:apps": "nx affected:apps",
     "lint:check": "eslint --ext .js,.ts --max-warnings=0",
-    "prepare": "ts-patch install && typia patch"
+    "prepare": "ts-patch install && typia patch",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "format:check-all": "nx format:check --all",
+    "update": "nx migrate latest",
+    "dep-graph": "nx dep-graph",
+    "help": "nx help"
   },
   "devDependencies": {
     "@nestia/sdk": "^2.4.4",
@@ -78,9 +96,6 @@
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0"
-  },
-  "nx": {
-    "targets": {}
   },
   "dependencies": {
     "@babel/core": "^7.23.7",
