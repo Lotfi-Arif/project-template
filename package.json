@@ -88,6 +88,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/platform-fastify": "^10.3.0",
+    "@nestjs/swagger": "^7.1.17",
     "@prisma/client": "^5.8.0",
     "axios": "^1.0.0",
     "fastify": "^4.25.2",

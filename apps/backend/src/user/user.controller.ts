@@ -8,7 +8,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @TypedRoute.Post()
-  create(@TypedBody() createUserDto: Prisma.UserCreateInput) {
+  create(@TypedBody() createUserDto: Prisma.UserCreateInput): any {
     return this.userService.create(createUserDto);
   }
 
@@ -26,12 +26,12 @@ export class UserController {
   update(
     @TypedParam('id') id: string,
     @TypedBody() updateUserDto: Prisma.UserUpdateInput,
-  ) {
+  ): any {
     return this.userService.update(+id, updateUserDto);
   }
 
   @TypedRoute.Delete(':id')
-  remove(@TypedParam('id') id: string) {
+  remove(@TypedParam('id') id: string): any {
     return this.userService.remove(+id);
   }
 }
