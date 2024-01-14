@@ -120,15 +120,12 @@ jobs:
         run: sleep 10 # Adjust the sleep duration as needed
 
       - name: Run E2E Tests
-        run: npx nx run backend:e2e
+        run: yarn nx run-many --target=e2e --all
 
       - name: Shutdown Server
         if: always() # Ensures this step runs even if the previous step fails
         run: kill $(jobs -p) || true
         shell: bash
-
-      - name: Run E2E Tests
-        run: yarn nx run-many --target=e2e --all
 
   lint:
     name: Lint 🎨

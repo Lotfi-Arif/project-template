@@ -27,7 +27,7 @@
           }
         ]
       },
-      "dependsOn": ["^generate-prisma"],
+      "dependsOn": ["generate-prisma"],
       "configurations": {
         "development": {},
         "production": {}
@@ -47,7 +47,7 @@
           "buildTarget": "backend:build:production"
         }
       },
-      "dependsOn": ["^generate-prisma"]
+      "dependsOn": ["generate-prisma"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -70,7 +70,7 @@
       "options": {
         "jestConfig": "apps/backend/jest.config.ts"
       },
-      "dependsOn": ["^generate-prisma"]
+      "dependsOn": ["generate-prisma"]
     }
   },
   "tags": []
