@@ -47,7 +47,18 @@
           "buildTarget": "backend:build:production"
         }
       },
-      "dependsOn": ["generate-prisma"]
+      "dependsOn": ["generate-prisma", "generate-swagger"]
+    },
+    "generate-swagger": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx nestia swagger"
+          }
+        ],
+        "cwd": "apps/backend"
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
