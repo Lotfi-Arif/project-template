@@ -27,6 +27,7 @@
           }
         ]
       },
+      "dependsOn": ["^generate-prisma"],
       "configurations": {
         "development": {},
         "production": {}
@@ -45,7 +46,8 @@
         "production": {
           "buildTarget": "backend:build:production"
         }
-      }
+      },
+      "dependsOn": ["^generate-prisma"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",

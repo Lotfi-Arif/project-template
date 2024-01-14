@@ -112,6 +112,21 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-modules-yarn-${{ hashFiles('yarn.lock') }}
 
+      - name: Start Server
+        run: npx nx run backend:serve &
+        shell: bash
+
+      - name: Wait for Server
+        run: sleep 10 # Adjust the sleep duration as needed
+
+      - name: Run E2E Tests
+        run: npx nx run backend:e2e
+
+      - name: Shutdown Server
+        if: always() # Ensures this step runs even if the previous step fails
+        run: kill $(jobs -p) || true
+        shell: bash
+
       - name: Run E2E Tests
         run: yarn nx run-many --target=e2e --all
 
