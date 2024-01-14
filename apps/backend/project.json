@@ -27,6 +27,7 @@
           }
         ]
       },
+      "dependsOn": ["generate-prisma"],
       "configurations": {
         "development": {},
         "production": {}
@@ -45,18 +46,31 @@
         "production": {
           "buildTarget": "backend:build:production"
         }
-      }
+      },
+      "dependsOn": ["generate-prisma"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
+    },
+    "generate-prisma": {
+      "executor": "@nx-tools/nx-prisma:generate",
+      "options": {
+        "schema": "apps/backend/prisma/schema.prisma",
+        "prismaSchema": "apps/backend/prisma/schema.prisma",
+        "prismaBinaryTarget": "native",
+        "output": "apps/backend/src/generated",
+        "transpile": true,
+        "rejectOnFail": true
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/backend/jest.config.ts"
-      }
+      },
+      "dependsOn": ["generate-prisma"]
     }
   },
   "tags": []
