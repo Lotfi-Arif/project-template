@@ -230,7 +230,7 @@
             "format": "date-time"
           },
           "id": {
-            "type": "number"
+            "type": "string"
           }
         },
         "nullable": false,
@@ -265,7 +265,7 @@
             "format": "date-time"
           },
           "id": {
-            "type": "number"
+            "type": "string"
           }
         },
         "nullable": true,

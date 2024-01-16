@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   password  String
   name      String?
@@ -20,8 +20,8 @@ model User {
 }
 
 model Auth {
-  id        Int      @id @default(autoincrement())
-  userId    Int
+  id        String   @id @default(uuid())
+  userId    String
   user      User     @relation(fields: [userId], references: [id])
   token     String   @unique
   createdAt DateTime @default(now())
@@ -29,7 +29,7 @@ model Auth {
 }
 
 model Product {
-  id           Int            @id @default(autoincrement())
+  id           String         @id @default(uuid())
   name         String
   description  String
   price        Float
@@ -39,26 +39,26 @@ model Product {
   ItemInCart   ItemInCart[]
   ItemInOrder  ItemInOrder[]
   Category     Category?      @relation(fields: [categoryId], references: [id])
-  categoryId   Int?
+  categoryId   String?
   ProductImage ProductImage[]
 }
 
 model Cart {
-  id        Int          @id @default(autoincrement())
-  userId    Int
+  id        String       @id @default(uuid())
+  userId    String
   user      User         @relation(fields: [userId], references: [id])
   items     ItemInCart[]
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
   Product   Product?     @relation(fields: [productId], references: [id])
-  productId Int?
+  productId String?
 }
 
 model ItemInCart {
-  id        Int      @id @default(autoincrement())
-  cartId    Int
+  id        String   @id @default(uuid())
+  cartId    String
   cart      Cart     @relation(fields: [cartId], references: [id])
-  productId Int
+  productId String
   product   Product  @relation(fields: [productId], references: [id])
   quantity  Int
   createdAt DateTime @default(now())
@@ -66,8 +66,8 @@ model ItemInCart {
 }
 
 model Order {
-  id        Int           @id @default(autoincrement())
-  userId    Int
+  id        String        @id @default(uuid())
+  userId    String
   user      User          @relation(fields: [userId], references: [id])
   items     ItemInOrder[]
   createdAt DateTime      @default(now())
@@ -75,10 +75,10 @@ model Order {
 }
 
 model ItemInOrder {
-  id        Int      @id @default(autoincrement())
-  orderId   Int
+  id        String   @id @default(uuid())
+  orderId   String
   order     Order    @relation(fields: [orderId], references: [id])
-  productId Int
+  productId String
   product   Product  @relation(fields: [productId], references: [id])
   quantity  Int
   createdAt DateTime @default(now())
@@ -86,7 +86,7 @@ model ItemInOrder {
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -94,8 +94,8 @@ model Category {
 }
 
 model ProductImage {
-  id        Int      @id @default(autoincrement())
-  productId Int
+  id        String   @id @default(uuid())
+  productId String
   product   Product  @relation(fields: [productId], references: [id])
   url       String
   createdAt DateTime @default(now())
@@ -103,7 +103,7 @@ model ProductImage {
 }
 
 model Admin {
-  id        Int         @id @default(autoincrement())
+  id        String      @id @default(uuid())
   email     String      @unique
   password  String
   name      String?
@@ -113,8 +113,8 @@ model Admin {
 }
 
 model AdminAuth {
-  id        Int      @id @default(autoincrement())
-  adminId   Int
+  id        String   @id @default(uuid())
+  adminId   String
   admin     Admin    @relation(fields: [adminId], references: [id])
   token     String   @unique
   createdAt DateTime @default(now())
