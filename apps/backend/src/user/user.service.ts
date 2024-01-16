@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@tradetrove/shared-types';
+import {
+  User,
+  UserCreateInput,
+  UserUpdateInput,
+} from '@tradetrove/shared-types';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createUserDto: Prisma.UserCreateInput): Promise<User> {
+  async create(createUserDto: UserCreateInput): Promise<User> {
     return this.prisma.user.create({
       data: createUserDto,
     });
@@ -23,10 +26,7 @@ export class UserService {
     });
   }
 
-  async update(
-    id: string,
-    updateUserDto: Prisma.UserUpdateInput,
-  ): Promise<User> {
+  async update(id: string, updateUserDto: UserUpdateInput): Promise<User> {
     return this.prisma.user.update({
       where: { id },
       data: updateUserDto,
