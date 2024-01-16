@@ -9,13 +9,22 @@ export const userSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type User = z.infer<typeof userSchema>;
+export const userCreateSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+  name: z.string().nullable().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
+});
 
-// export type User = {
-//   id: number;
-//   email: string;
-//   password: string;
-//   name: string | null;
-//   createdAt: Date;
-//   updatedAt: Date;
-// };
+export const userUpdateSchema = z.object({
+  email: z.string().optional(),
+  password: z.string().optional(),
+  name: z.string().nullable().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
+});
+
+export interface User extends z.infer<typeof userSchema> {}
+export interface UserCreateInput extends z.input<typeof userCreateSchema> {}
+export interface UserUpdateInput extends z.input<typeof userUpdateSchema> {}

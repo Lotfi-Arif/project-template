@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { z } from 'zod';
 
-export type Data = {
-  message: string;
-};
+const dataschema = z.object({
+  message: z.string(),
+});
+export interface Data extends z.infer<typeof dataschema> {}
 
 @Injectable()
 export class AppService {

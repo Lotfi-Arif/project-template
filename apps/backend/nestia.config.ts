@@ -17,7 +17,7 @@ const NESTIA_CONFIG: INestiaConfig = {
     return app;
   },
   swagger: {
-    output: 'dist/swagger.json',
+    output: 'docs/swagger.json',
     beautify: true,
     servers: [
       {
