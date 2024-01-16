@@ -1,7 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
-import { User, UserCreateInput, UserUpdateInput } from './types';
+import {
+  User,
+  UserCreateInput,
+  UserUpdateInput,
+} from '@tradetrove/shared-types';
 
 @Controller('user')
 export class UserController {
