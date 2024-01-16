@@ -1,7 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
+import { User } from './types';
 
 @Controller('user')
 export class UserController {

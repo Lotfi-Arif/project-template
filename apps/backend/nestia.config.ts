@@ -14,14 +14,11 @@ const NESTIA_CONFIG: INestiaConfig = {
       new FastifyAdapter(),
     );
     app.setGlobalPrefix('api');
-    // app.enableVersioning({
-    //     type: VersioningType.URI,
-    //     prefix: "v",
-    // })
     return app;
   },
   swagger: {
     output: 'dist/swagger.json',
+    beautify: true,
     servers: [
       {
         url: 'http://localhost:3000',

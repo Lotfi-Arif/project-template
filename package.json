@@ -31,6 +31,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
+    "@fastify/static": "^6.12.0",
     "@nestia/sdk": "^2.4.4",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.1",
@@ -99,7 +100,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-node-externals": "^3.0.0",
+    "zod": "^3.22.4"
   },
   "dependencies": {
     "@babel/core": "^7.23.7",
