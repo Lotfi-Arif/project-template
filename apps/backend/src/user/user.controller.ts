@@ -1,15 +1,18 @@
 import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Prisma } from '@prisma/client';
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
-import { User } from './types';
+import {
+  User,
+  UserCreateInput,
+  UserUpdateInput,
+} from '@tradetrove/shared-types';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @TypedRoute.Post()
-  create(@TypedBody() createUserDto: Prisma.UserCreateInput): Promise<User> {
+  create(@TypedBody() createUserDto: UserCreateInput): Promise<User> {
     return this.userService.create(createUserDto);
   }
 
@@ -21,19 +24,19 @@ export class UserController {
   // TODO: add better error handling for not found instead of returning null
   @TypedRoute.Get(':id')
   findOne(@TypedParam('id') id: string): Promise<User | null> {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   @TypedRoute.Patch(':id')
   update(
     @TypedParam('id') id: string,
-    @TypedBody() updateUserDto: Prisma.UserUpdateInput,
+    @TypedBody() updateUserDto: UserUpdateInput,
   ): Promise<User> {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @TypedRoute.Delete(':id')
   remove(@TypedParam('id') id: string): Promise<User> {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

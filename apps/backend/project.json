@@ -64,6 +64,37 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
     },
+    "migrate-prisma": {
+      "executor": "@nx-tools/nx-prisma:migrate",
+      "options": {
+        "name": "default",
+        "schema": "apps/backend/prisma/schema.prisma",
+        "prismaBinaryTarget": "native",
+        "preview": false,
+        "transpile": true,
+        "rejectOnFail": true,
+        "create-only": true
+      }
+    },
+    "prisma-studio": {
+      "executor": "@nx-tools/nx-prisma:studio",
+      "options": {
+        "schema": "apps/backend/prisma/schema.prisma",
+        "prismaBinaryTarget": "native",
+        "rejectOnFail": true
+      }
+    },
+    "prisma-migrate-dev": {
+      "executor": "@nx-tools/nx-prisma:migrate",
+      "options": {
+        "name": "dev",
+        "schema": "apps/backend/prisma/schema.prisma",
+        "prismaBinaryTarget": "native",
+        "preview": false,
+        "transpile": true,
+        "rejectOnFail": true
+      }
+    },
     "generate-prisma": {
       "executor": "@nx-tools/nx-prisma:generate",
       "options": {
