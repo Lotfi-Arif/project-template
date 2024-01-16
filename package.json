@@ -12,7 +12,7 @@
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "lint:check": "eslint --ext .js,.ts --max-warnings=0",
-    "prepare": "ts-patch install && typia patch",
+    "prepare": "ts-patch install && typia patch && husky install",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:e2e": "nx affected:e2e",
@@ -29,12 +29,16 @@
     "help": "nx help"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@fastify/static": "^6.12.0",
     "@nestia/sdk": "^2.4.4",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
     "@nrwl/nest": "^17.2.8",
     "@nrwl/next": "^17.2.8",
+    "@nrwl/workspace": "^17.2.8",
     "@nx-tools/nx-prisma": "^5.1.0",
     "@nx/cypress": "17.2.8",
     "@nx/eslint": "17.2.8",
@@ -96,7 +100,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-node-externals": "^3.0.0",
+    "zod": "^3.22.4"
   },
   "dependencies": {
     "@babel/core": "^7.23.7",
@@ -108,6 +113,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/platform-fastify": "^10.3.0",
+    "@nestjs/swagger": "^7.1.17",
     "@prisma/client": "^5.8.0",
     "axios": "^1.0.0",
     "fastify": "^4.25.2",
