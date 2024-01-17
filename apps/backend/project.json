@@ -68,7 +68,7 @@
       "executor": "@nx-tools/nx-prisma:migrate",
       "options": {
         "name": "default",
-        "schema": "apps/backend/prisma/schema.prisma",
+        "schema": "apps/backend/prisma/schema.dev.prisma",
         "prismaBinaryTarget": "native",
         "preview": false,
         "transpile": true,
@@ -79,7 +79,7 @@
     "prisma-studio": {
       "executor": "@nx-tools/nx-prisma:studio",
       "options": {
-        "schema": "apps/backend/prisma/schema.prisma",
+        "schema": "apps/backend/prisma/schema.dev.prisma",
         "prismaBinaryTarget": "native",
         "rejectOnFail": true
       }
@@ -88,7 +88,7 @@
       "executor": "@nx-tools/nx-prisma:migrate",
       "options": {
         "name": "dev",
-        "schema": "apps/backend/prisma/schema.prisma",
+        "schema": "apps/backend/prisma/schema.dev.prisma",
         "prismaBinaryTarget": "native",
         "preview": false,
         "transpile": true,
@@ -98,8 +98,8 @@
     "generate-prisma": {
       "executor": "@nx-tools/nx-prisma:generate",
       "options": {
-        "schema": "apps/backend/prisma/schema.prisma",
-        "prismaSchema": "apps/backend/prisma/schema.prisma",
+        "schema": "apps/backend/prisma/schema.dev.prisma",
+        "prismaSchema": "apps/backend/prisma/schema.dev.prisma",
         "prismaBinaryTarget": "native",
         "output": "apps/backend/src/generated",
         "transpile": true,
