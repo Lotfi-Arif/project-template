@@ -74,5 +74,37 @@ describe('AuthService', () => {
         token_type: 'Bearer',
       });
     });
+
+    it('should throw an error if no user is provided', async () => {
+      await expect(
+        service.login(
+          undefined as unknown as {
+            id: string;
+            username: string;
+            email: string;
+          },
+        ),
+      ).rejects.toThrow();
+    });
   });
+
+  describe('create', () => {
+    it('should return an auth object', async () => {
+      const auth = {
+        id: '1',
+        token: 'token',
+        user: {
+          connect: {
+            id: '1',
+          },
+        },
+      };
+      mockPrismaService.auth.create = jest.fn().mockResolvedValue(auth);
+      const result = await service.create(auth);
+
+      expect(result).toEqual(auth);
+    });
+  });
+
+  // TODO: Additional tests for findAll, findOne, update, remove
 });
