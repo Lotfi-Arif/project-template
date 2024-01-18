@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  backend:
+    volumes:
+      - ./apps/backend:/usr/src/app
+    command: ['npx', 'nx', 'serve', 'backend']
+
+  frontend:
+    volumes:
+      - ./apps/frontend:/usr/src/app
+    command: ['npx', 'nx', 'serve', 'frontend']
