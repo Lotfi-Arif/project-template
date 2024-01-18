@@ -1,28 +1,49 @@
 import { z } from 'zod';
 
 export const userSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string(),
+  id: z.string().uuid().optional(),
+  email: z.string().email(),
+  username: z.string(),
   password: z.string(),
-  name: z.string().nullable(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  name: z.string().nullable().optional(),
+  status: z.string().optional(),
+  role: z.string().optional(),
+  phone: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  profilePictureUrl: z.string().nullable().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
+  // Note: You'll need to define schemas for Cart, Auth, and Order if they are used.
 });
 
 export const userCreateSchema = z.object({
   email: z.string().email(),
+  username: z.string(),
   password: z.string(),
   name: z.string().nullable().optional(),
+  status: z.string().optional(),
+  role: z.string().optional(),
+  phone: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  profilePictureUrl: z.string().nullable().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
+  // Include nested schemas for cart, Auth, and Orders if necessary
 });
 
 export const userUpdateSchema = z.object({
-  email: z.string().optional(),
+  email: z.string().email().optional(),
+  username: z.string().optional(),
   password: z.string().optional(),
   name: z.string().nullable().optional(),
+  status: z.string().optional(),
+  role: z.string().optional(),
+  phone: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  profilePictureUrl: z.string().nullable().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
+  // Include nested schemas for cart, Auth, and Orders if necessary
 });
 
 export interface User extends z.infer<typeof userSchema> {}
