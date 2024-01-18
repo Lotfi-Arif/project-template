@@ -16,6 +16,11 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @TypedRoute.Post('register')
+  async register(@TypedBody() createUserDto: UserCreateInput): Promise<User> {
+    return this.userService.create(createUserDto);
+  }
+
   @TypedRoute.Get()
   findAll(): Promise<User[]> {
     return this.userService.findAll();
