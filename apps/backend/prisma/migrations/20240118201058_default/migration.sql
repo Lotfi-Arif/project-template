@@ -1,17 +1,23 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "name" TEXT,
+    "role" TEXT NOT NULL DEFAULT 'USER',
+    "status" TEXT NOT NULL DEFAULT 'ACTIVE',
+    "address" TEXT,
+    "phone" TEXT,
+    "profilePictureUrl" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Auth" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
     "token" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -20,32 +26,30 @@ CREATE TABLE "Auth" (
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "price" REAL NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "categoryId" INTEGER,
+    "categoryId" TEXT,
     CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "Cart" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "productId" INTEGER,
-    CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Cart_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "ItemInCart" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "cartId" INTEGER NOT NULL,
-    "productId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "cartId" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -55,8 +59,9 @@ CREATE TABLE "ItemInCart" (
 
 -- CreateTable
 CREATE TABLE "Order" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "price" REAL NOT NULL,
+    "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
@@ -64,9 +69,9 @@ CREATE TABLE "Order" (
 
 -- CreateTable
 CREATE TABLE "ItemInOrder" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "orderId" INTEGER NOT NULL,
-    "productId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "orderId" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -76,7 +81,7 @@ CREATE TABLE "ItemInOrder" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
@@ -84,8 +89,8 @@ CREATE TABLE "Category" (
 
 -- CreateTable
 CREATE TABLE "ProductImage" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "productId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "productId" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -94,7 +99,7 @@ CREATE TABLE "ProductImage" (
 
 -- CreateTable
 CREATE TABLE "Admin" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "name" TEXT,
@@ -104,8 +109,8 @@ CREATE TABLE "Admin" (
 
 -- CreateTable
 CREATE TABLE "AdminAuth" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "adminId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "adminId" TEXT NOT NULL,
     "token" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -116,10 +121,73 @@ CREATE TABLE "AdminAuth" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+
+-- CreateIndex
+CREATE INDEX "idx_user_email" ON "User"("email");
+
+-- CreateIndex
+CREATE INDEX "idx_user_username" ON "User"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Auth_userId_key" ON "Auth"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Auth_token_key" ON "Auth"("token");
+
+-- CreateIndex
+CREATE INDEX "idx_auth_userId" ON "Auth"("userId");
+
+-- CreateIndex
+CREATE INDEX "idx_auth_token" ON "Auth"("token");
+
+-- CreateIndex
+CREATE INDEX "idx_product_name" ON "Product"("name");
+
+-- CreateIndex
+CREATE INDEX "idx_product_price" ON "Product"("price");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Cart_userId_key" ON "Cart"("userId");
+
+-- CreateIndex
+CREATE INDEX "idx_cart_userId" ON "Cart"("userId");
+
+-- CreateIndex
+CREATE INDEX "idx_itemInCart_cartId" ON "ItemInCart"("cartId");
+
+-- CreateIndex
+CREATE INDEX "idx_itemInCart_productId" ON "ItemInCart"("productId");
+
+-- CreateIndex
+CREATE INDEX "idx_order_userId" ON "Order"("userId");
+
+-- CreateIndex
+CREATE INDEX "idx_order_price" ON "Order"("price");
+
+-- CreateIndex
+CREATE INDEX "idx_itemInOrder_orderId" ON "ItemInOrder"("orderId");
+
+-- CreateIndex
+CREATE INDEX "idx_itemInOrder_productId" ON "ItemInOrder"("productId");
+
+-- CreateIndex
+CREATE INDEX "idx_category_name" ON "Category"("name");
+
+-- CreateIndex
+CREATE INDEX "idx_productImage_productId" ON "ProductImage"("productId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
 
 -- CreateIndex
+CREATE INDEX "idx_admin_email" ON "Admin"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "AdminAuth_token_key" ON "AdminAuth"("token");
+
+-- CreateIndex
+CREATE INDEX "idx_adminAuth_adminId" ON "AdminAuth"("adminId");
+
+-- CreateIndex
+CREATE INDEX "idx_adminAuth_token" ON "AdminAuth"("token");

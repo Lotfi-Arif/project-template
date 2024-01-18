@@ -169,6 +169,143 @@
           }
         }
       }
+    },
+    "/api/order": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCreateInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/order/{id}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order.Nullable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderUpdateInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -189,10 +326,31 @@
           "email": {
             "type": "string"
           },
+          "username": {
+            "type": "string"
+          },
           "password": {
             "type": "string"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureUrl": {
             "type": "string",
             "nullable": true
           },
@@ -206,7 +364,7 @@
           }
         },
         "nullable": false,
-        "required": ["email", "password"]
+        "required": ["email", "username", "password"]
       },
       "User": {
         "type": "object",
@@ -214,10 +372,34 @@
           "email": {
             "type": "string"
           },
+          "username": {
+            "type": "string"
+          },
           "password": {
             "type": "string"
           },
+          "id": {
+            "type": "string"
+          },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureUrl": {
             "type": "string",
             "nullable": true
           },
@@ -228,20 +410,10 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
-          },
-          "id": {
-            "type": "string"
           }
         },
         "nullable": false,
-        "required": [
-          "email",
-          "password",
-          "name",
-          "createdAt",
-          "updatedAt",
-          "id"
-        ]
+        "required": ["email", "username", "password"]
       },
       "User.Nullable": {
         "type": "object",
@@ -249,10 +421,34 @@
           "email": {
             "type": "string"
           },
+          "username": {
+            "type": "string"
+          },
           "password": {
             "type": "string"
           },
+          "id": {
+            "type": "string"
+          },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureUrl": {
             "type": "string",
             "nullable": true
           },
@@ -263,20 +459,10 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
-          },
-          "id": {
-            "type": "string"
           }
         },
         "nullable": true,
-        "required": [
-          "email",
-          "password",
-          "name",
-          "createdAt",
-          "updatedAt",
-          "id"
-        ]
+        "required": ["email", "username", "password"]
       },
       "UserUpdateInput": {
         "type": "object",
@@ -284,10 +470,31 @@
           "email": {
             "type": "string"
           },
+          "username": {
+            "type": "string"
+          },
           "password": {
             "type": "string"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "profilePictureUrl": {
             "type": "string",
             "nullable": true
           },
@@ -301,6 +508,108 @@
           }
         },
         "nullable": false
+      },
+      "OrderCreateInput": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "connect": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "nullable": false,
+                "required": ["id"]
+              }
+            },
+            "nullable": false,
+            "required": ["connect"]
+          }
+        },
+        "nullable": false,
+        "required": ["price", "user"]
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "nullable": false,
+        "required": ["createdAt", "updatedAt", "id", "price", "userId"]
+      },
+      "Order.Nullable": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "nullable": true,
+        "required": ["createdAt", "updatedAt", "id", "price", "userId"]
+      },
+      "OrderUpdateInput": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "connect": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "nullable": false,
+                "required": ["id"]
+              }
+            },
+            "nullable": false,
+            "required": ["connect"]
+          }
+        },
+        "nullable": false,
+        "required": ["price", "user"]
       }
     }
   }
