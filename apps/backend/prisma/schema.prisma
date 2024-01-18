@@ -7,25 +7,47 @@ generator client {
     provider = "prisma-client-js"
 }
 
+enum Role {
+    ADMIN
+    USER
+}
+
+enum Status {
+    ACTIVE
+    INACTIVE
+}
+
 model User {
-    id        String   @id @default(uuid())
-    email     String   @unique
-    password  String
-    name      String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    carts     Cart[]
-    Auth      Auth[]
-    Order     Order[]
+    id                String   @id @default(uuid())
+    email             String   @unique
+    username          String   @unique
+    password          String
+    name              String?
+    role              Role     @default(USER)
+    status            Status   @default(ACTIVE)
+    address           String?
+    phone             String?
+    profilePictureUrl String?
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+    cart              Cart?
+    Auth              Auth?
+    Orders            Order[]
+
+    @@index([email], name: "idx_user_email")
+    @@index([username], name: "idx_user_username")
 }
 
 model Auth {
     id        String   @id @default(uuid())
-    userId    String
+    userId    String   @unique
     user      User     @relation(fields: [userId], references: [id])
     token     String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([userId], name: "idx_auth_userId")
+    @@index([token], name: "idx_auth_token")
 }
 
 model Product {
@@ -35,23 +57,25 @@ model Product {
     price        Float
     createdAt    DateTime       @default(now())
     updatedAt    DateTime       @updatedAt
-    carts        Cart[]
     ItemInCart   ItemInCart[]
     ItemInOrder  ItemInOrder[]
     Category     Category?      @relation(fields: [categoryId], references: [id])
     categoryId   String?
     ProductImage ProductImage[]
+
+    @@index([name], name: "idx_product_name")
+    @@index([price], name: "idx_product_price")
 }
 
 model Cart {
     id        String       @id @default(uuid())
-    userId    String
+    userId    String       @unique
     user      User         @relation(fields: [userId], references: [id])
     items     ItemInCart[]
     createdAt DateTime     @default(now())
     updatedAt DateTime     @updatedAt
-    Product   Product?     @relation(fields: [productId], references: [id])
-    productId String?
+
+    @@index([userId], name: "idx_cart_userId")
 }
 
 model ItemInCart {
@@ -63,15 +87,22 @@ model ItemInCart {
     quantity  Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([cartId], name: "idx_itemInCart_cartId")
+    @@index([productId], name: "idx_itemInCart_productId")
 }
 
 model Order {
     id        String        @id @default(uuid())
+    price     Float
     userId    String
     user      User          @relation(fields: [userId], references: [id])
     items     ItemInOrder[]
     createdAt DateTime      @default(now())
     updatedAt DateTime      @updatedAt
+
+    @@index([userId], name: "idx_order_userId")
+    @@index([price], name: "idx_order_price")
 }
 
 model ItemInOrder {
@@ -83,6 +114,9 @@ model ItemInOrder {
     quantity  Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([orderId], name: "idx_itemInOrder_orderId")
+    @@index([productId], name: "idx_itemInOrder_productId")
 }
 
 model Category {
@@ -91,6 +125,8 @@ model Category {
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     Product   Product[]
+
+    @@index([name], name: "idx_category_name")
 }
 
 model ProductImage {
@@ -100,6 +136,8 @@ model ProductImage {
     url       String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([productId], name: "idx_productImage_productId")
 }
 
 model Admin {
@@ -110,6 +148,8 @@ model Admin {
     createdAt DateTime    @default(now())
     updatedAt DateTime    @updatedAt
     AdminAuth AdminAuth[]
+
+    @@index([email], name: "idx_admin_email")
 }
 
 model AdminAuth {
@@ -119,4 +159,7 @@ model AdminAuth {
     token     String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([adminId], name: "idx_adminAuth_adminId")
+    @@index([token], name: "idx_adminAuth_token")
 }
