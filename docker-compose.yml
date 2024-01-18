@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      args:
+        BUILD_TARGET: backend
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=postgresql://username:password@postgres:5432/dbname
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: .
+      args:
+        BUILD_TARGET: frontend
+    ports:
+      - '3001:3001'
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
