@@ -26,7 +26,13 @@
     "format:check-all": "nx format:check --all",
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "docker:build:dev": "docker-compose up --build",
+    "docker:build:prod": "docker-compose -f docker-compose.yml up --build",
+    "docker:start:dev": "docker-compose up",
+    "docker:start:prod": "docker-compose -f docker-compose.yml up",
+    "docker:stop:dev": "docker-compose down",
+    "docker:stop:prod": "docker-compose -f docker-compose.yml down"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.4",
