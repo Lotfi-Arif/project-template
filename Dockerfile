@@ -14,5 +14,6 @@ WORKDIR /usr/src/app
 ARG BUILD_TARGET
 COPY --from=builder /usr/src/app/dist/apps/${BUILD_TARGET} ./dist
 COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist/swagger.json ./dist/swagger.json
 EXPOSE 3000
 CMD ["node", "dist/main"]

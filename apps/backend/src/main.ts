@@ -15,11 +15,21 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  // Updated path to Swagger JSON file
-  const swaggerPath = path.join(__dirname, '../../swagger.json');
-  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf-8'));
-
-  SwaggerModule.setup('docs', app, swaggerDocument);
+  try {
+    // Attempt to load Swagger JSON file
+    const swaggerPath = path.join(__dirname, '../../swagger.json');
+    const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf-8'));
+    SwaggerModule.setup('docs', app, swaggerDocument);
+    Logger.log('Swagger setup successfully');
+  } catch (error) {
+    if (error instanceof Error) {
+      // Now it's safe to access error.message
+      Logger.error('Failed to set up Swagger: ' + error.message);
+    } else {
+      // For non-Error objects, you might want to log differently
+      Logger.error('An unknown error occurred during Swagger setup');
+    }
+  }
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
