@@ -109,4 +109,74 @@ describe('UserService', () => {
       );
     });
   });
+
+  describe('findAll', () => {
+    it('should return an array of users', async () => {
+      const mockUsers: User[] = [
+        {
+          id: 'some-id',
+          email: 'example@test.com',
+          username: 'exampleUser',
+          password: 'hashedPassword',
+          name: null,
+          role: 'userRole',
+          status: 'active',
+          address: null,
+          phone: null,
+          profilePictureUrl: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
+
+      prismaService.user.findMany.mockResolvedValueOnce(mockUsers);
+
+      const users = await userService.findAll();
+      expect(users).toEqual(mockUsers);
+      expect(prismaService.user.findMany).toHaveBeenCalled();
+    });
+
+    it('should return an empty array if no users exist', async () => {
+      prismaService.user.findMany.mockResolvedValueOnce([]);
+
+      const users = await userService.findAll();
+      expect(users).toEqual([]);
+      expect(prismaService.user.findMany).toHaveBeenCalled();
+    });
+
+    it('should throw an error if the query fails', async () => {
+      prismaService.user.findMany.mockRejectedValueOnce(
+        new Error('Some error'),
+      );
+
+      await expect(userService.findAll()).rejects.toThrow('Some error');
+    });
+  });
+
+  describe('findOne', () => {
+    it('should return a user', async () => {
+      const mockUser: User = {
+        id: 'some-id',
+        email: 'test@test.com',
+        username: 'exampleUser',
+        password: 'hashedPassword',
+        name: null,
+        role: 'userRole',
+        status: 'active',
+        address: null,
+        phone: null,
+        profilePictureUrl: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      prismaService.user.findUnique.mockResolvedValueOnce(mockUser);
+
+      const user = await userService.findOne('some-id');
+      expect(user).toEqual(mockUser);
+      expect(prismaService.user.findUnique).toHaveBeenCalledWith({
+        where: { id: 'some-id' },
+      });
+    });
+  });
 });
