@@ -178,5 +178,77 @@ describe('UserService', () => {
         where: { id: 'some-id' },
       });
     });
+
+    it('should return null if the user does not exist', async () => {
+      prismaService.user.findUnique.mockResolvedValueOnce(null);
+
+      const user = await userService.findOne('some-id');
+      expect(user).toBeNull();
+      expect(prismaService.user.findUnique).toHaveBeenCalledWith({
+        where: { id: 'some-id' },
+      });
+    });
+
+    it('should throw an error if the query fails', async () => {
+      prismaService.user.findUnique.mockRejectedValueOnce(
+        new Error('Some error'),
+      );
+
+      await expect(userService.findOne('some-id')).rejects.toThrow(
+        'Some error',
+      );
+    });
+  });
+
+  describe('update', () => {
+    it('should update a user', async () => {
+      const mockUser: User = {
+        id: 'some-id',
+        email: 'test@test.com',
+        username: 'exampleUser',
+        password: 'hashedPassword',
+        name: null,
+        role: 'userRole',
+        status: 'active',
+        address: null,
+        phone: null,
+        profilePictureUrl: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      const userDto = mockDeep<UserCreateInput>();
+      prismaService.user.update.mockResolvedValueOnce(mockUser);
+
+      const updatedUser = await userService.update('some-id', userDto);
+
+      expect(updatedUser).toEqual(mockUser);
+      expect(prismaService.user.update).toHaveBeenCalledWith({
+        where: { id: 'some-id' },
+        data: userDto,
+      });
+    });
+
+    it('should throw an error if the user does not exist', async () => {
+      const userDto = mockDeep<UserCreateInput>();
+      prismaService.user.update.mockRejectedValueOnce(
+        new Error('User not found'),
+      );
+
+      await expect(userService.update('some-id', userDto)).rejects.toThrow(
+        'User not found',
+      );
+    });
+
+    it('should throw an error if the email is invalid', async () => {
+      const userDto = mockDeep<UserCreateInput>();
+      prismaService.user.update.mockRejectedValueOnce(
+        new Error('Invalid email'),
+      );
+
+      await expect(userService.update('some-id', userDto)).rejects.toThrow(
+        'Invalid email',
+      );
+    });
   });
 });
