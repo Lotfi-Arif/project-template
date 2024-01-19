@@ -1,18 +1,18 @@
 import { z } from 'zod';
 
 export const userSchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().uuid(),
   email: z.string().email(),
   username: z.string(),
   password: z.string(),
-  name: z.string().nullable().optional(),
-  status: z.string().optional(),
-  role: z.string().optional(),
-  phone: z.string().nullable().optional(),
-  address: z.string().nullable().optional(),
-  profilePictureUrl: z.string().nullable().optional(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
+  name: z.string().nullable(),
+  status: z.string(),
+  role: z.string(),
+  phone: z.string().nullable(),
+  address: z.string().nullable(),
+  profilePictureUrl: z.string().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
   // Note: You'll need to define schemas for Cart, Auth, and Order if they are used.
 });
 
