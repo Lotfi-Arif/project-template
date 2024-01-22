@@ -7,6 +7,8 @@ import {
   User,
   userSchema,
   userCreateSchema,
+  userUpdateSchema,
+  UserUpdateInput,
 } from '@tradetrove/shared-types';
 import * as bcrypt from 'bcrypt';
 import { mockObject } from '@tradetrove/shared-utils';
@@ -19,6 +21,9 @@ const mockUser: User = mockObject(userSchema, {
 });
 const mockUsers: User[] = [mockObject(userSchema)];
 const mockUserDTO: UserCreateInput = mockObject(userCreateSchema);
+const mockUserUpdateDTO: UserUpdateInput = mockObject(userUpdateSchema, {
+  email: 'test@test.com',
+});
 
 describe('UserService', () => {
   let userService: UserService;
@@ -171,12 +176,15 @@ describe('UserService', () => {
     it('should update a user', async () => {
       prismaService.user.update = jest.fn().mockResolvedValueOnce(mockUser);
 
-      const updatedUser = await userService.update('some-id', mockUserDTO);
+      const updatedUser = await userService.update(
+        'some-id',
+        mockUserUpdateDTO,
+      );
 
       expect(updatedUser).toEqual(mockUser);
       expect(prismaService.user.update).toHaveBeenCalledWith({
         where: { id: 'some-id' },
-        data: mockUserDTO,
+        data: mockUserUpdateDTO,
       });
     });
 
