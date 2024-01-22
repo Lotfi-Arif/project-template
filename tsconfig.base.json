@@ -27,7 +27,8 @@
     "strictNullChecks": true,
     "strict": true,
     "paths": {
-      "@tradetrove/shared-types": ["libs/shared/types/index.ts"]
+      "@tradetrove/shared-types": ["libs/shared/types/index.ts"],
+      "@tradetrove/shared-utils": ["libs/shared/utils/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
