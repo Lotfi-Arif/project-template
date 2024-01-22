@@ -27,8 +27,10 @@ describe('AuthService', () => {
     }).compile();
 
     service = module.get<AuthService>(AuthService);
-    mockPrismaService = module.get<PrismaService>(PrismaService);
-    mockJwtService = module.get<JwtService>(JwtService);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('should be defined', () => {
