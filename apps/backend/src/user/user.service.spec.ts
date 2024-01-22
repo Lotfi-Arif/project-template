@@ -1,34 +1,49 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
-import { UserCreateInput, User } from '@tradetrove/shared-types';
+import { mockDeep } from 'jest-mock-extended';
+import {
+  UserCreateInput,
+  User,
+  userSchema,
+  userCreateSchema,
+} from '@tradetrove/shared-types';
 import * as bcrypt from 'bcrypt';
+import { mockObject } from '@tradetrove/shared-utils';
 
 jest.mock('bcrypt');
 
+const mockUser: User = mockObject(userSchema, {
+  id: 'some-id',
+  password: 'hashedPassword',
+});
+const mockUsers: User[] = [mockObject(userSchema)];
+const mockUserDTO: UserCreateInput = mockObject(userCreateSchema);
+
 describe('UserService', () => {
   let userService: UserService;
-  let prismaService: DeepMockProxy<PrismaService>;
+  let prismaService: PrismaService;
 
   beforeEach(async () => {
+    prismaService = mockDeep<PrismaService>();
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
         {
           provide: PrismaService,
-          useValue: mockDeep<PrismaService>(),
+          useValue: prismaService,
         },
       ],
     }).compile();
 
     userService = module.get<UserService>(UserService);
-    prismaService = module.get<PrismaService>(
-      PrismaService,
-    ) as DeepMockProxy<PrismaService>;
 
     // Mock bcrypt.hash to return a predictable value
     (bcrypt.hash as jest.Mock).mockResolvedValue('hashedPassword');
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('should be defined', () => {
@@ -37,74 +52,58 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should create a new user', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      const mockUser: User = {
-        id: 'some-id',
-        email: 'example@example.com',
-        username: 'exampleUser',
-        password: 'hashedPassword',
-        name: null,
-        role: 'userRole',
-        status: 'active',
-        address: null,
-        phone: null,
-        profilePictureUrl: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      prismaService.user.create.mockResolvedValueOnce(mockUser);
+      prismaService.user.create = jest.fn().mockResolvedValueOnce(mockUser);
 
-      const createdUser = await userService.create(userDto);
+      const createdUser = await userService.create(mockUserDTO);
+      console.log(createdUser);
       expect(createdUser).toEqual(mockUser);
-      expect(bcrypt.hash).toHaveBeenCalledWith(userDto.password, 10);
+      expect(bcrypt.hash).toHaveBeenCalledWith(mockUserDTO.password, 10);
       expect(prismaService.user.create).toHaveBeenCalledWith({
         data: {
-          ...userDto,
+          ...mockUserDTO,
           password: 'hashedPassword',
         },
       });
     });
 
     it('should throw an error if the user already exists', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.create.mockRejectedValueOnce(
-        new Error('Unique constraint failed on the fields: (`email`)'),
-      );
+      prismaService.user.create = jest
+        .fn()
+        .mockRejectedValueOnce(
+          new Error('Unique constraint failed on the fields: (`email`)'),
+        );
 
-      await expect(userService.create(userDto)).rejects.toThrow(
+      await expect(userService.create(mockUserDTO)).rejects.toThrow(
         'Unique constraint failed on the fields: (`email`)',
       );
     });
 
     it('should throw an error if the email is invalid', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.create.mockRejectedValueOnce(
-        new Error('Invalid email'),
-      );
+      prismaService.user.create = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Invalid email'));
 
-      await expect(userService.create(userDto)).rejects.toThrow(
+      await expect(userService.create(mockUserDTO)).rejects.toThrow(
         'Invalid email',
       );
     });
 
     it('should throw an error if the username is invalid', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.create.mockRejectedValueOnce(
-        new Error('Invalid username'),
-      );
+      prismaService.user.create = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Invalid username'));
 
-      await expect(userService.create(userDto)).rejects.toThrow(
+      await expect(userService.create(mockUserDTO)).rejects.toThrow(
         'Invalid username',
       );
     });
 
     it('should throw an error if the password is invalid', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.create.mockRejectedValueOnce(
-        new Error('Invalid password'),
-      );
+      prismaService.user.create = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Invalid password'));
 
-      await expect(userService.create(userDto)).rejects.toThrow(
+      await expect(userService.create(mockUserDTO)).rejects.toThrow(
         'Invalid password',
       );
     });
@@ -112,24 +111,7 @@ describe('UserService', () => {
 
   describe('findAll', () => {
     it('should return an array of users', async () => {
-      const mockUsers: User[] = [
-        {
-          id: 'some-id',
-          email: 'example@test.com',
-          username: 'exampleUser',
-          password: 'hashedPassword',
-          name: null,
-          role: 'userRole',
-          status: 'active',
-          address: null,
-          phone: null,
-          profilePictureUrl: null,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ];
-
-      prismaService.user.findMany.mockResolvedValueOnce(mockUsers);
+      prismaService.user.findMany = jest.fn().mockResolvedValueOnce(mockUsers);
 
       const users = await userService.findAll();
       expect(users).toEqual(mockUsers);
@@ -137,7 +119,7 @@ describe('UserService', () => {
     });
 
     it('should return an empty array if no users exist', async () => {
-      prismaService.user.findMany.mockResolvedValueOnce([]);
+      prismaService.user.findMany = jest.fn().mockResolvedValueOnce([]);
 
       const users = await userService.findAll();
       expect(users).toEqual([]);
@@ -145,9 +127,9 @@ describe('UserService', () => {
     });
 
     it('should throw an error if the query fails', async () => {
-      prismaService.user.findMany.mockRejectedValueOnce(
-        new Error('Some error'),
-      );
+      prismaService.user.findMany = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Some error'));
 
       await expect(userService.findAll()).rejects.toThrow('Some error');
     });
@@ -155,22 +137,7 @@ describe('UserService', () => {
 
   describe('findOne', () => {
     it('should return a user', async () => {
-      const mockUser: User = {
-        id: 'some-id',
-        email: 'test@test.com',
-        username: 'exampleUser',
-        password: 'hashedPassword',
-        name: null,
-        role: 'userRole',
-        status: 'active',
-        address: null,
-        phone: null,
-        profilePictureUrl: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      prismaService.user.findUnique.mockResolvedValueOnce(mockUser);
+      prismaService.user.findUnique = jest.fn().mockResolvedValueOnce(mockUser);
 
       const user = await userService.findOne('some-id');
       expect(user).toEqual(mockUser);
@@ -180,7 +147,7 @@ describe('UserService', () => {
     });
 
     it('should return null if the user does not exist', async () => {
-      prismaService.user.findUnique.mockResolvedValueOnce(null);
+      prismaService.user.findUnique = jest.fn().mockResolvedValueOnce(null);
 
       const user = await userService.findOne('some-id');
       expect(user).toBeNull();
@@ -190,9 +157,9 @@ describe('UserService', () => {
     });
 
     it('should throw an error if the query fails', async () => {
-      prismaService.user.findUnique.mockRejectedValueOnce(
-        new Error('Some error'),
-      );
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Some error'));
 
       await expect(userService.findOne('some-id')).rejects.toThrow(
         'Some error',
@@ -202,51 +169,33 @@ describe('UserService', () => {
 
   describe('update', () => {
     it('should update a user', async () => {
-      const mockUser: User = {
-        id: 'some-id',
-        email: 'test@test.com',
-        username: 'exampleUser',
-        password: 'hashedPassword',
-        name: null,
-        role: 'userRole',
-        status: 'active',
-        address: null,
-        phone: null,
-        profilePictureUrl: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
+      prismaService.user.update = jest.fn().mockResolvedValueOnce(mockUser);
 
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.update.mockResolvedValueOnce(mockUser);
-
-      const updatedUser = await userService.update('some-id', userDto);
+      const updatedUser = await userService.update('some-id', mockUserDTO);
 
       expect(updatedUser).toEqual(mockUser);
       expect(prismaService.user.update).toHaveBeenCalledWith({
         where: { id: 'some-id' },
-        data: userDto,
+        data: mockUserDTO,
       });
     });
 
     it('should throw an error if the user does not exist', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.update.mockRejectedValueOnce(
-        new Error('User not found'),
-      );
+      prismaService.user.update = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('User not found'));
 
-      await expect(userService.update('some-id', userDto)).rejects.toThrow(
+      await expect(userService.update('some-id', mockUserDTO)).rejects.toThrow(
         'User not found',
       );
     });
 
     it('should throw an error if the email is invalid', async () => {
-      const userDto = mockDeep<UserCreateInput>();
-      prismaService.user.update.mockRejectedValueOnce(
-        new Error('Invalid email'),
-      );
+      prismaService.user.update = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Invalid email'));
 
-      await expect(userService.update('some-id', userDto)).rejects.toThrow(
+      await expect(userService.update('some-id', mockUserDTO)).rejects.toThrow(
         'Invalid email',
       );
     });
