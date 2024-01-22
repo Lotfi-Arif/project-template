@@ -4,7 +4,10 @@ import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { mock, mockDeep } from 'jest-mock-extended';
 import * as bcrypt from 'bcrypt';
-import { User } from '@tradetrove/shared-types';
+import { User, authSchema, authUpdateSchema } from '@tradetrove/shared-types';
+import { Auth } from '@tradetrove/shared-types';
+import { mockObject } from '@tradetrove/shared-utils';
+import { InternalServerErrorException } from '@nestjs/common';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -55,8 +58,6 @@ describe('AuthService', () => {
       const result = await service.validateUser('nonexistent', 'password');
       expect(result).toBeNull();
     });
-
-    // Add more tests for other methods like login, create, etc.
   });
 
   // Additional tests for login, create, findAll, findOne, update, remove
@@ -98,4 +99,63 @@ describe('AuthService', () => {
   });
 
   // TODO: Additional tests for findAll, findOne, update, remove
+  describe('findAll', () => {
+    it('should return an array of auth records', async () => {
+      const authRecords: Auth[] = [mockObject(authSchema)];
+
+      mockPrismaService.auth.findMany = jest
+        .fn()
+        .mockResolvedValue(authRecords);
+
+      const result = await service.findAll();
+
+      expect(result).toEqual(authRecords);
+    });
+  });
+
+  describe('update', () => {
+    it('should update and return the updated auth record', async () => {
+      const authId = '1';
+      const updatedAuth = mockObject(authSchema, { id: authId });
+      const updateAuthDto = mockObject(authUpdateSchema);
+
+      mockPrismaService.auth.update = jest.fn().mockResolvedValue(updatedAuth);
+
+      const result = await service.update(authId, updateAuthDto);
+
+      expect(result).toEqual(updatedAuth);
+    });
+
+    it('should throw NotFoundException if auth record is not found', async () => {
+      const authId = '1';
+      const updateAuthDto = mockObject(authUpdateSchema);
+
+      mockPrismaService.auth.update = jest.fn().mockRejectedValue(null);
+
+      await expect(service.update(authId, updateAuthDto)).rejects.toThrow(
+        InternalServerErrorException,
+      );
+    });
+  });
+
+  describe('remove', () => {
+    it('should delete and return the deleted auth record', async () => {
+      const authId = '1';
+      const deletedAuth: Auth = mockObject(authSchema, { id: authId });
+      mockPrismaService.auth.delete = jest.fn().mockResolvedValue(deletedAuth);
+
+      const result = await service.remove(authId);
+
+      expect(result).toEqual(deletedAuth);
+    });
+
+    it('should throw NotFoundException if auth record is not found', async () => {
+      const authId = '1';
+      mockPrismaService.auth.delete = jest.fn().mockRejectedValue(null);
+
+      await expect(service.remove(authId)).rejects.toThrow(
+        InternalServerErrorException,
+      );
+    });
+  });
 });
