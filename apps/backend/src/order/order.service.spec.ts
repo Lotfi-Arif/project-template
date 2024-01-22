@@ -12,11 +12,11 @@ import {
 import { mockDeep } from 'jest-mock-extended';
 import { mockObject } from '@tradetrove/shared-utils';
 
-const orderId = '123';
-const createOrderDto: OrderCreateInput = mockObject(createOrderSchema);
-const updateOrderDto: OrderUpdateInput = mockObject(updateOrderSchema);
-const order: Order = mockObject(orderSchema, { id: orderId });
-const orders: Order[] = [mockObject(orderSchema, { id: orderId })];
+const mockOrderId = '123';
+const mockCreateOrderDto: OrderCreateInput = mockObject(createOrderSchema);
+const mockUpdateOrderDto: OrderUpdateInput = mockObject(updateOrderSchema);
+const mockOrder: Order = mockObject(orderSchema, { id: mockOrderId });
+const mockOrders: Order[] = [mockObject(orderSchema, { id: mockOrderId })];
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -33,7 +33,6 @@ describe('OrderService', () => {
     }).compile();
 
     service = module.get<OrderService>(OrderService);
-    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   afterEach(() => {
@@ -42,66 +41,65 @@ describe('OrderService', () => {
 
   describe('create', () => {
     it('should create an order', async () => {
-      prismaService.order.create = jest.fn().mockResolvedValue(order);
+      prismaService.order.create = jest.fn().mockResolvedValue(mockOrder);
 
-      const result = await service.create(createOrderDto);
+      const result = await service.create(mockCreateOrderDto);
 
       expect(prismaService.order.create).toHaveBeenCalledWith({
-        data: createOrderDto,
+        data: mockCreateOrderDto,
       });
-      expect(result).toEqual(order);
+      expect(result).toEqual(mockOrder);
     });
   });
 
   describe('findAll', () => {
-    it('should return all orders', async () => {
-      prismaService.order.findMany = jest.fn().mockResolvedValue(orders);
+    it('should return all mockOrders', async () => {
+      prismaService.order.findMany = jest.fn().mockResolvedValue(mockOrders);
 
       const result = await service.findAll();
 
       expect(prismaService.order.findMany).toHaveBeenCalled();
-      expect(result).toEqual(orders);
+      expect(result).toEqual(mockOrders);
     });
   });
 
   describe('findOne', () => {
     it('should return an order by id', async () => {
-      prismaService.order.findUnique = jest.fn().mockResolvedValue(order);
+      prismaService.order.findUnique = jest.fn().mockResolvedValue(mockOrder);
 
-      const result = await service.findOne(orderId);
+      const result = await service.findOne(mockOrderId);
 
       expect(prismaService.order.findUnique).toHaveBeenCalledWith({
-        where: { id: orderId },
+        where: { id: mockOrderId },
       });
-      expect(result).toEqual(order);
+      expect(result).toEqual(mockOrder);
     });
   });
 
   describe('update', () => {
     it('should update an order', async () => {
-      jest.spyOn(prismaService.order, 'update').mockResolvedValue(order);
+      jest.spyOn(prismaService.order, 'update').mockResolvedValue(mockOrder);
 
-      const result = await service.update(orderId, updateOrderDto);
+      const result = await service.update(mockOrderId, mockUpdateOrderDto);
 
       expect(prismaService.order.update).toHaveBeenCalledWith({
-        where: { id: orderId },
-        data: updateOrderDto,
+        where: { id: mockOrderId },
+        data: mockUpdateOrderDto,
       });
-      expect(result).toEqual(order);
+      expect(result).toEqual(mockOrder);
     });
   });
 
   describe('remove', () => {
     it('should remove an order', async () => {
-      const orderId = '123';
-      const deletedOrder: Order = mockObject(orderSchema, { id: orderId });
+      const deletedOrder: Order = mockObject(orderSchema, { id: mockOrderId });
 
       jest.spyOn(prismaService.order, 'delete').mockResolvedValue(deletedOrder);
 
-      const result = await service.remove(orderId);
+      const result = await service.remove(mockOrderId);
 
       expect(prismaService.order.delete).toHaveBeenCalledWith({
-        where: { id: orderId },
+        where: { id: mockOrderId },
       });
       expect(result).toEqual(deletedOrder);
     });
