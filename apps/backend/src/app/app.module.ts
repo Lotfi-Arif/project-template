@@ -10,6 +10,8 @@ import { OrderModule } from '../order/order.module';
 import { OrderService } from '../order/order.service';
 import { AuthModule } from '../auth/auth.module';
 import { AuthService } from '../auth/auth.service';
+import { ProductModule } from '../product/product.module';
+import { ProductService } from '../product/product.service';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { AuthService } from '../auth/auth.service';
     PrismaModule,
     OrderModule,
     AuthModule,
+    ProductModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '7d' },
@@ -28,7 +31,8 @@ import { AuthService } from '../auth/auth.service';
     UserService,
     OrderService,
     AuthService,
-    PrismaService,
+    ProductService,
+    PrismaService
   ],
 })
 export class AppModule {}
