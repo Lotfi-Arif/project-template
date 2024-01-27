@@ -8,6 +8,7 @@ import {
 } from '@tradetrove/shared-types';
 import { Result } from 'neverthrow';
 
+// create and use a utility function to handle errors to make them more readable for the developer and the user
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}

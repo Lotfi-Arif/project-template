@@ -7,6 +7,7 @@ import {
 } from '@tradetrove/shared-types';
 import { err, ok, Result } from 'neverthrow';
 
+// use neverthrow to handle errors in the service layer
 @Injectable()
 export class ProductService {
   constructor(private prisma: PrismaService) {}

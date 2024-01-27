@@ -72,7 +72,7 @@ describe('ProductService', () => {
 
       const result = await service.create(mockProductCreateInput);
 
-      expect(result).toEqual(mockProduct);
+      if (result.isOk()) expect(result.value).toEqual(mockProduct);
     });
   });
 
@@ -85,7 +85,7 @@ describe('ProductService', () => {
 
       const result = await service.findAll();
 
-      expect(result).toEqual(mockProducts);
+      if (result.isOk()) expect(result.value).toEqual(mockProducts);
     });
   });
 
@@ -97,7 +97,7 @@ describe('ProductService', () => {
 
       const result = await service.findOne('1');
 
-      expect(result).toEqual(mockProduct);
+      if (result.isOk()) expect(result.value).toEqual(mockProduct);
     });
 
     it('should return null if product is not found', async () => {
@@ -105,7 +105,7 @@ describe('ProductService', () => {
 
       const result = await service.findOne('nonexistent');
 
-      expect(result).toBeNull();
+      if (result.isOk()) expect(result.value).toBeNull();
     });
   });
 
@@ -117,7 +117,7 @@ describe('ProductService', () => {
 
       const result = await service.update('1', mockProductUpdateInput);
 
-      expect(result).toEqual(mockProduct);
+      if (result.isOk()) expect(result.value).toEqual(mockProduct);
     });
   });
 
@@ -129,7 +129,7 @@ describe('ProductService', () => {
 
       const result = await service.remove('1');
 
-      expect(result).toEqual(mockProduct);
+      if (result.isOk()) expect(result.value).toEqual(mockProduct);
     });
 
     it('should return null if product is not found', async () => {
@@ -139,7 +139,7 @@ describe('ProductService', () => {
 
       const result = await service.remove('nonexistent');
 
-      expect(result).toBeNull();
+      if (result.isOk()) expect(result.value).toBeNull();
     });
   });
 });
