@@ -36,7 +36,7 @@ export class AuthController {
   }
 
   @TypedRoute.Get(':id')
-  findOne(@TypedParam('id') id: string) {
+  findOne(@TypedParam('id') id: string): Promise<Auth | null> {
     return this.authService.findOne(id);
   }
 
@@ -44,12 +44,12 @@ export class AuthController {
   update(
     @TypedParam('id') id: string,
     @TypedBody() updateAuthDto: AuthUpdateInput,
-  ) {
+  ): Promise<Auth> {
     return this.authService.update(id, updateAuthDto);
   }
 
   @TypedRoute.Delete(':id')
-  remove(@TypedParam('id') id: string) {
+  remove(@TypedParam('id') id: string): Promise<Auth> {
     return this.authService.remove(id);
   }
 }
