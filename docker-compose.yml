@@ -11,6 +11,8 @@ services:
       - DATABASE_URL=postgresql://username:password@postgres:5432/dbname
     depends_on:
       - postgres
+    volumes:
+      - ./apps/backend:/usr/src/app
 
   frontend:
     build:
@@ -19,6 +21,8 @@ services:
         BUILD_TARGET: frontend
     ports:
       - '3001:3001'
+    volumes:
+      - ./apps/frontend:/usr/src/app
 
   postgres:
     image: postgres:latest
