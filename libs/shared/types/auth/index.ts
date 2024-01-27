@@ -1,29 +1,22 @@
 import { z } from 'zod';
 
 export const authSchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().uuid(),
   token: z.string(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
+  userId: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
   // Note: You'll need to define schemas for User if they are used.
 });
 
 export const authCreateSchema = z.object({
   token: z.string(),
-  user: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  userId: z.string(),
 });
 
 export const authUpdateSchema = z.object({
   token: z.string(),
-  user: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  userId: z.string(),
 });
 
 export const loginInputSchema = z.object({

@@ -5,6 +5,7 @@ export const productSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.number(),
+  categoryId: z.string().nullable(),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -13,22 +14,14 @@ export const createProductSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.number(),
-  category: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  categoryId: z.string().nullable(),
 });
 
 export const updateProductSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.number(),
-  category: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  categoryId: z.string().nullable(),
 });
 
 export interface Product extends z.infer<typeof productSchema> {}
