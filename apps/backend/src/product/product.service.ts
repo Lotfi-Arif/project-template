@@ -5,31 +5,64 @@ import {
   ProductCreateInput,
   ProductUpdateInput,
 } from '@tradetrove/shared-types';
+import { err, ok, Result } from 'neverthrow';
 
 @Injectable()
 export class ProductService {
   constructor(private prisma: PrismaService) {}
 
-  create(createProductDto: ProductCreateInput): Promise<Product> {
-    return this.prisma.product.create({ data: createProductDto });
+  async create(
+    createProductDto: ProductCreateInput,
+  ): Promise<Result<Product, Error>> {
+    try {
+      const product = await this.prisma.product.create({
+        data: createProductDto,
+      });
+      return ok(product);
+    } catch (error) {
+      return err(new Error('Error creating product'));
+    }
   }
 
-  findAll(): Promise<Product[]> {
-    return this.prisma.product.findMany();
+  async findAll(): Promise<Result<Product[], Error>> {
+    try {
+      const products = await this.prisma.product.findMany();
+      return ok(products);
+    } catch (error) {
+      return err(new Error('Error finding all products'));
+    }
   }
 
-  findOne(id: string): Promise<Product | null> {
-    return this.prisma.product.findUnique({ where: { id } });
+  async findOne(id: string): Promise<Result<Product | null, Error>> {
+    try {
+      const product = await this.prisma.product.findUnique({ where: { id } });
+      return ok(product);
+    } catch (error) {
+      return err(new Error('Error finding product'));
+    }
   }
 
-  update(id: string, updateProductDto: ProductUpdateInput): Promise<Product> {
-    return this.prisma.product.update({
-      where: { id },
-      data: updateProductDto,
-    });
+  async update(
+    id: string,
+    updateProductDto: ProductUpdateInput,
+  ): Promise<Result<Product, Error>> {
+    try {
+      const product = await this.prisma.product.update({
+        where: { id },
+        data: updateProductDto,
+      });
+      return ok(product);
+    } catch (error) {
+      return err(new Error('Error updating product'));
+    }
   }
 
-  remove(id: string): Promise<Product> {
-    return this.prisma.product.delete({ where: { id } });
+  async remove(id: string): Promise<Result<Product, Error>> {
+    try {
+      const product = await this.prisma.product.delete({ where: { id } });
+      return ok(product);
+    } catch (error) {
+      return err(new Error('Error removing product'));
+    }
   }
 }

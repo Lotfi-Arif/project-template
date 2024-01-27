@@ -6,55 +6,41 @@ import {
   ProductCreateInput,
   ProductUpdateInput,
 } from '@tradetrove/shared-types';
-import { ResultAsync } from 'neverthrow';
-import { handleAsyncOperation } from '../utils/errors';
+import { Result } from 'neverthrow';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @TypedRoute.Post()
-  create(
+  async create(
     @TypedBody() createProductDto: ProductCreateInput,
-  ): ResultAsync<Product, Error> {
-    return handleAsyncOperation(
-      this.productService.create(createProductDto),
-      'Error creating product',
-    );
+  ): Promise<Result<Product, Error>> {
+    return this.productService.create(createProductDto);
   }
 
   @TypedRoute.Get()
-  findAll(): ResultAsync<Product[], Error> {
-    return handleAsyncOperation(
-      this.productService.findAll(),
-      'Error finding all products',
-    );
+  async findAll(): Promise<Result<Product[], Error>> {
+    return this.productService.findAll();
   }
 
   @TypedRoute.Get(':id')
-  findOne(@TypedParam('id') id: string): ResultAsync<Product | null, Error> {
-    return handleAsyncOperation(
-      this.productService.findOne(id),
-      'Error finding product',
-    );
+  async findOne(
+    @TypedParam('id') id: string,
+  ): Promise<Result<Product | null, Error>> {
+    return this.productService.findOne(id);
   }
 
-  @TypedRoute.Patch(':id')
-  update(
+  @TypedRoute.Put(':id')
+  async update(
     @TypedParam('id') id: string,
     @TypedBody() updateProductDto: ProductUpdateInput,
-  ): ResultAsync<Product, Error> {
-    return handleAsyncOperation(
-      this.productService.update(id, updateProductDto),
-      'Error updating product',
-    );
+  ): Promise<Result<Product, Error>> {
+    return this.productService.update(id, updateProductDto);
   }
 
   @TypedRoute.Delete(':id')
-  remove(@TypedParam('id') id: string): ResultAsync<Product, Error> {
-    return handleAsyncOperation(
-      this.productService.remove(id),
-      'Error removing product',
-    );
+  async remove(@TypedParam('id') id: string): Promise<Result<Product, Error>> {
+    return this.productService.remove(id);
   }
 }
