@@ -83,14 +83,19 @@ export class AuthService {
       });
     } catch (error) {
       this.logger.error(`Error updating auth record: ${error}`);
-      throw error; // Or handle more gracefully
+      throw new InternalServerErrorException('Error updating auth record');
     }
   }
 
   async remove(id: string): Promise<Auth> {
-    this.logger.log(`Deleting auth record with ID ${id}`);
-    return this.prisma.auth.delete({
-      where: { id },
-    });
+    try {
+      this.logger.log(`Deleting auth record with ID ${id}`);
+      return await this.prisma.auth.delete({
+        where: { id },
+      });
+    } catch (error) {
+      this.logger.error(`Error deleting auth record: ${error}`);
+      throw new InternalServerErrorException('Error deleting auth record');
+    }
   }
 }
