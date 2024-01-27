@@ -10,20 +10,12 @@ export const orderSchema = z.object({
 
 export const createOrderSchema = z.object({
   price: z.number(),
-  user: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  userId: z.string(),
 });
 
 export const updateOrderSchema = z.object({
   price: z.number(),
-  user: z.object({
-    connect: z.object({
-      id: z.string(),
-    }),
-  }),
+  userId: z.string(),
 });
 
 export interface Order extends z.infer<typeof orderSchema> {}
