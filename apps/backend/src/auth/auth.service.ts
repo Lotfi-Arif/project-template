@@ -4,7 +4,7 @@ import {
   Logger,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'nestjs-prisma';
 import {
   Auth,
   AuthCreateInput,

@@ -1,10 +1,11 @@
 import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 import { AppModule } from './app/app.module';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -26,6 +27,9 @@ async function bootstrap() {
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
