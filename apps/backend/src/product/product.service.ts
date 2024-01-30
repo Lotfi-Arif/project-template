@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import {
-  Product,
+  CreateProductResult,
+  DeleteProductResult,
+  GetAllProductResult,
+  GetProductResult,
   ProductCreateInput,
   ProductUpdateInput,
+  UpdateProductResult,
 } from '@tradetrove/shared-types';
-import { err, ok, Result } from 'neverthrow';
+import { err, ok } from 'neverthrow';
 
 // use neverthrow to handle errors in the service layer
 @Injectable()
@@ -14,7 +18,7 @@ export class ProductService {
 
   async create(
     createProductDto: ProductCreateInput,
-  ): Promise<Result<Product, Error>> {
+  ): Promise<CreateProductResult> {
     try {
       const product = await this.prisma.product.create({
         data: createProductDto,
@@ -25,7 +29,7 @@ export class ProductService {
     }
   }
 
-  async findAll(): Promise<Result<Product[], Error>> {
+  async findAll(): Promise<GetAllProductResult> {
     try {
       const products = await this.prisma.product.findMany();
       return ok(products);
@@ -34,7 +38,7 @@ export class ProductService {
     }
   }
 
-  async findOne(id: string): Promise<Result<Product | null, Error>> {
+  async findOne(id: string): Promise<GetProductResult> {
     try {
       const product = await this.prisma.product.findUnique({ where: { id } });
       return ok(product);
@@ -46,7 +50,7 @@ export class ProductService {
   async update(
     id: string,
     updateProductDto: ProductUpdateInput,
-  ): Promise<Result<Product, Error>> {
+  ): Promise<UpdateProductResult> {
     try {
       const product = await this.prisma.product.update({
         where: { id },
@@ -58,7 +62,7 @@ export class ProductService {
     }
   }
 
-  async remove(id: string): Promise<Result<Product, Error>> {
+  async remove(id: string): Promise<DeleteProductResult> {
     try {
       const product = await this.prisma.product.delete({ where: { id } });
       return ok(product);
