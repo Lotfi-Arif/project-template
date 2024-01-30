@@ -1,3 +1,4 @@
+import { Result } from 'neverthrow';
 import { z } from 'zod';
 
 export const authSchema = z.object({
@@ -34,3 +35,10 @@ export interface AuthCreateInput extends z.input<typeof authCreateSchema> {}
 export interface AuthUpdateInput extends z.input<typeof authUpdateSchema> {}
 export interface LoginInput extends z.input<typeof loginInputSchema> {}
 export interface Login extends z.input<typeof loginschema> {}
+
+// Response
+export type GetAllAuthResult = Result<Auth[], Error>;
+export type GetAuthResult = Result<Auth | null, Error>;
+export type CreateAuthResult = Result<Auth, Error>;
+export type UpdateAuthResult = Result<Auth, Error>;
+export type DeleteAuthResult = Result<Auth, Error>;

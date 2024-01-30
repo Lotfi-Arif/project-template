@@ -1,3 +1,4 @@
+import { Result } from 'neverthrow';
 import { z } from 'zod';
 
 export const userSchema = z.object({
@@ -49,3 +50,11 @@ export const userUpdateSchema = z.object({
 export interface User extends z.infer<typeof userSchema> {}
 export interface UserCreateInput extends z.input<typeof userCreateSchema> {}
 export interface UserUpdateInput extends z.input<typeof userUpdateSchema> {}
+export interface UserWithoutPassword extends Omit<User, 'password'> {}
+
+// Response
+export type GetAllUserResult = Result<UserWithoutPassword[], Error>;
+export type GetUserResult = Result<UserWithoutPassword | null, Error>;
+export type CreateUserResult = Result<UserWithoutPassword, Error>;
+export type UpdateUserResult = Result<UserWithoutPassword, Error>;
+export type DeleteUserResult = Result<UserWithoutPassword, Error>;

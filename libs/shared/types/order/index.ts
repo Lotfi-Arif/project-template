@@ -1,3 +1,4 @@
+import { Result } from 'neverthrow';
 import { z } from 'zod';
 
 export const orderSchema = z.object({
@@ -21,3 +22,10 @@ export const updateOrderSchema = z.object({
 export interface Order extends z.infer<typeof orderSchema> {}
 export interface OrderCreateInput extends z.input<typeof createOrderSchema> {}
 export interface OrderUpdateInput extends z.input<typeof updateOrderSchema> {}
+
+// Response
+export type GetAllOrderResult = Result<Order[], Error>;
+export type GetOrderResult = Result<Order | null, Error>;
+export type CreateOrderResult = Result<Order, Error>;
+export type UpdateOrderResult = Result<Order, Error>;
+export type DeleteOrderResult = Result<Order, Error>;
