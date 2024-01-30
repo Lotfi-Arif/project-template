@@ -75,8 +75,6 @@ describe('AuthService', () => {
         'hashedPassword', // Pass the hashed password for comparison
       );
 
-      console.log(result);
-
       // Define the expected result without the password property
       const expectedUserWithoutPassword = { ...mockUser, password: undefined };
 

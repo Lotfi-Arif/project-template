@@ -60,7 +60,7 @@ describe('UserService', () => {
       prismaService.user.create = jest.fn().mockResolvedValueOnce(mockUser);
 
       const createdUser = await userService.create(mockUserDTO);
-      console.log(createdUser);
+
       expect(createdUser).toEqual(mockUser);
       expect(bcrypt.hash).toHaveBeenCalledWith(mockUserDTO.password, 10);
       expect(prismaService.user.create).toHaveBeenCalledWith({
