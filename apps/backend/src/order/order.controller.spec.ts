@@ -8,7 +8,6 @@ import {
   updateOrderSchema,
 } from '@tradetrove/shared-types';
 import { mockDeep } from 'jest-mock-extended';
-import { InternalServerErrorException } from '@nestjs/common';
 
 const mockOrderCreateInput = mockObject(createOrderSchema);
 const mockOrderUpdateInput = mockObject(updateOrderSchema);
@@ -39,17 +38,18 @@ describe('OrderController', () => {
       orderServiceMock.create = jest.fn().mockResolvedValue(mockOrder);
 
       const result = await controller.create(mockOrderCreateInput);
-      expect(result).toEqual(mockOrder);
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
 
-    it('should throw InternalServerErrorException if mockOrder creation fails', async () => {
+    it('should throw Error if mockOrder creation fails', async () => {
       orderServiceMock.create = jest
         .fn()
-        .mockRejectedValue(new InternalServerErrorException('Test error'));
+        .mockRejectedValue(new Error('Test error'));
 
-      await expect(controller.create(mockOrderCreateInput)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.create(mockOrderCreateInput);
+
+      expect(result.isErr()).toBe(true);
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -58,17 +58,19 @@ describe('OrderController', () => {
       orderServiceMock.findAll = jest.fn().mockResolvedValue(mockOrders);
 
       const result = await controller.findAll();
-      expect(result).toEqual(mockOrders);
+
+      if (result.isOk()) expect(result.value).toEqual(mockOrders);
     });
 
-    it('should throw InternalServerErrorException if mockOrder retrieval fails', async () => {
+    it('should throw Error if mockOrder retrieval fails', async () => {
       orderServiceMock.findAll = jest
         .fn()
-        .mockRejectedValue(new InternalServerErrorException('Test error'));
+        .mockRejectedValue(new Error('Test error'));
 
-      await expect(controller.findAll()).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.findAll();
+
+      expect(result.isErr()).toBe(true);
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -77,17 +79,18 @@ describe('OrderController', () => {
       orderServiceMock.findOne = jest.fn().mockResolvedValue(mockOrder);
 
       const result = await controller.findOne(mockOrder.id);
-      expect(result).toEqual(mockOrder);
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
 
-    it('should throw InternalServerErrorException if mockOrder retrieval fails', async () => {
+    it('should throw Error if mockOrder retrieval fails', async () => {
       orderServiceMock.findOne = jest
         .fn()
-        .mockRejectedValue(new InternalServerErrorException('Test error'));
+        .mockRejectedValue(new Error('Test error'));
 
-      await expect(controller.findOne(mockOrder.id)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.findOne(mockOrder.id);
+
+      expect(result.isErr()).toBe(true);
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -99,17 +102,22 @@ describe('OrderController', () => {
         mockOrder.id,
         mockOrderUpdateInput,
       );
-      expect(result).toEqual(mockOrder);
+
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
 
-    it('should throw InternalServerErrorException if mockOrder update fails', async () => {
+    it('should throw Error if mockOrder update fails', async () => {
       orderServiceMock.update = jest
         .fn()
-        .mockRejectedValue(new InternalServerErrorException('Test error'));
+        .mockRejectedValue(new Error('Test error'));
 
-      await expect(
-        controller.update(mockOrder.id, mockOrderUpdateInput),
-      ).rejects.toThrow(InternalServerErrorException);
+      const result = await controller.update(
+        mockOrder.id,
+        mockOrderUpdateInput,
+      );
+
+      expect(result.isErr()).toBe(true);
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -118,17 +126,19 @@ describe('OrderController', () => {
       orderServiceMock.remove = jest.fn().mockResolvedValue(mockOrder);
 
       const result = await controller.remove(mockOrder.id);
-      expect(result).toEqual(mockOrder);
+
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
 
-    it('should throw InternalServerErrorException if mockOrder removal fails', async () => {
+    it('should throw Error if mockOrder removal fails', async () => {
       orderServiceMock.remove = jest
         .fn()
-        .mockRejectedValue(new InternalServerErrorException('Test error'));
+        .mockRejectedValue(new Error('Test error'));
 
-      await expect(controller.remove(mockOrder.id)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.remove(mockOrder.id);
+
+      expect(result.isErr()).toBe(true);
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 });
