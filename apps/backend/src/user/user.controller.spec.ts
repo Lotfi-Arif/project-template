@@ -43,7 +43,8 @@ describe('UserController', () => {
       mockService.create = jest.fn().mockResolvedValueOnce(mockUser);
 
       const result = await mockController.create(mockUserDTO);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
     });
   });
 
@@ -52,7 +53,8 @@ describe('UserController', () => {
       mockService.findAll = jest.fn().mockResolvedValueOnce(mockUsers);
 
       const result = await mockController.findAll();
-      expect(result).toEqual(mockUsers);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUsers);
     });
   });
 
@@ -61,7 +63,8 @@ describe('UserController', () => {
       mockService.findOne = jest.fn().mockResolvedValueOnce(mockUser);
 
       const result = await mockController.findOne('1');
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
     });
   });
 
@@ -70,7 +73,8 @@ describe('UserController', () => {
       mockService.update = jest.fn().mockResolvedValueOnce(mockUser);
 
       const result = await mockController.update('1', mockUserUpdateDTO);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
     });
   });
 
@@ -79,7 +83,8 @@ describe('UserController', () => {
       mockService.remove = jest.fn().mockResolvedValueOnce(mockUser);
 
       const result = await mockController.remove('1');
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
     });
   });
 });

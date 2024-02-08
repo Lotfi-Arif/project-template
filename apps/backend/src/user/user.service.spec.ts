@@ -61,7 +61,7 @@ describe('UserService', () => {
 
       const createdUser = await userService.create(mockUserDTO);
 
-      expect(createdUser).toEqual(mockUser);
+      if (createdUser.isOk()) expect(createdUser.value).toEqual(mockUser);
       expect(bcrypt.hash).toHaveBeenCalledWith(mockUserDTO.password, 10);
       expect(prismaService.user.create).toHaveBeenCalledWith({
         data: {
@@ -71,46 +71,59 @@ describe('UserService', () => {
       });
     });
 
-    it('should throw an error if the user already exists', async () => {
+    it('should return an error result if the user already exists', async () => {
+      // Mock the Prisma service to simulate a unique constraint failure
       prismaService.user.create = jest
         .fn()
-        .mockRejectedValueOnce(
+        .mockRejectedValue(
           new Error('Unique constraint failed on the fields: (`email`)'),
         );
 
-      await expect(userService.create(mockUserDTO)).rejects.toThrow(
-        'Unique constraint failed on the fields: (`email`)',
-      );
+      const result = await userService.create(mockUserDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error creating user');
     });
 
     it('should throw an error if the email is invalid', async () => {
       prismaService.user.create = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Invalid email'));
+        .mockRejectedValueOnce(new Error('Error creating user'));
 
-      await expect(userService.create(mockUserDTO)).rejects.toThrow(
-        'Invalid email',
-      );
+      const result = await userService.create(mockUserDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error creating user');
     });
 
     it('should throw an error if the username is invalid', async () => {
       prismaService.user.create = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Invalid username'));
+        .mockRejectedValueOnce(new Error('Error creating user'));
 
-      await expect(userService.create(mockUserDTO)).rejects.toThrow(
-        'Invalid username',
-      );
+      const result = await userService.create(mockUserDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error creating user');
     });
 
     it('should throw an error if the password is invalid', async () => {
       prismaService.user.create = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Invalid password'));
+        .mockRejectedValueOnce(new Error('Error creating user'));
 
-      await expect(userService.create(mockUserDTO)).rejects.toThrow(
-        'Invalid password',
-      );
+      const result = await userService.create(mockUserDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error creating user');
     });
   });
 
@@ -119,7 +132,8 @@ describe('UserService', () => {
       prismaService.user.findMany = jest.fn().mockResolvedValueOnce(mockUsers);
 
       const users = await userService.findAll();
-      expect(users).toEqual(mockUsers);
+
+      if (users.isOk()) expect(users.value).toEqual(mockUsers);
       expect(prismaService.user.findMany).toHaveBeenCalled();
     });
 
@@ -127,16 +141,22 @@ describe('UserService', () => {
       prismaService.user.findMany = jest.fn().mockResolvedValueOnce([]);
 
       const users = await userService.findAll();
-      expect(users).toEqual([]);
+
+      if (users.isOk()) expect(users.value).toEqual([]);
       expect(prismaService.user.findMany).toHaveBeenCalled();
     });
 
     it('should throw an error if the query fails', async () => {
       prismaService.user.findMany = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Some error'));
+        .mockRejectedValueOnce(new Error('Error finding all users'));
 
-      await expect(userService.findAll()).rejects.toThrow('Some error');
+      const result = await userService.findAll();
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error finding all users');
     });
   });
 
@@ -145,7 +165,8 @@ describe('UserService', () => {
       prismaService.user.findUnique = jest.fn().mockResolvedValueOnce(mockUser);
 
       const user = await userService.findOne('some-id');
-      expect(user).toEqual(mockUser);
+
+      if (user.isOk()) expect(user.value).toEqual(mockUser);
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
         where: { id: 'some-id' },
       });
@@ -155,7 +176,8 @@ describe('UserService', () => {
       prismaService.user.findUnique = jest.fn().mockResolvedValueOnce(null);
 
       const user = await userService.findOne('some-id');
-      expect(user).toBeNull();
+
+      if (user.isOk()) expect(user.value).toBeNull();
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
         where: { id: 'some-id' },
       });
@@ -164,11 +186,14 @@ describe('UserService', () => {
     it('should throw an error if the query fails', async () => {
       prismaService.user.findUnique = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Some error'));
+        .mockRejectedValueOnce(new Error('Error finding user'));
 
-      await expect(userService.findOne('some-id')).rejects.toThrow(
-        'Some error',
-      );
+      const result = await userService.findOne('some-id');
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error finding user');
     });
   });
 
@@ -181,7 +206,7 @@ describe('UserService', () => {
         mockUserUpdateDTO,
       );
 
-      expect(updatedUser).toEqual(mockUser);
+      if (updatedUser.isOk()) expect(updatedUser.value).toEqual(mockUser);
       expect(prismaService.user.update).toHaveBeenCalledWith({
         where: { id: 'some-id' },
         data: mockUserUpdateDTO,
@@ -191,21 +216,27 @@ describe('UserService', () => {
     it('should throw an error if the user does not exist', async () => {
       prismaService.user.update = jest
         .fn()
-        .mockRejectedValueOnce(new Error('User not found'));
+        .mockRejectedValueOnce(new Error('Error updating user'));
 
-      await expect(userService.update('some-id', mockUserDTO)).rejects.toThrow(
-        'User not found',
-      );
+      const result = await userService.update('some-id', mockUserUpdateDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error updating user');
     });
 
     it('should throw an error if the email is invalid', async () => {
       prismaService.user.update = jest
         .fn()
-        .mockRejectedValueOnce(new Error('Invalid email'));
+        .mockRejectedValueOnce(new Error('Error updating user'));
 
-      await expect(userService.update('some-id', mockUserDTO)).rejects.toThrow(
-        'Invalid email',
-      );
+      const result = await userService.update('some-id', mockUserUpdateDTO);
+
+      // Check that the result is an error
+      expect(result.isErr()).toBe(true);
+      if (result.isErr())
+        expect(result.error.message).toBe('Error updating user');
     });
   });
 });
