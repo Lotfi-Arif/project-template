@@ -54,7 +54,7 @@ export interface UserWithoutPassword extends Omit<User, 'password'> {}
 
 // Response
 export type GetAllUserResult = Result<UserWithoutPassword[], Error>;
-export type GetUserResult = Result<UserWithoutPassword | null, Error>;
+export type GetUserResult = Result<UserWithoutPassword, Error>;
 export type CreateUserResult = Result<UserWithoutPassword, Error>;
 export type UpdateUserResult = Result<UserWithoutPassword, Error>;
 export type DeleteUserResult = Result<UserWithoutPassword, Error>;
