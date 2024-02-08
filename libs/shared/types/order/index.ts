@@ -25,7 +25,7 @@ export interface OrderUpdateInput extends z.input<typeof updateOrderSchema> {}
 
 // Response
 export type GetAllOrderResult = Result<Order[], Error>;
-export type GetOrderResult = Result<Order | null, Error>;
+export type GetOrderResult = Result<Order, Error>;
 export type CreateOrderResult = Result<Order, Error>;
 export type UpdateOrderResult = Result<Order, Error>;
 export type DeleteOrderResult = Result<Order, Error>;

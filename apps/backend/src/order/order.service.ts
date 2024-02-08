@@ -1,32 +1,77 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import {
-  Order,
+  CreateOrderResult,
+  DeleteOrderResult,
+  GetAllOrderResult,
+  GetOrderResult,
   OrderCreateInput,
   OrderUpdateInput,
+  UpdateOrderResult,
 } from '@tradetrove/shared-types';
+import { err, ok } from 'neverthrow';
 
 @Injectable()
 export class OrderService {
   constructor(private prisma: PrismaService) {}
 
-  create(createOrderDto: OrderCreateInput): Promise<Order> {
-    return this.prisma.order.create({ data: createOrderDto });
+  async create(createOrderDto: OrderCreateInput): Promise<CreateOrderResult> {
+    try {
+      const order = await this.prisma.order.create({ data: createOrderDto });
+
+      return ok(order);
+    } catch (error) {
+      return err(new Error('Error creating order'));
+    }
   }
 
-  findAll(): Promise<Order[]> {
-    return this.prisma.order.findMany();
+  async findAll(): Promise<GetAllOrderResult> {
+    try {
+      const orders = await this.prisma.order.findMany();
+
+      return ok(orders);
+    } catch (error) {
+      return err(new Error('Error finding all orders'));
+    }
   }
 
-  findOne(id: string): Promise<Order | null> {
-    return this.prisma.order.findUnique({ where: { id } });
+  async findOne(id: string): Promise<GetOrderResult> {
+    try {
+      const order = await this.prisma.order.findUnique({ where: { id } });
+
+      if (!order) {
+        return err(new Error('Order not found'));
+      }
+
+      return ok(order);
+    } catch (error) {
+      return err(new Error('Error finding order'));
+    }
   }
 
-  update(id: string, updateOrderDto: OrderUpdateInput): Promise<Order> {
-    return this.prisma.order.update({ where: { id }, data: updateOrderDto });
+  async update(
+    id: string,
+    updateOrderDto: OrderUpdateInput,
+  ): Promise<UpdateOrderResult> {
+    try {
+      const order = await this.prisma.order.update({
+        where: { id },
+        data: updateOrderDto,
+      });
+
+      return ok(order);
+    } catch (error) {
+      return err(new Error('Error updating order'));
+    }
   }
 
-  remove(id: string): Promise<Order> {
-    return this.prisma.order.delete({ where: { id } });
+  async remove(id: string): Promise<DeleteOrderResult> {
+    try {
+      const order = await this.prisma.order.delete({ where: { id } });
+
+      return ok(order);
+    } catch (error) {
+      return err(new Error('Error deleting order'));
+    }
   }
 }

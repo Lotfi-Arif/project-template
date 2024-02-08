@@ -38,7 +38,7 @@ export interface Login extends z.input<typeof loginschema> {}
 
 // Response
 export type GetAllAuthResult = Result<Auth[], Error>;
-export type GetAuthResult = Result<Auth | null, Error>;
+export type GetAuthResult = Result<Auth, Error>;
 export type CreateAuthResult = Result<Auth, Error>;
 export type UpdateAuthResult = Result<Auth, Error>;
 export type DeleteAuthResult = Result<Auth, Error>;
