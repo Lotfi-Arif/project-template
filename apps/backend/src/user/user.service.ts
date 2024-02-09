@@ -9,7 +9,6 @@ import {
   UserCreateInput,
   UserUpdateInput,
 } from '@tradetrove/shared-types';
-import * as bcrypt from 'bcrypt';
 import { err, ok } from 'neverthrow';
 
 @Injectable()
@@ -18,14 +17,12 @@ export class UserService {
 
   async create(createUserDto: UserCreateInput): Promise<CreateUserResult> {
     try {
-      const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-      // return user withoput password
       const user = await this.prisma.user.create({
         data: {
           ...createUserDto,
-          password: hashedPassword,
         },
       });
+
       return ok(user);
     } catch (error) {
       return err(new Error('Error creating user'));

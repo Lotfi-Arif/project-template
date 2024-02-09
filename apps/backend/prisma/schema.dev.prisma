@@ -11,7 +11,6 @@ model User {
   id                String   @id @default(uuid())
   email             String   @unique
   username          String   @unique
-  password          String
   name              String?
   // since we are using sqlite, we will use a normal string instead of enum.
   role              String   @default("USER")
@@ -34,6 +33,7 @@ model Auth {
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id])
   token     String   @unique
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

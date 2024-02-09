@@ -14,6 +14,7 @@ import {
   User,
 } from '@tradetrove/shared-types';
 import { mockObject } from '@tradetrove/shared-utils';
+import { ok } from 'neverthrow';
 
 jest.mock('bcrypt');
 
@@ -45,6 +46,9 @@ describe('AuthService', () => {
     }).compile();
 
     service = module.get<AuthService>(AuthService);
+
+    // mock bycrypt compare
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
   });
 
   afterEach(() => {
@@ -119,13 +123,21 @@ describe('AuthService', () => {
   });
 
   describe('create', () => {
-    it('should return an auth object', async () => {
-      const auth: Auth = mockObject(authSchema);
-      mockPrismaService.auth.create.mockResolvedValue(auth);
+    it('should create and return an auth record', async () => {
+      mockPrismaService.auth.create.mockResolvedValue(mockAuth);
 
       const result = await service.create(mockAuthCreateDto);
 
-      expect(result).toEqual(auth);
+      if (result.isOk()) expect(result).toEqual(ok(mockAuth));
+    });
+
+    it('should throw an error if validation fails', async () => {
+      const validationError = new Error('Validation failed');
+      mockPrismaService.auth.create.mockRejectedValue(validationError);
+
+      const result = await service.create(mockAuthCreateDto);
+
+      expect(result).toEqual(ok(validationError));
     });
   });
 

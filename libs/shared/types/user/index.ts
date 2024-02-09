@@ -5,7 +5,6 @@ export const userSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
   username: z.string(),
-  password: z.string(),
   name: z.string().nullable(),
   status: z.string(),
   role: z.string(),
@@ -20,7 +19,6 @@ export const userSchema = z.object({
 export const userCreateSchema = z.object({
   email: z.string().email(),
   username: z.string(),
-  password: z.string(),
   name: z.string().nullable().optional(),
   status: z.string().optional(),
   role: z.string().optional(),
@@ -35,7 +33,6 @@ export const userCreateSchema = z.object({
 export const userUpdateSchema = z.object({
   email: z.string().email().optional(),
   username: z.string().optional(),
-  password: z.string().optional(),
   name: z.string().nullable().optional(),
   status: z.string().optional(),
   role: z.string().optional(),
@@ -50,11 +47,11 @@ export const userUpdateSchema = z.object({
 export interface User extends z.infer<typeof userSchema> {}
 export interface UserCreateInput extends z.input<typeof userCreateSchema> {}
 export interface UserUpdateInput extends z.input<typeof userUpdateSchema> {}
-export interface UserWithoutPassword extends Omit<User, 'password'> {}
 
 // Response
-export type GetAllUserResult = Result<UserWithoutPassword[], Error>;
-export type GetUserResult = Result<UserWithoutPassword, Error>;
-export type CreateUserResult = Result<UserWithoutPassword, Error>;
-export type UpdateUserResult = Result<UserWithoutPassword, Error>;
-export type DeleteUserResult = Result<UserWithoutPassword, Error>;
+export type GetAllUserResult = Result<User[], Error>;
+export type GetUserResult = Result<User, Error>;
+export type CreateUserResult = Result<User, Error>;
+export type UpdateUserResult = Result<User, Error>;
+export type DeleteUserResult = Result<User, Error>;
+export type ValidateUserResult = Result<User, Error>;

@@ -10,14 +10,10 @@ import {
   userUpdateSchema,
   UserUpdateInput,
 } from '@tradetrove/shared-types';
-import * as bcrypt from 'bcrypt';
 import { mockObject } from '@tradetrove/shared-utils';
-
-jest.mock('bcrypt');
 
 const mockUser: User = mockObject(userSchema, {
   id: 'some-id',
-  password: 'hashedPassword',
 });
 const mockUsers: User[] = [mockObject(userSchema)];
 const mockUserDTO: UserCreateInput = mockObject(userCreateSchema);
@@ -42,9 +38,6 @@ describe('UserService', () => {
     }).compile();
 
     userService = module.get<UserService>(UserService);
-
-    // Mock bcrypt.hash to return a predictable value
-    (bcrypt.hash as jest.Mock).mockResolvedValue('hashedPassword');
   });
 
   afterEach(() => {
@@ -62,11 +55,9 @@ describe('UserService', () => {
       const createdUser = await userService.create(mockUserDTO);
 
       if (createdUser.isOk()) expect(createdUser.value).toEqual(mockUser);
-      expect(bcrypt.hash).toHaveBeenCalledWith(mockUserDTO.password, 10);
       expect(prismaService.user.create).toHaveBeenCalledWith({
         data: {
           ...mockUserDTO,
-          password: 'hashedPassword',
         },
       });
     });
@@ -101,19 +92,6 @@ describe('UserService', () => {
     });
 
     it('should throw an error if the username is invalid', async () => {
-      prismaService.user.create = jest
-        .fn()
-        .mockRejectedValueOnce(new Error('Error creating user'));
-
-      const result = await userService.create(mockUserDTO);
-
-      // Check that the result is an error
-      expect(result.isErr()).toBe(true);
-      if (result.isErr())
-        expect(result.error.message).toBe('Error creating user');
-    });
-
-    it('should throw an error if the password is invalid', async () => {
       prismaService.user.create = jest
         .fn()
         .mockRejectedValueOnce(new Error('Error creating user'));
