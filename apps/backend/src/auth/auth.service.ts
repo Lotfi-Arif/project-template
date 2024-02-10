@@ -1,27 +1,22 @@
-import {
-  Injectable,
-  Logger,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { ok, err, Result } from 'neverthrow';
+import { ok, err } from 'neverthrow';
 import {
   authCreateSchema,
   AuthCreateInput,
   AuthUpdateInput,
   loginInputSchema,
-  Login,
   loginschema,
   ValidateUserResult,
-  User,
   CreateAuthResult,
   GetAllAuthResult,
   GetAuthResult,
   UpdateAuthResult,
   DeleteAuthResult,
+  LoginResult,
+  LoginInput,
 } from '@tradetrove/shared-types';
 
 @Injectable()
@@ -75,25 +70,41 @@ export class AuthService {
     }
   }
 
-  async login(user: User): Promise<Result<Login, Error>> {
+  async login(loginInput: LoginInput): Promise<LoginResult> {
     try {
+      // Validate user credentials
+      const validation = await this.validateUser(
+        loginInput.username,
+        loginInput.password,
+      );
+
+      // If validation fails, return an error
+      if (validation.isErr()) {
+        return err(new Error('Invalid username or password'));
+      }
+
+      // User validation successful, proceed with token generation
+      const user = validation.value; // This is the user without sensitive info like password
+
       const payload = { username: user.username, sub: user.id };
       const access_token = this.jwtService.sign(payload);
 
-      const loginResult = loginschema.safeParse({
+      const tokenValidation = loginschema.safeParse({
         access_token,
         token_type: 'Bearer',
       });
 
-      if (!loginResult.success) {
-        throw new InternalServerErrorException('Error generating token');
+      if (!tokenValidation.success) {
+        return err(new Error('Failed to generate valid token'));
       }
 
-      return ok(loginResult.data);
+      // Return the generated token
+      return ok(tokenValidation.data);
     } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Login error: ${error.message}`);
-      return err(new Error('Error generating token'));
+      this.logger.error(
+        `Login error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      );
+      return err(new Error('Error during login process'));
     }
   }
 

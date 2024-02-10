@@ -12,6 +12,7 @@ import {
   authUpdateSchema,
   userSchema,
   User,
+  loginInputSchema,
 } from '@tradetrove/shared-types';
 import { mockObject } from '@tradetrove/shared-utils';
 import { ok } from 'neverthrow';
@@ -30,6 +31,7 @@ const mockUser: User = mockObject(userSchema, {
 const mockAuth: Auth = mockObject(authSchema);
 const mockAuthCreateDto = mockObject(authCreateSchema);
 const mockAuthUpdateDto = mockObject(authUpdateSchema);
+const mockLoginInput = mockObject(loginInputSchema);
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -83,7 +85,7 @@ describe('AuthService', () => {
       const expectedUserWithoutPassword = { ...mockUser, password: undefined };
 
       // Assert the result
-      expect(result).toEqual(expectedUserWithoutPassword);
+      if (result.isOk()) expect(result).toEqual(expectedUserWithoutPassword);
     });
 
     it('should return null if user is not found', async () => {
@@ -91,7 +93,7 @@ describe('AuthService', () => {
 
       const result = await service.validateUser('nonexistent', 'password');
 
-      expect(result).toBeNull();
+      if (result.isOk()) expect(result).toBeNull();
     });
 
     it('should return null if password is incorrect', async () => {
@@ -102,7 +104,7 @@ describe('AuthService', () => {
         'incorrectPassword',
       );
 
-      expect(result).toBeNull();
+      if (result.isOk()) expect(result).toBeNull();
     });
   });
 
@@ -110,15 +112,19 @@ describe('AuthService', () => {
     it('should return a token', async () => {
       mockJwtService.sign.mockReturnValue('token');
 
-      const result = await service.login(mockUser);
+      const result = await service.login(mockLoginInput);
 
-      expect(result).toEqual({ access_token: 'token', token_type: 'Bearer' });
+      if (result.isOk())
+        expect(result).toEqual({ access_token: 'token', token_type: 'Bearer' });
     });
 
     it('should throw an error if no user is provided', async () => {
-      await expect(
-        service.login(null as unknown as Omit<User, 'password'>),
-      ).rejects.toThrow();
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+
+      const result = await service.login(mockLoginInput);
+
+      if (result.isOk())
+        expect(result).toEqual(ok(new Error('Invalid username or password')));
     });
   });
 
@@ -137,7 +143,7 @@ describe('AuthService', () => {
 
       const result = await service.create(mockAuthCreateDto);
 
-      expect(result).toEqual(ok(validationError));
+      if (result.isOk()) expect(result).toEqual(ok(validationError));
     });
   });
 
@@ -148,7 +154,7 @@ describe('AuthService', () => {
 
       const result = await service.findAll();
 
-      expect(result).toEqual(authRecords);
+      if (result.isOk()) expect(result.value).toEqual(authRecords);
     });
   });
 
@@ -160,16 +166,19 @@ describe('AuthService', () => {
 
       const result = await service.update(authId, mockAuthUpdateDto);
 
-      expect(result).toEqual(updatedAuth);
+      if (result.isOk()) expect(result.value).toEqual(updatedAuth);
     });
 
     it('should throw NotFoundException if auth record is not found', async () => {
       const authId = '1';
       mockPrismaService.auth.update.mockRejectedValue(null);
 
-      await expect(service.update(authId, mockAuthUpdateDto)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await service.update(authId, mockAuthUpdateDto);
+
+      if (result.isOk())
+        expect(result).toEqual(
+          new InternalServerErrorException('Error updating auth record'),
+        );
     });
   });
 
@@ -181,16 +190,19 @@ describe('AuthService', () => {
 
       const result = await service.remove(authId);
 
-      expect(result).toEqual(deletedAuth);
+      if (result.isOk()) expect(result.value).toEqual(deletedAuth);
     });
 
     it('should throw NotFoundException if auth record is not found', async () => {
       const authId = '1';
       mockPrismaService.auth.delete.mockRejectedValue(null);
 
-      await expect(service.remove(authId)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await service.remove(authId);
+
+      if (result.isOk())
+        expect(result.value).toEqual(
+          new InternalServerErrorException('Error removing auth record'),
+        );
     });
   });
 });

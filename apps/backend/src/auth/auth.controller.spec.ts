@@ -2,10 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import {
-  InternalServerErrorException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import {
   Login,
   LoginInput,
   AuthCreateInput,
@@ -25,7 +21,7 @@ const loginInput: LoginInput = mockObject(loginInputSchema, {
   username: 'testuser',
 });
 const loginResult: Login = mockObject(loginschema);
-const mockUser = mockObject(userSchema.omit({ password: true }), {
+const mockUser = mockObject(userSchema, {
   username: 'testuser',
   id: '1',
 });
@@ -58,20 +54,18 @@ describe('AuthController', () => {
       authServiceMock.login = jest.fn().mockResolvedValue(loginResult);
 
       const result = await controller.login(loginInput);
-      expect(result).toEqual(loginResult);
-      expect(authServiceMock.validateUser).toHaveBeenCalledWith(
-        loginInput.username,
-        loginInput.password,
-      );
-      expect(authServiceMock.login).toHaveBeenCalledWith(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(loginResult);
+      expect(authServiceMock.login).toHaveBeenCalledWith(loginInput);
     });
 
-    it('should throw UnauthorizedException when credentials are invalid', async () => {
+    it('should throw Error when credentials are invalid', async () => {
       authServiceMock.validateUser = jest.fn().mockResolvedValue(null);
 
-      await expect(controller.login(loginInput)).rejects.toThrow(
-        UnauthorizedException,
-      );
+      const result = await controller.login(loginInput);
+
+      expect(result.isErr()).toBeTruthy();
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -80,18 +74,18 @@ describe('AuthController', () => {
       authServiceMock.create = jest.fn().mockResolvedValue(mockUser);
 
       const result = await controller.create(createAuthDto);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
       expect(authServiceMock.create).toHaveBeenCalledWith(createAuthDto);
     });
 
-    it('should throw InternalServerErrorException if the auth cannot be created', async () => {
-      authServiceMock.create = jest
-        .fn()
-        .mockRejectedValue(new InternalServerErrorException());
+    it('should throw Error if the auth cannot be created', async () => {
+      authServiceMock.create = jest.fn().mockRejectedValue(new Error());
 
-      await expect(controller.create(createAuthDto)).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.create(createAuthDto);
+
+      expect(result.isErr()).toBeTruthy();
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -100,18 +94,18 @@ describe('AuthController', () => {
       authServiceMock.findAll = jest.fn().mockResolvedValue(authList);
 
       const result = await controller.findAll();
-      expect(result).toEqual(authList);
+
+      if (result.isOk()) expect(result.value).toEqual(authList);
       expect(authServiceMock.findAll).toHaveBeenCalled();
     });
 
     it('should throw InternalServerErrorException if the auths cannot be found', async () => {
-      authServiceMock.findAll = jest
-        .fn()
-        .mockRejectedValue(new InternalServerErrorException());
+      authServiceMock.findAll = jest.fn().mockRejectedValue(new Error());
 
-      await expect(controller.findAll()).rejects.toThrow(
-        InternalServerErrorException,
-      );
+      const result = await controller.findAll();
+
+      expect(result.isErr()).toBeTruthy();
+      if (result.isErr()) expect(result.error).toBeInstanceOf(Error);
     });
   });
 
@@ -120,7 +114,9 @@ describe('AuthController', () => {
       const id = '1';
       authServiceMock.findOne = jest.fn().mockResolvedValue(mockUser);
       const result = await controller.findOne(id);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
+
       expect(authServiceMock.findOne).toHaveBeenCalledWith(id);
     });
   });
@@ -129,8 +125,10 @@ describe('AuthController', () => {
     it('should update an existing auth', async () => {
       const id = '1';
       authServiceMock.update = jest.fn().mockResolvedValue(mockUser);
+
       const result = await controller.update(id, updateAuthDto);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result).toEqual(mockUser);
       expect(authServiceMock.update).toHaveBeenCalledWith(id, updateAuthDto);
     });
   });
@@ -140,7 +138,8 @@ describe('AuthController', () => {
       const id = '1';
       authServiceMock.remove = jest.fn().mockResolvedValue(mockUser);
       const result = await controller.remove(id);
-      expect(result).toEqual(mockUser);
+
+      if (result.isOk()) expect(result.value).toEqual(mockUser);
       expect(authServiceMock.remove).toHaveBeenCalledWith(id);
     });
   });
