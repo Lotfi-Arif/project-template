@@ -19,60 +19,40 @@ export class ProductService {
   async create(
     createProductDto: ProductCreateInput,
   ): Promise<CreateProductResult> {
-    try {
-      const product = await this.prisma.product.create({
-        data: createProductDto,
-      });
-      return ok(product);
-    } catch (error) {
-      return err(new Error('Error creating product'));
-    }
+    const product = await this.prisma.product.create({
+      data: createProductDto,
+    });
+    return ok(product);
   }
 
   async findAll(): Promise<GetAllProductResult> {
-    try {
-      const products = await this.prisma.product.findMany();
-      return ok(products);
-    } catch (error) {
-      return err(new Error('Error finding all products'));
-    }
+    const products = await this.prisma.product.findMany();
+    return ok(products);
   }
 
   async findOne(id: string): Promise<GetProductResult> {
-    try {
-      const product = await this.prisma.product.findUnique({ where: { id } });
+    const product = await this.prisma.product.findUnique({ where: { id } });
 
-      if (!product) {
-        return err(new Error('Product not found'));
-      }
-
-      return ok(product);
-    } catch (error) {
-      return err(new Error('Error finding product'));
+    if (!product) {
+      return err(new Error('Product not found'));
     }
+
+    return ok(product);
   }
 
   async update(
     id: string,
     updateProductDto: ProductUpdateInput,
   ): Promise<UpdateProductResult> {
-    try {
-      const product = await this.prisma.product.update({
-        where: { id },
-        data: updateProductDto,
-      });
-      return ok(product);
-    } catch (error) {
-      return err(new Error('Error updating product'));
-    }
+    const product = await this.prisma.product.update({
+      where: { id },
+      data: updateProductDto,
+    });
+    return ok(product);
   }
 
   async remove(id: string): Promise<DeleteProductResult> {
-    try {
-      const product = await this.prisma.product.delete({ where: { id } });
-      return ok(product);
-    } catch (error) {
-      return err(new Error('Error removing product'));
-    }
+    const product = await this.prisma.product.delete({ where: { id } });
+    return ok(product);
   }
 }
