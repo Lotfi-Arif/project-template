@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ok, err } from 'neverthrow';
 import {
-  authCreateSchema,
   AuthCreateInput,
   AuthUpdateInput,
   loginInputSchema,
@@ -71,111 +70,69 @@ export class AuthService {
   }
 
   async login(loginInput: LoginInput): Promise<LoginResult> {
-    try {
-      // Validate user credentials
-      const validation = await this.validateUser(
-        loginInput.username,
-        loginInput.password,
-      );
+    // Validate user credentials
+    const validation = await this.validateUser(
+      loginInput.username,
+      loginInput.password,
+    );
 
-      // If validation fails, return an error
-      if (validation.isErr()) {
-        return err(new Error('Invalid username or password'));
-      }
-
-      // User validation successful, proceed with token generation
-      const user = validation.value; // This is the user without sensitive info like password
-
-      const payload = { username: user.username, sub: user.id };
-      const access_token = this.jwtService.sign(payload);
-
-      const tokenValidation = loginschema.safeParse({
-        access_token,
-        token_type: 'Bearer',
-      });
-
-      if (!tokenValidation.success) {
-        return err(new Error('Failed to generate valid token'));
-      }
-
-      // Return the generated token
-      return ok(tokenValidation.data);
-    } catch (error) {
-      this.logger.error(
-        `Login error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      );
-      return err(new Error('Error during login process'));
+    // If validation fails, return an error
+    if (validation.isErr()) {
+      return err(new Error('Invalid username or password'));
     }
+
+    // User validation successful, proceed with token generation
+    const user = validation.value; // This is the user without sensitive info like password
+
+    const payload = { username: user.username, sub: user.id };
+    const access_token = this.jwtService.sign(payload);
+
+    const tokenValidation = loginschema.safeParse({
+      access_token,
+      token_type: 'Bearer',
+    });
+
+    if (!tokenValidation.success) {
+      return err(new Error('Failed to generate valid token'));
+    }
+
+    // Return the generated token
+    return ok(tokenValidation.data);
   }
 
   async create(createAuthDto: AuthCreateInput): Promise<CreateAuthResult> {
-    const validation = authCreateSchema.safeParse(createAuthDto);
-    if (!validation.success) {
-      return err(new Error('Validation failed'));
-    }
-
-    try {
-      const auth = await this.prisma.auth.create({
-        data: validation.data,
-      });
-      return ok(auth);
-    } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Create auth error: ${error.message}`);
-      return err(new Error('Failed to create auth record'));
-    }
+    const auth = await this.prisma.auth.create({
+      data: createAuthDto,
+    });
+    return ok(auth);
   }
 
   async findAll(): Promise<GetAllAuthResult> {
-    try {
-      const auths = await this.prisma.auth.findMany();
-      return ok(auths);
-    } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Find all auth error: ${error.message}`);
-      return err(new Error('Failed to find all auth records'));
-    }
+    const auths = await this.prisma.auth.findMany();
+    return ok(auths);
   }
 
   async findOne(id: string): Promise<GetAuthResult> {
-    try {
-      const auth = await this.prisma.auth.findUnique({ where: { id } });
-      if (!auth) {
-        return err(new NotFoundException('Auth record not found'));
-      }
-      return ok(auth);
-    } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Find one auth error: ${error.message}`);
-      return err(new Error('Failed to find auth record'));
+    const auth = await this.prisma.auth.findUnique({ where: { id } });
+    if (!auth) {
+      return err(new NotFoundException('Auth record not found'));
     }
+    return ok(auth);
   }
 
   async update(
     id: string,
     updateAuthDto: AuthUpdateInput,
   ): Promise<UpdateAuthResult> {
-    try {
-      const auth = await this.prisma.auth.update({
-        where: { id },
-        data: updateAuthDto,
-      });
-      return ok(auth);
-    } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Update auth error: ${error.message}`);
-      return err(new Error('Failed to update auth record'));
-    }
+    const auth = await this.prisma.auth.update({
+      where: { id },
+      data: updateAuthDto,
+    });
+    return ok(auth);
   }
 
   async remove(id: string): Promise<DeleteAuthResult> {
-    try {
-      const auth = await this.prisma.auth.delete({ where: { id } });
-      return ok(auth);
-    } catch (error) {
-      if (error instanceof Error)
-        this.logger.error(`Remove auth error: ${error.message}`);
-      return err(new Error('Failed to remove auth record'));
-    }
+    const auth = await this.prisma.auth.delete({ where: { id } });
+    return ok(auth);
   }
 }
