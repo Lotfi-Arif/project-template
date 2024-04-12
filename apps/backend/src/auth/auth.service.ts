@@ -1,19 +1,22 @@
-import {
-  Injectable,
-  NotFoundException,
-  Logger,
-  InternalServerErrorException,
-} from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import {
-  Auth,
-  AuthCreateInput,
-  AuthUpdateInput,
-  Login,
-  User,
-} from '@tradetrove/shared-types';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'nestjs-prisma';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { ok, err } from 'neverthrow';
+import {
+  AuthCreateInput,
+  AuthUpdateInput,
+  loginInputSchema,
+  loginschema,
+  ValidateUserResult,
+  CreateAuthResult,
+  GetAllAuthResult,
+  GetAuthResult,
+  UpdateAuthResult,
+  DeleteAuthResult,
+  LoginResult,
+  LoginInput,
+} from '@tradetrove/shared-types';
 
 @Injectable()
 export class AuthService {
@@ -27,75 +30,109 @@ export class AuthService {
   async validateUser(
     username: string,
     password: string,
-  ): Promise<Omit<User, 'password'> | null> {
-    const user = await this.prisma.user.findUnique({
-      where: { username },
+  ): Promise<ValidateUserResult> {
+    // Validate input
+    const loginValidation = loginInputSchema.safeParse({ username, password });
+    if (!loginValidation.success) {
+      return err(new Error('Invalid input'));
+    }
+
+    try {
+      // Find the user by username
+      const user = await this.prisma.user.findUnique({
+        where: { username: loginValidation.data.username },
+        include: {
+          Auth: true, // Assuming User model includes an Auth relation
+        },
+      });
+
+      // Check if user exists and verify password
+      if (
+        !user ||
+        !user.Auth ||
+        !(await bcrypt.compare(
+          loginValidation.data.password,
+          user.Auth.password,
+        ))
+      ) {
+        return err(new Error('Invalid username or password'));
+      }
+
+      // Exclude password and Auth from the result
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { Auth, ...userWithoutAuth } = user;
+      return ok(userWithoutAuth);
+    } catch (error) {
+      if (error instanceof Error)
+        this.logger.error(`Validation error: ${error.message}`);
+      return err(new Error('Failed to validate user'));
+    }
+  }
+
+  async login(loginInput: LoginInput): Promise<LoginResult> {
+    // Validate user credentials
+    const validation = await this.validateUser(
+      loginInput.username,
+      loginInput.password,
+    );
+
+    // If validation fails, return an error
+    if (validation.isErr()) {
+      return err(new Error('Invalid username or password'));
+    }
+
+    // User validation successful, proceed with token generation
+    const user = validation.value; // This is the user without sensitive info like password
+
+    const payload = { username: user.username, sub: user.id };
+    const access_token = this.jwtService.sign(payload);
+
+    const tokenValidation = loginschema.safeParse({
+      access_token,
+      token_type: 'Bearer',
     });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...userWithoutPassword } = user;
-      return userWithoutPassword;
+    if (!tokenValidation.success) {
+      return err(new Error('Failed to generate valid token'));
     }
-    return null;
+
+    // Return the generated token
+    return ok(tokenValidation.data);
   }
 
-  async login(user: Omit<User, 'password'>): Promise<Login> {
-    try {
-      const payload = { email: user.email, sub: user.id };
-      const access_token = this.jwtService.sign(payload);
-
-      return {
-        access_token,
-        token_type: 'Bearer', // Specify the token type
-      };
-    } catch (error) {
-      throw new InternalServerErrorException('Error generating token');
-    }
-  }
-
-  async create(createAuthDto: AuthCreateInput): Promise<Auth> {
-    this.logger.log('Creating a new auth record');
-    return this.prisma.auth.create({
+  async create(createAuthDto: AuthCreateInput): Promise<CreateAuthResult> {
+    const auth = await this.prisma.auth.create({
       data: createAuthDto,
     });
+    return ok(auth);
   }
 
-  async findAll(): Promise<Auth[]> {
-    return this.prisma.auth.findMany();
+  async findAll(): Promise<GetAllAuthResult> {
+    const auths = await this.prisma.auth.findMany();
+    return ok(auths);
   }
 
-  async findOne(id: string): Promise<Auth | null> {
-    const auth = await this.prisma.auth.findUnique({
-      where: { id },
-    });
+  async findOne(id: string): Promise<GetAuthResult> {
+    const auth = await this.prisma.auth.findUnique({ where: { id } });
     if (!auth) {
-      throw new NotFoundException(`Auth record not found for ID ${id}`);
+      return err(new NotFoundException('Auth record not found'));
     }
-    return auth;
+    return ok(auth);
   }
 
-  async update(id: string, updateAuthDto: AuthUpdateInput): Promise<Auth> {
-    try {
-      return await this.prisma.auth.update({
-        where: { id },
-        data: updateAuthDto,
-      });
-    } catch (error) {
-      this.logger.error(`Error updating auth record: ${error}`);
-      throw new InternalServerErrorException('Error updating auth record');
-    }
+  async update(
+    id: string,
+    updateAuthDto: AuthUpdateInput,
+  ): Promise<UpdateAuthResult> {
+    const auth = await this.prisma.auth.update({
+      where: { id },
+      data: updateAuthDto,
+    });
+    return ok(auth);
   }
 
-  async remove(id: string): Promise<Auth> {
-    try {
-      this.logger.log(`Deleting auth record with ID ${id}`);
-      return await this.prisma.auth.delete({
-        where: { id },
-      });
-    } catch (error) {
-      this.logger.error(`Error deleting auth record: ${error}`);
-      throw new InternalServerErrorException('Error deleting auth record');
-    }
+  async remove(id: string): Promise<DeleteAuthResult> {
+    const auth = await this.prisma.auth.delete({ where: { id } });
+    return ok(auth);
   }
 }

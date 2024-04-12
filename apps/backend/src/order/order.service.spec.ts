@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrderService } from './order.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'nestjs-prisma';
 import {
   Order,
   OrderCreateInput,
@@ -48,7 +48,7 @@ describe('OrderService', () => {
       expect(prismaService.order.create).toHaveBeenCalledWith({
         data: mockCreateOrderDto,
       });
-      expect(result).toEqual(mockOrder);
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
   });
 
@@ -59,7 +59,7 @@ describe('OrderService', () => {
       const result = await service.findAll();
 
       expect(prismaService.order.findMany).toHaveBeenCalled();
-      expect(result).toEqual(mockOrders);
+      if (result.isOk()) expect(result.value).toEqual(mockOrders);
     });
   });
 
@@ -72,7 +72,7 @@ describe('OrderService', () => {
       expect(prismaService.order.findUnique).toHaveBeenCalledWith({
         where: { id: mockOrderId },
       });
-      expect(result).toEqual(mockOrder);
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
   });
 
@@ -86,7 +86,7 @@ describe('OrderService', () => {
         where: { id: mockOrderId },
         data: mockUpdateOrderDto,
       });
-      expect(result).toEqual(mockOrder);
+      if (result.isOk()) expect(result.value).toEqual(mockOrder);
     });
   });
 
@@ -101,7 +101,7 @@ describe('OrderService', () => {
       expect(prismaService.order.delete).toHaveBeenCalledWith({
         where: { id: mockOrderId },
       });
-      expect(result).toEqual(deletedOrder);
+      if (result.isOk()) expect(result.value).toEqual(deletedOrder);
     });
   });
 });

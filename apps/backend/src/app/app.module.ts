@@ -3,9 +3,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
-import { PrismaService } from '../prisma/prisma.service';
 import { UserService } from '../user/user.service';
-import { PrismaModule } from '../prisma/prisma.module';
+import { PrismaModule, PrismaService } from 'nestjs-prisma';
 import { OrderModule } from '../order/order.module';
 import { OrderService } from '../order/order.service';
 import { AuthModule } from '../auth/auth.module';
@@ -16,7 +15,9 @@ import { ProductService } from '../product/product.service';
 @Module({
   imports: [
     UserModule,
-    PrismaModule,
+    PrismaModule.forRoot({
+      isGlobal: true,
+    }),
     OrderModule,
     AuthModule,
     ProductModule,
@@ -32,7 +33,7 @@ import { ProductService } from '../product/product.service';
     OrderService,
     AuthService,
     ProductService,
-    PrismaService
+    PrismaService,
   ],
 })
 export class AppModule {}

@@ -2,40 +2,108 @@ import { Controller } from '@nestjs/common';
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
 import { ProductService } from './product.service';
 import {
-  Product,
+  CreateProductResult,
+  DeleteProductResult,
+  GetAllProductResult,
+  GetProductResult,
   ProductCreateInput,
   ProductUpdateInput,
+  UpdateProductResult,
 } from '@tradetrove/shared-types';
+import { err, ok } from 'neverthrow';
 
+// create and use a utility function to handle errors to make them more readable for the developer and the user
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @TypedRoute.Post()
-  create(@TypedBody() createProductDto: ProductCreateInput): Promise<Product> {
-    return this.productService.create(createProductDto);
+  async create(
+    @TypedBody() createProductDto: ProductCreateInput,
+  ): Promise<CreateProductResult> {
+    try {
+      const product = await this.productService.create(createProductDto);
+
+      if (product.isErr()) {
+        return err(product.error);
+      }
+
+      const createdProduct = product.value;
+
+      return ok(createdProduct);
+    } catch (error) {
+      return err(new Error('Error creating product'));
+    }
   }
 
   @TypedRoute.Get()
-  findAll(): Promise<Product[]> {
-    return this.productService.findAll();
+  async findAll(): Promise<GetAllProductResult> {
+    try {
+      const products = await this.productService.findAll();
+
+      if (products.isErr()) {
+        return err(products.error);
+      }
+
+      const foundProducts = products.value;
+
+      return ok(foundProducts);
+    } catch (error) {
+      return err(new Error('Error finding all products'));
+    }
   }
 
   @TypedRoute.Get(':id')
-  findOne(@TypedParam('id') id: string): Promise<Product | null> {
-    return this.productService.findOne(id);
+  async findOne(@TypedParam('id') id: string): Promise<GetProductResult> {
+    try {
+      const product = await this.productService.findOne(id);
+
+      if (product.isErr()) {
+        return err(product.error);
+      }
+
+      const foundProduct = product.value;
+
+      return ok(foundProduct);
+    } catch (error) {
+      return err(new Error('Error finding product'));
+    }
   }
 
-  @TypedRoute.Patch(':id')
-  update(
+  @TypedRoute.Put(':id')
+  async update(
     @TypedParam('id') id: string,
     @TypedBody() updateProductDto: ProductUpdateInput,
-  ): Promise<Product> {
-    return this.productService.update(id, updateProductDto);
+  ): Promise<UpdateProductResult> {
+    try {
+      const product = await this.productService.update(id, updateProductDto);
+
+      if (product.isErr()) {
+        return err(product.error);
+      }
+
+      const updatedProduct = product.value;
+
+      return ok(updatedProduct);
+    } catch (error) {
+      return err(new Error('Error updating product'));
+    }
   }
 
   @TypedRoute.Delete(':id')
-  remove(@TypedParam('id') id: string): Promise<Product> {
-    return this.productService.remove(id);
+  async remove(@TypedParam('id') id: string): Promise<DeleteProductResult> {
+    try {
+      const product = await this.productService.remove(id);
+
+      if (product.isErr()) {
+        return err(product.error);
+      }
+
+      const deletedProduct = product.value;
+
+      return ok(deletedProduct);
+    } catch (error) {
+      return err(new Error('Error removing product'));
+    }
   }
 }

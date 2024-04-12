@@ -11,6 +11,7 @@ import {
   updateProductSchema,
 } from '@tradetrove/shared-types';
 import { mockDeep } from 'jest-mock-extended';
+import { err, ok } from 'neverthrow';
 
 const mockProduct: Product = mockObject(productSchema, {
   id: '1',
@@ -62,74 +63,132 @@ describe('ProductController', () => {
 
   describe('create', () => {
     it('should return a product', async () => {
-      service.create = jest.fn().mockResolvedValue(mockProduct);
+      service.create = jest.fn().mockResolvedValue(ok(mockProduct));
 
       const result = await controller.create(mockProductCreateInput);
 
-      expect(result).toEqual(mockProduct);
+      expect(result.isOk()).toBe(true);
+      expect(result._unsafeUnwrap()).toEqual(mockProduct);
+      expect(service.create).toHaveBeenCalledWith(mockProductCreateInput);
+    });
+
+    it('should return an error if product creation fails', async () => {
+      service.create = jest.fn().mockResolvedValue(err(new Error()));
+
+      const result = await controller.create(mockProductCreateInput);
+
+      expect(result.isErr()).toBe(true);
+      expect(result._unsafeUnwrapErr()).toBeInstanceOf(Error);
       expect(service.create).toHaveBeenCalledWith(mockProductCreateInput);
     });
   });
 
   describe('findAll', () => {
     it('should return an array of products', async () => {
-      const mockProducts: Product[] = [mockProduct];
-      service.findAll = jest.fn().mockResolvedValue(mockProducts);
+      service.findAll = jest.fn().mockResolvedValue(ok([mockProduct]));
 
       const result = await controller.findAll();
 
-      expect(result).toEqual(mockProducts);
+      expect(result._unsafeUnwrap()).toEqual([mockProduct]);
+      expect(service.findAll).toHaveBeenCalled();
+    });
+
+    it('should return an empty array if no products are found', async () => {
+      service.findAll = jest.fn().mockResolvedValue(ok([]));
+
+      const result = await controller.findAll();
+
+      expect(result._unsafeUnwrap()).toEqual([]);
+      expect(service.findAll).toHaveBeenCalled();
+    });
+
+    it('should return an error if product retrieval fails', async () => {
+      service.findAll = jest.fn().mockRejectedValue(err(new Error()));
+
+      const result = await controller.findAll();
+
+      expect(result._unsafeUnwrapErr()).toBeInstanceOf(Error);
       expect(service.findAll).toHaveBeenCalled();
     });
   });
 
   describe('findOne', () => {
     it('should return a product by ID', async () => {
-      service.findOne = jest.fn().mockResolvedValue(mockProduct);
+      service.findOne = jest.fn().mockResolvedValue(ok(mockProduct));
 
       const result = await controller.findOne('1');
 
-      expect(result).toEqual(mockProduct);
+      expect(result._unsafeUnwrap()).toEqual(mockProduct);
       expect(service.findOne).toHaveBeenCalledWith('1');
     });
 
     it('should return null if product is not found', async () => {
-      service.findOne = jest.fn().mockResolvedValue(null);
+      service.findOne = jest
+        .fn()
+        .mockResolvedValue(ok(null as unknown as Product));
 
       const result = await controller.findOne('nonexistent');
 
-      expect(result).toBeNull();
+      expect(result._unsafeUnwrap()).toBeNull();
       expect(service.findOne).toHaveBeenCalledWith('nonexistent');
     });
   });
 
   describe('update', () => {
     it('should update and return the updated product', async () => {
-      service.update = jest.fn().mockResolvedValue(mockProduct);
+      service.update = jest.fn().mockResolvedValue(ok(mockProduct));
 
       const result = await controller.update('1', mockProductUpdateInput);
 
-      expect(result).toEqual(mockProduct);
+      expect(result._unsafeUnwrap()).toEqual(mockProduct);
+      expect(service.update).toHaveBeenCalledWith('1', mockProductUpdateInput);
+    });
+
+    it('should return null if product is not found', async () => {
+      service.update = jest
+        .fn()
+        .mockResolvedValue(ok(null as unknown as Product));
+
+      const result = await controller.update(
+        'nonexistent',
+        mockProductUpdateInput,
+      );
+
+      expect(result._unsafeUnwrap()).toBeNull();
+      expect(service.update).toHaveBeenCalledWith(
+        'nonexistent',
+        mockProductUpdateInput,
+      );
+    });
+
+    it('should return an error if product update fails', async () => {
+      service.update = jest.fn().mockResolvedValue(err(new Error()));
+
+      const result = await controller.update('1', mockProductUpdateInput);
+
+      expect(result._unsafeUnwrapErr()).toBeInstanceOf(Error);
       expect(service.update).toHaveBeenCalledWith('1', mockProductUpdateInput);
     });
   });
 
   describe('remove', () => {
     it('should delete and return the deleted product', async () => {
-      service.remove = jest.fn().mockResolvedValue(mockProduct);
+      service.remove = jest.fn().mockResolvedValue(ok(mockProduct));
 
       const result = await controller.remove('1');
 
-      expect(result).toEqual(mockProduct);
+      expect(result._unsafeUnwrap()).toEqual(mockProduct);
       expect(service.remove).toHaveBeenCalledWith('1');
     });
 
     it('should return null if product is not found', async () => {
-      service.remove = jest.fn().mockResolvedValue(null as unknown as Product);
+      service.remove = jest
+        .fn()
+        .mockResolvedValue(ok(null as unknown as Product));
 
       const result = await controller.remove('nonexistent');
 
-      expect(result).toBeNull();
+      expect(result._unsafeUnwrap()).toBeNull();
       expect(service.remove).toHaveBeenCalledWith('nonexistent');
     });
   });

@@ -1,3 +1,4 @@
+import { Result, ResultAsync } from 'neverthrow';
 import { z } from 'zod';
 
 export const productSchema = z.object({
@@ -29,3 +30,10 @@ export interface ProductCreateInput
   extends z.input<typeof createProductSchema> {}
 export interface ProductUpdateInput
   extends z.input<typeof updateProductSchema> {}
+
+// Response
+export type GetAllProductResult = Result<Product[], Error>;
+export type GetProductResult = Result<Product, Error>;
+export type CreateProductResult = Result<Product, Error>;
+export type UpdateProductResult = Result<Product, Error>;
+export type DeleteProductResult = Result<Product, Error>;
