@@ -126,7 +126,8 @@ jobs:
         shell: bash
 
       - name: Wait for Server
-        run: sleep 15 # Adjust the sleep duration as needed
+        run: |
+          while ! nc -z localhost 3000; do sleep 1; done
 
       - name: Run E2E Tests
         run: yarn nx run-many --target=e2e --all
