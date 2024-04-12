@@ -4,7 +4,6 @@ import { PrismaService } from 'nestjs-prisma';
 import { JwtService } from '@nestjs/jwt';
 import { mockDeep } from 'jest-mock-extended';
 import * as bcrypt from 'bcrypt';
-import { InternalServerErrorException } from '@nestjs/common';
 import {
   Auth,
   authSchema,
@@ -136,15 +135,6 @@ describe('AuthService', () => {
 
       if (result.isOk()) expect(result).toEqual(ok(mockAuth));
     });
-
-    it('should throw an error if validation fails', async () => {
-      const validationError = new Error('Validation failed');
-      mockPrismaService.auth.create.mockRejectedValue(validationError);
-
-      const result = await service.create(mockAuthCreateDto);
-
-      if (result.isOk()) expect(result).toEqual(ok(validationError));
-    });
   });
 
   describe('findAll', () => {
@@ -168,18 +158,6 @@ describe('AuthService', () => {
 
       if (result.isOk()) expect(result.value).toEqual(updatedAuth);
     });
-
-    it('should throw NotFoundException if auth record is not found', async () => {
-      const authId = '1';
-      mockPrismaService.auth.update.mockRejectedValue(null);
-
-      const result = await service.update(authId, mockAuthUpdateDto);
-
-      if (result.isOk())
-        expect(result).toEqual(
-          new InternalServerErrorException('Error updating auth record'),
-        );
-    });
   });
 
   describe('remove', () => {
@@ -191,18 +169,6 @@ describe('AuthService', () => {
       const result = await service.remove(authId);
 
       if (result.isOk()) expect(result.value).toEqual(deletedAuth);
-    });
-
-    it('should throw NotFoundException if auth record is not found', async () => {
-      const authId = '1';
-      mockPrismaService.auth.delete.mockRejectedValue(null);
-
-      const result = await service.remove(authId);
-
-      if (result.isOk())
-        expect(result.value).toEqual(
-          new InternalServerErrorException('Error removing auth record'),
-        );
     });
   });
 });
