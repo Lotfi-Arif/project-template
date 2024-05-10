@@ -2869,6 +2869,16 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
+"@ts-rest/core@^3.45.2":
+  version "3.45.2"
+  resolved "https://registry.yarnpkg.com/@ts-rest/core/-/core-3.45.2.tgz#9e2e1b8377bd88bfc326a01cc7599ea2199f2603"
+  integrity sha512-Eiv+Sa23MbsAd1Gx9vNJ+IFCDyLZNdJ+UuGMKbFvb+/NmgcBR1VL1UIVtEkd5DJxpYMMd8SLvW91RgB2TS8iPw==
+
+"@ts-rest/nest@^3.45.2":
+  version "3.45.2"
+  resolved "https://registry.yarnpkg.com/@ts-rest/nest/-/nest-3.45.2.tgz#cb2a355d4b5de564048a2dae9137662b4288c84e"
+  integrity sha512-FHtpQb4nZItBQKpXh7GZK5N4Yu0qfqkhIRpfaoUER13ary2aDO8tQOz2VscWXxQvnF0J7ew53IwNJWQOgzksEQ==
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.9.tgz#df4907fc07a886922637b15e02d4cebc4c0021b2"

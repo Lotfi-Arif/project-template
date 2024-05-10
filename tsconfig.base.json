@@ -27,6 +27,7 @@
     "strictNullChecks": true,
     "strict": true,
     "paths": {
+      "@tradetrove/contract": ["libs/contract/src/index.ts"],
       "@tradetrove/custom-errors": ["libs/custom-errors/src/index.ts"],
       "@tradetrove/shared-types": ["libs/shared/types/index.ts"],
       "@tradetrove/shared-utils": ["libs/shared/utils/index.ts"]
