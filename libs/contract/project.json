@@ -1,0 +1,38 @@
+{
+  "name": "contract",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/contract/src",
+  "projectType": "library",
+  "targets": {
+    "openapi": {
+      "executor": "@ninetailed/docs:openapi",
+      "options": {
+        "contract": {
+          "path": "libs/contract/src/lib/v1/contract.ts",
+          "name": "ApiContractV1"
+        },
+        "api": {
+          "title": "API",
+          "version": "1.0.0",
+          "description": "The API is a RESTful API."
+        },
+        "output": {
+          "path": "libs/docs",
+          "filename": "api.openapi.json"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/contract/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
