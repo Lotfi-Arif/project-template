@@ -5,12 +5,6 @@ import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
 import { PrismaModule, PrismaService } from 'nestjs-prisma';
-import { OrderModule } from '../order/order.module';
-import { OrderService } from '../order/order.service';
-import { AuthModule } from '../auth/auth.module';
-import { AuthService } from '../auth/auth.service';
-import { ProductModule } from '../product/product.module';
-import { ProductService } from '../product/product.service';
 
 @Module({
   imports: [
@@ -18,22 +12,12 @@ import { ProductService } from '../product/product.service';
     PrismaModule.forRoot({
       isGlobal: true,
     }),
-    OrderModule,
-    AuthModule,
-    ProductModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    UserService,
-    OrderService,
-    AuthService,
-    ProductService,
-    PrismaService,
-  ],
+  providers: [AppService, UserService, PrismaService],
 })
 export class AppModule {}
