@@ -14,17 +14,7 @@
         "outputPath": "dist/apps/backend",
         "main": "apps/backend/src/main.ts",
         "tsConfig": "apps/backend/tsconfig.app.json",
-        "webpackConfig": "apps/backend/webpack.config.js",
-        "transformers": [
-          "typia/lib/transform",
-          {
-            "name": "@nestia/core/lib/transform",
-            "options": {
-              "validate": "assert",
-              "stringify": "assert"
-            }
-          }
-        ]
+        "webpackConfig": "apps/backend/webpack.config.js"
       },
       "dependsOn": ["generate-prisma"],
       "configurations": {
@@ -47,17 +37,6 @@
         }
       },
       "dependsOn": ["generate-prisma", "generate-swagger"]
-    },
-    "generate-swagger": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "npx nestia swagger"
-          }
-        ],
-        "cwd": "apps/backend"
-      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

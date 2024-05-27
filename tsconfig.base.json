@@ -14,16 +14,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "plugins": [
-      {
-        "transform": "@nestia/core/lib/transform",
-        "validate": "assert",
-        "stringify": "assert"
-      },
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
     "strictNullChecks": true,
     "strict": true,
     "paths": {

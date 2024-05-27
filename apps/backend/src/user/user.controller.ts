@@ -1,6 +1,12 @@
-import { Controller } from '@nestjs/common';
-import { UserService } from './user.service';
-import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import {
   CreateUserResult,
   DeleteUserResult,
@@ -11,14 +17,15 @@ import {
   UserUpdateInput,
 } from '@tradetrove/shared-types';
 import { err, ok } from 'neverthrow';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @TypedRoute.Post()
+  @Post()
   async create(
-    @TypedBody() createUserDto: UserCreateInput,
+    @Body() createUserDto: UserCreateInput,
   ): Promise<CreateUserResult> {
     try {
       const user = await this.userService.create(createUserDto);
@@ -35,9 +42,9 @@ export class UserController {
     }
   }
 
-  @TypedRoute.Post('register')
+  @Post('register')
   async register(
-    @TypedBody() createUserDto: UserCreateInput,
+    @Body() createUserDto: UserCreateInput,
   ): Promise<CreateUserResult> {
     try {
       const user = await this.userService.create(createUserDto);
@@ -54,7 +61,7 @@ export class UserController {
     }
   }
 
-  @TypedRoute.Get()
+  @Get()
   async findAll(): Promise<GetAllUserResult> {
     try {
       const users = await this.userService.findAll();
@@ -72,8 +79,8 @@ export class UserController {
   }
 
   // TODO: add better error handling for not found instead of returning null
-  @TypedRoute.Get(':id')
-  async findOne(@TypedParam('id') id: string): Promise<GetUserResult> {
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<GetUserResult> {
     try {
       const user = await this.userService.findOne(id);
 
@@ -89,10 +96,10 @@ export class UserController {
     }
   }
 
-  @TypedRoute.Patch(':id')
+  @Patch(':id')
   async update(
-    @TypedParam('id') id: string,
-    @TypedBody() updateUserDto: UserUpdateInput,
+    @Param('id') id: string,
+    @Body() updateUserDto: UserUpdateInput,
   ): Promise<UpdateUserResult> {
     try {
       const user = await this.userService.update(id, updateUserDto);
@@ -109,8 +116,8 @@ export class UserController {
     }
   }
 
-  @TypedRoute.Delete(':id')
-  async remove(@TypedParam('id') id: string): Promise<DeleteUserResult> {
+  @Delete(':id')
+  async remove(@Param('id') id: string): Promise<DeleteUserResult> {
     try {
       const user = await this.userService.remove(id);
 
