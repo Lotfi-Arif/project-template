@@ -68,52 +68,6 @@
         "implicitDependencies": []
       }
     },
-    "frontend-e2e": {
-      "name": "frontend-e2e",
-      "type": "lib",
-      "data": {
-        "root": "apps/frontend-e2e",
-        "name": "frontend-e2e",
-        "$schema": "../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "apps/frontend-e2e/src",
-        "tags": [],
-        "implicitDependencies": [
-          "frontend"
-        ],
-        "targets": {
-          "e2e": {
-            "executor": "@nx/cypress:cypress",
-            "options": {
-              "cypressConfig": "apps/frontend-e2e/cypress.config.ts",
-              "testingType": "e2e",
-              "devServerTarget": "frontend:serve"
-            },
-            "configurations": {
-              "production": {
-                "devServerTarget": "frontend:serve:production"
-              }
-            },
-            "parallelism": true
-          },
-          "lint": {
-            "executor": "@nx/eslint:lint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "configurations": {},
-            "options": {},
-            "parallelism": true,
-            "cache": true,
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore",
-              "{workspaceRoot}/eslint.config.js"
-            ]
-          }
-        }
-      }
-    },
     "backend-e2e": {
       "name": "backend-e2e",
       "type": "e2e",
@@ -237,104 +191,6 @@
               "default",
               "^default",
               "{workspaceRoot}/jest.preset.js"
-            ]
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
-    "frontend": {
-      "name": "frontend",
-      "type": "app",
-      "data": {
-        "root": "apps/frontend",
-        "name": "frontend",
-        "$schema": "../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "apps/frontend",
-        "projectType": "application",
-        "tags": [],
-        "targets": {
-          "build": {
-            "executor": "@nx/next:build",
-            "outputs": [
-              "{options.outputPath}"
-            ],
-            "defaultConfiguration": "production",
-            "options": {
-              "outputPath": "dist/apps/frontend"
-            },
-            "configurations": {
-              "development": {
-                "outputPath": "apps/frontend"
-              },
-              "production": {}
-            },
-            "parallelism": true
-          },
-          "serve": {
-            "executor": "@nx/next:server",
-            "defaultConfiguration": "development",
-            "options": {
-              "buildTarget": "frontend:build",
-              "dev": true
-            },
-            "configurations": {
-              "development": {
-                "buildTarget": "frontend:build:development",
-                "dev": true
-              },
-              "production": {
-                "buildTarget": "frontend:build:production",
-                "dev": false
-              }
-            },
-            "parallelism": true
-          },
-          "export": {
-            "executor": "@nx/next:export",
-            "options": {
-              "buildTarget": "frontend:build:production"
-            },
-            "configurations": {},
-            "parallelism": true
-          },
-          "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "apps/frontend/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            },
-            "parallelism": true,
-            "cache": true,
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/jest.preset.js"
-            ]
-          },
-          "lint": {
-            "executor": "@nx/eslint:lint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "configurations": {},
-            "options": {},
-            "parallelism": true,
-            "cache": true,
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore",
-              "{workspaceRoot}/eslint.config.js"
             ]
           }
         },
@@ -17755,23 +17611,6 @@
         "type": "static"
       }
     ],
-    "frontend-e2e": [
-      {
-        "source": "frontend-e2e",
-        "target": "frontend",
-        "type": "implicit"
-      },
-      {
-        "source": "frontend-e2e",
-        "target": "npm:@nx/cypress",
-        "type": "static"
-      },
-      {
-        "source": "frontend-e2e",
-        "target": "npm:cypress",
-        "type": "static"
-      }
-    ],
     "backend-e2e": [
       {
         "source": "backend-e2e",
@@ -17792,39 +17631,12 @@
       },
       {
         "source": "contract",
+        "target": "npm:zod",
+        "type": "static"
+      },
+      {
+        "source": "contract",
         "target": "custom-errors",
-        "type": "static"
-      }
-    ],
-    "frontend": [
-      {
-        "source": "frontend",
-        "target": "npm:next",
-        "type": "static"
-      },
-      {
-        "source": "frontend",
-        "target": "npm:react",
-        "type": "static"
-      },
-      {
-        "source": "frontend",
-        "target": "npm:react-icons",
-        "type": "static"
-      },
-      {
-        "source": "frontend",
-        "target": "npm:@nx/next",
-        "type": "static"
-      },
-      {
-        "source": "frontend",
-        "target": "npm:tailwindcss",
-        "type": "static"
-      },
-      {
-        "source": "frontend",
-        "target": "npm:daisyui",
         "type": "static"
       }
     ],
@@ -17847,6 +17659,11 @@
       {
         "source": "backend",
         "target": "npm:nestjs-prisma",
+        "type": "static"
+      },
+      {
+        "source": "backend",
+        "target": "npm:zod",
         "type": "static"
       },
       {
